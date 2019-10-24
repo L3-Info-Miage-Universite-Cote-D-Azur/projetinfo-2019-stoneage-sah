@@ -2,54 +2,51 @@
 projetinfo-2019-stoneage-sah created by GitHub Classroom
 
 Première Itération:
-Nous souhaitons commencer le développement du jeu en programmant les entités suivantes:
 -1 joueur.
 -1 figurine.
--2 zones (celle de chasse ainsi qu'une zone de ressource quelconque).
--1 dé équilibré allant de 1 à 6.
--le début d'un inventaire pour le joueur, contenant les ressources et la nourriture.
--une phase de jeu obligeant le joueur à poser la figurine dans une zone.
--la gestion des ressources recoltées.
--une "fin de jeu" après l'obtention de la ressource.
+-1 zone de ressource.
+première version de l'inventaire du joueur.
+phase de jeu, l'IA (pas encore vraiment développée) posera donc sa figurine dans la seule zone disponible, viendra donc la phase où il reçoit sa ressource, puis la fin du tour de jeu.
+la valeur sera constante pour la récolte de ressource.
+pas de dé.
+fin du jeu a la fin du tour, le joueur est gagnant.
 
-Seconde Itération:
-Nous souhaitons continuer le développement en introduisant les fonctionnalités suivantes en plus des précédentes:
--Implémentation des 5 figurines de début de partie.
--Implémentation des zones de récolte des ressources manquantes.
--Implémentation de la création de dés, ainsi, à chaque fois qu'un nombre de figurine sera placée dans une zone, dans la phase de recolte, les dés seront génerés selon le nombre de figurines.
--Ajout d'une zone autre que celles des ressources, la cabane à reproduction, ainsi que ses contraintes
--Ajout d'un maximum de figurines pour le joueur (10).
+Seconde itération:
+-toujours 1 seul joueur
+-le joueur commence avec 5 figurines.
+-ajout des zones de ressources manquantes (sauf nourriture)
+-ajout du système de dé
+-ajout du système de récolte "semi complet", avec le lancer de dé.
+-développement d'une première IA simpliste, jouant au moins une figurine dans une zone aléatoire.
+-Le premier tour ne se termine pas tant que l'IA ne pose pas toutes ses figurines (première boucle de jeu).
 
-Le déroulement de la phase de jeu reste le même, le joueur est forcé de poser toutes ses figurines (pas forcement toutes dans la même zone), puis vient la phase de récolte.
-La fin de jeu reste la même, le jeu termine après la récolte des ressources.
+Troisième itération:
+-Ajout du champ ainsi que du système l'accompagnant.
+-Ajout de la cabane de reproduction et de ses contraintes si non fait.
+-ajout de la zone de chasse ainsi que du système complet de nourriture.
+-Finalisation du système de tour, le joueur doit désormais nourrir les figurines avant que le tour termine.
 
-Troisième Itération:
--Ajout des outils et du système allant avec, permettant de les utiliser dans la phase de récolte.
--Ajout de la cabane afin de craft les outils ainsi que ses contraintes (1 seule figurine).
--Ajout d'un système de tour complet, imposant au joueur de poser toutes les figurines (pas forcément toutes à la fois), puis vient la phase de récolte, le joueur peut désormais utiliser les outils. 
-Après cela, le joueur doit dépenser de la nourriture pour chaque figurine utilisée avant de finaliser son tour, si il n'a pas assez de nourriture il peut utiliser des ressources, enfin , si il 
-n'a pas assez de ressources, rien de spécial, il ne perd pas de points car ils ne sont pas encore dans le jeu.
-La partie fini désormais après 5 tours de jeu, pas vraiment de gagnant.
+Quatrième itération:
+-le début de partie change, on sélectionne désormais le nombre de joueur(1-4)
+-ajout de la cabane a outils et du système allant avec
+-ajout de la cabane de craft ainsi que ses contraintes
+la partie fini désormais après 5 tours, un joueur aléatoire gagne.
 
-Quatrième Itération:
-Le début de partie change enfin, on sélectionne désormais le nombre de joueurs, allant de 2 a 4, celui-ci ne changera plus.
--On gère le marqueur "premier joueur", celui-ci change de joueur après chaque tour.
--On commence à gérer les différentes IA, pour l'instant, le joueur 1 sera concentré sur la nourriture, le joueur 2 sur une ressource, le joueur 3 sur une ressource différente, et le joueur 4 encore sur une autre ressouce.
-La fin de partie reste la même.
+Cinquième itération;
 
-Cinquième Itération:
--Ajout d'un système de score rudimentaire (les joueurs ont des points avec les bâtiments, et perdent des points lorsqu'ils ne peuvent pas nourrir les figurines).
+-Ajout du système de score
 -Ajout du système de batiments coûtant des ressources afin d'obtenir des points en fonction des ressources dépensées.
--Affinement des AI (Nous ne savons pas encore ce qu'on ajoutera).
-Changement de la fin de partie, la partie fini toujours après 5 tours, mais il y a désormais un classement en fonction des points.
-
-Sixième Itération:
 -Ajout des cartes civilisation ainsi que du système les concernant.
--Ajout d'un calcul des scores en fin de partie, avant de désigner un gagnant, celui-ci prend en compte les points des cartes civilisation.
--Ajout des conditions de fin de parties présentes dans le vrai jeu.
--Affinement des AI ( Toujours pas d'idée).
-Le gagnant est le joueur ayant le plus de points après calcul du score.
+-On commence a affiner les IA
+La partie finie toujours après 5 tours, le joueur avec le plus gros score gagne.
 
-Dernière Itération et rendu:
--Avancement au maximum des AI.
--Réalisation des statistiques sur 500 parties (exemple: quelle AI gagne le plus souvent, quelle AI s'adapte le plus aux autres...).
+Sixième itération:
+
+-Ajout du marqueur premier joueur, celui-ci change de joueur après chaque tour
+-Ajout des conditions de fin de parties présentes dans le vrai jeu.
+-Affinement de l'IA
+
+Juste avant rendu:
+-Affinement de l'IA
+-Réalisation des statistiques sur 500 parties (quelle IA gagne le plus souvent)
+
