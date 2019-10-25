@@ -21,7 +21,7 @@ public class Program {
         }
         
         int figurineNb = -1;
-        while (figurineNb <= 0 || figurineNb >= player.getFigurine())
+        while (figurineNb <= 0 || figurineNb > player.getFigurine())
         	figurineNb = ClientPlayer.chooseNumber(player.getFigurine());
         System.out.println("Player choosed to put " + figurineNb + " figurine(s) in the " + currentZone.getName() + " zone");
         
