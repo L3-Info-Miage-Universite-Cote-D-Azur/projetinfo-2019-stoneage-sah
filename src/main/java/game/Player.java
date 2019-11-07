@@ -1,5 +1,5 @@
 package game;
-import Client.*;
+import client.*;
 
 /**
  * La class Player est une class qui sert a  gerer un joueur, le joueur contient un inventaire, 
