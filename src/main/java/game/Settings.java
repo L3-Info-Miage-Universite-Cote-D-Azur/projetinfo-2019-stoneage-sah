@@ -35,7 +35,7 @@ public class Settings {
 		Settings.PLAYER_NAME.remove(index);
 		return ret;
 	}
-
+	
 	/**
 	 * Renvoie une IA (qui suit une strategie) au hasard parmis une liste de strategie d'IA.
 	 * @return IA, avec sa strategie.
