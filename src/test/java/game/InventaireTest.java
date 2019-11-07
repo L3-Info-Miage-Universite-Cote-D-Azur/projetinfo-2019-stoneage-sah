@@ -1,13 +1,15 @@
 package game;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class InventaireTest {
-	
+
+
+class InventaireTest {
+
 	private Inventaire inv;
-
+	
 	@Test
 	public void testAddWood () {
 		/* DEPENDENCIES INITIALISATION */
@@ -84,4 +86,5 @@ public class InventaireTest {
 		assertEquals((Settings.MAX_DICE * Settings.MAX_FIGURINE_IN_ZONE)/6 +2, this.inv.getGold());
 		assertEquals(9, ret);
 	}
+
 }
