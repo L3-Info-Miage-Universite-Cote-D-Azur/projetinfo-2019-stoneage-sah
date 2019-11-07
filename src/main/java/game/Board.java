@@ -6,6 +6,7 @@ package game;
  * et la fin du jeu. 
  */
 
+
 public class Board {
 	/* FIELDS */
 	private Player[] players;
