@@ -2,7 +2,7 @@ package client;
 
 import java.util.Random;
 
-import Game.Settings;
+import game.Settings;
 
 /**
  * RandomIA correspond a l'IA comportant une strategie basee sur le hasard. 
