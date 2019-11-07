@@ -84,5 +84,4 @@ public class InventaireTest {
 		assertEquals((Settings.MAX_DICE * Settings.MAX_FIGURINE_IN_ZONE)/6 +2, this.inv.getGold());
 		assertEquals(9, ret);
 	}
-
 }
