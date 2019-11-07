@@ -1,10 +1,10 @@
-package Game;
-import Game.Settings;
+package game;
+import game.Settings;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import Client.RandomIA;
+import client.RandomIA;
 
 public class PlayerTest {
     private Player player;
