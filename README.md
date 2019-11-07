@@ -1,6 +1,13 @@
 # projetinfo-2019-stoneage-sah
 projetinfo-2019-stoneage-sah created by GitHub Classroom
 
+Nom/prénom des membres du groupe:
+-Iopama : Goulot Thomas
+-Idrash : Tognetti Yohann
+-Mentra20 : Martin d'escrienne Yann
+-Theoricien : Jerome Maxime
+-AnthonyS06 : Santi Anthony
+
 Première Itération:
 -1 joueur.
 -1 figurine.
