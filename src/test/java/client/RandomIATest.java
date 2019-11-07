@@ -3,9 +3,9 @@ package client;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-import Game.Settings;
-import Client.IA;
-import Client.RandomIA;
+import game.Settings;
+import client.IA;
+import client.RandomIA;
 
 class RandomIATest {
 
