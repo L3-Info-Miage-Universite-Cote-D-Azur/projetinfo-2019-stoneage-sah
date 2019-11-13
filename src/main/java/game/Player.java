@@ -1,60 +1,92 @@
 package game;
-import client.*;
+
+import client.IA;
 
 /**
- * La class Player est une class qui sert a  gerer un joueur, le joueur contient un inventaire, 
- * un nombre de figurines et un tableau dans lequel il a place ses figurines
- * @author theoricien
+ * La classe Player represente le joueur et ses attributs. 
  */
-public class Player {
-    
-    private int figurine;
-    private int figurineInZone[];
 
-    private Inventaire inv;
+public class Player 
+{
+    /* FIELDS */
+    private Inventory inventory;
+    private int maxFigurine;
+    private int currentFigurine;
     private String name;
     private IA ia; 
+    private boolean[] hadPlaced;
     
     /* CONSTRUCTOR */
-    public Player (String name, IA ia) {
-        this.figurine = Settings.START_FIGURINE;
-        this.figurineInZone = new int[Settings.NB_ZONES];
-        this.inv = new Inventaire();
+    public Player(String name, IA ia)
+    {
         this.name = name;
+        // Nombre maximum de figurine dont le joueur dispose.
+        this.maxFigurine = SETTING.START_FIGURINE;
+        // Nombre de figurine qu'il reste a placer. 
+        this.currentFigurine = SETTING.START_FIGURINE;
         this.ia = ia;
+        this.inventory = new Inventory();
+        this.hadPlaced = new boolean[SETTING.MAX_ZONERESSOURCE_SPACE];
     }
-    
+
     /* METHODS */
     /**
-     * addFigurineInZone(int nbZone, int n) est une fonction qui mise des ouvriers dans une zone
-     * @param nbZone represente le numero de la zone
-     * @param n represente le nombre de figurine a placer
+     * IncreaseMaxFigurine() incremente le nombre de figurine du joueur si cela est possible.
+     * @return Retourne faux si le nombre de Figurine max a ete atteind, vrai sinon.
      */
-    public void addFigurineInZone(int nbZone, int n) {
-        if ((nbZone < Settings.NB_ZONES && nbZone >= 0) &&
-        		(n <= this.figurine && n > 0)) 
-        {
-            this.figurineInZone[nbZone] += n;
-            this.figurine -= n;
-        }
+    public boolean IncreaseMaxFigurine () 
+    {
+        if (this.maxFigurine == SETTING.MAX_FIGURINE)
+            return false;
+        this.maxFigurine += 1;
+        return true;
     }
     
     /**
-     * subFigurineInZone(int nbZone, int n) est une fonction qui recupere les ouvriers dans une zone
-     * @param nbZone represente le numero de la zone
+     * Met a jour le nomber de figurine qui reste a placer. 
+     * @param number : le nombre de figurine a placer. 
      */
-    public void subFigurineInZone(int nbZone) {
-        if (nbZone < Settings.NB_ZONES && nbZone >= 0) 
-        {
-            this.figurine += this.figurineInZone[nbZone];
-            this.figurineInZone[nbZone] = 0;
-        }
+    public void placeFigurine (int number) 
+    {
+        this.currentFigurine -= number;
     }
     
+    /**
+     * ableToPlaceFigurine() permet de savoir si il est possible de placer number figurine selon ce qui lui reste a placer. 
+     * @param number : le nombre de figurine a placer. 
+     * @return true si la soustraction donne un entier positif ou nul, false sinon
+     */ 
+    public boolean ableToPlaceFigurine (int indexZone)
+    {
+        return this.getCurrentFigurine() > 0 && this.hadPlaced[indexZone] != true;
+    }
+    
+    /**
+     * permet d'ajouter number figurine dans celles a placer. 
+     * @param number : le nombre de figurine a recuperer. 
+     */
+    public void recoveryFigurine (int number)
+    {
+        this.currentFigurine += number;
+    }
+
     /* GETTERS */
-    public int getFigurine() { return this.figurine; }
-    public int[] getFigurineInZone () {return this.figurineInZone;}
-    public Inventaire getInv () {return this.inv;}
-    public String getName () {return this.name;}
-    public IA getIA() { return this.ia;}
+    public Inventory getInventory() {return this.inventory;}
+    public int getMaxFigurine() {return this.maxFigurine;}
+    public int getCurrentFigurine() {return this.currentFigurine;}
+    public String getName() {return this.name;}
+    public IA getIA() {return this.ia;}
+    public boolean[] getHadPlaced() {return this.hadPlaced;}
+
+    /* SETTERS */
+    public void setHadPlaced (int index, boolean b) {this.hadPlaced[index] = b;}
+
+    /* RESETTERS */
+    public void resetHadPlaced() 
+    {
+    	for(int i = 0; i < this.hadPlaced.length; i++)
+            this.hadPlaced[i] = false;
+    }
+    
+    
 }
