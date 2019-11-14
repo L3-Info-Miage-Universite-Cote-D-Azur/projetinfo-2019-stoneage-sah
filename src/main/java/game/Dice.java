@@ -1,8 +1,5 @@
 package game;
 
-
-import java.util.Random;
-
 /**
  * La classe Dice represente le dé non truque du plateau.  
  */
