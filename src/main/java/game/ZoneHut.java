@@ -19,7 +19,7 @@ class ZoneHut implements Zone{
     
     ZoneHut(String name){
         this.name=name;
-        this.availableSpace=SETTING.MAX_ZONEHUT_SPACE;
+        this.availableSpace=Settings.MAX_ZONEHUT_SPACE;
         //this.totalAvailableSpace=this.availableSpace;
     }
     
