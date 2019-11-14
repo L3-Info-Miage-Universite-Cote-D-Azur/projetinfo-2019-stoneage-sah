@@ -56,7 +56,7 @@ public class Inventory {
 		return true;
 	}
 	
-		/**
+	/**
 	 * Renvoie la liste des ressource premiere (sans outil ou Field)
 	 * @return liste des ressource premiere 
 	 */
@@ -71,6 +71,7 @@ public class Inventory {
 		{
 			Ressource r = (Ressource) it.next();
 			if(r!=Ressource.FIELD) {ressource[i]=r.toString();}
+			i+=1;
 		}
 		return ressource;
 		
@@ -92,8 +93,31 @@ public class Inventory {
 		{
 			Ressource r = (Ressource) it.next();
 			if(r!=Ressource.FIELD) {number[i]=ressources.get(r);}
+			i+=1;
 		}
 		return number;
+		
+	}
+	
+	/**
+	 * Renvoie la liste des ressource premiere (sans outil ou Field)
+	 * elle fonctionne avec toArrayRessource et toArrayNumber pour avoir a quel ressource l'indice du tableau correspond.
+	 * @return nombre de ressource.
+	 */
+	public Ressource[] toArrayRessourceEnum() {
+		Set<Ressource> setRessources = ressources.keySet();
+		Ressource[] ressource = new Ressource[setRessources.size()];
+
+		Iterator<Ressource> it;
+		it=setRessources.iterator(); // on cree un iterator sur les clés de ton hashmap
+		int i=0;
+		while(it.hasNext())
+		{
+			Ressource r = (Ressource) it.next();
+			if(r!=Ressource.FIELD) {ressource[i]=r;}
+			i+=1;
+		}
+		return ressource;
 		
 	}
 }
