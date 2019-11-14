@@ -39,10 +39,10 @@ public class Settings
 	public static String getRandomName ()
 	{
 		Random rand = new Random();
-		int index = rand.nextInt(SETTING.PLAYER_NAME.size());
+		int index = rand.nextInt(Settings.PLAYER_NAME.size());
 		
-		String ret = SETTING.PLAYER_NAME.get(index);
-		SETTING.PLAYER_NAME.remove(index);
+		String ret = Settings.PLAYER_NAME.get(index);
+		Settings.PLAYER_NAME.remove(index);
 		
 		return ret;
 	}
