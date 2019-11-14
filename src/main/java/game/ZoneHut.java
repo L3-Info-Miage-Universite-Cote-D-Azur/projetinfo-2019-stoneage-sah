@@ -26,6 +26,8 @@ class ZoneHut implements Zone{
     //GETTERS
     public int getAvailableSpace(){return availableSpace;}
     public String getName(){return name;}
+    public int figurineInZone() {return figurineInZone;}
+    public Player occupated() {return occupated;}
   
   
     
