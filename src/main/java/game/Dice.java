@@ -1,7 +1,7 @@
 package game;
 
 /**
- * La classe Dice represente le dé non truque du plateau.  
+ * La classe Dice represente le de non truque du plateau.  
  */
  
 class Dice{
