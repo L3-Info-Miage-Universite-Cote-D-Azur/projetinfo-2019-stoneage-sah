@@ -118,15 +118,15 @@ public class Game {
 				inventory.subRessource(Ressource.FOOD,figurinesToFeed);
 			}
 			else {
-				System.out.println("Le joueur "+player.getName()+" nourris ses figurines avec "+food+ " nourritures.");
+				System.out.println("Le joueur "+player.getName()+" nourris une partie de ses figurines avec "+food+ " nourritures.");
 				figurinesToFeed -= food;
 				inventory.subRessource(Ressource.FOOD,food);
 				
-				int[] tabRessource = inventory.toArrayNumber();
+				int totalRessource = inventory.availableResourceToFeed();
 				
 				//Si le joueur n'a plus de ressource ou ne veut pas les depenser.
-				if(tabRessource.length == 0) {//Voir plus tard si le joueur ne veux pas depenser.
-					System.out.println("Le joueur ne peut pas nourrir ses figurines.");
+				if(totalRessource<=figurinesToFeed) {//Voir plus tard si le joueur ne veux pas depenser.
+					System.out.println("Le joueur "+ player.getName() +" ne peut pas nourrir ses figurines.");
 					//travail sur le score plus tard.
 					return;
 				}
@@ -136,7 +136,7 @@ public class Game {
 					int ressource = GameUtility.ressourceChooze(player, figurinesToFeed);
 					figurinesToFeed -= ressource;
 				}
-				System.out.println("Le joueur "+player.getName()+" nourris ses figurines.");
+				System.out.println("Le joueur "+player.getName()+" a nourris ses figurines.");
 			}
 		}
 	}
