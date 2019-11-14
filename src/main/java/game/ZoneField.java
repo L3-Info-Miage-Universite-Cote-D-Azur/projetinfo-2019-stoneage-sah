@@ -56,7 +56,7 @@ class ZoneField implements Zone{
      */ 
     public void removePlayerFigurine(Player player){
     	availableSpace += howManyPlayerFigurine(player);
-        figurineInZone -= 1;
+        figurineInZone -= howManyPlayerFigurine(player);
     }
     
     /**
