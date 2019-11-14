@@ -28,6 +28,8 @@ public class Settings
 	public static final int MAX_ZONEHUT_SPACE = 2;
 	// Nombre d'espace dans le champ
 	public static final int MAX_ZONEFIELD_SPACE = 1;
+	//Nombre de ressource present dans le jeu:
+	public static final int NB_RESSOURCES = 6;
 	// Aleatoire globale
 	public static Random RAND = new Random();
 		
