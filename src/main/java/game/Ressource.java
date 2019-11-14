@@ -53,4 +53,28 @@ public enum Ressource {
             return -1;
     	}
     }
+
+    /**
+     * Renvoie la ressource correspondant a l'index de l'inventaire
+     * @param index de l'inventaire que l'on veux savoir la ressource
+     * @return ressource selectionner par l'index
+     */
+    public static Ressource indexToRessource(int index) {
+    	switch(index){
+        case 0:
+            return WOOD;
+        case 1:
+            return CLAY;
+        case 2 :
+            return STONE;
+        case 3 :
+            return GOLD;
+        case 4:
+        	return FOOD;
+        case 5:
+        	return FIELD;
+        default :
+            return null;
+    	}
+    }
 }
