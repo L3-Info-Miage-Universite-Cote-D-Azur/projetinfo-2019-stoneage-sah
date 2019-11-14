@@ -28,7 +28,7 @@ public class GameUtility{
 	 * @return tableau de Zone (utiliser dans Game).
 	 */
 	public static Zone[] initZone(){
-		Zone[] res = new Zone[4];
+		Zone[] res = new Zone[7];
 
 		//Les zones du jeu. 
 		res[0] = new ZoneRessource("Foret",Ressource.WOOD,3,Settings.MAX_ZONERESSOURCE_SPACE);
