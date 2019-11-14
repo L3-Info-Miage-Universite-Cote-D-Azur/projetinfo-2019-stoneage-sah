@@ -21,12 +21,12 @@ public class Player
     {
         this.name = name;
         // Nombre maximum de figurine dont le joueur dispose.
-        this.maxFigurine = SETTING.START_FIGURINE;
+        this.maxFigurine = Settings.START_FIGURINE;
         // Nombre de figurine qu'il reste a placer. 
-        this.currentFigurine = SETTING.START_FIGURINE;
+        this.currentFigurine = Settings.START_FIGURINE;
         this.ia = ia;
         this.inventory = new Inventory();
-        this.hadPlaced = new boolean[SETTING.MAX_ZONERESSOURCE_SPACE];
+        this.hadPlaced = new boolean[Settings.NB_ZONES];
     }
 
     /* METHODS */
@@ -34,11 +34,12 @@ public class Player
      * IncreaseMaxFigurine() incremente le nombre de figurine du joueur si cela est possible.
      * @return Retourne faux si le nombre de Figurine max a ete atteind, vrai sinon.
      */
-    public boolean IncreaseMaxFigurine () 
+    public boolean increaseMaxFigurine () 
     {
-        if (this.maxFigurine == SETTING.MAX_FIGURINE)
+        if (this.maxFigurine == Settings.MAX_FIGURINE)
             return false;
-        this.maxFigurine += 1;
+        this.maxFigurine++;
+        this.currentFigurine++;
         return true;
     }
     
@@ -84,7 +85,7 @@ public class Player
     /* RESETTERS */
     public void resetHadPlaced() 
     {
-    	for(int i = 0; i < this.hadPlaced.length; i++)
+        for(int i = 0; i < this.hadPlaced.length; i++)
             this.hadPlaced[i] = false;
     }
     
