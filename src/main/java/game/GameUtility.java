@@ -100,20 +100,32 @@ public class GameUtility{
 		return choose;
 	}
 	
-	public static int ressourceChooze(Player player,int ressourceToFood) {
+	/**
+	 * Demande au joueur par quoi il veux remplacer la nourriture qui manque pour finir le tour et nourire toutes les figurine
+	 * cette fonction est appeler jusqua ce que ressourceToFood soit a 0 dans Game.feedPhase().
+	 * @param player le joueur concernet.
+	 * @param ressourceToFood la nouriture totale qu'il luis manque.
+	 * @return renvoie le nombre de ressour que le joueur a utiliser a la place de la nouriture.
+	 */
+	public static int ressourceChoose(Player player,int ressourceToFood) {
+		
 		int[] IAChoose;
 		int[] ressourceNumber = new int[4];
 		int[] copieInventory=player.getInventory().getCopyRessources();
 		String[] ressourceName = new String[4];
+		
 		for(int i=0;i<4;i++) {
 			ressourceNumber[i]=copieInventory[i];
 			ressourceName[i]=Ressource.indexToRessource(i).toString();
 		}
+		
 		do {
 			IAChoose=player.getIA().chooseRessource(ressourceToFood, ressourceNumber, ressourceName);
 		}while(IAChoose[0]<0 && IAChoose[0]>3 && IAChoose[1]>0 && IAChoose[1]<=Math.min(ressourceToFood, copieInventory[IAChoose[0]]));
+		
 		player.getInventory().ableToSubRessource(Ressource.indexToRessource(IAChoose[0]), IAChoose[1]);
 		player.getInventory().subRessource(Ressource.indexToRessource(IAChoose[0]), IAChoose[1]);
+		
 		return IAChoose[1];
 	}
 }
