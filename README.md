@@ -19,7 +19,7 @@ pas de dé.
 fin du jeu a la fin du tour, le joueur est gagnant.  
   
 Seconde itération:  
--toujours 1 seul joueur  
+-2 joueurs  
 -le joueur commence avec 5 figurines.  
 -ajout des zones de ressources manquantes (sauf nourriture)  
 -ajout du système de dé  
@@ -27,7 +27,7 @@ Seconde itération:
 -développement d'une première IA simpliste, jouant au moins une figurine dans une zone aléatoire.  
 -Le premier tour ne se termine pas tant que l'IA ne pose pas toutes ses figurines (première boucle de jeu).  
 -Si possible, ajout de la cabane de reproduction et de ses contraintes (optionnel).  
--Il y a victoire d'un joueur si un joueur a au moins 1 de bois, sinon, il ne gagne pas, il peut ne pas y avoir de joueur gagnant  
+-Il y a victoire d'un joueur si un joueur a au moins 1 de bois.  
   
 Troisième itération:  
 -Ajout d'un second joueur. 
