@@ -1,5 +1,4 @@
 package game;
-import game.Settings;
 import game.Ressource;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,7 +13,7 @@ public class InventoryTest
 	{
 		this.inv = new Inventory();
 		// Test de l'instanciation
-		assertEquals(this.inv.getRessource(Ressource.FOOD), 0);
+		assertEquals(this.inv.getRessource(Ressource.FOOD), 15);
 		assertEquals(this.inv.getRessource(Ressource.WOOD), 0);
 		assertEquals(this.inv.getRessource(Ressource.STONE), 0);
 		assertEquals(this.inv.getRessource(Ressource.CLAY), 0);
@@ -33,14 +32,14 @@ public class InventoryTest
 	{
 		this.inv = new Inventory();
 		// Test de l'instanciation
-		assertEquals(this.inv.getRessource(Ressource.FOOD), 0);
+		assertEquals(this.inv.getRessource(Ressource.FOOD), 15);
 		assertEquals(this.inv.getRessource(Ressource.WOOD), 0);
 		assertEquals(this.inv.getRessource(Ressource.STONE), 0);
 		assertEquals(this.inv.getRessource(Ressource.CLAY), 0);
 		assertEquals(this.inv.getRessource(Ressource.GOLD), 0);
 
 		// Test soustraction de 100 bois un par un
-		this.inv.subRessource(Ressource.WOOD, 100);
+		this.inv.addRessource(Ressource.WOOD, 100);
 		for (int i = 99; i >= 0; i--)
 		{
 			this.inv.subRessource(Ressource.WOOD, 1);
@@ -53,7 +52,7 @@ public class InventoryTest
 	{
 		this.inv = new Inventory();
 		// Test de l'instanciation
-		assertEquals(this.inv.getRessource(Ressource.FOOD), 0);
+		assertEquals(this.inv.getRessource(Ressource.FOOD), 15);
 		assertEquals(this.inv.getRessource(Ressource.WOOD), 0);
 		assertEquals(this.inv.getRessource(Ressource.STONE), 0);
 		assertEquals(this.inv.getRessource(Ressource.CLAY), 0);
@@ -70,23 +69,5 @@ public class InventoryTest
 		for (int i = 0; i <= 10; i++)
 			assertEquals(this.inv.ableToSubRessource(Ressource.WOOD, i), true);
 
-	}
-
-	@Test
-	public void testAvailableResourceToFeed ()
-	{
-		this.inv = new Inventory();
-		// Test de l'instanciation
-		assertEquals(this.inv.availableResourceToFeed(), 0);
-
-		// Test classique
-		this.inv.addRessource(Ressource.WOOD, 5);
-		assertEquals(this.inv.availableResourceToFeed(), 5);
-
-		// Test sur toutes les ressources
-		this.inv.addRessource(Ressource.CLAY, 5);
-		this.inv.addRessource(Ressource.STONE, 5);
-		this.inv.addRessource(Ressource.GOLD, 5);
-		assertEquals(this.inv.availableResourceToFeed(), 20);
 	}
 }
