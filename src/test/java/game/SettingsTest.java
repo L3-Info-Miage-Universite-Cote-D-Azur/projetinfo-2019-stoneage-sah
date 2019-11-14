@@ -8,10 +8,9 @@ import org.junit.jupiter.api.Test;
 
 public class SettingsTest {
 	@Test
-	public void testSettings() {
-	
-		//getRandomName()
-		// Test si le nom retourne fait bien partie de la liste de nom.
+	// Test si le nom retourne a bien etait retire de la liste initiale, et s'il appartennait bien a la liste.
+	public void testGetRandomName() {
+		
 		int len = Settings.PLAYER_NAME.size();
 		ArrayList<String> liste = new ArrayList<String>(Settings.PLAYER_NAME);
 		
@@ -21,15 +20,14 @@ public class SettingsTest {
 			assertEquals(true,liste.contains(nom));
 		}
 		assertEquals(0,Settings.PLAYER_NAME.size());
-		
-		// Test si l'IA retournee fait bien partie de la liste aleatoire
-		//getRandomIA()
+	}
+	@Test
+	// Test si l'IA retournee fait bien partie de la liste aleatoire, que la liste fait bien un de taille et ne renvoie pas rien.
+	public void testGetRandomIA(){	
+
 		assertEquals(true,Settings.IA_list[0] == Settings.getRandomIA());
 		assertEquals(true,Settings.IA_list.length == 1);
 		assertEquals(false,null == Settings.getRandomIA());
-		
-		
-		
-		
+			
 	}
 }
