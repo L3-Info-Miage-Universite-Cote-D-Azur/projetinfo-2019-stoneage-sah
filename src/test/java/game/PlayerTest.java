@@ -1,6 +1,5 @@
 package game;
 import game.Settings;
-import game.Ressource;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
@@ -21,13 +20,15 @@ public class PlayerTest
         // Resultat et application classiques attendus
         assertEquals(this.player.increaseMaxFigurine(), true);
         assertEquals(this.player.getCurrentFigurine(), Settings.START_FIGURINE + 1);
+        assertEquals(this.player.getMaxFigurine(), Settings.START_FIGURINE + 1);
 
         // Mettre maxFigurine a Settings.MAX_FIGURINE manuellement avec un pas de 1
-        for (int i = 0; i < Settings.MAX_FIGURINE - this.player.getMaxFigurine(); i++)
+        int maxFigurineTmp = this.player.getMaxFigurine();
+        for (int i = 0; i < Settings.MAX_FIGURINE - maxFigurineTmp; i++)
         {
-            assertEquals(this.player.increaseMaxFigurine, true);
+            assertEquals(this.player.increaseMaxFigurine(), true);
         }
-
+        
         // Essayer de mettre 1 figurine d'overflow
         assertEquals(this.player.increaseMaxFigurine(), false);
         // Regarder si quelque chose a change
@@ -43,7 +44,7 @@ public class PlayerTest
         assertEquals(this.player.ableToPlaceFigurine(0), true);
 
         // Dit qu'on a place sur la foret
-        this.player.setHadPlace(0, true);
+        this.player.setHadPlaced(0, true);
 
         // Si on peut placer sur la foret
         assertEquals(this.player.ableToPlaceFigurine(0), false);
@@ -55,7 +56,7 @@ public class PlayerTest
         // On a place de partout
         for (int i = 0; i < Settings.NB_ZONES; i++)
         {
-            this.player.setHadPlace(i, true);
+            this.player.setHadPlaced(i, true);
         }
 
         // Check si on peut bien placer nul part
