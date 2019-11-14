@@ -3,26 +3,22 @@ package game;
 
 
 /**
- * La classe represente les zones de ressource du jeu. 
+ * La classe represente la zone du champ. 
  */
 
 class ZoneField implements Zone{
     /* FIELDS */
 	private int availableSpace;//Les places disponible dans la zone actuellement.
-	//Dictionnaire qui contient pour un joueur, le nombre de figurine qu'il a dans la zone.
-	private Player occupated;
-	private int figurineInZone;
+	private Player occupated; // le joueur occupant la zone
+	private int figurineInZone; // des figurines dans la zone?
 	private String name; //Le nom de la zone
-	private Ressource ressource;
-	
-	/* FINAL FIELDS */
-    //Probablement inutile dans cette conception private final int totalAvailableSpace;//La place totale disponible dans la zone. 
+	private Ressource ressource; // la ressource
     
+	//CONSTRUCTOR
     ZoneField(String name,Ressource ressource){
         this.name=name;
         this.availableSpace=Settings.MAX_ZONEFIELD_SPACE;
         this.ressource= ressource;
-        //this.totalAvailableSpace=this.availableSpace;
     }
     
     //GETTERS
@@ -35,7 +31,7 @@ class ZoneField implements Zone{
     
     //Figurine
     /**
-     * placeFigurine(int, Player) place number figurine appartenant a player dans la zone. 
+     * placeFigurine(int, Player) place 1 figurine appartenant a player dans la zone. 
      * @param number : le nombre de figurine a mettre dans la zone, player : le joueur qui les mets. 
      */ 
     public void placeFigurine(int number,Player player){
@@ -45,8 +41,7 @@ class ZoneField implements Zone{
     }
     
     /**
-     * 
-     * @return
+     * ableToChooseZone(int) renvoie true si il reste de la place dans zone
      */
     public boolean ableToChooseZone(int currentPlayerFigurine){
         return (availableSpace>0);
@@ -62,7 +57,7 @@ class ZoneField implements Zone{
     }
     
     /**
-     * Retourne le nombre de figurines que player a dans la zone. 
+     * Retourne le nombre de figurines que player a dans la zone, 0 si il n'occupe pas la zone.
      * @param player: le joueur dont on veut savoir le nombre de figurines dans la zone. 
      */ 
     public int howManyPlayerFigurine(Player player){
@@ -71,7 +66,13 @@ class ZoneField implements Zone{
         }
         return figurineInZone;
     } 
-    
+    /**
+     * @param player 
+     * enlève les figurines du joueur de la zone
+     * rends les figurines au joueur
+     * ajoute une ressource au joueur
+     * affiche un message pour confirmer que le joueur a reçu la ressource, puis affiche le nombre qu'il possède
+     */
     public void playerRecoveryFigurine(Player player) {
     	int number = howManyPlayerFigurine(player);
         removePlayerFigurine(player);
@@ -79,7 +80,9 @@ class ZoneField implements Zone{
         player.getInventory().addRessource(getRessource(),1);
         System.out.println("Le joueur "+ player.getName() +" a maintenant "+ player.getInventory().getRessource(getRessource())+ " "+ getRessource().toString()+".");
     }
-    	
+    /**
+     * retourne le nombre de figurine minimum nécessaire pour occuper la zone	
+     */
     public int getMinimalFigurineRequierement() {
     	return 1;
     }
