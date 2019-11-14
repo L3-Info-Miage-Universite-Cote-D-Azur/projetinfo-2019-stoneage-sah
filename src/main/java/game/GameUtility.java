@@ -109,6 +109,9 @@ public class GameUtility{
 	 */
 	public static int ressourceChoose(Player player,int ressourceToFood) {
 		
+		//cas normalement ignorer par game.feedPhase()
+		if(player.getInventory().availableResourceToFeed()==0) {return 0;}
+		
 		int[] IAChoose;
 		int[] ressourceNumber = new int[4];
 		int[] copieInventory=player.getInventory().getCopyRessources();
