@@ -73,7 +73,7 @@ class ZoneHut implements Zone{
         removePlayerFigurine(player);
         player.recoveryFigurine(number);
         boolean ok = player.increaseMaxFigurine();
-        if(ok) { System.out.println("Le joueur"+ player.getName()+" a maintenant"+ player.getMaxFigurine()+"figurine");}
+        if(ok) { System.out.println("Le joueur "+ player.getName()+" a maintenant "+ player.getMaxFigurine()+" figurine");}
         else { System.out.println("Le joueur"+ player.getName()+" a deja le maximum de figurine");}
     }
     	
