@@ -20,7 +20,7 @@ class ZoneRessource implements Zone{
 	 * Construit la zone de ressource.
 	 * @param name nom de la zone.
 	 * @param ressource Ressource que la zone produit.
-	 * @param divisor diviseur des dée lors de la recolte.
+	 * @param divisor diviseur des dÃ©e lors de la recolte.
 	 * @param availableSpace place maximum disponible.
 	 */
     ZoneRessource(String name,Ressource ressource,int divisor, int availableSpace){
@@ -47,7 +47,8 @@ class ZoneRessource implements Zone{
      */
     public void placeFigurine(int number,Player player){
         availableSpace-=number;
-        figurineInZone.put(player,number);
+        if(figurineInZone==null) {figurineInZone.put(player,number);}
+        else{ figurineInZone.put(player,number+figurineInZone.get(player)); }
     }
     
     
