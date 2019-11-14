@@ -67,7 +67,7 @@ public class GameUtility{
 			choose = player.getIA().chooseZone(zoneAvailableSpace,zoneName);
 
 			if((choose >= 0) && (choose<zone.length) && FigurineManagement.ableToChooseZone(zone[choose], player, choose)) ok=true;
-			else System.out.println("Choix incorrecte ou zone pleine, veuillez reessayer.\n");
+			else System.out.println("/!\\ Choix incorrecte ou zone pleine, veuillez reessayer./!\\");
 		}
 		return choose;
 	}
@@ -95,7 +95,7 @@ public class GameUtility{
 			choose = player.getIA().chooseNumber(min,max);
 
 			if(choose >= min && choose <= max) ok = true;
-			else System.out.println("Choix incorrecte, veuillez reessayer.\n");
+			else System.out.println("/!\\ Choix incorrecte, veuillez reessayer. /!\\");
 		}
 		return choose;
 	}
@@ -123,6 +123,7 @@ public class GameUtility{
 			IAChoose=player.getIA().chooseRessource(ressourceToFood, ressourceNumber, ressourceName);
 		}while(IAChoose[0]<0 && IAChoose[0]>3 && IAChoose[1]>0 && IAChoose[1]<=Math.min(ressourceToFood, copieInventory[IAChoose[0]]));
 		
+		System.out.println("Le joueur "+player.getName()+ " nourris ses figurines avec "+ IAChoose[1]+" "+Ressource.indexToRessource(IAChoose[0])+".");
 		player.getInventory().ableToSubRessource(Ressource.indexToRessource(IAChoose[0]), IAChoose[1]);
 		player.getInventory().subRessource(Ressource.indexToRessource(IAChoose[0]), IAChoose[1]);
 		
