@@ -1,6 +1,8 @@
 package game;
 
 import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * La classe Inventory gere l'inventaire du joueur.
