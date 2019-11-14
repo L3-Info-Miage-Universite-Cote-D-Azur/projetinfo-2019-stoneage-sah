@@ -24,7 +24,9 @@ public class Settings
 	public static final int MAX_ZONERESSOURCE_SPACE = 7;
 	// Nombre de zones au total
 	public static final int NB_ZONES = 7;
-    
+	// Aleatoire globale
+	public static Random RAND = new Random();
+		
 	// Liste des noms de joueurs. 
 	public static ArrayList<String> PLAYER_NAME = new ArrayList<String>(Arrays.asList("Robert","Sardoche","Doritos","JeanCharles","Mclito&Carfly","Helico42"));
     
@@ -38,8 +40,7 @@ public class Settings
 	 */
 	public static String getRandomName ()
 	{
-		Random rand = new Random();
-		int index = rand.nextInt(Settings.PLAYER_NAME.size());
+		int index = Settings.RAND.nextInt(Settings.PLAYER_NAME.size());
 		
 		String ret = Settings.PLAYER_NAME.get(index);
 		Settings.PLAYER_NAME.remove(index);
@@ -53,8 +54,7 @@ public class Settings
 	 */
 	public static IA getRandomIA () 
 	{
-		Random rand = new Random();
-		return IA_list[rand.nextInt(IA_list.length)];
+		return IA_list[Settings.RAND.nextInt(IA_list.length)];
 	}
     
 }
