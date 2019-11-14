@@ -30,7 +30,7 @@ Seconde itération:
 -Il y a victoire d'un joueur si un joueur a au moins 1 de bois.  
   
 Troisième itération:  
--Ajout d'un second joueur. 
+-Ajout d'un second joueur.  
 -Ajout du champ ainsi que du système l'accompagnant.  
 -Ajout de la cabane de reproduction et de ses contraintes si non fait.  
 -ajout de la zone de chasse ainsi que du système complet de nourriture.  
@@ -38,10 +38,11 @@ Troisième itération:
 -Un ou plusieurs joueurs gagnent dès qu'ils ont plus de 2 bois. 
   
 Quatrième itération:  
--le début de partie change, on sélectionne désormais le nombre de joueur(1-4)  
--ajout de la cabane a outils et du système allant avec  
--ajout de la cabane de craft ainsi que ses contraintes  
-la partie fini désormais après 5 tours, un joueur aléatoire gagne.  
+-Avant le lancement du programme, nous demandons à l'utilisateur combien veut-il de joueur dans sa partie, ce nombre sera compris entre 2 et 4 
+-Nous ajouterons la cabane de craft en guise de dernière zone spécial faisant parti du village  
+-Pour continuer sur la boucle de jeu, nous améliorerons le système de manque de ressources pour un joueur, par exemple quand le joueur n'a plus assez de nourriture pour nourrir ses figurines au début d'un nouveau tour, il aura le choix entre conserver ses ressources collectables ou de perdre des points de victoire  
+-Nous ajouterons alors un système de point de victoire rudimentaire  
+-Nous ajouterons un protytpe de bâtiment et de carte qui seront de nouvelles zones spéciales.  
   
 Cinquième itération;  
   
