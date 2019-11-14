@@ -1,74 +1,53 @@
 package game;
 
-public class Zone {
-	
-	/* FIELDS */
-	private int divisor;
-	private int availableSpace;
-	private String name;
-	
-	/* FINAL FIELDS */
-	private final int totalAvailableSpace;
-		
-	/* CONSTRUCTOR */
-	public Zone (String name, int divisor, int availableSpace) {
-		this.name = name;
-		this.divisor = divisor;
-		this.availableSpace = availableSpace;
-		this.totalAvailableSpace = this.availableSpace;
-	}
-	
-	/* METHODS */
+/**
+ * Interface commune a toutes les zone
+ * @author Yohann
+ *
+ */
+public interface Zone {
 	/**
-	 * La fonction hasEnoughSpace(size) prends en paramètre un int et renvoie un booléen
-	 * elle vérifie si size est > 0 et si size n'est pas plus grand que l'espace disponible.
-	 * @param size corréspond au nombre de figurine a placer dans la zone
-	 * @return true si il y a assez de place et que size>0 false sinon
+	 * Possible de choissir
+	 * @param currentPlayerFigurine
+	 * @return
 	 */
-	public boolean hasEnoughSpace (int size) {
-		if (this.availableSpace - size < 0 || size < 0)
-			return false;
-		return true;
-	}
-	/**
-	 * La fonction addFigurine(size) prends en paramètre un int et renvoie un booléen
-	 * elle vérifie si la zone a une place restante > size , si oui , on enlève size au nombre de places disponible a la zone
-	 * @param size correspond a un nombre de figurine
-	 * @return true si le nombre de place restante est supérieur a size, false sinon
-	 */
-	public boolean addFigurine (int size)
-	{
-		if (this.hasEnoughSpace(size) == true) {
-			this.availableSpace -= size;
-			return true;
-		}
-		return false;
-	}
-	/**
-	 * La fonction subFigurine(size) prends en paramètre un int et renvoie un booléen
-	 * elle vérifie si size est inférieur au nombre total de place et si size est supérieur a 0, si oui , le nombre de place disponible augmente de size
-	 * @param size correspond a un nombre de figurine
-	 * @return true si size > 0 et size< nombre total de place , false sinon
-	 */
-	public boolean subFigurine (int size)
-	{
-		if (size <= this.totalAvailableSpace && size >= 0) {
-			this.availableSpace += size;
-			return true;
-		}
-		return false;
-	}
-	/**
-	 * réinitialisation de l'espace disponible des zone
-	 */
-	public void resetZone () {
-		this.availableSpace = this.totalAvailableSpace;
-	}
+	public boolean ableToChooseZone(int currentPlayerFigurine);
 	
-	/* GETTERS */
-	public int getAvailableSpace () {return this.availableSpace;}
+	/**
+	 * Nombre de figurine que le joueur possede dans la zone
+	 * @param player le joueur en question.
+	 * @return le nombre de figurine du joueur player dans la zone.
+	 */
+	public int howManyPlayerFigurine(Player player);
 	
-	public int getDivisor () {return this.divisor;}
+	/**
+	 * Place les figurine du joueur dans la zone
+	 * @param number nombre de figurine que le joueur place
+	 * @param player joueur que
+	 */
+	public void placeFigurine(int number,Player player);
 	
-	public String getName () {return this.name;}
+	/**
+	 * nom de la zone
+	 * @return nom de la zone
+	 */
+	public String getName();
+	
+	/**
+	 * Le joueur recupere son due et recupere ces figurine
+	 * @param player le joueur qui recupere son due
+	 */
+	public void playerRecoveryFigurine(Player player);
+	
+	/**
+	 * place disponnible dans la zone
+	 * @return le nombre de place disponnible
+	 */
+	public int getAvailableSpace();
+	
+	/**
+	 * le nombre minimal a placer dans la zone
+	 * @return le nombre minimal que le joueur dois posser dans la zone
+	 */
+	public int getMinimalFigurineRequierement();
 }
