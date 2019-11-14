@@ -37,6 +37,8 @@ public class GameUtility{
 		res[3] = new ZoneRessource("Riviere",Ressource.GOLD,6,Settings.MAX_ZONERESSOURCE_SPACE);
 		//La zone de chasse a : nombre de joueur x le nombre de figurines maximum d'espace. 
 		res[4] = new ZoneRessource("Chasse", Ressource.FOOD, 2, Settings.MAX_PLAYER * Settings.MAX_FIGURINE);
+		res[5] = new ZoneField("Champs", Ressource.FIELD);
+		res[6] = new ZoneHut("Cabane de reproduction");
 
 		return res;
 	}
