@@ -71,4 +71,22 @@ public class InventoryTest
 			assertEquals(this.inv.ableToSubRessource(Ressource.WOOD, i), true);
 
 	}
+
+	@Test
+	public void testAvailableResourceToFeed ()
+	{
+		this.inv = new Inventory();
+		// Test de l'instanciation
+		assertEquals(this.inv.availableResourceToFeed(), 0);
+
+		// Test classique
+		this.inv.addRessource(Ressource.WOOD, 5);
+		assertEquals(this.inv.availableResourceToFeed(), 5);
+
+		// Test sur toutes les ressources
+		this.inv.addRessource(Ressource.CLAY, 5);
+		this.inv.addRessource(Ressource.STONE, 5);
+		this.inv.addRessource(Ressource.GOLD, 5);
+		assertEquals(this.inv.availableResourceToFeed(), 20);
+	}
 }
