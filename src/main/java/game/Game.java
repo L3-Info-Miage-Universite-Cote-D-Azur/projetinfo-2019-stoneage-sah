@@ -101,7 +101,10 @@ public class Game {
 	 */
 	public void feedPhase() {
 		for(int i = 0; i < players.length; i++) {
-			Player player = players[i];
+			int  selectedPlayer = (i + nbTour) % players.length;//L'indice du joueur selectionne en fonction du tour. 
+			
+			Player player = players[selectedPlayer];
+			
 			Inventory inventory = player.getInventory();
 			int food = inventory.getRessource(Ressource.FOOD);
 			
@@ -118,17 +121,19 @@ public class Game {
 				inventory.subRessource(Ressource.FOOD,figurinesToFeed);
 			}
 			else {
-				System.out.println("Le joueur "+player.getName()+" nourris une partie de ses figurines avec "+food+ " nourritures.");
-				figurinesToFeed -= food;
-				inventory.subRessource(Ressource.FOOD,food);
+				if(food != 0 ) {
+					System.out.println("Le joueur "+player.getName()+" nourris une partie de ses figurines avec "+food+ " nourritures.");
+					figurinesToFeed -= food;
+					inventory.subRessource(Ressource.FOOD,food);
+				}
 				
 				int totalRessource = inventory.availableResourceToFeed();
 				
 				//Si le joueur n'a plus de ressource ou ne veut pas les depenser.
-				if(totalRessource<=figurinesToFeed) {//Voir plus tard si le joueur ne veux pas depenser.
+				if(totalRessource < figurinesToFeed) {//Voir plus tard si le joueur ne veux pas depenser.
 					System.out.println("Le joueur "+ player.getName() +" ne peut pas nourrir ses figurines.");
 					//travail sur le score plus tard.
-					return;
+					continue;
 				}
 				
 				//Si le joueur a des ressources et veut les depenser
