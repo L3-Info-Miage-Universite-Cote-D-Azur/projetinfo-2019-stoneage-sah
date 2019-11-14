@@ -11,7 +11,7 @@ public class ZoneRessourceTest {
 
 	@Test
 	public void testPlaceFigurine(){
-		this.player = new Player(Settings.getRandomName(), new RandomIA());
+		this.player = new Player("test1", null);
 		this.zoneR = new ZoneRessource("Foret",Ressource.WOOD,3,Settings.MAX_ZONERESSOURCE_SPACE);
 		//cas de base
 		assertEquals(true,zoneR.getAvailableSpace()==Settings.MAX_ZONERESSOURCE_SPACE);
@@ -31,7 +31,7 @@ public class ZoneRessourceTest {
 		//cas de base
 		assertEquals(true,zoneR.ableToChooseZone(1)); //parametre inutiliser dans cette fonction
 		
-		this.player = new Player(Settings.getRandomName(), new RandomIA());
+		this.player = new Player("test1", null);
 		//on remplie la zone et normalement on peut plus placer dedans
 		zoneR.placeFigurine(Settings.MAX_ZONERESSOURCE_SPACE, player);
 		assertEquals(false,zoneR.ableToChooseZone(1));
@@ -53,7 +53,7 @@ public class ZoneRessourceTest {
 		assertEquals(true,zoneR.getAvailableSpace()==Settings.MAX_ZONERESSOURCE_SPACE);
 		
 		//parreil avec 2 joueur remove les figurine d'un joueur dois remove que celle du joueur en question
-		this.player2 = new Player(Settings.getRandomName(), new RandomIA());
+		this.player2 = new Player(Settings.getRandomName(), null);
 		zoneR.placeFigurine(3, player);
 		zoneR.placeFigurine(2, player2);
 		
