@@ -138,7 +138,7 @@ public class Game {
 				
 				//Si le joueur a des ressources et veut les depenser
 				while(figurinesToFeed > 0) {
-					int ressource = GameUtility.ressourceChooze(player, figurinesToFeed);
+					int ressource = GameUtility.ressourceChoose(player, figurinesToFeed);
 					figurinesToFeed -= ressource;
 				}
 				System.out.println("Le joueur "+player.getName()+" a nourris ses figurines.");
