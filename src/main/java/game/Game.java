@@ -29,7 +29,10 @@ public class Game {
 
 			System.out.println("\n--- Phase de recolte ---");
 			harvestPhase();
-
+			
+			System.out.println("\n--- Phase de nourrisage ---");
+			feedPhase();
+			
 			nbTour+=1;
 		}
 	}
@@ -90,6 +93,51 @@ public class Game {
 				}
 			}
 			player.resetHadPlaced();
+		}
+	}
+	
+	/**
+	 * feedPhase correspond a la phase de nourrisage. 
+	 */
+	public void feedPhase() {
+		for(int i = 0; i < players.length; i++) {
+			Player player = players[i];
+			Inventory inventory = player.getInventory();
+			int food = inventory.getRessource(Ressource.FOOD);
+			
+			int figurinesToFeed = player.getMaxFigurine();
+			figurinesToFeed -= inventory.getRessource(Ressource.FIELD);
+			
+			System.out.println("\nC'est au tour de "+player.getName()+" :");
+			
+			if(figurinesToFeed <= 0) {
+				System.out.println("Le joueur "+player.getName()+" a nourris ses figurines.");
+			}
+			else if(food >= figurinesToFeed) {
+				System.out.println("Le joueur "+player.getName()+" a nourris ses figurines avec "+figurinesToFeed+ " nourritures.");
+				inventory.subRessource(Ressource.FOOD,figurinesToFeed);
+			}
+			else {
+				System.out.println("Le joueur "+player.getName()+" nourris ses figurines avec "+food+ " nourritures.");
+				figurinesToFeed -= food;
+				inventory.subRessource(Ressource.FOOD,food);
+				
+				int[] tabRessource = inventory.toArrayNumber();
+				
+				//Si le joueur n'a plus de ressource ou ne veut pas les depenser.
+				if(tabRessource.length == 0) {//Voir plus tard si le joueur ne veux pas depenser.
+					System.out.println("Le joueur ne peut pas nourrir ses figurines.");
+					//travail sur le score plus tard.
+					return;
+				}
+				
+				//Si le joueur a des ressources et veut les depenser
+				while(figurinesToFeed > 0) {
+					int ressource = GameUtility.ressourceChooze(player, figurinesToFeed);
+					figurinesToFeed -= ressource;
+				}
+				System.out.println("Le joueur "+player.getName()+" nourris ses figurines.");
+			}
 		}
 	}
 
