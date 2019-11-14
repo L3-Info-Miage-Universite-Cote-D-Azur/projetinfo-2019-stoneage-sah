@@ -72,7 +72,7 @@ class ZoneHut implements Zone{
     	int number = howManyPlayerFigurine(player);
         removePlayerFigurine(player);
         player.recoveryFigurine(number);
-        boolean ok = player.IncreaseMaxFigurine();
+        boolean ok = player.increaseMaxFigurine();
         if(ok) { System.out.println("Le joueur"+ player.getName()+" a maintenant"+ player.getMaxFigurine()+"figurine");}
         else { System.out.println("Le joueur"+ player.getName()+" a deja le maximum de figurine");}
     }
