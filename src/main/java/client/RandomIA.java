@@ -41,14 +41,18 @@ public class RandomIA implements IA {
 	 * @return l'indice de la zone
 	 */
 	public int[] chooseRessource(int figurinesToFeed, int[] RessourceNumber, String[] ressourceName) {
-		int index = rand.nextInt(RessourceNumber.length);
-		int ressource = RessourceNumber[index];
-		
-		int nb = rand.nextInt(Math.min(ressource, figurinesToFeed))+1;
-		
-		int[] res = new int[] {index,nb};
-		return res;
-	}
+        int ressource;
+        int index;
+        do {
+            index = rand.nextInt(RessourceNumber.length);
+            ressource = RessourceNumber[index];
+        }while(ressource==0);
+        
+        int nb = rand.nextInt(Math.min(ressource, figurinesToFeed))+1;
+        
+        int[] res = new int[] {index,nb};
+        return res;
+    }
 
 	public String toString(){
 		return "Random";
