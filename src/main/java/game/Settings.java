@@ -53,8 +53,8 @@ public class Settings
 	}
 	
 	/**
-	 * Renvoie une IA parmi celles présentes aléatoirement
-	 * @return Renvoie une instance implémentant l'interface IA
+	 * Renvoie une IA parmi celles presentes aléatoirement
+	 * @return Renvoie une instance implementant l'interface IA
 	 */
 	public static IA getRandomIA () 
 	{
