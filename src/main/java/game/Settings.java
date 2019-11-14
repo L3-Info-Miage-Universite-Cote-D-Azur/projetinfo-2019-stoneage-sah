@@ -24,6 +24,10 @@ public class Settings
 	public static final int MAX_ZONERESSOURCE_SPACE = 7;
 	// Nombre de zones au total
 	public static final int NB_ZONES = 7;
+	// Nombre d'espace dans la cabane
+	public static final int MAX_ZONEHUT_SPACE = 2;
+	// Nombre d'espace dans le champ
+	public static final int MAX_ZONEFIELD_SPACE = 1;
 	// Aleatoire globale
 	public static Random RAND = new Random();
 		
