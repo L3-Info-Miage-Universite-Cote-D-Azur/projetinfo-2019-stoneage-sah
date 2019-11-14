@@ -30,10 +30,12 @@ Seconde itération:
 -Il y a victoire d'un joueur si un joueur a au moins 1 de bois, sinon, il ne gagne pas, il peut ne pas y avoir de joueur gagnant  
   
 Troisième itération:  
+-Ajout d'un second joueur. 
 -Ajout du champ ainsi que du système l'accompagnant.  
 -Ajout de la cabane de reproduction et de ses contraintes si non fait.  
 -ajout de la zone de chasse ainsi que du système complet de nourriture.  
 -Finalisation du système de tour, le joueur doit désormais nourrir les figurines avant que le tour termine.  
+-Un ou plusieurs joueurs gagnent dès qu'ils ont plus de 2 bois. 
   
 Quatrième itération:  
 -le début de partie change, on sélectionne désormais le nombre de joueur(1-4)  
