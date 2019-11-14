@@ -55,4 +55,45 @@ public class Inventory {
 		if(ressources.get(ressource) < number) return false;
 		return true;
 	}
+	
+		/**
+	 * Renvoie la liste des ressource premiere (sans outil ou Field)
+	 * @return liste des ressource premiere 
+	 */
+	public String[] toArrayRessource() {
+		Set<Ressource> setRessources = ressources.keySet();
+		String[] ressource = new String[setRessources.size()];
+
+		Iterator<Ressource> it;
+		it=setRessources.iterator(); // on cree un iterator sur les clés de ton hashmap
+		int i=0;
+		while(it.hasNext())
+		{
+			Ressource r = (Ressource) it.next();
+			if(r!=Ressource.FIELD) {ressource[i]=r.toString();}
+		}
+		return ressource;
+		
+	}
+	
+	/**
+	 * Renvoie la liste des ressource premiere (sans outil ou Field)
+	 * elle fonctionne avec toArrayRessource pour avoir a quel ressource l'indice du tableau correspond.
+	 * @return nombre de ressource.
+	 */
+	public int[] toArrayNumber() {
+		Set<Ressource> setRessources = ressources.keySet();
+		int[] number = new int[setRessources.size()];
+
+		Iterator<Ressource> it;
+		it=setRessources.iterator(); // on cree un iterator sur les clés de ton hashmap
+		int i=0;
+		while(it.hasNext())
+		{
+			Ressource r = (Ressource) it.next();
+			if(r!=Ressource.FIELD) {number[i]=ressources.get(r);}
+		}
+		return number;
+		
+	}
 }
