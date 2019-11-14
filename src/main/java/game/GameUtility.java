@@ -99,4 +99,21 @@ public class GameUtility{
 		}
 		return choose;
 	}
+	
+	public static int ressourceChooze(Player player,int ressourceToFood) {
+		int[] IAChoose;
+		int[] ressourceNumber = new int[4];
+		int[] copieInventory=player.getInventory().getCopyRessources();
+		String[] ressourceName = new String[4];
+		for(int i=0;i<4;i++) {
+			ressourceNumber[i]=copieInventory[i];
+			ressourceName[i]=Ressource.indexToRessource(i).toString();
+		}
+		do {
+			IAChoose=player.getIA().chooseRessource(ressourceToFood, ressourceNumber, ressourceName);
+		}while(IAChoose[0]<0 && IAChoose[0]>3 && IAChoose[1]>0 && IAChoose[1]<=Math.min(ressourceToFood, copieInventory[IAChoose[0]]));
+		player.getInventory().ableToSubRessource(Ressource.indexToRessource(IAChoose[0]), IAChoose[1]);
+		player.getInventory().subRessource(Ressource.indexToRessource(IAChoose[0]), IAChoose[1]);
+		return IAChoose[1];
+	}
 }
