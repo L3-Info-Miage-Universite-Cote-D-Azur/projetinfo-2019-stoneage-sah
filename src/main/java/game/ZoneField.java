@@ -29,6 +29,8 @@ class ZoneField implements Zone{
     public int getAvailableSpace(){return availableSpace;}
     public String getName(){return name;}
     public Ressource getRessource(){return ressource;}
+    public int figurineInZone() {return figurineInZone;}
+    public Player occupated() {return occupated;}
   
     
     //Figurine
