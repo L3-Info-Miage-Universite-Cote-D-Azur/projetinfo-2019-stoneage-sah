@@ -19,7 +19,7 @@ public class Inventory {
 	
 	//GETTERS
 	public int getRessource(Ressource ressource){ return ressources[ressource.getIndex()] ;}
-	public int[] getCopiRessources() {return ressources.clone();}
+	public int[] getCopyRessources() {return ressources.clone();}
 	
 	//ADDERS
 	/**
