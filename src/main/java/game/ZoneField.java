@@ -75,6 +75,7 @@ class ZoneField implements Zone{
         removePlayerFigurine(player);
         player.recoveryFigurine(number);
         player.getInventory().addRessource(getRessource(),1);
+        System.out.println("Le joueur "+ player.getName() +" a maintenant "+ player.getInventory().getRessource(getRessource())+ " "+ getRessource().toString()+".");
     }
     	
     public int getMinimalFigurineRequierement() {
