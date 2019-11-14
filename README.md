@@ -35,7 +35,7 @@ fin du jeu a la fin du tour, le joueur est gagnant.
 -Ajout de la cabane de reproduction et de ses contraintes si non fait.  
 -ajout de la zone de chasse ainsi que du système complet de nourriture.  
 -Finalisation du système de tour, le joueur doit désormais nourrir les figurines avant que le tour termine.  
--Un ou plusieurs joueurs gagnent dès qu'ils ont plus de 2 bois. 
+-Un ou plusieurs joueurs gagnent dès qu'ils ont plus de 1 bois au moins.  
   
 ## Quatrième itération:  
 -Avant le lancement du programme, nous demandons à l'utilisateur combien veut-il de joueur dans sa partie, ce nombre sera compris entre 2 et 4  
