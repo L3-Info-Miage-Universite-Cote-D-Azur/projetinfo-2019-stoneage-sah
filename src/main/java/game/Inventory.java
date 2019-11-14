@@ -14,10 +14,12 @@ public class Inventory {
 	/* CONSTRUCTOR */
 	public Inventory () {
 		ressources = new int[Settings.NB_RESSOURCES];
+		ressources[Ressource.FOOD.getIndex()]=15;
 	}
 	
 	//GETTERS
 	public int getRessource(Ressource ressource){ return ressources[ressource.getIndex()] ;}
+	public int[] getCopiRessources() {return ressources.clone();}
 	
 	//ADDERS
 	/**
