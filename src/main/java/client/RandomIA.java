@@ -1,6 +1,6 @@
 package client;
 
-import game.Settings;
+import java.util.Random;
 
 
 /**
@@ -10,7 +10,10 @@ import game.Settings;
  */
 
 public class RandomIA implements IA {
-
+	
+	//Random de l'IA (elle ne peux pas acceder a Settings).
+	private Random rand = new Random();
+	
 	/**
 	 * chooseZone retourne l'indice de la zone choisie par l'IA (ici au hasard). 
 	 * @param zoneAvailableSpace le tableau avec l'espace disponible de chaque zone. 
@@ -18,7 +21,7 @@ public class RandomIA implements IA {
 	 * @return l'indice de la zone
 	 */
 	public int chooseZone (int[] zoneAvailableSpace,String[] zoneName) {
-		return Settings.RAND.nextInt(zoneAvailableSpace.length);
+		return rand.nextInt(zoneAvailableSpace.length);
 	}
 
 	/**
@@ -27,10 +30,28 @@ public class RandomIA implements IA {
 	 * @return l'indice de la zone
 	 */
 	public int chooseNumber (int min,int max) {
-		return Settings.RAND.nextInt(max-min+1)+min;
+		return rand.nextInt(max-min+1)+min;
+	}
+	
+	/**
+	 * chooseNumber retourne le nombre de ressource choisie par l'IA au hasard. 
+	 * @param Le nombre de figurines a nourrir
+	 * @param Un tableau contenant le nombre de ressource que l'IA possede par index.
+	 * @param Un tableau contenant le nom des ressources que l'IA possede par index.
+	 * @return l'indice de la zone
+	 */
+	public int[] chooseRessource(int figurinesToFeed, int[] RessourceNumber, String[] ressourceName) {
+		int index = rand.nextInt(RessourceNumber.length);
+		int ressource = RessourceNumber[index];
+		
+		int nb = rand.nextInt(Math.min(ressource, figurinesToFeed))+1;
+		
+		int[] res = new int[] {index,nb};
+		return res;
 	}
 
 	public String toString(){
 		return "Random";
 	}
 }
+
