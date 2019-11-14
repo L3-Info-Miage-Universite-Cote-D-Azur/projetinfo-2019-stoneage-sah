@@ -20,7 +20,7 @@ class ZoneField implements Zone{
     
     ZoneField(String name,Ressource ressource){
         this.name=name;
-        this.availableSpace=SETTING.MAX_ZONEFIELD_SPACE;
+        this.availableSpace=Settings.MAX_ZONEFIELD_SPACE;
         this.ressource= ressource;
         //this.totalAvailableSpace=this.availableSpace;
     }
