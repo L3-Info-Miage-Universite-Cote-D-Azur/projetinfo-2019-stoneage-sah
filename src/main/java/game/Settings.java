@@ -11,7 +11,7 @@ import client.RandomIA;
  * La classe represente les parametres immutables du jeu.  
  */
 
-public class SETTING
+public class Settings
 {
 	/* STATIC FINAL FIELDS */
 	// Nombre de figurine au depart pour chaque joueur
@@ -22,6 +22,8 @@ public class SETTING
 	public static final int MAX_PLAYER = 2;
 	// Nombre de place dans les zones de ressources. 
 	public static final int MAX_ZONERESSOURCE_SPACE = 7;
+	// Nombre de zones au total
+	public static final int NB_ZONES = 7;
     
 	// Liste des noms de joueurs. 
 	public static ArrayList<String> PLAYER_NAME = new ArrayList<String>(Arrays.asList("Robert","Sardoche","Doritos","JeanCharles","Mclito&Carfly","Helico42"));
