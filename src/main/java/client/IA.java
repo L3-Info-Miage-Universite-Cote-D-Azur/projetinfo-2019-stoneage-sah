@@ -22,7 +22,17 @@ public interface IA{
 	 * @return l'indice de la zone
 	 */
 	public int chooseNumber(int min,int max);
+	
+	/**
+	 * chooseNumber retourne le nombre de res choisie par l'IA. 
+	 * @param Le nombre de figurines a nourrir
+	 * @param Un tableau contenant le nombre de ressource que l'IA possede par index.
+	 * @param Un tableau contenant le nom des ressources que l'IA possede par index.
+	 * @return l'indice de la zone
+	 */
+	public int[] chooseRessource(int figurinesToFeed, int[] RessourceNumber, String[] ressourceName);
 
 	@Override
 	public String toString();
 }
+
