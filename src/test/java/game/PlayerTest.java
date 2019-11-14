@@ -1,5 +1,6 @@
 package game;
 import game.Settings;
+import game.Ressource;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
@@ -14,22 +15,22 @@ public class PlayerTest
     public void testIncreaseMaxFigurine() 
     {
         this.player = new Player(Settings.getRandomName(), new RandomIA());
-        // INIT TEST
+        // Test de l'instanciation
         assertEquals(this.player.getMaxFigurine(), Settings.START_FIGURINE);
 
-        // TEST
+        // Resultat et application classiques attendus
         assertEquals(this.player.increaseMaxFigurine(), true);
         assertEquals(this.player.getCurrentFigurine(), Settings.START_FIGURINE + 1);
 
-        // FILL IT
+        // Mettre maxFigurine a Settings.MAX_FIGURINE manuellement avec un pas de 1
         for (int i = 0; i < Settings.MAX_FIGURINE - this.player.getMaxFigurine(); i++)
         {
             assertEquals(this.player.increaseMaxFigurine, true);
         }
 
-        // ERROR TEST
+        // Essayer de mettre 1 figurine d'overflow
         assertEquals(this.player.increaseMaxFigurine(), false);
-        // IS IT FILLED
+        // Regarder si quelque chose a change
         assertEquals(this.player.getMaxFigurine(), Settings.MAX_FIGURINE);
         assertEquals(this.player.getCurrentFigurine(), Settings.MAX_FIGURINE);
     }
@@ -38,27 +39,35 @@ public class PlayerTest
     public void testAbleToPlaceFigurine () 
     {
         this.player = new Player(Settings.getRandomName(), new RandomIA());
-        
+        // Test de l'instanciation
         assertEquals(this.player.ableToPlaceFigurine(0), true);
 
+        // Dit qu'on a place sur la foret
         this.player.setHadPlace(0, true);
 
+        // Si on peut placer sur la foret
         assertEquals(this.player.ableToPlaceFigurine(0), false);
+        // Si on peut placer autre part
         assertEquals(this.player.ableToPlaceFigurine(1), true);
+        // Si on peut placer sur la derniere zone
         assertEquals(this.player.ableToPlaceFigurine(Settings.NB_ZONES - 1), true);
 
+        // On a place de partout
         for (int i = 0; i < Settings.NB_ZONES; i++)
         {
             this.player.setHadPlace(i, true);
         }
 
+        // Check si on peut bien placer nul part
         for (int i = 0; i < Settings.NB_ZONES; i++)
         {
             assertEquals(this.player.ableToPlaceFigurine(i), false);
         }
 
+        // On reset ce tableau des placements
         this.player.resetHadPlaced();
 
+        // Check si on peut placer partout
         for (int i = 0; i < Settings.NB_ZONES; i++)
         {
             assertEquals(this.player.ableToPlaceFigurine(i), true);
