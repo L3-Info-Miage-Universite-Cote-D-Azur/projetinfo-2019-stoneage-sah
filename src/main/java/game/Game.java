@@ -24,13 +24,13 @@ public class Game {
 		while(!this.isEnd()){
 			System.out.println("\n\n####### TOUR : "+nbTour+" #######");
 
-			System.out.println("\n--- Phase de placement ---");
+			System.out.println("\n\n--- PHASE DE PLACEMENT ---");
 			placePhase();
 
-			System.out.println("\n--- Phase de recolte ---");
+			System.out.println("\n\n--- PHASE DE RECOLTE ---");
 			harvestPhase();
 			
-			System.out.println("\n--- Phase de nourrisage ---");
+			System.out.println("\n\n--- PHASE DE NOURRISAGE ---");
 			feedPhase();
 			
 			nbTour+=1;
@@ -157,7 +157,7 @@ public class Game {
 		
 		for(Player player : players){
 			if(player.getInventory().getRessource(Ressource.WOOD) > 1) {//La condition de victoire. 
-				System.out.println("\n"+player.getName()+" a gagne.");
+				System.out.println("\nVICTOIRE :"+player.getName()+" a gagne.");
 				isOver = true; 
 			}
 		}
