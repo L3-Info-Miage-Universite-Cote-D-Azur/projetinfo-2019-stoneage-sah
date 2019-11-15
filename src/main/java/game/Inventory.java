@@ -24,7 +24,8 @@ public class Inventory {
 	//ADDERS
 	/**
 	 * La fonction addRessource ajoute number ressource a l'inventaire du joueur. 
-	 * @param ressource la ressource et number le nombre de ressources gagnee. 
+	 * @param ressource la ressource 
+	 * @param number le nombre de ressources gagnee. 
 	 */
 	public void addRessource(Ressource ressource,int number){
 		ressources[ressource.getIndex()]+=number;
@@ -33,7 +34,8 @@ public class Inventory {
 	//SUBSTRACTORS
 	/**
 	 * La fonction addRessource soustrait number ressource a l'inventaire du joueur. 
-	 * @param ressource la ressource et number le nombre de ressources retiree. 
+	 * @param ressource la ressource
+	 * @param number le nombre de ressources retiree. 
 	 */
 	public void subRessource(Ressource ressource,int number) {
 		ressources[ressource.getIndex()]-=number;
