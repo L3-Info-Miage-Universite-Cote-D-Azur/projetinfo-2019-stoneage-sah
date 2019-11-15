@@ -101,11 +101,11 @@ public class GameUtility{
 	}
 	
 	/**
-	 * Demande au joueur par quoi il veux remplacer la nourriture qui manque pour finir le tour et nourire toutes les figurine
-	 * cette fonction est appeler jusqua ce que ressourceToFood soit a 0 dans Game.feedPhase().
-	 * @param player le joueur concernet.
-	 * @param ressourceToFood la nouriture totale qu'il luis manque.
-	 * @return renvoie le nombre de ressour que le joueur a utiliser a la place de la nouriture.
+	 * Demande au joueur par quoi il veux remplacer la nourriture qui manque pour finir le tour et nourrire toutes les figurines
+	 * cette fonction est appelee jusqu'a ce que ressourceToFood soit a 0 dans Game.feedPhase().
+	 * @param player le joueur concerne.
+	 * @param ressourceToFood la nouriture totale qu'il lui manque.
+	 * @return renvoie le nombre de ressource que le joueur a utiliser a la place de la nouriture.
 	 */
 	public static int ressourceChoose(Player player,int ressourceToFood) {
 		
