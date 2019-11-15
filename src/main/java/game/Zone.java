@@ -23,7 +23,7 @@ public interface Zone {
 	/**
 	 * Place les figurine du joueur dans la zone
 	 * @param number nombre de figurine que le joueur place
-	 * @param player joueur que
+	 * @param player joueur qui est concerne. 
 	 */
 	public void placeFigurine(int number,Player player);
 	
@@ -34,14 +34,14 @@ public interface Zone {
 	public String getName();
 	
 	/**
-	 * Le joueur recupere son due et recupere ces figurine
-	 * @param player le joueur qui recupere son due
+	 * Le joueur recupere son du et recupere ses figurine
+	 * @param player le joueur qui recupere son du.
 	 */
 	public void playerRecoveryFigurine(Player player);
 	
 	/**
-	 * place disponnible dans la zone
-	 * @return le nombre de place disponnible
+	 * Retourn la place disponible dans la zone
+	 * @return le nombre de place disponible
 	 */
 	public int getAvailableSpace();
 	
