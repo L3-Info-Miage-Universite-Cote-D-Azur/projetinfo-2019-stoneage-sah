@@ -32,7 +32,8 @@ class ZoneField implements Zone{
     //Figurine
     /**
      * placeFigurine(int, Player) place 1 figurine appartenant a player dans la zone. 
-     * @param number : le nombre de figurine a mettre dans la zone, player : le joueur qui les mets. 
+     * @param number : le nombre de figurine a mettre dans la zone. 
+     * @param player : le joueur qui les mets. 
      */ 
     public void placeFigurine(int number,Player player){
         availableSpace-=number;
@@ -66,12 +67,10 @@ class ZoneField implements Zone{
         }
         return figurineInZone;
     } 
-    /**
-     * @param player 
-     * enlève les figurines du joueur de la zone
-     * rends les figurines au joueur
-     * ajoute une ressource au joueur
+    /** 
+     * enlève les figurines du joueur de la zone, rends les figurines au joueur, ajoute une ressource au joueur
      * affiche un message pour confirmer que le joueur a reçu la ressource, puis affiche le nombre qu'il possède
+     * @param player
      */
     public void playerRecoveryFigurine(Player player) {
     	int number = howManyPlayerFigurine(player);
