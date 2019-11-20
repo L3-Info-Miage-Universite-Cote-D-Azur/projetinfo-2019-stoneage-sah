@@ -15,6 +15,7 @@ public class Player
     private String name;
     private IA ia; 
     private boolean[] hadPlaced;
+    private int score;
     
     /* CONSTRUCTOR */
     public Player(String name, IA ia)
@@ -27,6 +28,7 @@ public class Player
         this.ia = ia;
         this.inventory = new Inventory();
         this.hadPlaced = new boolean[Settings.NB_ZONES];
+        score = 0;
     }
 
     /* METHODS */
@@ -78,9 +80,12 @@ public class Player
     public String getName() {return this.name;}
     public IA getIA() {return this.ia;}
     public boolean[] getHadPlaced() {return this.hadPlaced;}
+    public int getScore() { return score; }
 
     /* SETTERS */
     public void setHadPlaced (int index, boolean b) {this.hadPlaced[index] = b;}
+    public void addScore(int number) { this.score += number; }
+    public void subScore(int number) { this.score -= number; }
 
     /* RESETTERS */
     public void resetHadPlaced() 
