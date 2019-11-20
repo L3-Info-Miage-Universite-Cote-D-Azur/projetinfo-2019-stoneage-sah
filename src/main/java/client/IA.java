@@ -38,8 +38,17 @@ public interface IA{
 	 * @param RessourceNumber Le tableau du nombre de ressource possedee par le joueur. 
 	 * @return Booleen : true si le joueur veut utiliser ses ressources pour nourrir, false sinon.
 	 */
-	public boolean useRessourceToFeed(int[] RessourceNumber);
+	public boolean useRessourceToFeed(int[] ressourceNumber);
 
+	/**
+	 * pickCard renvoie les ressources donnee pour l'achat de la carte civilisation. 
+	 * Si l'IA renvoie un tableau vide, elle refuse l'achat de la carte. 
+	 * @param ressourceNumber : les ressources premieres du joueur
+	 * @param numberRessourceRequire : le nombre de ressource pour l'achat de la carte. 
+	 * @return res : tableau des ressources donnes pour la carte. 
+	 */
+	public int[] pickCard(int[] ressourceNumber,int numberRessourceRequire);
+	
 	@Override
 	public String toString();
 }
