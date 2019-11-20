@@ -6,6 +6,7 @@ public class Game {
 	/* FIELDS */
 	private Player[] players;//Tableau des joueurs.
 	private Zone[] zones;//Tableau des zones.
+	private ZoneCarteCivilisation[] zoneCarteCivilisation;
 	private int nbTour;//Compteur du nombre de tours. 
 
 	/**
@@ -13,7 +14,7 @@ public class Game {
 	 */
 	public Game(){
 		players=GameUtility.initPlayer();
-		zones=GameUtility.initZone();
+		initZone();
 		nbTour=1;
 	}
 
@@ -168,5 +169,31 @@ public class Game {
 			}
 		}
 		return isOver; 
+	}
+	
+	/**
+	 * Initie le tableau zones. 
+	 */
+	public void initZone(){
+		zones = new Zone[11];
+		zoneCarteCivilisation = new ZoneCarteCivilisation[4];
+
+		//Les zones du jeu. 
+		zones[0] = new ZoneRessource("Foret",Ressource.WOOD,Settings.MAX_ZONERESSOURCE_SPACE);
+		zones[1] = new ZoneRessource("Glaisiere",Ressource.CLAY,Settings.MAX_ZONERESSOURCE_SPACE);
+		zones[2] = new ZoneRessource("Carriere",Ressource.STONE,Settings.MAX_ZONERESSOURCE_SPACE);
+		zones[3] = new ZoneRessource("Riviere",Ressource.GOLD,Settings.MAX_ZONERESSOURCE_SPACE);
+		//La zone de chasse a : nombre de joueur x le nombre de figurines maximum d'espace. 
+		zones[4] = new ZoneRessource("Chasse", Ressource.FOOD,Settings.MAX_PLAYER * Settings.MAX_FIGURINE);
+		zones[5] = new ZoneField("Champs", Ressource.FIELD);
+		zones[6] = new ZoneHut("Cabane de reproduction");
+		
+		//gestion des carte civilisation
+		ZoneCarteCivilisation zcc;
+		for(int i=0;i<4;i++) {
+			zcc=new ZoneCarteCivilisation("Carte Civilisation: "+ (i+1), i+1);
+			zoneCarteCivilisation[i]=zcc;
+			zones[7+i]=zcc;
+		}
 	}
 }
