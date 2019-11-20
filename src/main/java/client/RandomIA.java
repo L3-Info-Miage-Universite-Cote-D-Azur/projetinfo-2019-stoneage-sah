@@ -57,11 +57,38 @@ public class RandomIA implements IA {
 	/**
 	 * useRessourceToFeed renvoie true ou false selon le choix de l'IA pour nourrir 
 	 * ses figurines avec des ressources. Le choix se fait au hasard.  
-	 * @param RessourceNumber Le tableau du nombre de ressource possedee par le joueur. 
+	 * @param ressourceNumber Le tableau du nombre de ressource possedee par le joueur. 
 	 * @return Booleen : true si le joueur veut utiliser ses ressources pour nourrir, false sinon.
 	 */
-	public boolean useRessourceToFeed(int[] RessourceNumber) {
+	public boolean useRessourceToFeed(int[] ressourceNumber) {
 		return rand.nextInt(2)==1;
+	}
+	
+	/**
+	 * pickCard renvoie les ressources donnee pour l'achat de la carte civilisation. 
+	 * Si l'IA renvoie un tableau vide, elle refuse l'achat de la carte. 
+	 * @param ressourceNumber : les ressources premieres du joueur
+	 * @param numberRessourceRequire : le nombre de ressource pour l'achat de la carte. 
+	 * @return res : tableau des ressources donnes pour la carte. 
+	 */
+	public int[] pickCard(int[] ressourceNumber,int numberRessourceRequire) {
+		int[] res = new int[] {0,0,0,0};
+		
+		if(rand.nextInt(2) == 1) {
+			while(numberRessourceRequire > 0) {
+				int index = -1;
+				
+				while(index == -1 || ressourceNumber[index] == 0) {
+					index = rand.nextInt(ressourceNumber.length);
+				}
+				int number = rand.nextInt(Math.min(numberRessourceRequire, ressourceNumber[index])) + 1;
+				
+				ressourceNumber[index] -= number;
+				res[index] += number;
+				numberRessourceRequire -= number;
+			}
+		}
+		return res; 
 	}
 	
 	public String toString(){
