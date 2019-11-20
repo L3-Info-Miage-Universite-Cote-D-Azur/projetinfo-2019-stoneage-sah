@@ -32,6 +32,12 @@ public interface IA{
 	 */
 	public int[] chooseRessource(int figurinesToFeed, int[] RessourceNumber, String[] ressourceName);
 	
+	/**
+	 * useRessourceToFeed renvoie true ou false selon le choix de l'IA pour nourrir 
+	 * ses figurines avec des ressources. 
+	 * @param RessourceNumber Le tableau du nombre de ressource possedee par le joueur. 
+	 * @return Booleen : true si le joueur veut utiliser ses ressources pour nourrir, false sinon.
+	 */
 	public boolean useRessourceToFeed(int[] RessourceNumber);
 
 	@Override
