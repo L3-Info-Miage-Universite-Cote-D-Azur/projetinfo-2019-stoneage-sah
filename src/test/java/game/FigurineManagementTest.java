@@ -15,8 +15,8 @@ public class FigurineManagementTest {
 	@Test
 	public void TestPlaceFigurine(){
 		//placeFigurine(Zone zone, Player player,int number,int indexZone)
-		this.zoneR = new ZoneRessource("Foret",Ressource.WOOD,3,Settings.MAX_ZONERESSOURCE_SPACE);	
-		this.zoneR2 = new ZoneRessource("Glaisiere",Ressource.CLAY,4,Settings.MAX_ZONERESSOURCE_SPACE);
+		this.zoneR = new ZoneRessource("Foret",Ressource.WOOD,Settings.MAX_ZONERESSOURCE_SPACE);	
+		this.zoneR2 = new ZoneRessource("Glaisiere",Ressource.CLAY,Settings.MAX_ZONERESSOURCE_SPACE);
 		this.player = new Player(Settings.getRandomName(), new RandomIA());
 		int forestIndex=0;
 		int glaiIndex=1;
@@ -42,8 +42,8 @@ public class FigurineManagementTest {
 	@Test
 	public void testAbleToChooseZone(){
 		this.player = new Player(Settings.getRandomName(), new RandomIA());
-		this.zoneR = new ZoneRessource("Foret",Ressource.WOOD,3,Settings.MAX_ZONERESSOURCE_SPACE);	
-		this.zoneR2 = new ZoneRessource("Chasse", Ressource.FOOD, 2, Settings.MAX_PLAYER * Settings.MAX_FIGURINE);
+		this.zoneR = new ZoneRessource("Foret",Ressource.WOOD,Settings.MAX_ZONERESSOURCE_SPACE);	
+		this.zoneR2 = new ZoneRessource("Chasse", Ressource.FOOD,Settings.MAX_PLAYER * Settings.MAX_FIGURINE);
 		int forestIndex=0;
 		int chasseIndex=4;
 		//cas de base
