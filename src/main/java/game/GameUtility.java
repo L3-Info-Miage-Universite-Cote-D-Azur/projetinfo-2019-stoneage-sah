@@ -31,12 +31,12 @@ public class GameUtility{
 		Zone[] res = new Zone[7];
 
 		//Les zones du jeu. 
-		res[0] = new ZoneRessource("Foret",Ressource.WOOD,3,Settings.MAX_ZONERESSOURCE_SPACE);
-		res[1] = new ZoneRessource("Glaisiere",Ressource.CLAY,4,Settings.MAX_ZONERESSOURCE_SPACE);
-		res[2] = new ZoneRessource("Carriere",Ressource.STONE,5,Settings.MAX_ZONERESSOURCE_SPACE);
-		res[3] = new ZoneRessource("Riviere",Ressource.GOLD,6,Settings.MAX_ZONERESSOURCE_SPACE);
+		res[0] = new ZoneRessource("Foret",Ressource.WOOD,Settings.MAX_ZONERESSOURCE_SPACE);
+		res[1] = new ZoneRessource("Glaisiere",Ressource.CLAY,Settings.MAX_ZONERESSOURCE_SPACE);
+		res[2] = new ZoneRessource("Carriere",Ressource.STONE,Settings.MAX_ZONERESSOURCE_SPACE);
+		res[3] = new ZoneRessource("Riviere",Ressource.GOLD,Settings.MAX_ZONERESSOURCE_SPACE);
 		//La zone de chasse a : nombre de joueur x le nombre de figurines maximum d'espace. 
-		res[4] = new ZoneRessource("Chasse", Ressource.FOOD, 2, Settings.MAX_PLAYER * Settings.MAX_FIGURINE);
+		res[4] = new ZoneRessource("Chasse", Ressource.FOOD,Settings.MAX_PLAYER * Settings.MAX_FIGURINE);
 		res[5] = new ZoneField("Champs", Ressource.FIELD);
 		res[6] = new ZoneHut("Cabane de reproduction");
 
