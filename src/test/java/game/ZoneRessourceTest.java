@@ -12,7 +12,7 @@ public class ZoneRessourceTest {
 	@Test
 	public void testPlaceFigurine(){
 		this.player = new Player("test1", null);
-		this.zoneR = new ZoneRessource("Foret",Ressource.WOOD,3,Settings.MAX_ZONERESSOURCE_SPACE);
+		this.zoneR = new ZoneRessource("Foret",Ressource.WOOD,Settings.MAX_ZONERESSOURCE_SPACE);
 		//cas de base
 		assertEquals(true,zoneR.getAvailableSpace()==Settings.MAX_ZONERESSOURCE_SPACE);
 		
@@ -27,7 +27,7 @@ public class ZoneRessourceTest {
 	
 	@Test
 	public void testAbleToChooseZone(){
-		this.zoneR = new ZoneRessource("Foret",Ressource.WOOD,3,Settings.MAX_ZONERESSOURCE_SPACE);
+		this.zoneR = new ZoneRessource("Foret",Ressource.WOOD,Settings.MAX_ZONERESSOURCE_SPACE);
 		//cas de base
 		assertEquals(true,zoneR.ableToChooseZone(1)); //parametre inutiliser dans cette fonction
 		
@@ -39,7 +39,7 @@ public class ZoneRessourceTest {
 	
 	public void testRemovePlayerFigurine(){
 		this.player = new Player(Settings.getRandomName(), new RandomIA());
-		this.zoneR = new ZoneRessource("Foret",Ressource.WOOD,3,Settings.MAX_ZONERESSOURCE_SPACE);	
+		this.zoneR = new ZoneRessource("Foret",Ressource.WOOD,Settings.MAX_ZONERESSOURCE_SPACE);	
 		
 		//remove sans que le joueur ai de figurine dans la zone rien ne ce passe
 		zoneR.removePlayerFigurine(player);
@@ -69,7 +69,7 @@ public class ZoneRessourceTest {
 	
 	public void testHowManyPlayerFigurine() {
 		this.player = new Player(Settings.getRandomName(), new RandomIA());
-		this.zoneR = new ZoneRessource("Foret",Ressource.WOOD,3,Settings.MAX_ZONERESSOURCE_SPACE);	
+		this.zoneR = new ZoneRessource("Foret",Ressource.WOOD,Settings.MAX_ZONERESSOURCE_SPACE);	
 		this.player2 = new Player(Settings.getRandomName(), new RandomIA());
 		
 		//cas de base
@@ -89,7 +89,7 @@ public class ZoneRessourceTest {
 	
 	public void testPlayerRecoveryFigurine() {
 		this.player = new Player(Settings.getRandomName(), new RandomIA());
-		this.zoneR = new ZoneRessource("Foret",Ressource.WOOD,3,Settings.MAX_ZONERESSOURCE_SPACE);	
+		this.zoneR = new ZoneRessource("Foret",Ressource.WOOD,Settings.MAX_ZONERESSOURCE_SPACE);	
 		zoneR.placeFigurine(3, player);
 		assertEquals(true,player.getInventory().getRessource(Ressource.WOOD)==0);
 		//avec 3 joueur le joueur est obliger de recolter un minimum de 1 de bois car 
@@ -99,7 +99,7 @@ public class ZoneRessourceTest {
 	}
 	@Test
 	public void testGetMinimalFigurineRequierement(){
-		this.zoneR = new ZoneRessource("Foret",Ressource.WOOD,3,Settings.MAX_ZONERESSOURCE_SPACE);
+		this.zoneR = new ZoneRessource("Foret",Ressource.WOOD,Settings.MAX_ZONERESSOURCE_SPACE);
 		assertEquals(1, this.zoneR.getMinimalFigurineRequierement());
 	}
 	
