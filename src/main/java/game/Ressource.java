@@ -77,4 +77,28 @@ public enum Ressource {
             return null;
     	}
     }
+    
+    /**
+     * getDivisor renvoie le diviseur lie a la ressource premiere. 
+     * @return int diviseur, le diviseur de la ressource. 
+     */
+    public int getDivisor(){
+        switch(this){
+            case WOOD:
+                return 3;
+            case CLAY:
+                return 4;
+            case STONE :
+                return 5;
+            case GOLD :
+                return 6;
+            case FOOD:
+                return 2;
+            case FIELD:
+                return 1;
+            default :
+                System.out.println("ERROR");
+                return -1;
+        }
+    }
 }
