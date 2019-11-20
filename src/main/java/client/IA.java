@@ -31,6 +31,8 @@ public interface IA{
 	 * @return l'indice de la zone
 	 */
 	public int[] chooseRessource(int figurinesToFeed, int[] RessourceNumber, String[] ressourceName);
+	
+	public boolean useRessourceToFeed(int[] RessourceNumber);
 
 	@Override
 	public String toString();
