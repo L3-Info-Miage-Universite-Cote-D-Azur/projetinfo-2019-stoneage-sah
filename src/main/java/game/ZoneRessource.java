@@ -20,15 +20,14 @@ class ZoneRessource implements Zone{
 	 * Construit la zone de ressource.
 	 * @param name nom de la zone.
 	 * @param ressource Ressource que la zone produit.
-	 * @param divisor diviseur des dÃ©e lors de la recolte.
 	 * @param availableSpace place maximum disponible.
 	 */
-    ZoneRessource(String name,Ressource ressource,int divisor, int availableSpace){
+    ZoneRessource(String name,Ressource ressource, int availableSpace){
         this.name=name;
-        this.divisor=divisor;
         this.availableSpace=availableSpace;
         this.figurineInZone=new Hashtable<Player,Integer>();
         this.ressource = ressource;
+        this.divisor= ressource.getDivisor();
     }
     
     //GETTERS
