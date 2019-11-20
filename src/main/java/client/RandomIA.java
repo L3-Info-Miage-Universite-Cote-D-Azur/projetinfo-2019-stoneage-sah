@@ -54,6 +54,11 @@ public class RandomIA implements IA {
         return res;
     }
 
+	
+	public boolean useRessourceToFeed(int[] RessourceNumber) {
+		return rand.nextInt(2)==1;
+	}
+	
 	public String toString(){
 		return "Random";
 	}
