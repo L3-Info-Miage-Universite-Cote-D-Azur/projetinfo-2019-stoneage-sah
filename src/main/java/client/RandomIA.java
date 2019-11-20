@@ -54,7 +54,12 @@ public class RandomIA implements IA {
         return res;
     }
 
-	
+	/**
+	 * useRessourceToFeed renvoie true ou false selon le choix de l'IA pour nourrir 
+	 * ses figurines avec des ressources. Le choix se fait au hasard.  
+	 * @param RessourceNumber Le tableau du nombre de ressource possedee par le joueur. 
+	 * @return Booleen : true si le joueur veut utiliser ses ressources pour nourrir, false sinon.
+	 */
 	public boolean useRessourceToFeed(int[] RessourceNumber) {
 		return rand.nextInt(2)==1;
 	}
