@@ -24,7 +24,9 @@ public class Game {
 	public void gameLoop() {
 		while(!this.isEnd()){
 			System.out.println("\n\n####### TOUR : "+nbTour+" #######");
-
+			
+			afficheInfo();
+			
 			System.out.println("\n\n--- PHASE DE PLACEMENT ---");
 			placePhase();
 
@@ -201,5 +203,11 @@ public class Game {
 			zones[8+i]=zcc;
 		}
 		cardManager = new CarteCivilisationManager(zoneCarteCivilisation);
+	}
+	
+	public void afficheInfo() {
+		for (int i=0; i<players.length;i++) {
+			System.out.println("Le joueur "+ players[i].getName()+" a " + players[i].getScore()+" points de victoire");
+		}
 	}
 }
