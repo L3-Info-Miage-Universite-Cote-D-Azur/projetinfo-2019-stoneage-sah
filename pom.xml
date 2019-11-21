@@ -6,7 +6,7 @@
 
     <groupId>SAH</groupId> <!-- à changer par le nom du groupe -->
     <artifactId>StoneAge</artifactId> <!-- et le nom du projet -->
-    <version>1.2</version>
+    <version>2.0</version>
 
 
     <properties>
@@ -109,11 +109,9 @@
                     <!-- argument de la commande java (en plus du nom de la classe et du classpath -->
 
                     <!-- arguments récupérés dans le main -->
-                    <!--
-                        <arguments>
-                                <argument>argument1</argument>
-                        </arguments>
-                    -->
+                    <arguments>
+                            <argument>4</argument> <!-- Nombre de joueur -->
+                    </arguments>
 
                     <!-- arguments de configuration système -->
                     <!--
