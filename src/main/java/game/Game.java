@@ -9,12 +9,14 @@ public class Game {
 	private Zone[] zones;//Tableau des zones.
 	private CarteCivilisationManager cardManager;
 	private int nbTour;//Compteur du nombre de tours. 
+	public final int numberPlayer;
 
 	/**
 	 * Le constructeur de Game qui initialise players et zones.
 	 */
-	public Game(){
-		players=GameUtility.initPlayer();
+	public Game(int numberPlayer){
+		this.numberPlayer=numberPlayer;
+		players=GameUtility.initPlayer(numberPlayer);
 		initZone();
 		nbTour=1;
 	}
@@ -198,7 +200,7 @@ public class Game {
 		zones[2] = new ZoneRessource("Carriere",Ressource.STONE,Settings.MAX_ZONERESSOURCE_SPACE);
 		zones[3] = new ZoneRessource("Riviere",Ressource.GOLD,Settings.MAX_ZONERESSOURCE_SPACE);
 		//La zone de chasse a : nombre de joueur x le nombre de figurines maximum d'espace. 
-		zones[4] = new ZoneRessource("Chasse", Ressource.FOOD,Settings.MAX_PLAYER * Settings.MAX_FIGURINE);
+		zones[4] = new ZoneRessource("Chasse", Ressource.FOOD,numberPlayer * Settings.MAX_FIGURINE);
 		zones[5] = new ZoneField("Champs", Ressource.FIELD);
 		zones[6] = new ZoneHut("Cabane de reproduction");
 		zones[7] = new ZoneTool("Le Fabricant D'outils");
