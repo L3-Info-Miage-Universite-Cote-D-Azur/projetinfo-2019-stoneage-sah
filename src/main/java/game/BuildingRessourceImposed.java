@@ -6,7 +6,8 @@ package game;
 public class BuildingRessourceImposed extends Building 
 {
 	/* CONSTRUCTOR */
-	public BuildingRessourceImposed(int type, int vP, Ressource... r) {
+	public BuildingRessourceImposed(int vP, Ressource... r)
+	{
 		super(0);
 		super.victoryPoints = vP;
 		super.neededRessource = new Ressource[r.length];
