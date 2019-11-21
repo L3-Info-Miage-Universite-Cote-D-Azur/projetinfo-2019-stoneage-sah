@@ -75,7 +75,12 @@ class ZoneTool implements Zone{
         player.recoveryFigurine(number);
         player.getInventory().incrementTools();
         player.getInventory().incrementTool();
-        System.out.println("Le joueur "+ player.getName() +" a maintenant "+ player.getInventory().getTools() + " outils.");
+        
+        for(int i=0; i< player.getInventory().getTools().length; i++) {
+        	if(player.getInventory().getTools()[i] != 0) {
+        		System.out.println("Le joueur "+player.getName()+" a maintenant un outils de niveau "+player.getInventory().getTools()[i]+".");
+        	}
+        }
     }
     /**
      * retourne le nombre de figurine minimum necessaire pour occuper la zone	
