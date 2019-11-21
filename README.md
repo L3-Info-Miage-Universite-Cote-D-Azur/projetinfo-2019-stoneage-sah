@@ -46,7 +46,7 @@ fin du jeu a la fin du tour, le joueur est gagnant.
   
 ## Cinquième itération:  
 -Ajouts de toutes les cartes et bâtiments  
--Ajout des regles en fonction du nombre de joueur
+-Ajout des regles en fonction du nombre de joueur  
 -Ajout d'une nouvelle IA  
 -Affinement de la boucle de jeu, on assiste à une partie normale avec des conditions de victoires réalistes  
   
