@@ -1,5 +1,6 @@
 package game;
 
+import java.util.Arrays;
 
 public class Game {
 	
@@ -40,6 +41,8 @@ public class Game {
 			cardManager.organizeCard();
 			nbTour+=1;
 		}
+		calculScore();
+		classement();
 	}
 	
 	/**
@@ -222,6 +225,9 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * Calcule le score de chaque joueur (ne dois etre appeler que 1 fois et a la fin de la partie)
+	 */
 	public void calculScore() {
 		for (Player player : players) {
 			CarteCivilisation[] cardCivi = player.getInventory().getCardCivilisation().clone();
@@ -270,5 +276,27 @@ public class Game {
 			player.addScore(scoreAdd);
 		}
 		
+	}
+	
+	/**
+	 * Affichage du classement
+	 */
+	public void classement() {
+		int[] score= new int[players.length];
+		for(int i=0; i<players.length; i++) {
+			score[i]=players[i].getScore();
+		}
+		Arrays.sort(score);
+		System.out.println("\n=========================\nLa partie est fini\n=========================\nVoici le classement:");
+		int position =1;
+		for(int i=players.length-1; i>=0; i--) {
+			for(Player player: players) {
+				if(player.getScore()==score[i]) { 
+					System.out.println("Posistion "+position+" : "+player.getName()+" avec un score de : "+player.getScore()); 
+					break; //gerer les egalité plus tard (le premier dans la liste est prioriter en cas d'egalité)
+				}
+			}
+			position++;
+		}
 	}
 }
