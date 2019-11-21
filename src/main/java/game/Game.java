@@ -24,7 +24,9 @@ public class Game {
 	public void gameLoop() {
 		while(!this.isEnd()){
 			System.out.println("\n\n####### TOUR : "+nbTour+" #######");
-
+			
+			afficheInfo();
+			
 			System.out.println("\n\n--- PHASE DE PLACEMENT ---");
 			placePhase();
 
@@ -133,14 +135,14 @@ public class Game {
 				if(totalRessource < figurinesToFeed) {//Voir plus tard si le joueur ne veux pas depenser.
 					System.out.println("Le joueur "+ player.getName() +" ne peut pas nourrir ses figurines.");
 					player.subScore(10);
-					System.out.println("Le joueur "+ player.getName() + " a perdu 10 points de victoires");
+					System.out.println("Le joueur"+player.getName() + "a perdu 10 points de victoires");
 					continue;
 				}
 				boolean wantToFeed = player.getIA().useRessourceToFeed(inventory.getCopyRessources());
 				if(!wantToFeed) {
 					System.out.println("Le joueur "+ player.getName() +" ne veux pas nourrir ses figurines.");
 					player.subScore(10);
-					System.out.println("Le joueur "+ player.getName() + " a perdu 10 points de victoires");
+					System.out.println("Le joueur"+player.getName() + "a perdu 10 points de victoires");
 					continue;
 				}
 				
@@ -196,6 +198,12 @@ public class Game {
 			zcc=new ZoneCarteCivilisation("Carte Civilisation: "+ (i+1), i+1);
 			zoneCarteCivilisation[i]=zcc;
 			zones[7+i]=zcc;
+		}
+	}
+	
+	public void afficheInfo() {
+		for (int i=0; i<players.length;i++) {
+			System.out.println("Le joueur "+ players[i].getName()+" a " + players[i].getScore()+" points de victoire");
 		}
 	}
 }
