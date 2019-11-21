@@ -70,4 +70,24 @@ public class InventoryTest
 			assertEquals(this.inv.ableToSubRessource(Ressource.WOOD, i), true);
 
 	}
+	
+	@Test
+	public void testAddCardCivilisation ()
+	{
+		this.inv = new Inventory();
+		CarteCivilisation card = new CarteCivilisation(0, 0, 0, Ressource.WOOD, 3);
+		this.inv.addCardCivilisation(card);
+		// Test positif, on ajoute une carte
+		assertEquals(this.inv.getCardCivilisation()[0], card);
+	}
+	
+	@Test
+	public void testAvailableResourceToFeed ()
+	{
+		this.inv = new Inventory();
+		this.inv.addRessource(Ressource.WOOD, 845);
+		assertEquals(this.inv.availableResourceToFeed(), 845);
+		this.inv.addRessource(Ressource.CLAY, 6546);
+		assertEquals(this.inv.availableResourceToFeed(), 845 + 6546);
+	}
 }
