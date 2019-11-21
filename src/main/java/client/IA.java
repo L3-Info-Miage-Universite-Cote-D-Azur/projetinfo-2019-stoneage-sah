@@ -49,7 +49,12 @@ public interface IA{
 	 */
 	public int[] pickCard(int[] ressourceNumber,int numberRessourceRequire);
 	
+	/**
+	 * Renvoie un choix aleatoire sur la prise d'une carte batiment
+	 * @return true ou false, aleatoirement
+	 */
+	public boolean pickBuilding ();
+	
 	@Override
 	public String toString();
 }
-
