@@ -15,6 +15,7 @@ public class CarteCivilisationManager {
 	/* CONSTRUCTOR */
 	public CarteCivilisationManager(ZoneCarteCivilisation[] cardZone) {
 		this.cardZone = cardZone;
+		initDeck();
 		initCardInZone();
 	}
 	
@@ -63,6 +64,7 @@ public class CarteCivilisationManager {
 	 * @return CarteCivilisation : la carte tiree au hasard. 
 	 */
 	public CarteCivilisation getRandomCivilisationCard() {
+		if(deck.size()==0) return null; //plus de carte a piocher
 		int index = Settings.RAND.nextInt(deck.size());
 		CarteCivilisation card = deck.get(index);
 		
@@ -72,8 +74,9 @@ public class CarteCivilisationManager {
 	
 	/**
 	 * organizeCard replace les cartes comme il faut a la fin du tour.
+	 * @return true -> operation effectuer; false -> plus de carte disponnible fin de la parti
 	 */
-	public void organizeCard() {
+	public boolean organizeCard() {
 		int n = cardZone.length-1;
 		while(n >= 0) {
 			if(null == cardZone[n].getCard()) {
@@ -89,9 +92,12 @@ public class CarteCivilisationManager {
 				}
 				if(m < 0) {
 					cardZone[n].setCard(getRandomCivilisationCard());
+					if(cardZone[n].getCard()==null) return false; //si aucune carte reste a piocher
 				}
 			}
 			n--;
 		}
+		return true;
+		
 	}
 }
