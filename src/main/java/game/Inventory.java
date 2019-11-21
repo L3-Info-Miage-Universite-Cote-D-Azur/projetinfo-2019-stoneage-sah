@@ -11,6 +11,7 @@ public class Inventory {
 	// Les ressources que peut avoir le joueur. 
 	private int[] ressources;
 	private int buildings;
+	private ArrayList<CarteCivilisation> carteCivilisation;
 	
 	/* CONSTRUCTOR */
 	public Inventory () {
@@ -22,8 +23,16 @@ public class Inventory {
 	//GETTERS
 	public int getRessource(Ressource ressource){ return ressources[ressource.getIndex()] ;}
 	public int[] getCopyRessources() {return ressources.clone();}
+		public CarteCivilisation[] getCardCivilisation() {
+		CarteCivilisation[] cardCivi = new CarteCivilisation[carteCivilisation.size()];
+		for(int i=0; i<cardCivi.length; i++) { cardCivi[i]=carteCivilisation.get(i); }
+		return cardCivi;
+	}
 	
 	//ADDERS
+	public void addCardCivilisation(CarteCivilisation card){
+		carteCivilisation.add(card);
+	}
 	/**
 	 * La fonction addRessource ajoute number ressource a l'inventaire du joueur. 
 	 * @param ressource la ressource 
