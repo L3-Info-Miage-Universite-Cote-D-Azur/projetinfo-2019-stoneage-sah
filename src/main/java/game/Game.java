@@ -164,7 +164,10 @@ public class Game {
 	 * @return true si le jeu doit se terminer, false sinon
 	 */
 	public boolean isEnd(){
+		if(cardManager.isEmpty()) {return true;}
+		return false;
 		// DANS LES ZONEBUILDING
+		/*
 		for (int i = 12; i < zones.length; i++)
 		{
 			// SI UNE ZONE EST VIDE
@@ -172,13 +175,14 @@ public class Game {
 				return true;
 		}
 		return false;
+		*/
 	}
 	
 	/**
 	 * Initie le tableau zones. 
 	 */
 	public void initZone(){
-		zones = new Zone[16];
+		zones = new Zone[Settings.NB_ZONES];
 		ZoneCarteCivilisation[] zoneCarteCivilisation = new ZoneCarteCivilisation[4];
 
 		//Les zones du jeu. 
@@ -205,6 +209,7 @@ public class Game {
 		zones[13] = new ZoneBuilding();
 		zones[14] = new ZoneBuilding();
 		zones[15] = new ZoneBuilding();
+		
 	}
 	
 	public void afficheInfo() {
