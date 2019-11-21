@@ -81,7 +81,7 @@ public class RandomIA implements IA {
 				int index = -1;
 				
 				while(index == -1 || ressourceNumber[index] == 0) {
-					index = rand.nextInt(ressourceNumber.length);
+					index = rand.nextInt(res.length);
 				}
 				int number = rand.nextInt(Math.min(numberRessourceRequire, ressourceNumber[index])) + 1;
 				
