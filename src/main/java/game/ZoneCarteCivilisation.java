@@ -63,11 +63,11 @@ public class ZoneCarteCivilisation implements Zone{
     } 
     /**
      * @param player 
-     * enlève les figurines du joueur de la zone
+     * enlï¿½ve les figurines du joueur de la zone
      * rends les figurines au joueur
      * ajoute une ressource au joueur
-     * affiche un message pour confirmer que le joueur a reçu la ressource, puis affiche le nombre qu'il possède
-     * @return id de l'effet sur la parti (il en existe que 1 lancer de dés pour que chacun selectionne ca ressource)
+     * affiche un message pour confirmer que le joueur a reï¿½u la ressource, puis affiche le nombre qu'il possï¿½de
+     * @return id de l'effet sur la parti (il en existe que 1 lancer de dï¿½s pour que chacun selectionne ca ressource)
      * 0 : aucune action suplementaire necessaire
      */
     public void playerRecoveryFigurine(Player player) {
@@ -122,7 +122,7 @@ public class ZoneCarteCivilisation implements Zone{
     
     
     /**
-     * retourne le nombre de figurine minimum nécessaire pour occuper la zone	
+     * retourne le nombre de figurine minimum nï¿½cessaire pour occuper la zone	
      */
     public int getMinimalFigurineRequierement() {
     	return 1;
@@ -137,13 +137,12 @@ public class ZoneCarteCivilisation implements Zone{
      */
     public boolean chooseRecoveryCard(Player player,int ressourceRequire) {
     	int sum;
-    	boolean correctChoice = false;
     	boolean verif;
     	
     	//verification ressource suffisant
     	sum=0;
     	int[] copie = player.getInventory().getCopyRessources();
-    	for(int i = 0; i<4 && verif; i++) {
+    	for(int i = 0; i<4; i++) {
 			sum += copie[i];
     	}
     	if(sum<ressourceRequire) {
@@ -151,29 +150,25 @@ public class ZoneCarteCivilisation implements Zone{
     	}
     	
     	//on demande au joueur
-    	while(!correctChoice) {
-    		
+    	while(true) {
     		sum=0;
     		verif = true;
     		int[] choix = player.getIA().pickCard(player.getInventory().getCopyRessources(), ressourceRequire);
     		
     		for(int i = 0; i<4 && verif; i++) {
-    			if(choix[i] > player.getInventory().getRessource(Ressource.indexToRessource(i)) && choix[i] < 0) { 
+    			if(choix[i] > player.getInventory().getRessource(Ressource.indexToRessource(i)) || choix[i] < 0) { 
     				verif=false;
-    				}
+    			}
     			sum+=choix[i];
     		}
     		
-    		if (sum==0) { return false; } //cas ou il ne recupere pas la carte
+    		if (sum==0 && verif) { return false; } //cas ou il ne recupere pas la carte
     		if(verif && sum==ressourceRequire) {
     			for(int i = 0; i<4 && verif; i++) {
-    				player.getInventory().addRessource(Ressource.indexToRessource(i), choix[i]);
+    				player.getInventory().subRessource(Ressource.indexToRessource(i), choix[i]);
     			}
     			return true;
-    			
     		}
-    		
     	}
     }
-    	
-    }
+}
