@@ -55,10 +55,10 @@ public class Inventory {
 	
 	public void incrementTool() {this.tool += 1;}
 	public void incrementTools() {
-		if (tool >= 12) {
-			break;
-		}
-		this.tools[tool % 3] += 1;
+		if (tool < 12) {		
+			this.tools[tool % 3] +=1;
+		}		
+	}
 	
 	//SUBSTRACTORS
 	/**
