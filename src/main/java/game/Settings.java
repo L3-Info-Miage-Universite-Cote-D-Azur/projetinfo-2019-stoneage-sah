@@ -19,7 +19,7 @@ public class Settings
 	// Nombre de figurine maximale pour chaque joueur
 	public static final int MAX_FIGURINE = 10;
 	// Nombre de joueur dans la partie
-	public static final int MAX_PLAYER = 2;
+	public static final int MAX_PLAYER = 4;
 	// Nombre de place dans les zones de ressources. 
 	public static final int MAX_ZONERESSOURCE_SPACE = 7;
 	// Nombre de zones au total
@@ -33,7 +33,7 @@ public class Settings
 	// Aleatoire globale
 	public static Random RAND = new Random();
 	// Nombre de ressources au maximum dans BuildingRessourceChoosed
-	public static int NB_MAX_RESSOURCE_BUILDING = 7;
+	public static final int NB_MAX_RESSOURCE_BUILDING = 7;
 	// Nombre d'espace au fabricant d'outils:
 	public static final int MAX_ZONETOOL_SPACE = 1;
 
@@ -71,9 +71,9 @@ public class Settings
 			));
 	
 	// Nombre de pile de cartes tuiles batiments
-	public static int NB_BUILDING_DECK = 4;
+	public static final int NB_BUILDING_DECK = 4;
 	// Nombre de cartes dans un deck
-	public static int NB_BUILDING_CARD_IN_DECK = (int)(Settings.BUILDINGS.size() / Settings.NB_BUILDING_DECK);
+	public static final int NB_BUILDING_CARD_IN_DECK = (int)(Settings.BUILDINGS.size() / Settings.NB_BUILDING_DECK);
 		
 	// Liste des noms de joueurs. 
 	public static ArrayList<String> PLAYER_NAME = new ArrayList<String>(Arrays.asList("Robert","Sardoche","Doritos","JeanCharles","Mclito&Carfly","Helico42"));
@@ -97,7 +97,7 @@ public class Settings
 	}
 	
 	/**
-	 * Renvoie une IA parmi celles presentes alÃ©atoirement
+	 * Renvoie une IA parmi celles presentes alÃƒÂ©atoirement
 	 * @return Renvoie une instance implementant l'interface IA
 	 */
 	public static IA getRandomIA () 
@@ -114,10 +114,10 @@ public class Settings
 		ArrayList<Building> buildings = new ArrayList<Building>(Settings.NB_BUILDING_CARD_IN_DECK);
 		for (int i = 0; i < Settings.NB_BUILDING_CARD_IN_DECK; i++)
 		{
+			if (Settings.BUILDINGS.isEmpty())
+				break;
 			buildings.add(Settings.BUILDINGS.get(0));
 			Settings.BUILDINGS.remove(0);
-			if (Settings.BUILDINGS.isEmpty())
-				return buildings;
 		}
 		return buildings;
 	}
