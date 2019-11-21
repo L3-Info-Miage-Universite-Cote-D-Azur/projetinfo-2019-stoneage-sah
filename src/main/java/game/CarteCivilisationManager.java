@@ -64,7 +64,7 @@ public class CarteCivilisationManager {
 	 * @return CarteCivilisation : la carte tiree au hasard. 
 	 */
 	public CarteCivilisation getRandomCivilisationCard() {
-		if(deck.size()==0) return null; //plus de carte a piocher
+		if(deck.size()==0) return null;
 		int index = Settings.RAND.nextInt(deck.size());
 		CarteCivilisation card = deck.get(index);
 		
@@ -74,9 +74,8 @@ public class CarteCivilisationManager {
 	
 	/**
 	 * organizeCard replace les cartes comme il faut a la fin du tour.
-	 * @return true -> operation effectuer; false -> plus de carte disponnible fin de la parti
 	 */
-	public boolean organizeCard() {
+	public void organizeCard() {
 		int n = cardZone.length-1;
 		while(n >= 0) {
 			if(null == cardZone[n].getCard()) {
@@ -85,6 +84,7 @@ public class CarteCivilisationManager {
 				while(m >= 0) {
 					if(cardZone[m].getCard() != null) {
 						cardZone[n].setCard(cardZone[m].getCard());
+						
 						cardZone[m].setCard(null);
 						break;
 					}
@@ -92,12 +92,21 @@ public class CarteCivilisationManager {
 				}
 				if(m < 0) {
 					cardZone[n].setCard(getRandomCivilisationCard());
-					if(cardZone[n].getCard()==null) return false; //si aucune carte reste a piocher
 				}
 			}
 			n--;
 		}
-		return true;
 		
+	}
+	
+	/**
+	 * regarde si il reste des carte en jeu
+	 * @return true -> plus de carte (fin de parti); false -> il reste des carte
+	 */
+	public boolean isEmpty() {
+		for(int i = 0; i<cardZone.length; i++) {
+			if(null == cardZone[i].getCard()) return true;
+		}
+		return false;
 	}
 }
