@@ -132,13 +132,15 @@ public class Game {
 				//Si le joueur n'a plus de ressource ou ne veut pas les depenser.
 				if(totalRessource < figurinesToFeed) {//Voir plus tard si le joueur ne veux pas depenser.
 					System.out.println("Le joueur "+ player.getName() +" ne peut pas nourrir ses figurines.");
-					//travail sur le score plus tard.
+					player.subScore(10);
+					System.out.println("Le joueur"+player.getName() + "a perdu 10 points de victoires");
 					continue;
 				}
 				boolean wantToFeed = player.getIA().useRessourceToFeed(inventory.getCopyRessources());
 				if(!wantToFeed) {
 					System.out.println("Le joueur "+ player.getName() +" ne veux pas nourrir ses figurines.");
-					//travail sur le score plus tard.
+					player.subScore(10);
+					System.out.println("Le joueur"+player.getName() + "a perdu 10 points de victoires");
 					continue;
 				}
 				
