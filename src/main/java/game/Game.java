@@ -161,27 +161,24 @@ public class Game {
 
 	/**
 	 * Renvoie true ou false, si la condition de victoire a ete effectue. 
-	 * @return isOver, qui vaut true ou false celon la condition de victoire. 
+	 * @return true si le jeu doit se terminer, false sinon
 	 */
 	public boolean isEnd(){
-		boolean isOver = false;
-		
-		if(nbTour == 100) isOver = true; //Si il y a un probleme.
-		
-		for(Player player : players){
-			if(player.getInventory().getRessource(Ressource.WOOD) > 1) {//La condition de victoire. 
-				System.out.println("\nVICTOIRE :"+player.getName()+" a gagne.");
-				isOver = true; 
-			}
+		// DANS LES ZONEBUILDING
+		for (int i = 12; i < zones.length; i++)
+		{
+			// SI UNE ZONE EST VIDE
+			if (((ZoneBuilding)zones[i]).isDeckEmpty() == true)
+				return true;
 		}
-		return isOver; 
+		return false;
 	}
 	
 	/**
 	 * Initie le tableau zones. 
 	 */
 	public void initZone(){
-		zones = new Zone[12];
+		zones = new Zone[16];
 		ZoneCarteCivilisation[] zoneCarteCivilisation = new ZoneCarteCivilisation[4];
 
 		//Les zones du jeu. 
@@ -203,6 +200,11 @@ public class Game {
 			zones[8+i]=zcc;
 		}
 		cardManager = new CarteCivilisationManager(zoneCarteCivilisation);
+		
+		zones[12] = new ZoneBuilding();
+		zones[13] = new ZoneBuilding();
+		zones[14] = new ZoneBuilding();
+		zones[15] = new ZoneBuilding();
 	}
 	
 	public void afficheInfo() {
