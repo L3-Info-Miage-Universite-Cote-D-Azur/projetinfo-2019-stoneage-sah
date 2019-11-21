@@ -38,6 +38,7 @@ public class Inventory {
 	public int getTool() {return tool;}
 	public int[] getTools() {return tools;}
 	public int[] getCopyTools() {return tools.clone();}
+	public int getbuildings() { return buildings; }
 	
 	//ADDERS
 	public void addCardCivilisation(CarteCivilisation card){
