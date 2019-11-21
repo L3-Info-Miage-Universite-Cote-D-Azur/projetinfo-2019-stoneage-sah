@@ -3,6 +3,7 @@ package client;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
+
 public class RandomIATest {
 	public IA testIa = new RandomIA();
 	
@@ -97,6 +98,86 @@ public class RandomIATest {
 			assertEquals(false,test[0] < 0);
 			assertEquals(false,test[1] < 0);
 			assertEquals(false,test[1] > i3);
+		}
+	}
+	
+	@Test 
+	void testPickCard() {
+		
+		//Test dans un cas ou il dois depenser toutes ses ressources. 
+		int[] ressource = new int[]{0,0,0,4};
+		int number = 4;
+		int[] res;
+		
+		for(int j =0; j < 50; j++) {
+			res = testIa.pickCard(ressource.clone(), number);
+			
+			assertEquals(true,res[0] == 0);
+			assertEquals(true,res[1] == 0);
+			assertEquals(true,res[2] == 0);
+			assertEquals(true,res[3] == 4 || res[3] == 0);
+		}
+		
+		//Test dans un cas general
+		ressource = new int[] {1,2,3,4};
+		number = 5;
+		
+		for(int j =0; j < 50; j++) {
+			res = testIa.pickCard(ressource.clone(), number);
+			
+			assertEquals(true,res[0] >= 0 && res[0] <= 1);
+			assertEquals(true,res[1] >= 0 && res[1] <= 2);
+			assertEquals(true,res[2] >= 0 && res[2] <= 3);
+			assertEquals(true,res[3] >= 0 && res[3] <= 4);
+			
+			int sum = 0;
+			for(int el : res) {
+				sum += el;
+			}
+			assertEquals(true, sum == number || sum == 0);
+		}
+		
+		//Le cas ou l'ia n'a pas assez de ressource est tester en amont et donnerais une boucle infinie ici. 
+	}
+	
+	@Test
+	void pickTools(){
+		
+		//Cas ou il n'as pas d'outils
+		int[] tools = new int[] {0,0,0};
+		boolean [] toolDispo = new boolean[] {true,true,true};
+		boolean[] res;
+		
+		for(int j =0; j < 50; j++) {
+			res = testIa.pickTools(tools, toolDispo);
+			
+			assertEquals(true, res[0] == false);
+			assertEquals(true, res[1] == false);
+			assertEquals(true, res[2] == false);
+		}
+		
+		//Cas general 
+		tools = new int[] {2,2,1};
+		toolDispo = new boolean[] {false, true, false};
+		
+		for(int j =0; j < 50; j++) {
+			res = testIa.pickTools(tools, toolDispo);
+			
+			assertEquals(true, res[0] == false);
+			assertEquals(true, res[1] == false || res[1] == true);
+			assertEquals(true, res[2] == false);
+		}
+		
+		//Cas general 2
+		tools = new int[] {1,0,0};
+		toolDispo = new boolean[] {true, true, true};
+		
+		for(int j =0; j < 50; j++) {
+			res = testIa.pickTools(tools, toolDispo);
+			
+			assertEquals(true, res[0] == false || res[0] == true);
+			assertEquals(true, res[1] == false);
+			assertEquals(true, res[2] == false);
 		}
 	}
 }
