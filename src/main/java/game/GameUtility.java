@@ -11,11 +11,11 @@ public class GameUtility{
 	 * Initie le tableau players de la classe game avec Settings.MAX_PLAYER joueurs. 
 	 * @return tableau de Players (utilise dans Game). 
 	 */
-	public static Player[] initPlayer(){
+	public static Player[] initPlayer(int numberPlayer){
 
-		Player[] res = new Player[Settings.MAX_PLAYER];
+		Player[] res = new Player[numberPlayer];
 
-		for(int i = 0; i < Settings.MAX_PLAYER; i++){
+		for(int i = 0; i < numberPlayer; i++){
 			//On attribut un nom et une IA au hasard. 
 			res[i] = new Player(Settings.getRandomName(), Settings.getRandomIA());
 			System.out.println("Le joueur " + res[i].getName() + " a ete creer avec la strategie " + res[i].getIA() + ".");
