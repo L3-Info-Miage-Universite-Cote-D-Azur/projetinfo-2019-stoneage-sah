@@ -164,10 +164,9 @@ public class Game {
 	 * @return true si le jeu doit se terminer, false sinon
 	 */
 	public boolean isEnd(){
+		// DANS LES CARTE CIVILISATION
 		if(cardManager.isEmpty()) {return true;}
-		return false;
 		// DANS LES ZONEBUILDING
-		/*
 		for (int i = 12; i < zones.length; i++)
 		{
 			// SI UNE ZONE EST VIDE
@@ -175,7 +174,6 @@ public class Game {
 				return true;
 		}
 		return false;
-		*/
 	}
 	
 	/**
