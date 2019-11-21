@@ -79,20 +79,26 @@ public class ZoneCarteCivilisation implements Zone{
 		int number = howManyPlayerFigurine(player);
 		removePlayerFigurine(player);
 		player.recoveryFigurine(number);
+		
 		boolean pickCard = chooseRecoveryCard(player,numberRessourceNeed);//choisi si il veux recuperer la carte et quelle ressource il utilise pour ce faire
-		if(!pickCard) {return;}
+		if(!pickCard) {
+			System.out.println("Le joueur "+player.getName()+" ne prend pas la carte de "+this.getName()+".");
+			return;
+		}
+		
 		switch(carteCivilisation.getTypeUpPart()){
 
 		case 0 : //cas ou c'est un gain de ressource direct
 			int total = ressourceEffect(carteCivilisation);
 			player.getInventory().addRessource(carteCivilisation.getRessource(),total);
+			System.out.println("Le joueur "+player.getName()+" obtient la carte civilisation de "+this.getName()+".");
 			break;
 
 		case 1 : //cas ou le joueur gagne des point de victoire
 			player.addScore(carteCivilisation.getNumberEffect());
+			System.out.println("Le joueur "+player.getName()+" obtient "+carteCivilisation.getNumberEffect()+" point de victoire.");
 			break;
-
-
+			
 		default :
 			System.out.println("Erreur Carte Civilisation");
 		}
@@ -158,7 +164,7 @@ public class ZoneCarteCivilisation implements Zone{
 		while(true) {
 			sum=0;
 			verif = true;
-			int[] choix = player.getIA().pickCard(player.getInventory().getCopyRessources(), ressourceRequire);
+			int[] choix = player.getIA().pickCard(player.getInventory().getCopyRessources(), ressourceRequire);//AJOUTER AU FUTUR LA CARTE CONCERNEE
 
 			for(int i = 0; i<4 && verif; i++) {
 				if(choix[i] > player.getInventory().getRessource(Ressource.indexToRessource(i)) || choix[i] < 0) { 
@@ -167,10 +173,14 @@ public class ZoneCarteCivilisation implements Zone{
 				sum+=choix[i];
 			}
 
-			if (sum==0 && verif) { return false; } //cas ou il ne recupere pas la carte
+			if (sum==0 && verif) {return false; } //cas ou il ne recupere pas la carte
 			if(verif && sum==ressourceRequire) {
 				for(int i = 0; i<4 && verif; i++) {
 					player.getInventory().subRessource(Ressource.indexToRessource(i), choix[i]);
+					if(choix[i] != 0) {
+						System.out.println("Le joueur "+player.getName()+" depense "+ choix[i]
+								+" "+ Ressource.indexToRessource(i)+ " pour la carte civilisation de "+this.getName()+".");
+					}
 				}
 				return true;
 			}
