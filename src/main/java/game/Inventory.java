@@ -1,5 +1,7 @@
 package game;
 
+import java.util.ArrayList;
+
 /**
  * La classe Inventory gere l'inventaire du joueur.
  */
@@ -18,6 +20,7 @@ public class Inventory {
 		ressources = new int[Settings.NB_RESSOURCES];
 		ressources[Ressource.FOOD.getIndex()]=15;
 		buildings = 0;
+		carteCivilisation = new ArrayList<CarteCivilisation>();
 	}
 	
 	//GETTERS
