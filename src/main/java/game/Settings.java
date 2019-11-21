@@ -23,7 +23,7 @@ public class Settings
 	// Nombre de place dans les zones de ressources. 
 	public static final int MAX_ZONERESSOURCE_SPACE = 7;
 	// Nombre de zones au total
-	public static final int NB_ZONES = 7;
+	public static final int NB_ZONES = 16;
 	// Nombre d'espace dans la cabane
 	public static final int MAX_ZONEHUT_SPACE = 2;
 	// Nombre d'espace dans le champ
