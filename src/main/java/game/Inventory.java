@@ -10,11 +10,13 @@ public class Inventory {
 	/* FIELDS */
 	// Les ressources que peut avoir le joueur. 
 	private int[] ressources;
+	private int buildings;
 	
 	/* CONSTRUCTOR */
 	public Inventory () {
 		ressources = new int[Settings.NB_RESSOURCES];
 		ressources[Ressource.FOOD.getIndex()]=15;
+		buildings = 0;
 	}
 	
 	//GETTERS
@@ -30,6 +32,7 @@ public class Inventory {
 	public void addRessource(Ressource ressource,int number){
 		ressources[ressource.getIndex()]+=number;
 	}
+	public void incrementBuilding() {this.buildings += 1;}
 	
 	//SUBSTRACTORS
 	/**
