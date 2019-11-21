@@ -34,10 +34,10 @@ public class Inventory {
 		CarteCivilisation[] cardCivi = new CarteCivilisation[carteCivilisation.size()];
 		for(int i=0; i<cardCivi.length; i++) { cardCivi[i]=carteCivilisation.get(i); }
 		return cardCivi;
+	}
 	public int getTool() {return tool;}
 	public int[] getTools() {return tools;}
 	public int[] getCopyTools() {return tools.clone();}
-	}
 	
 	//ADDERS
 	public void addCardCivilisation(CarteCivilisation card){
