@@ -55,6 +55,8 @@ public interface IA{
 	 */
 	public boolean pickBuilding ();
 	
+	public boolean[] pickTools(int[] toolsToUse,boolean[] useTools);
+	
 	@Override
 	public String toString();
 }
