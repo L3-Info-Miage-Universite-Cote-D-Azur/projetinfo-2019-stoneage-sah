@@ -48,7 +48,7 @@ public class GameUtility{
 			choose = player.getIA().chooseZone(zoneAvailableSpace,zoneName);
 
 			if((choose >= 0) && (choose<zone.length) && FigurineManagement.ableToChooseZone(zone[choose], player, choose)) ok=true;
-			else System.out.println("/!\\ Choix incorrecte ou zone pleine, veuillez reessayer./!\\");
+			else System.out.println("/!\\ Zone "+zone[choose].getName()+" : Choix incorrecte ou zone pleine, veuillez reessayer./!\\");
 		}
 		return choose;
 	}
