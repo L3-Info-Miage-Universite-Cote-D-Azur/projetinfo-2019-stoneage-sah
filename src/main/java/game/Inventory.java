@@ -14,6 +14,8 @@ public class Inventory {
 	private int[] ressources;
 	private int buildings;
 	private ArrayList<CarteCivilisation> carteCivilisation;
+	private int[] tools;
+	private int tool;
 	
 	/* CONSTRUCTOR */
 	public Inventory () {
@@ -21,15 +23,20 @@ public class Inventory {
 		ressources[Ressource.FOOD.getIndex()]=15;
 		buildings = 0;
 		carteCivilisation = new ArrayList<CarteCivilisation>();
+		tools = new int[] {0,0,0};
+		tool = 0;
 	}
 	
 	//GETTERS
 	public int getRessource(Ressource ressource){ return ressources[ressource.getIndex()] ;}
 	public int[] getCopyRessources() {return ressources.clone();}
-		public CarteCivilisation[] getCardCivilisation() {
+	public CarteCivilisation[] getCardCivilisation() {
 		CarteCivilisation[] cardCivi = new CarteCivilisation[carteCivilisation.size()];
 		for(int i=0; i<cardCivi.length; i++) { cardCivi[i]=carteCivilisation.get(i); }
 		return cardCivi;
+	public int getTool() {return tool;}
+	public int[] getTools() {return tools;}
+	public int[] getCopyTools() {return tools.clone();}
 	}
 	
 	//ADDERS
@@ -45,6 +52,13 @@ public class Inventory {
 		ressources[ressource.getIndex()]+=number;
 	}
 	public void incrementBuilding() {this.buildings += 1;}
+	
+	public void incrementTool() {this.tool += 1;}
+	public void incrementTools() {
+		if (tool >= 12) {
+			break;
+		}
+		this.tools[tool % 3] += 1;
 	
 	//SUBSTRACTORS
 	/**
