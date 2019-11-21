@@ -13,7 +13,7 @@ public class PlayerTest
     @Test
     public void testIncreaseMaxFigurine() 
     {
-        this.player = new Player(Settings.getRandomName(), new RandomIA());
+        this.player = new Player("test",null);
         // Test de l'instanciation
         assertEquals(this.player.getMaxFigurine(), Settings.START_FIGURINE);
 
@@ -39,7 +39,7 @@ public class PlayerTest
     @Test
     public void testAbleToPlaceFigurine () 
     {
-        this.player = new Player(Settings.getRandomName(), new RandomIA());
+        this.player = new Player("test",null);
         // Test de l'instanciation
         assertEquals(this.player.ableToPlaceFigurine(0), true);
 
