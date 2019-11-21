@@ -49,10 +49,6 @@ public class BuildingRessourceNotImposed extends BuildingSpecial
 				// ON L'AJOUTE
 				r.set(r_index, super.neededRessource[i]);
 				r_index++;
-				
-				System.out.println( super.neededRessource[i]);
-				System.out.println(r_index);
-
 			}
 		}
 		
