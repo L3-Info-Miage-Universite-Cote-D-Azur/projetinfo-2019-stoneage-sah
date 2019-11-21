@@ -102,6 +102,28 @@ public class RandomIA implements IA {
 		return Settings.RAND.nextBoolean();
 	}
 	
+	public boolean[] pickTools(int[] toolsToUse , boolean[] useTools) {
+	    int usableTools=0;
+	    for(int i=0;i<toolsToUse.length;i++){
+	        if(useTools[i] && toolsToUse[i]>0) usableTools+=1;
+	    }
+	    
+		if (usableTools==0) {
+			return new boolean[]{false,false,false};
+		}		
+		boolean[] res = new boolean[]{false,false,false};
+		boolean hasChoose=false;
+		for( int numberTools = Settings.RAND.nextInt(usableTools) ; 0 < numberTools; numberTools --){
+		    while(!hasChoose){
+		        int choose = Settings.RAND.nextInt(toolsToUse.length);
+		        if(useTools[choose] && toolsToUse[choose]>0 && res[choose]==false){
+		            res[choose]=true;
+		        }
+		    }
+		}
+		return res;
+	}
+	
 	public String toString(){
 		return "Random";
 	}
