@@ -26,10 +26,10 @@ public class BuildingRessourceNotImposed extends BuildingSpecial
 	{
 		/* INITIALISATION */
 		// LISTE QUI VA CONTENIR UNIQUEMENT howManyDifferentRessource RESSOURCE, ON CHECK AVEC .contains()
-		ArrayList<Ressource> r = new ArrayList<Ressource>(this.howManyDifferentRessource);
-		for (int i = 0; i < r.size(); i++)
+		ArrayList<Ressource> r = new ArrayList<Ressource>();
+		for (int i = 0; i < this.howManyDifferentRessource; i++)
 		{
-			r.add(i, null);
+			r.add(null);
 		}
 		
 		/* TREATMENT */
@@ -37,22 +37,27 @@ public class BuildingRessourceNotImposed extends BuildingSpecial
 		{
 			// SI LA RESSOURCE N'EST PAS DANS NOTRE LISTE
 			if (super.neededRessource[i] != null  &&
-					!r.contains(super.neededRessource[i]))
-			{
+					r.contains(super.neededRessource[i]) == false)
+			{			
 				// SI ON A UNE RESSOURCE DIFFERENTE DE TROP
-				if (r_index + 1 == r.size())
+				if (r_index == this.howManyDifferentRessource)
 				{
 					// IL Y A ERREUR
 					return false;
 				}
+				
 				// ON L'AJOUTE
-				r.add(r_index, super.neededRessource[i]);
+				r.set(r_index, super.neededRessource[i]);
 				r_index++;
+				
+				System.out.println( super.neededRessource[i]);
+				System.out.println(r_index);
+
 			}
 		}
 		
 		// SI ON A UN EMPLACEMENT VIDE
-		if (r.contains(null))
+		if (r.get(this.howManyDifferentRessource - 1) == null)
 		{
 			// ON A PAS ASSEZ DE RESSOURCE DIFFERENTES
 			return false;
