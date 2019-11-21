@@ -41,9 +41,10 @@ public class FigurineManagementTest {
 	
 	@Test
 	public void testAbleToChooseZone(){
+		int maxPlayer = 4;
 		this.player = new Player(Settings.getRandomName(), new RandomIA());
 		this.zoneR = new ZoneRessource("Foret",Ressource.WOOD,Settings.MAX_ZONERESSOURCE_SPACE);	
-		this.zoneR2 = new ZoneRessource("Chasse", Ressource.FOOD,Settings.MAX_PLAYER * Settings.MAX_FIGURINE);
+		this.zoneR2 = new ZoneRessource("Chasse", Ressource.FOOD,maxPlayer * Settings.MAX_FIGURINE);
 		int forestIndex=0;
 		int chasseIndex=4;
 		//cas de base
