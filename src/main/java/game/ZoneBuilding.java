@@ -48,8 +48,8 @@ public class ZoneBuilding implements Zone
 	}
 
 	@Override
-	public String getName() {return new String("Tuile Bâtiment");}
-
+	public String getName() {return new String("Tuile Batiment");}
+	
 	/**
 	 * Gere le systeme pour retirer la figurine de la zone
 	 */
@@ -58,6 +58,7 @@ public class ZoneBuilding implements Zone
 	{
 		boolean wantToPickBuilding = true;
 		this.availableSpace = 1;
+		this.occupated.recoveryFigurine(1);
 		
 		wantToPickBuilding = chooseTakeBuilding(buildings.get(0).getNeededRessource());
 		// SI LE JOUEUR VEUT LA TUILE BATIMENT
@@ -82,7 +83,6 @@ public class ZoneBuilding implements Zone
 			// ON SUPPRIME LA TUILE BATIMENT DE LA PILE
 			this.buildings.remove(0);
 			// ON REND AU JOUEUR SA FIGURINE
-			this.occupated.recoveryFigurine(1);
 		}
 		this.occupated = null;
 	}
