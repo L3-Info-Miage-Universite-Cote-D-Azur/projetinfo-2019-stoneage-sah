@@ -24,9 +24,9 @@ public class Program {
     		game= new Game(numberPlayer);
     	}
     	else { 
-    		System.out.println("Choix de joueur invalide il est donc automatiquement initialiser a 4");
+    		System.out.println("Choix de joueur invalide il est donc automatiquement initialiser a "+defaultNumber);
+    		numberPlayer = defaultNumber;
     		game= new Game(numberPlayer);
-			numberPlayer = defaultNumber;
     	}
     	game.gameLoop();
     }
