@@ -221,4 +221,54 @@ public class Game {
 			System.out.println("Le joueur "+ players[i].getName()+" a " + players[i].getScore()+" points de victoire");
 		}
 	}
+	
+	public void calculScore() {
+		for (Player player : players) {
+			CarteCivilisation[] cardCivi = player.getInventory().getCardCivilisation().clone();
+			int [] typeGreen = new int[8];
+			int [] typeYellow = new int [4];
+			int numberGreenCard=0;
+			for (int i=0; i<cardCivi.length;i++) {
+				if (cardCivi[i].getTypeDownPart()<8) {
+					typeGreen[cardCivi[i].getTypeDownPart()] += 1;
+					numberGreenCard +=1;
+				}
+				else{
+					typeYellow[cardCivi[i].getTypeDownPart()] += cardCivi[i].getNumberDownPart();
+				}
+			}
+				
+			int scoreAdd=0;
+			while (numberGreenCard>0) {
+				int numberDifferentCard = 0;
+				for(int i = 0; i<typeGreen.length; i++) {
+					if (typeGreen[i] > 0) {
+						numberDifferentCard+=1;
+						numberGreenCard-=1;
+						typeGreen[i]-=1;
+						}
+					scoreAdd+=numberDifferentCard*numberDifferentCard;
+				}
+			}
+			for(int i=0; i<typeYellow.length; i++) {
+				if (typeYellow[i] > 0) {
+					if (i == 0) {
+						scoreAdd += typeYellow[i]*player.getInventory().getRessource(Ressource.FIELD);
+					}
+					if (i == 1) {
+						scoreAdd += typeYellow[i]*player.getInventory().getTool();
+					}
+					if (i == 2) {
+						scoreAdd += typeYellow[i]*player.getInventory().getBuildings();
+					}	
+					if (i == 3) {
+						scoreAdd += typeYellow[i]*player.getMaxFigurine();
+					}
+				}
+			}
+			scoreAdd+=player.getInventory().availableResourceToFeed();
+			player.addScore(scoreAdd);
+		}
+		
+	}
 }
