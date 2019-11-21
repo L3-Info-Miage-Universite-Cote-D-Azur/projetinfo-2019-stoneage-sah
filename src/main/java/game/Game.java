@@ -165,13 +165,19 @@ public class Game {
 	 */
 	public boolean isEnd(){
 		// DANS LES CARTE CIVILISATION
-		if(cardManager.isEmpty()) {return true;}
+		if(cardManager.isEmpty()) {
+			System.out.println("\n--- PARTIE TERMINEE : Il n'y a plus de carte civilisation ---");
+			return true;
+		}
+		
 		// DANS LES ZONEBUILDING
 		for (int i = 12; i < zones.length; i++)
 		{
 			// SI UNE ZONE EST VIDE
-			if (((ZoneBuilding)zones[i]).isDeckEmpty() == true)
+			if (((ZoneBuilding)zones[i]).isDeckEmpty() == true) {
+				System.out.println("\n---- PARTIE TERMINEE : une des piles de batiment est vide ----");
 				return true;
+			}
 		}
 		return false;
 	}
