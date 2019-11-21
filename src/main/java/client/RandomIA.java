@@ -2,6 +2,8 @@ package client;
 
 import java.util.Random;
 
+import game.Settings;
+
 
 /**
  * RandomIA correspond a l'IA comportant une strategie basee sur le hasard. 
@@ -91,8 +93,16 @@ public class RandomIA implements IA {
 		return res; 
 	}
 	
+	/**
+	 * Renvoie un choix aleatoire sur la prise d'une carte batiment
+	 * @return true ou false, aleatoirement
+	 */
+	public boolean pickBuilding ()
+	{
+		return Settings.RAND.nextBoolean();
+	}
+	
 	public String toString(){
 		return "Random";
 	}
 }
-
