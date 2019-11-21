@@ -19,6 +19,10 @@ public class CarteCivilisationManager {
 		initCardInZone();
 	}
 	
+	public ArrayList<CarteCivilisation> getDeck() {
+		return deck;
+	}
+	
 	/**
 	 * initCardInZone initialise les cartes dans les ZoneCarteCivilisation.
 	 */
