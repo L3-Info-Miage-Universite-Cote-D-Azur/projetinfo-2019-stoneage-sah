@@ -14,33 +14,45 @@ public class ZoneBuilding implements Zone
 	
 	public ZoneBuilding ()
 	{
-		this.buildings = Settings.getRandomDeck();
+		this.buildings = new ArrayList<Building>(Settings.NB_BUILDING_CARD_IN_DECK); // TO-DO: getRandomDeck();
 		this.availableSpace = 1;
 		this.occupated = null;
 	}
 	
+	/**
+	 * @return Renvoie la possibilite de mettre une figurine sur la zone, true si oui, false sinon
+	 */
 	@Override
 	public boolean ableToChooseZone (int currentPlayerFigurine) 
 	{
 		return this.availableSpace != 0;
 	}
-
+	
+	/**
+	 * Renvoie le nombre de figurine dans la zone
+	 */
 	@Override
 	public int howManyPlayerFigurine (Player player)
 	{
 		return (this.availableSpace != 0) ? 0: 1;
 	}
 
+	/**
+	 * Enleve la place disponible dans la zone et met a jour le joueur sur la zone
+	 */
 	@Override
 	public void placeFigurine(int number, Player player)
 	{
-		this.availableSpace -= number;
+		this.availableSpace = 0;
 		this.occupated = player;
 	}
 
 	@Override
 	public String getName() {return new String("Tuile Bâtiment");}
 
+	/**
+	 * Gere le systeme pour retirer la figurine de la zone
+	 */
 	@Override
 	public void playerRecoveryFigurine(Player player)
 	{
@@ -69,10 +81,17 @@ public class ZoneBuilding implements Zone
 			
 			// ON SUPPRIME LA TUILE BATIMENT DE LA PILE
 			this.buildings.remove(0);
+			// ON REND AU JOUEUR SA FIGURINE
+			this.occupated.recoveryFigurine(1);
 		}
 		this.occupated = null;
 	}
 	
+	/**
+	 * La fonction regarde si le joueur peut choisir, et s'il peut, demande au joueur de choisir s'il veut prendre la carte ou non
+	 * @param neededRessource une copie des ressources du joueur
+	 * @return true si le joueur veut retirer la carte, false sinon
+	 */
 	public boolean chooseTakeBuilding (Ressource[] neededRessource)
 	{
 		int type = this.buildings.get(0).getType();
