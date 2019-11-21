@@ -14,7 +14,7 @@ public class ZoneBuilding implements Zone
 	
 	public ZoneBuilding ()
 	{
-		this.buildings = new ArrayList<Building>(Settings.NB_BUILDING_CARD_IN_DECK); // TO-DO: getRandomDeck();
+		this.buildings = Settings.getRandomDeck();
 		this.availableSpace = 1;
 		this.occupated = null;
 	}
@@ -39,7 +39,7 @@ public class ZoneBuilding implements Zone
 	}
 
 	@Override
-	public String getName() {return new String("Tuile Bâtiment");}
+	public String getName() {return new String("Tuile BÃ¢timent");}
 
 	@Override
 	public void playerRecoveryFigurine(Player player)
