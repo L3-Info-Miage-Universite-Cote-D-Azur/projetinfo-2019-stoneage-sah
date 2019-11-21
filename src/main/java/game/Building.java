@@ -24,7 +24,7 @@ public abstract class Building
 	
 	/* GETTERS */
 	protected int getVP () {return this.victoryPoints;}
-	protected Ressource[] getNeddedRessource() {return this.neededRessource;}
+	protected Ressource[] getNeededRessource() {return this.neededRessource;}
 	protected int getType() {return this.type;}
 	
 	/* SETTERS */
