@@ -16,6 +16,7 @@ public class Inventory {
 	private ArrayList<CarteCivilisation> carteCivilisation;
 	private int[] tools;
 	private int tool;
+	private boolean[] toolsUsed;
 	
 	/* CONSTRUCTOR */
 	public Inventory () {
@@ -25,6 +26,7 @@ public class Inventory {
 		carteCivilisation = new ArrayList<CarteCivilisation>();
 		tools = new int[] {0,0,0};
 		tool = 0;
+		toolsUsed = new boolean[] {false,false,false};
 	}
 	
 	//GETTERS
@@ -38,7 +40,13 @@ public class Inventory {
 	public int getTool() {return tool;}
 	public int[] getTools() {return tools;}
 	public int[] getCopyTools() {return tools.clone();}
-	public int getbuildings() { return buildings; }
+	public int getBuildings() { return buildings; }
+	public boolean[] getToolsUsed() {return toolsUsed;}
+	public void resetToolsUsed() {
+		for (int i=0; i <toolsUsed.length; i++) {
+			toolsUsed[i]=false;
+		}
+	}
 	
 	//ADDERS
 	public void addCardCivilisation(CarteCivilisation card){
