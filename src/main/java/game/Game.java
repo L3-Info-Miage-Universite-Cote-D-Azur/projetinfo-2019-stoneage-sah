@@ -179,7 +179,7 @@ public class Game {
 	 * Initie le tableau zones. 
 	 */
 	public void initZone(){
-		zones = new Zone[11];
+		zones = new Zone[12];
 		ZoneCarteCivilisation[] zoneCarteCivilisation = new ZoneCarteCivilisation[4];
 
 		//Les zones du jeu. 
@@ -191,13 +191,14 @@ public class Game {
 		zones[4] = new ZoneRessource("Chasse", Ressource.FOOD,Settings.MAX_PLAYER * Settings.MAX_FIGURINE);
 		zones[5] = new ZoneField("Champs", Ressource.FIELD);
 		zones[6] = new ZoneHut("Cabane de reproduction");
+		zones[7] = new ZoneTool("Le Fabricant D'outils");
 		
 		//gestion des carte civilisation
 		ZoneCarteCivilisation zcc;
 		for(int i=0;i<4;i++) {
 			zcc=new ZoneCarteCivilisation("Carte Civilisation: "+ (i+1), i+1);
 			zoneCarteCivilisation[i]=zcc;
-			zones[7+i]=zcc;
+			zones[8+i]=zcc;
 		}
 		cardManager = new CarteCivilisationManager(zoneCarteCivilisation);
 	}
