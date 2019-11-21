@@ -34,6 +34,9 @@ public class Settings
 	public static Random RAND = new Random();
 	// Nombre de ressources au maximum dans BuildingRessourceChoosed
 	public static int NB_MAX_RESSOURCE_BUILDING = 7;
+	// Nombre d'espace au fabricant d'outils:
+	public static final int MAX_ZONETOOL_SPACE = 1;
+
 	
 	// Toutes les cartes tuiles batiment du jeu
 	public static ArrayList<Building> BUILDINGS = new ArrayList<Building>(Arrays.asList(
