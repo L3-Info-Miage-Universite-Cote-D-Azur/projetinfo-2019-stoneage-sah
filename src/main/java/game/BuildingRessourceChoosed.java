@@ -15,8 +15,8 @@ public class BuildingRessourceChoosed extends BuildingSpecial
 		}
 	}
 	
-	public BuildingRessourceChoosed(int type) {
-		this(type, Settings.NB_MAX_RESSOURCE_BUILDING);
+	public BuildingRessourceChoosed() {
+		this(2, Settings.NB_MAX_RESSOURCE_BUILDING);
 	}
 	
 	/* METHODS */
