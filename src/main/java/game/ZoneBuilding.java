@@ -134,4 +134,9 @@ public class ZoneBuilding implements Zone
 	@Override
 	public int getMinimalFigurineRequierement () {return 1;}
 
+	/**
+	 * Permet de savoir si le deck de la zone est vide ou non
+	 * @return true s'il est vide, false sinon
+	 */
+	public boolean isDeckEmpty () {return this.buildings.isEmpty();}
 }
