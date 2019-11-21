@@ -6,7 +6,7 @@ public class Game {
 	/* FIELDS */
 	private Player[] players;//Tableau des joueurs.
 	private Zone[] zones;//Tableau des zones.
-	private ZoneCarteCivilisation[] zoneCarteCivilisation;
+	private CarteCivilisationManager cardManager;
 	private int nbTour;//Compteur du nombre de tours. 
 
 	/**
@@ -24,9 +24,7 @@ public class Game {
 	public void gameLoop() {
 		while(!this.isEnd()){
 			System.out.println("\n\n####### TOUR : "+nbTour+" #######");
-			
-			afficheInfo();
-			
+
 			System.out.println("\n\n--- PHASE DE PLACEMENT ---");
 			placePhase();
 
@@ -36,6 +34,8 @@ public class Game {
 			System.out.println("\n\n--- PHASE DE NOURRISAGE ---");
 			feedPhase();
 			
+			//update carte civilisation (si necessaire)
+			cardManager.organizeCard();
 			nbTour+=1;
 		}
 	}
@@ -135,14 +135,14 @@ public class Game {
 				if(totalRessource < figurinesToFeed) {//Voir plus tard si le joueur ne veux pas depenser.
 					System.out.println("Le joueur "+ player.getName() +" ne peut pas nourrir ses figurines.");
 					player.subScore(10);
-					System.out.println("Le joueur"+player.getName() + "a perdu 10 points de victoires");
+					System.out.println("Le joueur "+ player.getName() + " a perdu 10 points de victoires");
 					continue;
 				}
 				boolean wantToFeed = player.getIA().useRessourceToFeed(inventory.getCopyRessources());
 				if(!wantToFeed) {
 					System.out.println("Le joueur "+ player.getName() +" ne veux pas nourrir ses figurines.");
 					player.subScore(10);
-					System.out.println("Le joueur"+player.getName() + "a perdu 10 points de victoires");
+					System.out.println("Le joueur "+ player.getName() + " a perdu 10 points de victoires");
 					continue;
 				}
 				
@@ -180,7 +180,7 @@ public class Game {
 	 */
 	public void initZone(){
 		zones = new Zone[11];
-		zoneCarteCivilisation = new ZoneCarteCivilisation[4];
+		ZoneCarteCivilisation[] zoneCarteCivilisation = new ZoneCarteCivilisation[4];
 
 		//Les zones du jeu. 
 		zones[0] = new ZoneRessource("Foret",Ressource.WOOD,Settings.MAX_ZONERESSOURCE_SPACE);
@@ -199,11 +199,6 @@ public class Game {
 			zoneCarteCivilisation[i]=zcc;
 			zones[7+i]=zcc;
 		}
-	}
-	
-	public void afficheInfo() {
-		for (int i=0; i<players.length;i++) {
-			System.out.println("Le joueur "+ players[i].getName()+" a " + players[i].getScore()+" points de victoire");
-		}
+		cardManager = new CarteCivilisationManager(zoneCarteCivilisation);
 	}
 }
