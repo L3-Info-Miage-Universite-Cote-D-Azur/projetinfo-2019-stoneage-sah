@@ -18,8 +18,6 @@ public class Settings
 	public static final int START_FIGURINE = 5;
 	// Nombre de figurine maximale pour chaque joueur
 	public static final int MAX_FIGURINE = 10;
-	// Nombre de joueur dans la partie
-	public static final int MAX_PLAYER = 4;
 	// Nombre de place dans les zones de ressources. 
 	public static final int MAX_ZONERESSOURCE_SPACE = 7;
 	// Nombre de zones au total
