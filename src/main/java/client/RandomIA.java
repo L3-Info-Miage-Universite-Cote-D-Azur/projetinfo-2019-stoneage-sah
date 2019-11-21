@@ -74,17 +74,16 @@ public class RandomIA implements IA {
 	 * @return res : tableau des ressources donnes pour la carte. 
 	 */
 	public int[] pickCard(int[] ressourceNumber,int numberRessourceRequire) {
+		
 		int[] res = new int[] {0,0,0,0};
 		
 		if(rand.nextInt(2) == 1) {
 			while(numberRessourceRequire > 0) {
 				int index = -1;
-				
 				while(index == -1 || ressourceNumber[index] == 0) {
 					index = rand.nextInt(res.length);
 				}
 				int number = rand.nextInt(Math.min(numberRessourceRequire, ressourceNumber[index])) + 1;
-				
 				ressourceNumber[index] -= number;
 				res[index] += number;
 				numberRessourceRequire -= number;
@@ -110,10 +109,12 @@ public class RandomIA implements IA {
 	    
 		if (usableTools==0) {
 			return new boolean[]{false,false,false};
-		}		
+		}
+		int numberTools = Settings.RAND.nextInt(usableTools);
 		boolean[] res = new boolean[]{false,false,false};
 		boolean hasChoose=false;
-		for( int numberTools = Settings.RAND.nextInt(usableTools) ; 0 < numberTools; numberTools --){
+		
+		for(int i = numberTools; 0 < i; i --){
 		    while(!hasChoose){
 		        int choose = Settings.RAND.nextInt(toolsToUse.length);
 		        if(useTools[choose] && toolsToUse[choose]>0 && res[choose]==false){
