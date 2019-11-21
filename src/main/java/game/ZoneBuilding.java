@@ -3,7 +3,7 @@ package game;
 import java.util.ArrayList;
 
 /**
- * Cette abstract class defini une zone pour un paquet de Settings.NB_BUILDING_CARD_IN_DECK(7) batiments
+ * Cette class defini une zone pour un paquet de Settings.NB_BUILDING_CARD_IN_DECK(7) batiments
  */
 
 public class ZoneBuilding implements Zone 
@@ -14,7 +14,7 @@ public class ZoneBuilding implements Zone
 	
 	public ZoneBuilding ()
 	{
-		this.buildings = new ArrayList<Building>(Settings.NB_BUILDING_CARD_IN_DECK); // TO-DO: getRandomDeck();
+		this.buildings = Settings.getRandomDeck();
 		this.availableSpace = 1;
 		this.occupated = null;
 	}
