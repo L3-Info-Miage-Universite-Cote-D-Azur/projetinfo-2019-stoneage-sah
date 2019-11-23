@@ -81,40 +81,41 @@ class ZoneRessource implements Zone{
         return figurineInZone.get(player);
     } 
 	
-    public int	useTools(Player player){
-        boolean correctChoose = false;
-        boolean[] choose;
-        int[] tools = player.getInventory().getTools();
-        boolean[] toolsUsed = player.getInventory().getToolsUsed(); //tableau si outils utiliser index de l'outil = true
-        
-        //cas ou l'utilisateur n'a pas d'outil a utiliser:
-        int sum=0;
-        for(int i=0; i< tools.length; i++){ if(!toolsUsed[i]) sum += tools[i]; }
-        if(sum == 0) return 0;
-        
-        
-        while(!correctChoose){
-            
-            correctChoose = true;
-            choose = player.getIA().pickTools(tools.clone(),toolsUsed.clone());
-            if(choose.length == tools.length){
-                
-                for(int i = 0; i<tools.length; i++){
-                    if(choose[i] == true && toolsUsed[i] == true) correctChoose = false;
-                }
-            
-            
-        }
-        for(int i = 0; i<tools.length; i++){
-            if(choose[i]==true){
-                toolsUsed[i] = true;
-                sum += tools[i];
-            }
-        }
-        return sum;
-      }
-      return sum;
-   }
+	public int	useTools(Player player){
+		boolean correctChoose = false;
+		boolean[] choose = new boolean[] {false,false,false};
+		int[] tools = player.getInventory().getTools();
+		boolean[] toolsUsed = player.getInventory().getToolsUsed(); //tableau si outils utiliser index de l'outil = true
+
+		//cas ou l'utilisateur n'a pas d'outil a utiliser:
+		int sum=0;
+		for(int i=0; i< tools.length; i++){ if(!toolsUsed[i]) sum += tools[i]; }
+		if(sum == 0) return 0;
+
+
+		while(!correctChoose){
+
+			correctChoose = true;
+			choose = player.getIA().pickTools(tools.clone(),toolsUsed.clone());
+      
+			if(choose.length == tools.length){
+
+				for(int i = 0; i<tools.length; i++){
+					if(choose[i] == true && toolsUsed[i] == true) correctChoose = false;
+				}
+			}
+		}
+		sum = 0;
+		for(int i = 0; i<tools.length; i++)
+		{
+			if(choose[i]==true)
+			{
+				toolsUsed[i] = true;
+				sum += tools[i];
+			}
+		}
+		return sum;
+	}
     
     /**
      * Le joueur recupere son due dans la zone
