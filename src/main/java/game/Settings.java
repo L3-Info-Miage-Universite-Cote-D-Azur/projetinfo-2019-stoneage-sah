@@ -6,6 +6,7 @@ import java.util.Random;
 
 import client.IA;
 import client.RandomIA;
+import game.building.*;
 
 /**
  * La classe represente les parametres immutables du jeu.  

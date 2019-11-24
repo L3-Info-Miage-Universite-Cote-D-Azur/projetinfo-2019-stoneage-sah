@@ -1,11 +1,15 @@
 package game;
 
+
+import game.zone.*;
+
 import java.util.Arrays;
 
 public class Game {
 	
 	/* FIELDS */
 	private Player[] players;//Tableau des joueurs.
+  private Inventory[] inventories;//Tableau d'inventaire des joueurs. 
 	private Zone[] zones;//Tableau des zones.
 	private CarteCivilisationManager cardManager;
 	private int nbTour;//Compteur du nombre de tours. 
@@ -16,7 +20,8 @@ public class Game {
 	 */
 	public Game(int numberPlayer){
 		this.numberPlayer=numberPlayer;
-		players=GameUtility.initPlayer(numberPlayer);
+		players = GameUtility.initPlayer(numberPlayer);
+		initInventories(numberPlayer); 
 		initZone();
 		nbTour=1;
 	}
@@ -39,6 +44,7 @@ public class Game {
 			System.out.println("\n\n--- PHASE DE NOURRISAGE ---");
 			feedPhase();
 			
+			resetTools();
 			//update carte civilisation (si necessaire)
 			cardManager.organizeCard();
 			nbTour+=1;
@@ -93,16 +99,15 @@ public class Game {
 		Player player;
 		
 		for(int j = 0; j < players.length; j++) {
-			
-			player = players[(j + nbTour) % players.length];//L'indice du joueur selectionne en fonction du tour. 
+			int  selectedPlayer = (j + nbTour) % players.length;//L'indice du joueur selectionne en fonction du tour.
+			player = players[selectedPlayer];//L'indice du joueur selectionne en fonction du tour. 
 			System.out.println("\nC'est au tour de "+player.getName()+" :");
 
 			for(int i = 0; i < zones.length; i++) {
 				if(zones[i].howManyPlayerFigurine(player) != 0) {//Si le joueur avait des figurines dans la zone. 
-					FigurineManagement.recoveryFigurineInZone(zones[i], player);//Il recupere ses figurines et les ressources.
+					FigurineManagement.recoveryFigurineInZone(zones[i], player,inventories[selectedPlayer]);//Il recupere ses figurines et les ressources.
 				}
 			}
-			player.resetHadPlaced();
 		}
 	}
 	
@@ -115,7 +120,7 @@ public class Game {
 			
 			Player player = players[selectedPlayer];
 			
-			Inventory inventory = player.getInventory();
+			Inventory inventory = inventories[selectedPlayer];
 			int food = inventory.getRessource(Ressource.FOOD);
 			
 			int figurinesToFeed = player.getMaxFigurine();
@@ -156,7 +161,7 @@ public class Game {
 				
 				//Si le joueur a des ressources et veut les depenser
 				while(figurinesToFeed > 0) {
-					int ressource = GameUtility.ressourceChoose(player, figurinesToFeed);
+					int ressource = GameUtility.ressourceChoose(player,inventory, figurinesToFeed);
 					figurinesToFeed -= ressource;
 				}
 				System.out.println("Le joueur "+player.getName()+" a nourris ses figurines.");
@@ -200,7 +205,7 @@ public class Game {
 		zones[2] = new ZoneRessource("Carriere",Ressource.STONE,Settings.MAX_ZONERESSOURCE_SPACE);
 		zones[3] = new ZoneRessource("Riviere",Ressource.GOLD,Settings.MAX_ZONERESSOURCE_SPACE);
 		//La zone de chasse a : nombre de joueur x le nombre de figurines maximum d'espace. 
-		zones[4] = new ZoneRessource("Chasse", Ressource.FOOD,numberPlayer * Settings.MAX_FIGURINE);
+		zones[4] = new ZoneHunt("Chasse", Ressource.FOOD,numberPlayer * Settings.MAX_FIGURINE);
 		zones[5] = new ZoneField("Champs", Ressource.FIELD);
 		zones[6] = new ZoneHut("Cabane de reproduction");
 		zones[7] = new ZoneTool("Le Fabricant D'outils");
@@ -227,12 +232,20 @@ public class Game {
 		}
 	}
 	
+	public void resetTools() {
+		for(Inventory inventory: inventories) {
+			inventory.getTools().resetToolsUsed();
+		}
+	}
+	
 	/**
 	 * Calcule le score de chaque joueur (ne dois etre appeler que 1 fois et a la fin de la partie)
 	 */
 	public void calculScore() {
-		for (Player player : players) {
-			CarteCivilisation[] cardCivi = player.getInventory().getCardCivilisation().clone();
+		for (int selectedPlayer = 0; selectedPlayer<players.length; selectedPlayer++) {
+			Player player = players[selectedPlayer];
+			Inventory inventory = inventories[selectedPlayer];
+			CarteCivilisation[] cardCivi = inventory.getCardCivilisation().clone();
 			int [] typeGreen = new int[8];
 			int [] typeYellow = new int [4];
 			int numberGreenCard=0;
@@ -242,7 +255,7 @@ public class Game {
 					numberGreenCard +=1;
 				}
 				else{
-					typeYellow[cardCivi[i].getTypeDownPart()] += cardCivi[i].getNumberDownPart();
+					typeYellow[cardCivi[i].getTypeDownPart()-typeGreen.length] += cardCivi[i].getNumberDownPart();
 				}
 			}
 				
@@ -261,20 +274,20 @@ public class Game {
 			for(int i=0; i<typeYellow.length; i++) {
 				if (typeYellow[i] > 0) {
 					if (i == 0) {
-						scoreAdd += typeYellow[i]*player.getInventory().getRessource(Ressource.FIELD);
+						scoreAdd += typeYellow[i]*inventory.getRessource(Ressource.FIELD);
 					}
 					if (i == 1) {
-						scoreAdd += typeYellow[i]*player.getInventory().getTool();
+						scoreAdd += typeYellow[i]*inventory.getTools().getTool();
 					}
 					if (i == 2) {
-						scoreAdd += typeYellow[i]*player.getInventory().getBuildings();
+						scoreAdd += typeYellow[i]*inventory.getBuildings();
 					}	
 					if (i == 3) {
 						scoreAdd += typeYellow[i]*player.getMaxFigurine();
 					}
 				}
 			}
-			scoreAdd+=player.getInventory().availableResourceToFeed();
+			scoreAdd+=inventory.availableResourceToFeed();
 			player.addScore(scoreAdd);
 		}
 		
@@ -295,10 +308,17 @@ public class Game {
 			for(Player player: players) {
 				if(player.getScore()==score[i]) { 
 					System.out.println("Posistion "+position+" : "+player.getName()+" avec un score de : "+player.getScore()); 
-					break; //gerer les egalité plus tard (le premier dans la liste est prioriter en cas d'egalité)
+					break; //gerer les egalitï¿½ plus tard (le premier dans la liste est prioriter en cas d'egalitï¿½)
 				}
 			}
 			position++;
 		}
 	}
+  
+  public void initInventories(int number){
+    inventories = new Inventory[number];
+    for(int i = 0; i < number; i++){
+      inventories[i]=new Inventory();
+    }
+  }
 }
