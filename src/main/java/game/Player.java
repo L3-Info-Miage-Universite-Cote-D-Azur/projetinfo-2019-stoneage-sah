@@ -9,12 +9,10 @@ import client.IA;
 public class Player 
 {
     /* FIELDS */
-    private Inventory inventory;
     private int maxFigurine;
     private int currentFigurine;
     private String name;
     private IA ia; 
-    private boolean[] hadPlaced;
     private int score;
     
     /* CONSTRUCTOR */
@@ -26,8 +24,6 @@ public class Player
         // Nombre de figurine qu'il reste a placer. 
         this.currentFigurine = Settings.START_FIGURINE;
         this.ia = ia;
-        this.inventory = new Inventory();
-        this.hadPlaced = new boolean[Settings.NB_ZONES];
         score = 0;
     }
 
@@ -54,15 +50,6 @@ public class Player
         this.currentFigurine -= number;
     }
     
-    /**
-     * ableToPlaceFigurine() permet de savoir si il est possible de placer number figurine selon ce qui lui reste a placer. 
-     * @param number : le nombre de figurine a placer. 
-     * @return true si la soustraction donne un entier positif ou nul, false sinon
-     */ 
-    public boolean ableToPlaceFigurine (int indexZone)
-    {
-        return this.getCurrentFigurine() > 0 && this.hadPlaced[indexZone] != true;
-    }
     
     /**
      * permet d'ajouter number figurine dans celles a placer. 
@@ -74,25 +61,16 @@ public class Player
     }
 
     /* GETTERS */
-    public Inventory getInventory() {return this.inventory;}
     public int getMaxFigurine() {return this.maxFigurine;}
     public int getCurrentFigurine() {return this.currentFigurine;}
     public String getName() {return this.name;}
     public IA getIA() {return this.ia;}
-    public boolean[] getHadPlaced() {return this.hadPlaced;}
     public int getScore() { return score; }
 
     /* SETTERS */
-    public void setHadPlaced (int index, boolean b) {this.hadPlaced[index] = b;}
     public void addScore(int number) { this.score += number; }
     public void subScore(int number) { this.score -= number; }
 
-    /* RESETTERS */
-    public void resetHadPlaced() 
-    {
-        for(int i = 0; i < this.hadPlaced.length; i++)
-            this.hadPlaced[i] = false;
-    }
-    
+
     
 }

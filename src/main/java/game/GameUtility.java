@@ -1,5 +1,7 @@
 package game;
 
+import game.zone.Zone;
+
 /**
  * La classe GameUtility procure de fonctions utiles au deroulement du jeu. 
  * @author Mentra20
@@ -47,7 +49,7 @@ public class GameUtility{
 		while(!ok){
 			choose = player.getIA().chooseZone(zoneAvailableSpace,zoneName);
 
-			if((choose >= 0) && (choose<zone.length) && FigurineManagement.ableToChooseZone(zone[choose], player, choose)) ok=true;
+			if((choose >= 0) && (choose<zone.length) && FigurineManagement.ableToChooseZone(zone[choose], player)) ok=true;
 			else System.out.println("/!\\ Zone "+zone[choose].getName()+" : Choix incorrecte ou zone pleine, veuillez reessayer./!\\");
 		}
 		return choose;
@@ -88,14 +90,14 @@ public class GameUtility{
 	 * @param ressourceToFood la nouriture totale qu'il lui manque.
 	 * @return renvoie le nombre de ressource que le joueur a utiliser a la place de la nouriture.
 	 */
-	public static int ressourceChoose(Player player,int ressourceToFood) {
+	public static int ressourceChoose(Player player,Inventory inventory,int ressourceToFood) {
 		
 		//cas normalement ignorer par game.feedPhase()
-		if(player.getInventory().availableResourceToFeed()==0) {return 0;}
+		if(inventory.availableResourceToFeed()==0) {return 0;}
 		
 		int[] IAChoose;
 		int[] ressourceNumber = new int[4];
-		int[] copieInventory=player.getInventory().getCopyRessources();
+		int[] copieInventory=inventory.getCopyRessources();
 		String[] ressourceName = new String[4];
 		
 		for(int i=0;i<4;i++) {
@@ -108,8 +110,8 @@ public class GameUtility{
 		}while(IAChoose[0]<0 && IAChoose[0]>3 && IAChoose[1]>0 && IAChoose[1]<=Math.min(ressourceToFood, copieInventory[IAChoose[0]]));
 		
 		System.out.println("Le joueur "+player.getName()+ " nourris ses figurines avec "+ IAChoose[1]+" "+Ressource.indexToRessource(IAChoose[0])+".");
-		player.getInventory().ableToSubRessource(Ressource.indexToRessource(IAChoose[0]), IAChoose[1]);
-		player.getInventory().subRessource(Ressource.indexToRessource(IAChoose[0]), IAChoose[1]);
+		inventory.ableToSubRessource(Ressource.indexToRessource(IAChoose[0]), IAChoose[1]);
+		inventory.subRessource(Ressource.indexToRessource(IAChoose[0]), IAChoose[1]);
 		
 		return IAChoose[1];
 	}
