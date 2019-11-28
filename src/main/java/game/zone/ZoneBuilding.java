@@ -1,6 +1,5 @@
 package game.zone;
 import java.util.ArrayList;
-import java.util.Collections;
 
 import game.Ressource;
 import game.Settings;
@@ -82,8 +81,9 @@ public class ZoneBuilding extends ZoneOnePlayer
 	 * Gere le systeme pour retirer la figurine de la zone
 	 * @param player : le joueur concerne.
 	 * @param inventory inventaire du joueur concerner
+	 * @return 
 	 */
-	public void playerRecoveryFigurine(Player player,Inventory inventory){
+	public int playerRecoveryFigurine(Player player,Inventory inventory){
 		int number = super.howManyPlayerFigurine(player);
 
 		if (number > 0){
@@ -126,6 +126,7 @@ public class ZoneBuilding extends ZoneOnePlayer
 			}
 			super.removeFigurine(player);
 		}
+		return 0;
 
 	}
 
