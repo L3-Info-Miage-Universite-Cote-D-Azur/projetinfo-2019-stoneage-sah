@@ -29,7 +29,7 @@ public class RandomIA extends IA {
 	 * @param zoneName le tableau des noms des zones.
 	 * @return l'indice de la zone
 	 */
-	public int chooseZone (int[] zoneAvailableSpace,String[] zoneName, Zone[] z) {
+	public int chooseZone (int[] zoneAvailableSpace,String[] zoneName) {
 		return rand.nextInt(zoneAvailableSpace.length);
 	}
 
@@ -126,11 +126,11 @@ public class RandomIA extends IA {
 
 		//cas ou il n'y a pas d'outil a utiliser
 		if (usableTools == 0) {
-			return new boolean[]{false,false,false};
+			return new boolean[inventoryIA.getTools().getTools().length];
 		}
 
 		int numberTools = Settings.RAND.nextInt(usableTools+1);
-		boolean[] res = new boolean[]{false,false,false};
+		boolean[] res = new boolean[inventoryIA.getTools().getTools().length];
 
 		for(int i = numberTools; 0 < i; i --){
 			boolean hasChoose = false;
