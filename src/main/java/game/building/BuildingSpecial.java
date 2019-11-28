@@ -12,7 +12,7 @@ public abstract class BuildingSpecial extends Building
 	public BuildingSpecial(int type) {
 		super(type);
 	}
-	
+
 	/* METHODS */
 
 	/**
@@ -32,7 +32,7 @@ public abstract class BuildingSpecial extends Building
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Retourne le nombre de points de victoire en fonction de ce qu'il y a dans neededRessource
 	 * @return
@@ -49,9 +49,9 @@ public abstract class BuildingSpecial extends Building
 		}
 		return res;
 	}
-	
+
 	/* AFFECTATOR */
-	
+
 	/**
 	 * Permet de mettre a jour les victoryPoints, est utilise une fois que le joueur a finit de mettre les ressources demandees
 	 */

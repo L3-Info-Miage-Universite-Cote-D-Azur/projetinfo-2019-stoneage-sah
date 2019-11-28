@@ -17,11 +17,11 @@ public class BuildingRessourceChoosed extends BuildingSpecial
 			super.neededRessource[i] = null;
 		}
 	}
-	
+
 	public BuildingRessourceChoosed() {
 		this(2, Settings.NB_MAX_RESSOURCE_BUILDING);
 	}
-	
+
 	/* METHODS */
 	/**
 	 * Permet de verifier si le joueur a bien mis au moins 1 ressource

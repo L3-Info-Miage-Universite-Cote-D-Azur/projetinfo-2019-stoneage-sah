@@ -18,7 +18,7 @@ public class BuildingRessourceImposed extends Building
 			super.neededRessource[i] = r[i];
 		}
 	}
-	
+
 	/**
 	 * Verifie si le joueur peut retirer la carte et ses points
 	 * @param ressources copie de l'inventaire du joueur

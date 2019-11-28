@@ -10,16 +10,16 @@ import game.Ressource;
 public class BuildingRessourceNotImposed extends BuildingSpecial
 {
 	private int howManyDifferentRessource;
-	
+
 	/* CONSTRUCTOR */
 	public BuildingRessourceNotImposed(int howManyDifferentRessource, int lengthNeededRessource) {
 		super(1);
 		this.howManyDifferentRessource = howManyDifferentRessource;
 		super.neededRessource = new Ressource[lengthNeededRessource];
 	}
-	
+
 	/* METHODS */
-	
+
 	/**
 	 * Permet de verifier si le joueur a bien mis le nombre de ressources differentes, et assez
 	 * @return
@@ -33,7 +33,7 @@ public class BuildingRessourceNotImposed extends BuildingSpecial
 		{
 			r.add(null);
 		}
-		
+
 		/* TREATMENT */
 		for (int i = 0, r_index = 0; i < super.neededRessource.length; i++)
 		{
@@ -47,26 +47,26 @@ public class BuildingRessourceNotImposed extends BuildingSpecial
 					// IL Y A ERREUR
 					return false;
 				}
-				
+
 				// ON L'AJOUTE
 				r.set(r_index, super.neededRessource[i]);
 				r_index++;
 			}
 		}
-		
+
 		// SI ON A UN EMPLACEMENT VIDE
 		if (r.get(this.howManyDifferentRessource - 1) == null)
 		{
 			// ON A PAS ASSEZ DE RESSOURCE DIFFERENTES
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	/* GETTERS */
 	public int getHowManyDifferentRessource () {return this.howManyDifferentRessource;}
-	
+
 	/* SETTERS */
 	public void setHowManyDifferentRessource (int hmdr) {this.howManyDifferentRessource = hmdr;}
 }

@@ -16,18 +16,18 @@ public abstract class Building
 	// Tableau des ressources misees par le joueur
 	protected Ressource[] neededRessource;
 	protected int type;
-	
+
 	/* CONSTRUCTOR */
 	public Building (int type)
 	{
 		this.type = type;
 	}
-	
+
 	/* GETTERS */
 	public int getVP () {return this.victoryPoints;}
 	public Ressource[] getNeededRessource() {return this.neededRessource;}
 	public int getType() {return this.type;}
-	
+
 	/* SETTERS */
 	protected void setVP (int VP) {this.victoryPoints = VP;}
 	protected void setNeededRessource (Ressource[] r) {this.neededRessource = r;}
