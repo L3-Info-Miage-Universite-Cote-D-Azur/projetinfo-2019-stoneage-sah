@@ -33,8 +33,10 @@ public class ZoneRessource extends ZoneManyPlayer{
 	/**
 	 * playerRecoveryFigurine rend les figurines au joueur dans la zone. 
 	 * @param player : le joueur concerne.
+	 * @return nombre qui represente les action suplementaire a effectuer,
+	 * n'a pas d'importance pour cette classe
 	 */
-	public void playerRecoveryFigurine(Player player, Inventory inventory) {
+	public int playerRecoveryFigurine(Player player, Inventory inventory) {
 		int number = super.howManyPlayerFigurine(player);
 
 		if (number > 0)
@@ -51,5 +53,6 @@ public class ZoneRessource extends ZoneManyPlayer{
 			Printer.getPrinter().println("Le joueur "+player.getName()+" a eu comme lancer de de: "+Arrays.toString(diceValue));
 			Printer.getPrinter().println("Il recolte donc: "+total+" "+ressource);
 		}
+		return 0;
 	}
 }

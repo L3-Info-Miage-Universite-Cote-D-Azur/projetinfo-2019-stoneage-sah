@@ -52,7 +52,7 @@ public abstract class Zone {
 	/* ABSTRACT METHODS */
 	public abstract void placeFigurine(int number, Player player);
 	public abstract int howManyPlayerFigurine(Player player);
-	public abstract void playerRecoveryFigurine(Player player, Inventory inventory);
+	public abstract int playerRecoveryFigurine(Player player, Inventory inventory);
 	public abstract void removeFigurine(Player player);
 
 }

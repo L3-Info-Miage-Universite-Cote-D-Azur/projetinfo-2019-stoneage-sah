@@ -20,8 +20,10 @@ public class ZoneTool extends ZoneOnePlayer{
 	/**
 	 * playerRecoveryFigurine rend les figurines au joueur dans la zone. 
 	 * @param player : le joueur concerne.
+	 * @return nombre qui represente les action suplementaire a effectuer,
+	 * n'a pas d'importance pour cette classe
 	 */ 
-	public void playerRecoveryFigurine(Player player, Inventory inventory) {
+	public int playerRecoveryFigurine(Player player, Inventory inventory) {
 		int number = super.howManyPlayerFigurine(player);
 
 		if (number > 0){
@@ -30,5 +32,6 @@ public class ZoneTool extends ZoneOnePlayer{
 			tools.incrementTool();//On incremente son nombre d'outils.
 			Printer.getPrinter().print(tools.incrementToolsToString(player.getName()));
 		}
+		return 0;
 	}
 }

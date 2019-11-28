@@ -64,6 +64,6 @@ public abstract class ZoneOnePlayer extends Zone {
 	}
 
 	/* ABSTRACT METHODS */
-	public abstract void playerRecoveryFigurine(Player player, Inventory inventory);
+	public abstract int playerRecoveryFigurine(Player player, Inventory inventory);
 
 }
