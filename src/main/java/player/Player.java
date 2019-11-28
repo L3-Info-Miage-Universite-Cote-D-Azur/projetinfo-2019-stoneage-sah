@@ -1,6 +1,7 @@
 package player;
 
 import client.IA;
+import client.NoobIA;
 import client.RandomIA;
 import game.Settings;
 import inventory.InventoryIA;
@@ -88,12 +89,15 @@ public class Player extends PlayerStruct {
 	 */
 	public void initIA(InventoryIA inventoryIA) 
 	{
-		int numberIA = 1; //nombre d'ia possible
+		int numberIA = 2; //nombre d'ia possible
 		
 		int choose = Settings.RAND.nextInt(numberIA);
 		switch(choose) {
 		case 0: 
 			this.ia = new RandomIA(this.getPlayerIA(),inventoryIA);
+			break;
+		case 1:
+			this.ia = new NoobIA(this.getPlayerIA(),inventoryIA);
 			break;
 		default:
 			this.ia = null;
