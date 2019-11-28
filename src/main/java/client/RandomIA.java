@@ -29,7 +29,7 @@ public class RandomIA extends IA {
 	 * @param zoneName le tableau des noms des zones.
 	 * @return l'indice de la zone
 	 */
-	public int chooseZone (int[] zoneAvailableSpace,String[] zoneName) {
+	public int chooseZone (int[] zoneAvailableSpace,String[] zoneName, Zone[] z) {
 		return rand.nextInt(zoneAvailableSpace.length);
 	}
 
