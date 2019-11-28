@@ -271,36 +271,37 @@ public class NoobIA extends IA
     
     /**
 	 * pickTools renvoie un tableau de boolean pour dire quel outils l'IA utilise.
-	 * @param toolsToUse : le tableau des outils avec leurs niveau.
-	 * @param useTools : le tableau des outils deja utilises et non disponible.
 	 * @return
 	 */
-    public boolean[] pickTools()
-    {
-    	int[] toolsToUse = inventoryIA.getTools().getTools();
-    	boolean[] useTools = inventoryIA.getTools().getToolsUsed();
-        int usableTools=0;
-        for(int i=0;i<toolsToUse.length;i++){
-            if(useTools[i] && toolsToUse[i]>0) usableTools+=1;
-        }
-        
-        if (usableTools==0) {
-            return new boolean[]{false,false,false};
-        }
-        int numberTools = Settings.RAND.nextInt(usableTools);
-        boolean[] res = new boolean[]{false,false,false};
-        boolean hasChoose=false;
-        
-        for(int i = numberTools; 0 < i; i --){
-            while(!hasChoose){
-                int choose = this.rand.nextInt(toolsToUse.length);
-                if(useTools[choose] && toolsToUse[choose]>0 && res[choose]==false){
-                    res[choose]=true;
-                }
-            }
-        }
-        return res;
-    }
+	public boolean[] pickTools() {
+		int[] toolsToUse = inventoryIA.getTools().getTools();
+		boolean[] useTools = inventoryIA.getTools().getToolsUsed();
+		int usableTools = 0;
+		
+		for(int i = 0;i < toolsToUse.length;i++){
+			if((i>=3) || !useTools[i] && toolsToUse[i] > 0) usableTools+=1;
+		}
+
+		//cas ou il n'y a pas d'outil a utiliser
+		if (usableTools == 0) {
+			return new boolean[toolsToUse.length];
+		}
+
+		int numberTools = Settings.RAND.nextInt(usableTools+1);
+		boolean[] res = new boolean[toolsToUse.length];
+
+		for(int i = numberTools; 0 < i; i --){
+			boolean hasChoose = false;
+			while(!hasChoose){
+				int choose = Settings.RAND.nextInt(toolsToUse.length);
+				if((choose>=3 || !useTools[choose]) && toolsToUse[choose] > 0 && res[choose] == false){
+					res[choose] = true;
+					hasChoose = true;
+				}
+			}
+		}
+		return res;
+	}
     
     /**
 	 * Phase de tirage
