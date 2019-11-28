@@ -29,7 +29,11 @@ public class ZoneBuilding extends ZoneOnePlayer
 	public ZoneBuilding (ZoneBuilding z)
 	{
 		super(String.valueOf(z.getName()), z.getAvailableSpace());
-		Collections.copy(z.getBuildings(), this.buildings);
+		this.buildings = new ArrayList<Building>();
+		for (int i = 0; i < z.getBuildings().size(); i++)
+		{
+			this.buildings.add(z.getBuildings().get(i));
+		}
 	}
 
 	/**
