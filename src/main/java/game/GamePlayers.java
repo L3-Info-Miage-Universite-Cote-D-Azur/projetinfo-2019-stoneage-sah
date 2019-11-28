@@ -94,7 +94,7 @@ public class GamePlayers {
 				Printer.getPrinter().println("Le joueur "+ player.getName() + " a perdu 10 points de victoires");
 				return;
 			}
-			boolean wantToFeed = player.getIA().useRessourceToFeed(inventory.getCopyRessources());
+			boolean wantToFeed = player.getIA().useRessourceToFeed();
 			if(!wantToFeed) {
 				Printer.getPrinter().println("Le joueur "+ player.getName() +" ne veux pas nourrir ses figurines.");
 				player.subScore(10);
@@ -149,17 +149,10 @@ public class GamePlayers {
 		if(inventory.availableResourceToFeed() == 0) {return 0;}
 
 		int[] IAChoose;
-		int[] ressourceNumber = new int[4];
 		int[] copieInventory=inventory.getCopyRessources();
-		String[] ressourceName = new String[4];
-
-		for(int i = 0;i < 4;i++) {
-			ressourceNumber[i] = copieInventory[i];
-			ressourceName[i] = Ressource.indexToRessource(i).toString();
-		}
 
 		do {
-			IAChoose = player.getIA().chooseRessource(ressourceToFood, ressourceNumber, ressourceName);
+			IAChoose = player.getIA().chooseRessource(ressourceToFood);
 		}while(IAChoose[0] < 0 && IAChoose[0] > 3 && IAChoose[1] > 0 && IAChoose[1] <= Math.min(ressourceToFood, copieInventory[IAChoose[0]]));
 
 		Printer.getPrinter().println("Le joueur "+player.getName()+ " nourris ses figurines avec "+ IAChoose[1]+" "+Ressource.indexToRessource(IAChoose[0])+".");
