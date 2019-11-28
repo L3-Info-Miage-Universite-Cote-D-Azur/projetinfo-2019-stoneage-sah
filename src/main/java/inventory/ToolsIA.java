@@ -17,7 +17,7 @@ public class ToolsIA extends ToolStruct {
 	protected void useTools(boolean[] choose) {
 		for(int i = 0; i<tools.length; i++)
 		{
-			if(choose[i]==true)
+			if(choose[i]==true && i < 3)
 			{
 				toolsUsed[i] = true; //L'outils est maintenant utilise.
 			}

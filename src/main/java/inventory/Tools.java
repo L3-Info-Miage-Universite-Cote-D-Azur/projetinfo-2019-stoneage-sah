@@ -41,14 +41,32 @@ public class Tools extends ToolStruct{
 		toolsIA.incrementTool();
 	}
 
-
+	/**
+	 * addUniqueTool ajoute l'outils unique de valeur val a Tools.
+	 * @param val : la valeur de l'outils unique.
+	 */
+	public void addUniqueTool(int val) {
+		super.addUniqueTool(val);
+		toolsIA.addUniqueTool(val);
+	}
+	
+	/**
+	 * subUniqueTool supprime l'outils unique de valeur val;
+	 * @param val : la valeur de l'outils unique.
+	 */
+	public void subUniqueTool(int indexToErase) {
+		super.subUniqueTool(indexToErase);
+		toolsIA.subUniqueTool(indexToErase);
+	}
+	
 	/**
 	 * useTools renvoie le tableau correspondant aux outils utilise et choisis par l'IA
 	 * @param player : le joueur concerne. 
+	 * @return sum : la somme des valeurs des outils utilises.
 	 */
 	public int	useTools(Player player,int sumDice, Ressource ressource){
 		boolean correctChoose = false;
-		boolean[] choose = new boolean[]{false,false,false};
+		boolean[] choose = new boolean[tools.length];
 
 		int sum=0;
 		for(int i=0; i< tools.length; i++){ if(!toolsUsed[i]) sum += tools[i]; }
@@ -74,9 +92,14 @@ public class Tools extends ToolStruct{
 		{
 			if(choose[i]==true)
 			{
-				toolsUsed[i] = true; //L'outils est maintenant utilise.
+				if(i < 3) {
+					toolsUsed[i] = true; //L'outils est maintenant utilise.
+					Printer.getPrinter().println(useToolsToString(player.getName(),tools[i]));
+				}else {
+					Printer.getPrinter().println("Le joueur "+player.getName()+" a utiliser un outils unique de niveau "+tools[i]+".");
+					subUniqueTool(i);
+				}
 				sum += tools[i];//La valeur bonus des outils
-				Printer.getPrinter().println(useToolsToString(player.getName(),tools[i]));
 			}
 		}
 
