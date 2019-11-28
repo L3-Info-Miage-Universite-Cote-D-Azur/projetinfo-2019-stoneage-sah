@@ -1,7 +1,7 @@
 package game.zone;
 
-import game.Inventory;
-import game.Player;
+import inventory.Inventory;
+import player.Player;
 
 /**
  * Zone est une classe abstract qui definie les zones du jeu de maniere generale.  
@@ -36,9 +36,23 @@ public abstract class Zone {
 		return (this.availableSpace > 0) && (howManyPlayerFigurine(player) == 0);
 	}
 
+	/* STRING */
+	/**
+	 * Affichage textuel du joueur qui place dans la zone un nombre de figurine
+	 * @param zone : zone a afficher
+	 * @param player : player a afficher
+	 * @param number : nombre a qui a etait placer
+	 * @return phrase qui resume l'action
+	 */
+	public String stringPlaceFigurine(int number,Player player){
+		String str = "Le joueur "+ player.getName() + " a place "+ number +" figurines dans la zone "+getName()+".";
+		return str;
+	}
+
 	/* ABSTRACT METHODS */
 	public abstract void placeFigurine(int number, Player player);
 	public abstract int howManyPlayerFigurine(Player player);
 	public abstract void playerRecoveryFigurine(Player player, Inventory inventory);
 	public abstract void removeFigurine(Player player);
+
 }

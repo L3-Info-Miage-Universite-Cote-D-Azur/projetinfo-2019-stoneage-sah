@@ -2,8 +2,9 @@ package game.zone;
 
 import java.util.Hashtable;
 
-import game.Inventory;
-import game.Player;
+import inventory.Inventory;
+import player.Player;
+import printer.Printer;
 
 /**
  * Cette classe abstract represente les zones ou plusieurs joueurs peuvent poser leurs figurines.
@@ -28,6 +29,7 @@ public abstract class  ZoneManyPlayer extends Zone{
 	 * @param player : le joueur qui les mets. 
 	 */
 	public void placeFigurine(int number,Player player){
+		Printer.getPrinter().println(super.stringPlaceFigurine(number,player));
 		super.availableSpace -= number;
 		player.placeFigurine(number);
 		if(figurineInZone.get(player) == null) figurineInZone.put(player,number);

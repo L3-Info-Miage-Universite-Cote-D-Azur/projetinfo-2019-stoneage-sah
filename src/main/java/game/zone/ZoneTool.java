@@ -1,9 +1,10 @@
 package game.zone;
 
-import game.Inventory;
-import game.Player;
 import game.Settings;
-import game.Tools;
+import inventory.Inventory;
+import inventory.Tools;
+import player.Player;
+import printer.Printer;
 
 /**
  * La classe represente la zone du fabricant d'outils. 
@@ -27,7 +28,7 @@ public class ZoneTool extends ZoneOnePlayer{
 			super.removeFigurine(player);
 			Tools tools = inventory.getTools();
 			tools.incrementTool();//On incremente son nombre d'outils.
-			System.out.println(tools.incrementToolsToString(player.getName()));
+			Printer.getPrinter().print(tools.incrementToolsToString(player.getName()));
 		}
 	}
 }

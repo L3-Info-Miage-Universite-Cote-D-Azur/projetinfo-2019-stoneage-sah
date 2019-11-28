@@ -1,11 +1,16 @@
 package game.zone;
 import java.util.ArrayList;
 
-import game.building.*;
-import game.Inventory;
-import game.Player;
 import game.Ressource;
 import game.Settings;
+import game.building.Building;
+import game.building.BuildingRessourceChoosed;
+import game.building.BuildingRessourceImposed;
+import game.building.BuildingRessourceNotImposed;
+import game.building.BuildingSpecial;
+import inventory.Inventory;
+import player.Player;
+import printer.Printer;
 
 /**
  * Cette class defini une zone pour un paquet de Settings.NB_BUILDING_CARD_IN_DECK(7) batiments
@@ -14,8 +19,8 @@ public class ZoneBuilding extends ZoneOnePlayer{
 
 	private ArrayList<Building> buildings;
 	/* CONSTRUCTOR */
-	public ZoneBuilding (){
-		super("Tuile Batiment",1);
+	public ZoneBuilding (String name){
+		super(name,1);
 		this.buildings = Settings.getRandomDeck();
 	}
 
@@ -75,25 +80,37 @@ public class ZoneBuilding extends ZoneOnePlayer{
 			// SI LE JOUEUR VEUT LA TUILE BATIMENT
 			if (wantToPickBuilding == true)
 			{
-				// ON DONNE LE SCORE ASSOCIE AU JOUEUR
-				if (this.buildings.get(0).getType() == 0)
-					super.occupated.addScore(this.buildings.get(0).getVP());
-				else
-				{
-					super.occupated.addScore(((BuildingSpecial)this.buildings.get(0)).computeVP());
-				}
-				// LE JOUEUR OBTIENT UNE CARTE BATIMENT EN PLUS
-				inventory.incrementBuilding();
-
 				// ON SUPPRIME LES RESSOURCES DU JOUEUR UNE PAR UNE
 				for (int i = 0; i < this.buildings.get(0).getNeededRessource().length; i++)
 				{
+					Printer.getPrinter().println("Le joueur "+occupated.getName()+" depense 1 "
+							+this.buildings.get(0).getNeededRessource()[i]+" pour la "+ this.getName()+".");
 					inventory.subRessource(this.buildings.get(0).getNeededRessource()[i], 1);
 				}
-
+				
+				// LE JOUEUR OBTIENT UNE CARTE BATIMENT EN PLUS
+				inventory.incrementBuilding();
+				Printer.getPrinter().println("Le joueur "+player.getName()+" obtient la "+this.getName()+".");
+				
+				// ON DONNE LE SCORE ASSOCIE AU JOUEUR
+				if (this.buildings.get(0).getType() == 0) {
+					super.occupated.addScore(this.buildings.get(0).getVP());
+					Printer.getPrinter().println("Le joueur "+ occupated.getName()+ " obtient "
+							+this.buildings.get(0).getVP()+ " points de victoire (tuile).");
+				}
+				else
+				{
+					super.occupated.addScore(((BuildingSpecial)this.buildings.get(0)).computeVP());
+					Printer.getPrinter().println("Le joueur "+ occupated.getName()+ " obtient "
+							+((BuildingSpecial)this.buildings.get(0)).computeVP()+ " points de victoire (tuile).");
+				}
+			
 				// ON SUPPRIME LA TUILE BATIMENT DE LA PILE
 				this.buildings.remove(0);
 				// ON REND AU JOUEUR SA FIGURINE
+			}
+			else {
+				Printer.getPrinter().println("Le joueur "+player.getName()+" ne prend pas la "+this.getName()+".");
 			}
 			super.removeFigurine(player);
 		}

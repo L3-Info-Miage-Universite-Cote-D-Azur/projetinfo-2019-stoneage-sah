@@ -1,8 +1,9 @@
 
 package game.zone;
 
-import game.Inventory;
-import game.Player;
+import inventory.Inventory;
+import player.Player;
+import printer.Printer;
 
 /**
  * ZoneOnePlayer est une classe abstract qui represente les zone ou il ne peut y avoir qu'un joueur.
@@ -28,6 +29,7 @@ public abstract class ZoneOnePlayer extends Zone {
 	 * @param player : le joueur qui les mets. 
 	 */ 
 	public void placeFigurine(int number,Player player){
+		Printer.getPrinter().println(super.stringPlaceFigurine(number,player));
 		super.availableSpace -= number;
 		figurineInZone += number;
 		occupated = player;

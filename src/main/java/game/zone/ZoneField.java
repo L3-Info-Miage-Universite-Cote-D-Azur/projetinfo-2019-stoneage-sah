@@ -1,9 +1,10 @@
 package game.zone;
 
-import game.Inventory;
-import game.Player;
 import game.Ressource;
 import game.Settings;
+import inventory.Inventory;
+import player.Player;
+import printer.Printer;
 
 /**
  * ZoneField represente la zone des champs dans le jeu. 
@@ -31,7 +32,7 @@ public class ZoneField extends ZoneOnePlayer{
 		if (number > 0){
 			super.removeFigurine(player);
 			inventory.addRessource(foodMark,1);
-			System.out.println("Le joueur "+ player.getName() +" a maintenant "+ inventory.getRessource(foodMark)+ " "+ foodMark.toString()+".");
+			Printer.getPrinter().println("Le joueur "+ player.getName() +" a maintenant "+ inventory.getRessource(foodMark)+ " "+ foodMark.toString()+".");
 		}
 	}
 }

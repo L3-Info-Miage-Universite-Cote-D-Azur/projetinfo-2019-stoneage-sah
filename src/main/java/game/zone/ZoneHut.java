@@ -1,8 +1,9 @@
 package game.zone;
 
-import game.Inventory;
-import game.Player;
 import game.Settings;
+import inventory.Inventory;
+import player.Player;
+import printer.Printer;
 
 /**
  * ZoneHut represente la zone de la cabane de reproduction du jeu. 
@@ -23,13 +24,13 @@ public class ZoneHut extends ZoneOnePlayer{
 	 */ 
 	public void playerRecoveryFigurine(Player player, Inventory inventory) {
 		int number = super.howManyPlayerFigurine(player);
-		
+
 		if (number > 0){
 			super.removeFigurine(player);
 			boolean ok = player.increaseMaxFigurine();//Est ce que le joueur a augmenter son nombre de figurines ? 
 
-			if(ok) { System.out.println("Le joueur "+ player.getName() +" a maintenant "+ player.getMaxFigurine() +" figurine(s)");}
-			else { System.out.println("Le joueur "+ player.getName() +" a deja le maximum de figurine");}
+			if(ok) { Printer.getPrinter().println("Le joueur "+ player.getName() +" a maintenant "+ player.getMaxFigurine() +" figurine(s)");}
+			else { Printer.getPrinter().println("Le joueur "+ player.getName() +" a deja le maximum de figurine");}
 		}
 	}
 }
