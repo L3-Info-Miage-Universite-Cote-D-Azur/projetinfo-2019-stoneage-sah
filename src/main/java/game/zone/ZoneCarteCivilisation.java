@@ -93,7 +93,9 @@ public class ZoneCarteCivilisation extends ZoneOnePlayer{
 				//aucune action suplementaire necesaire sur le joueur les action seront fait par la classe qui traite le retour
 				return 2;
 				
-			case 4 : //cas ou le joueur peut utiliser la carte au moment voulue
+			case 4 : //outils temporaire
+				inventory.getTools().addUniqueTool(copieLinkCard.getNumberEffect());
+				Printer.getPrinter().println("Le joueur "+player.getName()+" obtient un outils temporaire de valeur : "+copieLinkCard.getNumberEffect());
 				return 0;
 				
 			default :
