@@ -75,7 +75,7 @@ public class GameZones {
 				if (action>0 && zones[i] instanceof ZoneCarteCivilisation) {
 					if (action==1) {
 						CarteCivilisation cc = cardManager.getRandomCivilisationCard();
-						if (cc != null) inventory.addCardCivilisation(cardManager.getRandomCivilisationCard()); //plus de carte dans le jeu
+						if (cc != null) inventory.addCardCivilisation(cc); //plus de carte dans le jeu
 					}
 					//tirage pour chaque joueur
 					else if(action == 2) 
