@@ -10,7 +10,6 @@ import game.Ressource;
 import inventory.Inventory;
 import player.Player;
 
-
 public class ZoneCarteCivilisationTest {
 
 	ZoneCarteCivilisation zonetest;
