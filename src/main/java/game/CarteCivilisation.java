@@ -28,6 +28,9 @@ public class CarteCivilisation{
     Pour typeUpPart:
     0: ressource instantanee joueur
     1: point de victoire
+    2: pioche une carte civilisation supplementaire
+    3: tout les joueur selectionne un objet parmi la liste
+    4: carte a action non immediate
     Ajout des autres cartes plus tard. 
 	 */
 
