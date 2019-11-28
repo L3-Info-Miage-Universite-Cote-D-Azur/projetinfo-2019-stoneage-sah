@@ -1,5 +1,7 @@
 package game;
 
+import java.util.Collections;
+
 import game.zone.Zone;
 import game.zone.ZoneBuilding;
 import game.zone.ZoneCarteCivilisation;
@@ -167,7 +169,14 @@ public class GameZones {
 		}
 
 		while(!ok){
-			choose = player.getIA().chooseZone(zoneAvailableSpace,zoneName);
+			ZoneBuilding[] buildingsCpy = new ZoneBuilding[4];
+			ZoneCarteCivilisation[] cVCpy = new ZoneCarteCivilisation[4];
+			for (int i = 0; i < 4; i++)
+			{
+				buildingsCpy[i] = new ZoneBuilding((ZoneBuilding)zones[i + 12]);
+				cVCpy[i] = new ZoneCarteCivilisation((ZoneCarteCivilisation)zones[i + 8]);
+			}
+			choose = player.getIA().chooseZone(zoneAvailableSpace,zoneName, buildingsCpy, cVCpy);
 
 			if((choose >= 0) && (choose<zones.length) && ableToChooseZone(zones[choose], player)) ok=true;
 			else Printer.getPrinter().println("/!\\ Zone "+zones[choose].getName()+" : Choix incorrecte ou zone pleine, veuillez reessayer./!\\");
