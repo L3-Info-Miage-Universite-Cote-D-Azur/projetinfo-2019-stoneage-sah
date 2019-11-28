@@ -51,6 +51,11 @@ public class CarteCivilisationManager {
 		deck.add(new CarteCivilisation(0, 7, 0, Ressource.FOOD, 3));
 		deck.add(new CarteCivilisation(0, 7, 0, Ressource.FOOD, 1));
 		deck.add(new CarteCivilisation(0, 1, 0, Ressource.GOLD, 0));
+		deck.add(new CarteCivilisation(3, 4, 0, null, 0));
+		deck.add(new CarteCivilisation(2, 2, 0, null, 0));
+		deck.add(new CarteCivilisation(3, 2, 0, null, 0));
+		deck.add(new CarteCivilisation(3, 5, 0, null, 0));
+		deck.add(new CarteCivilisation(3, 3, 0, null, 0));
 		//deck.add(new CarteCivilisation(0, 1, 0, Ressource.TOOL, 1)); POUR PLUS TARD. 
 
 		//Cartes jaunes : 
@@ -65,6 +70,12 @@ public class CarteCivilisationManager {
 		deck.add(new CarteCivilisation(0, 11, 1, Ressource.STONE, 0));
 		deck.add(new CarteCivilisation(0, 11, 1, Ressource.STONE, 1));
 		deck.add(new CarteCivilisation(0, 11, 1, Ressource.GOLD, 1));
+		deck.add(new CarteCivilisation(3, 10, 2, null, 0));
+		deck.add(new CarteCivilisation(3, 8, 2, null, 0));
+		deck.add(new CarteCivilisation(3, 8, 1, null, 0));
+		deck.add(new CarteCivilisation(3, 10, 1, null, 0));
+		deck.add(new CarteCivilisation(3, 9, 2, null, 0));
+		deck.add(new CarteCivilisation(3, 9, 2, null, 0));
 	}
 
 	/**
