@@ -82,7 +82,7 @@ public class ZoneCarteCivilisation extends ZoneOnePlayer{
 		Ressource ressource = carteCivilisation.getRessource();//La ressource de la carte.
 
 		if(carteCivilisation.getNumberEffect()==0){//Si le nombre de ressource se recupere par lancer de de. 
-			int [] dice = Dice.rollDice(2);
+			int [] dice = Dice.rollDice(Settings.RAND, 2);
 			total = 0;
 
 			for(int x : dice){
