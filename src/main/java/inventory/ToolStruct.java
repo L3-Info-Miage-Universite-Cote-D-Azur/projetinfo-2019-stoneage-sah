@@ -21,7 +21,8 @@ public abstract class ToolStruct {
 	/* GETTERS */
 	public int getTool() {return tool;}
 	public int[] getTools() {return tools;}
-
+	public boolean[] getToolsUsed() {return toolsUsed;}
+	
 	/**
 	 * resetToolsUsed remet a false le tableau ToolsUsed.
 	 */
