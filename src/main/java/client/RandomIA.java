@@ -2,6 +2,7 @@ package client;
 
 import java.util.Random;
 
+import game.Ressource;
 import game.Settings;
 import inventory.InventoryIA;
 import player.PlayerIA;
@@ -45,16 +46,14 @@ public class RandomIA extends IA {
 	/**
 	 * chooseNumber retourne le nombre de ressource choisie par l'IA au hasard. 
 	 * @param Le nombre de figurines a nourrir
-	 * @param Un tableau contenant le nombre de ressource que l'IA possede par index.
-	 * @param Un tableau contenant le nom des ressources que l'IA possede par index.
 	 * @return l'indice de la zone
 	 */
-	public int[] chooseRessource(int figurinesToFeed, int[] RessourceNumber, String[] ressourceName) {
+	public int[] chooseRessource(int figurinesToFeed) {
 		int ressource;
 		int index;
 		do {
-			index = rand.nextInt(RessourceNumber.length);
-			ressource = RessourceNumber[index];
+			index = rand.nextInt(4);
+			ressource = inventoryIA.getRessource(Ressource.indexToRessource(index));
 		}while(ressource == 0);
 
 		int nb = rand.nextInt(Math.min(ressource, figurinesToFeed))+1;
@@ -69,20 +68,24 @@ public class RandomIA extends IA {
 	 * @param ressourceNumber Le tableau du nombre de ressource possedee par le joueur. 
 	 * @return Booleen : true si le joueur veut utiliser ses ressources pour nourrir, false sinon.
 	 */
-	public boolean useRessourceToFeed(int[] ressourceNumber) {
+	public boolean useRessourceToFeed() {
 		return rand.nextInt(2)==1;
 	}
 
 	/**
 	 * pickCard renvoie les ressources donnee pour l'achat de la carte civilisation. 
 	 * Si l'IA renvoie un tableau vide, elle refuse l'achat de la carte. 
-	 * @param ressourceNumber : les ressources premieres du joueur
 	 * @param numberRessourceRequire : le nombre de ressource pour l'achat de la carte. 
 	 * @return res : tableau des ressources donnes pour la carte. 
 	 */
-	public int[] pickCard(int[] ressourceNumber,int numberRessourceRequire) {
+	public int[] pickCard(int numberRessourceRequire) {
 
 		int[] res = new int[] {0,0,0,0};
+		
+		int[] ressourceNumber = new int[4];
+		for(int i = 0; i<4; i++) {
+			ressourceNumber[i] = inventoryIA.getRessource(Ressource.indexToRessource(i));
+		}
 
 		if(rand.nextInt(2) == 1) {
 			while(numberRessourceRequire > 0) {
@@ -110,12 +113,13 @@ public class RandomIA extends IA {
 
 	/**
 	 * pickTools renvoie un tableau de boolean pour dire quel outils l'IA utilise.
-	 * @param toolsToUse : le tableau des outils avec leurs niveau.
-	 * @param useTools : le tableau des outils deja utilises et non disponible.
 	 * @return
 	 */
-	public boolean[] pickTools(int[] toolsToUse , boolean[] useTools) {
+	public boolean[] pickTools() {
+		int[] toolsToUse = inventoryIA.getTools().getTools();
+		boolean[] useTools = inventoryIA.getTools().getToolsUsed();
 		int usableTools = 0;
+		
 		for(int i = 0;i < toolsToUse.length;i++){
 			if(!useTools[i] && toolsToUse[i] > 0) usableTools+=1;
 		}

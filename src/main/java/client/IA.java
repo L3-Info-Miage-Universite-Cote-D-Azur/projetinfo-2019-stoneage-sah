@@ -38,19 +38,16 @@ public abstract class IA{
 	/**
 	 * chooseNumber retourne le nombre de res choisie par l'IA. 
 	 * @param Le nombre de figurines a nourrir
-	 * @param Un tableau contenant le nombre de ressource que l'IA possede par index.
-	 * @param Un tableau contenant le nom des ressources que l'IA possede par index.
 	 * @return l'indice de la zone
 	 */
-	public abstract int[] chooseRessource(int figurinesToFeed, int[] RessourceNumber, String[] ressourceName);
+	public abstract int[] chooseRessource(int figurinesToFeed);
 
 	/**
 	 * useRessourceToFeed renvoie true ou false selon le choix de l'IA pour nourrir 
 	 * ses figurines avec des ressources. 
-	 * @param RessourceNumber Le tableau du nombre de ressource possedee par le joueur. 
 	 * @return Booleen : true si le joueur veut utiliser ses ressources pour nourrir, false sinon.
 	 */
-	public abstract boolean useRessourceToFeed(int[] ressourceNumber);
+	public abstract boolean useRessourceToFeed();
 
 	/**
 	 * pickCard renvoie les ressources donnee pour l'achat de la carte civilisation. 
@@ -59,7 +56,7 @@ public abstract class IA{
 	 * @param numberRessourceRequire : le nombre de ressource pour l'achat de la carte. 
 	 * @return res : tableau des ressources donnes pour la carte. 
 	 */
-	public abstract int[] pickCard(int[] ressourceNumber,int numberRessourceRequire);
+	public abstract int[] pickCard(int numberRessourceRequire);
 
 	/**
 	 * Renvoie un choix aleatoire sur la prise d'une carte batiment
@@ -73,7 +70,7 @@ public abstract class IA{
 	 * @param useTools : le tableau des outils deja utilises et non disponible.
 	 * @return
 	 */
-	public abstract boolean[] pickTools(int[] toolsToUse,boolean[] useTools);
+	public abstract boolean[] pickTools();
 
 	@Override
 	public abstract String toString();
