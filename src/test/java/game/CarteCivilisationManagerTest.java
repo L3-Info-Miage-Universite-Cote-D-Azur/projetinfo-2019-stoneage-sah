@@ -6,15 +6,18 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+import game.zone.ZoneCarteCivilisation;
+
 public class CarteCivilisationManagerTest {
 	
+	Dice dice = new Dice();
 	
 	@Test
 	public void testInitDeck(){
 		ZoneCarteCivilisation[] zcc = new ZoneCarteCivilisation[4];
 
 		for(int i=0;i<4;i++) {
-			zcc[i]=new ZoneCarteCivilisation("Carte Civilisation: "+ (i+1), i+1);
+			zcc[i]=new ZoneCarteCivilisation("Carte Civilisation: "+ (i+1), i+1,dice);
 		}
 		
 		CarteCivilisationManager ccm = new CarteCivilisationManager(zcc);
@@ -28,7 +31,7 @@ public class CarteCivilisationManagerTest {
 	public void testGetRandomCivilisationCard() {
 		ZoneCarteCivilisation[] zcc = new ZoneCarteCivilisation[4];
 		for(int i=0;i<4;i++) {
-			zcc[i]=new ZoneCarteCivilisation("Carte Civilisation: "+ (i+1), i+1);
+			zcc[i]=new ZoneCarteCivilisation("Carte Civilisation: "+ (i+1), i+1,dice);
 		}
 		CarteCivilisationManager ccm = new CarteCivilisationManager(zcc);
 		
