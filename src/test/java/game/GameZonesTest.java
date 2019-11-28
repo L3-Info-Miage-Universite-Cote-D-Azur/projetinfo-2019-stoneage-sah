@@ -15,6 +15,7 @@ class GameZonesTest{
 	Inventory i = new Inventory();
 	Player p = new Player("sardoche", i.getInventoryIA());
 	
+	//verifie que le joueur a bien recuperer toutes ses figurines
 	@Test
 	void testPlayerHarvest() {
 		g.playerHarvest(p, i, gh);
