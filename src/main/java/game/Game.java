@@ -96,7 +96,7 @@ public class Game {
 
 		for(int j = 0; j < numberPlayer; j++) {
 			int  selectedPlayer = (j + nbTour) % numberPlayer;//L'indice du joueur selectionne en fonction du tour.
-			gameZones.playerHarvest(gamePlayers.getPlayer(selectedPlayer), gamePlayers.getInventory(selectedPlayer));
+			gameZones.playerHarvest(gamePlayers.getPlayer(selectedPlayer), gamePlayers.getInventory(selectedPlayer),gamePlayers);
 		}
 	}
 

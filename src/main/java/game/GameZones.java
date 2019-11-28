@@ -1,6 +1,8 @@
 package game;
 
 
+import java.util.Arrays;
+
 import game.zone.Zone;
 import game.zone.ZoneBuilding;
 import game.zone.ZoneCarteCivilisation;
@@ -62,14 +64,28 @@ public class GameZones {
 	 * @param player le joueur qui recupere
 	 * @param inventory l'inventaire du joueur en question
 	 */
-	public void playerHarvest(Player player, Inventory inventory){
+	public void playerHarvest(Player player, Inventory inventory,GamePlayers gamePlayers){
 		Printer.getPrinter().println("\nC'est au tour de "+player.getName()+" :");
-
+		int action;
 		for(int i = 0; i < zones.length; i++) 
 		{
 			if(zones[i].howManyPlayerFigurine(player) != 0) //Si le joueur avait des figurines dans la zone. 
 			{
-				zones[i].playerRecoveryFigurine(player,inventory);//Il recupere ses figurines et les ressources.
+				action = zones[i].playerRecoveryFigurine(player,inventory);//Il recupere ses figurines et les ressources.
+				if (action>0 && zones[i] instanceof ZoneCarteCivilisation) {
+					if (action==1) {
+						CarteCivilisation cc = cardManager.getRandomCivilisationCard();
+						if (cc != null) inventory.addCardCivilisation(cardManager.getRandomCivilisationCard()); //plus de carte dans le jeu
+					}
+					//tirage pour chaque joueur
+					else if(action == 2) 
+					{	
+						Printer.getPrinter().println();
+						Printer.getPrinter().println("Phase de Tirage");
+						tirage(gamePlayers,player);
+						Printer.getPrinter().println();
+					}
+				}
 			}
 		}
 	}
@@ -221,5 +237,67 @@ public class GameZones {
 		return zone.ableToChooseZone(player) && zone.getMinimalFigurineRequierement()<=player.getCurrentFigurine();
 	}
 
+	/**
+	 * Gestion du tirage d'obejet
+	 * @param gamePlayers la liste de tout les joueur et leurs
+	 * @param player le joueur qui a piocher la carte
+	 */
+	private void tirage(GamePlayers gamePlayers, Player player) {
+		int index=0;
+		for(int j = 0; j < gamePlayers.getNumberPlayers();j++ ) {
+			if(gamePlayers.getPlayer(j)==player) index = j;
+		}
+		
+		int[] diceRes = dice.rollDice(Settings.RAND, gamePlayers.getNumberPlayers());
+		Printer.getPrinter().println("le tirage donne : "+Arrays.toString(diceRes));
+		boolean[] alreadyChoose = new boolean[gamePlayers.getNumberPlayers()];
+		for(int j = 0; j < gamePlayers.getNumberPlayers();j++ ) {
+			int indexPlayerChoose = (j+index)%gamePlayers.getNumberPlayers();
+			boolean correctChoose = false;
+			int choose=-1;
+			while(!correctChoose) {
+				choose = gamePlayers.getPlayer(indexPlayerChoose).getIA().chooseTirage(diceRes.clone(),alreadyChoose.clone());
+				if(choose>=0 && choose<diceRes.length && !alreadyChoose[choose]) {
+					correctChoose = true;
+					alreadyChoose[choose]=true;
+				}
+			}
+			String str = "Le joueur "+gamePlayers.getPlayer(indexPlayerChoose).getName()+" a choisi : ";
+			switch(diceRes[choose]) {
+				case 1:
+					gamePlayers.getInventory(indexPlayerChoose).addRessource(Ressource.WOOD, 1);
+					Printer.getPrinter().println(str+Ressource.WOOD);
+					break;
+					
+				case 2:
+					gamePlayers.getInventory(indexPlayerChoose).addRessource(Ressource.CLAY, 1);
+					Printer.getPrinter().println(str+Ressource.CLAY);
+					break;
+					
+				case 3:
+					gamePlayers.getInventory(indexPlayerChoose).addRessource(Ressource.STONE, 1);
+					Printer.getPrinter().println(str+Ressource.STONE);
+					break;
+					
+				case 4:
+					gamePlayers.getInventory(indexPlayerChoose).addRessource(Ressource.GOLD, 1);
+					Printer.getPrinter().println(str+Ressource.GOLD);
+					break;
+					
+				case 5:
+					gamePlayers.getInventory(indexPlayerChoose).getTools().incrementTool();
+					Printer.getPrinter().println(str+"une augmentation d'outils");
+					break;
+					
+				case 6:
+					gamePlayers.getInventory(indexPlayerChoose).addRessource(Ressource.FIELD, 1);
+					Printer.getPrinter().println(str+Ressource.FIELD);
+					break;
+				default:
+					Printer.getPrinter().println("erreur");
+			}
+			
+		}
+	}
 }
 

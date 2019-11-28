@@ -22,6 +22,7 @@ public class GamePlayers {
 	}
 
 	/* GETTERS */
+	public int getNumberPlayers() { return players.length; }
 	public Player getPlayer(int index) {
 		if(index >= 0 && index < players.length) { return players[index]; }
 		return null;
