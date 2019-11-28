@@ -201,13 +201,13 @@ public class NoobIA extends IA
      * @param Un tableau contenant le nom des ressources que l'IA possede par index.
      * @return l'indice de la zone
      */
-    public int[] chooseRessource(int figurinesToFeed, int[] RessourceNumber, String[] ressourceName) {
+    public int[] chooseRessource(int figurinesToFeed) {
         int ressource;
         int index = -1;
         // BOIS - ARGILE - PIERRE - OR
         do {
             index++;
-            ressource = RessourceNumber[index];
+            ressource = inventoryIA.getRessource(Ressource.indexToRessource(index));
         }while(ressource==0);
         
         int nb = this.rand.nextInt(Math.min(ressource, figurinesToFeed))+1;
@@ -297,16 +297,21 @@ public class NoobIA extends IA
         return res;
     }
     
-	@Override
-	public int chooseTirage(int[] listeTirage, boolean[] alreadyChoose) {
+    /**
+	 * Phase de tirage
+	 * @param listeTirage des dée tirée
+	 * @param alreadyChoose si un autre joueur l'a deja choisi ou non
+	 * @return l'index de ce que veut le joueur dans le tirage
+	 */
+	public int chooseTirage(int[] listeTirage, boolean[] alreadyChoose) 
+	{
 		int choose;
 		do {
 			choose = Settings.RAND.nextInt(alreadyChoose.length);
 		}while(alreadyChoose[choose]);
-
+			
 		return choose;
-	
-	
+	}
     
     public String toString () {return "Brainlet";}
 }
