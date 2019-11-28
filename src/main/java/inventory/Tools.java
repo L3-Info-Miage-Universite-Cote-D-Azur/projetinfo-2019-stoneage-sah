@@ -59,7 +59,7 @@ public class Tools extends ToolStruct{
 
 			correctChoose = true;
 			//On demande a l'IA les outils qu'elle veut utiliser.
-			choose = player.getIA().pickTools(tools.clone(),toolsUsed.clone());
+			choose = player.getIA().pickTools();
 
 			if(choose.length == tools.length) 
 			{
