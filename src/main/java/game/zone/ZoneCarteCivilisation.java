@@ -3,7 +3,6 @@ package game.zone;
 import game.CarteCivilisation;
 import game.Dice;
 import game.Ressource;
-import game.Settings;
 import inventory.Inventory;
 import player.Player;
 import printer.Printer;
@@ -87,7 +86,7 @@ public class ZoneCarteCivilisation extends ZoneOnePlayer{
 		Ressource ressource = carteCivilisation.getRessource();//La ressource de la carte.
 
 		if(carteCivilisation.getNumberEffect()==0){//Si le nombre de ressource se recupere par lancer de de. 
-			int [] diceValue = dice.rollDice(Settings.RAND,2);
+			int [] diceValue = dice.rollDice(2);
 			total = 0;
 
 			for(int x : diceValue){
@@ -127,7 +126,7 @@ public class ZoneCarteCivilisation extends ZoneOnePlayer{
 			sum=0;
 			verif = true;
 			//On demande a l'IA
-			int[] choix = player.getIA().pickCard(inventory.getCopyRessources(), ressourceRequire);//AJOUTER AU FUTUR LA CARTE CONCERNEE
+			int[] choix = player.getIA().pickCard(ressourceRequire);//AJOUTER AU FUTUR LA CARTE CONCERNEE
 
 			for(int i = 0; i<4 && verif; i++) {
 				if(choix[i] > inventory.getRessource(Ressource.indexToRessource(i)) || choix[i] < 0) 
