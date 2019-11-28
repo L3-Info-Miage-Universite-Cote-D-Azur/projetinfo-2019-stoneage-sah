@@ -19,7 +19,7 @@ public class DiceTest
 		Random tooMuch = mock(Random.class);
 		when(tooMuch.nextInt(anyInt())).thenReturn(7);
 		d = new Dice();
-		d.rollDice(tooMuch, 1);
+		assertThrows(RuntimeException.class, () -> d.rollDice(tooMuch, 1));
 	}
 	
 	/**
@@ -30,6 +30,6 @@ public class DiceTest
 		Random tooLow = mock(Random.class);
 		when(tooLow.nextInt(anyInt())).thenReturn(-1);
 		d = new Dice();
-		d.rollDice(tooLow, 1);
+		assertThrows(RuntimeException.class, () -> d.rollDice(tooLow, 1));
 	}
 }
