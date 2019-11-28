@@ -3,6 +3,7 @@ package game.zone;
 import game.CarteCivilisation;
 import game.Dice;
 import game.Ressource;
+import game.Settings;
 import inventory.Inventory;
 import player.Player;
 import printer.Printer;
@@ -86,7 +87,7 @@ public class ZoneCarteCivilisation extends ZoneOnePlayer{
 		Ressource ressource = carteCivilisation.getRessource();//La ressource de la carte.
 
 		if(carteCivilisation.getNumberEffect()==0){//Si le nombre de ressource se recupere par lancer de de. 
-			int [] diceValue = dice.rollDice(2);
+			int [] diceValue = dice.rollDice(Settings.RAND,2);
 			total = 0;
 
 			for(int x : diceValue){

@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import game.Dice;
 import game.Ressource;
+import game.Settings;
 import inventory.Inventory;
 import player.Player;
 import printer.Printer;
@@ -38,7 +39,7 @@ public class ZoneRessource extends ZoneManyPlayer{
 
 		if (number > 0)
 		{
-			int[] diceValue = dice.rollDice(number);
+			int[] diceValue = dice.rollDice(Settings.RAND, number);
 			int sum=0;
 
 			for (int value : diceValue) { sum += value; }
