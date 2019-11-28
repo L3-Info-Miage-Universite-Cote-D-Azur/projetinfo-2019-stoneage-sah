@@ -23,7 +23,7 @@ public class ZoneCarteCivilisationTest {
 	public void testPlayerRecoveryFigurine() {
 		zonetest = new ZoneCarteCivilisation("test", 4, new Dice());
 		Inventorytest = new Inventory();
-		playertest = new Player("test",null);
+		playertest = new Player("test",Inventorytest.getInventoryIA());
 
 		//La carte donne des ressources fixe.
 		cartetest = new CarteCivilisation(0,0,0,Ressource.WOOD,4);
