@@ -35,7 +35,7 @@ public class ZoneRessource extends ZoneManyPlayer{
 
 		if (number > 0)
 		{
-			int[] dice = Dice.rollDice(number);
+			int[] dice = Dice.rollDice(Settings.RAND, number);
 			int sum=0;
 
 			for (int value : dice) { sum += value; }
