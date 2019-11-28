@@ -8,6 +8,11 @@ import java.util.Random;
 
 public class Dice
 {
+	
+	public Dice (Dice d)
+	{}
+	public Dice ()
+	{}
 
     /**
      * rollDice lance number fois le de et stocke les resultats dans un tableau.
