@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 public class DiceTest 
 {
+	Dice d;
 	@Test
 	/**
 	 * Test si le retour du de est trop haut
@@ -17,7 +18,8 @@ public class DiceTest
 	{
 		Random tooMuch = mock(Random.class);
 		when(tooMuch.nextInt(anyInt())).thenReturn(7);
-		Dice.rollDice(tooMuch, 1);
+		d = new Dice();
+		d.rollDice(tooMuch, 1);
 	}
 	
 	/**
@@ -27,6 +29,7 @@ public class DiceTest
 	{
 		Random tooLow = mock(Random.class);
 		when(tooLow.nextInt(anyInt())).thenReturn(-1);
-		Dice.rollDice(tooLow, 1);
+		d = new Dice();
+		d.rollDice(tooLow, 1);
 	}
 }
