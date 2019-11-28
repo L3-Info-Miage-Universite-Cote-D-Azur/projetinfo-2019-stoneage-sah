@@ -22,7 +22,7 @@ public abstract class ToolStruct {
 	public int getTool() {return tool;}
 	public int[] getTools() {return tools;}
 	public boolean[] getToolsUsed() {return toolsUsed;}
-	
+
 	/**
 	 * resetToolsUsed remet a false le tableau ToolsUsed.
 	 */
@@ -69,4 +69,43 @@ public abstract class ToolStruct {
 		return "Le joueur "+name+" a utiliser un outils de niveau "+tools+".";
 	}
 
+	/**
+	 * addUniqueTool ajoute l'outils unique de valeur val a Tools.
+	 * @param val : la valeur de l'outils unique.
+	 */
+	public void addUniqueTool(int val) {
+		int[] res = new int[tools.length + 1];
+		int i = 0;
+		while(i < tools.length) {
+			res[i] = tools[i];
+			i++;
+		}
+		res[i] = val;
+		this.tools = res;
+	}
+
+	/**
+	 * subUniqueTool supprime l'outils unique de valeur val;
+	 * @param val : la valeur de l'outils unique.
+	 */
+	public void subUniqueTool(int indexToErase) {
+		if(tools.length > 3 ) {
+			int[] res = new int[tools.length - 1];
+
+			for(int j =0; j<3; j++) {// On copie les outils ordinaires.
+				res[j] = tools[j];
+			}
+
+			int i = 3;
+			int k = 3;
+			while(k < tools.length) {
+				if(i != indexToErase) {
+					res[i] = tools[k];
+					i++;
+				}
+				k++;
+			}
+			this.tools = res;
+		}
+	}
 }
