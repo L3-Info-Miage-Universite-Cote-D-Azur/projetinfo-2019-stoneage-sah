@@ -4,6 +4,8 @@ import java.util.Random;
 
 import game.Ressource;
 import game.Settings;
+import game.zone.ZoneBuilding;
+import game.zone.ZoneCarteCivilisation;
 import inventory.InventoryIA;
 import player.PlayerIA;
 
@@ -23,13 +25,16 @@ public class RandomIA extends IA {
 	//Random de l'IA (elle ne peux pas acceder a Settings).
 	private Random rand = new Random();
 
-	/**
-	 * chooseZone retourne l'indice de la zone choisie par l'IA (ici au hasard). 
+    /**
+	 * chooseZone retourne l'indice de la zone choisie par l'IA . 
 	 * @param zoneAvailableSpace le tableau avec l'espace disponible de chaque zone. 
 	 * @param zoneName le tableau des noms des zones.
+	 * @param buildings la copie des zones batiment
+	 * @param cV la copie des zones carte civilisation
 	 * @return l'indice de la zone
 	 */
-	public int chooseZone (int[] zoneAvailableSpace,String[] zoneName) {
+    public int chooseZone (int[] zoneAvailableSpace, String[] zoneName, ZoneBuilding[] buildings, ZoneCarteCivilisation[] cV)
+    {
 		return rand.nextInt(zoneAvailableSpace.length);
 	}
 
@@ -153,9 +158,12 @@ public class RandomIA extends IA {
 		}while(alreadyChoose[choose]);
 			
 		return choose;
+	}
 	
 
 	public String toString(){
 		return "Random";
 	}
+
+
 }
