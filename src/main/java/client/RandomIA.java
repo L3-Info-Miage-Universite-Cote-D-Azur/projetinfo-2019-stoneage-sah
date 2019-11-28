@@ -144,6 +144,16 @@ public class RandomIA extends IA {
 		}
 		return res;
 	}
+	
+	@Override
+	public int chooseTirage(int[] listeTirage, boolean[] alreadyChoose) {
+		int choose;
+		do {
+			choose = Settings.RAND.nextInt(alreadyChoose.length);
+		}while(alreadyChoose[choose]);
+			
+		return choose;
+	
 
 	public String toString(){
 		return "Random";
