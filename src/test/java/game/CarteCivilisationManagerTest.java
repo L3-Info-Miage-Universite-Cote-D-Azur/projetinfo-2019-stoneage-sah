@@ -24,7 +24,7 @@ public class CarteCivilisationManagerTest {
 		
 		ccm.initDeck();
 		//Test de la longueur
-		assertEquals(true,ccm.getDeck().size() == 20);
+		assertEquals(true,ccm.getDeck().size() == 31);
 	}
 	
 	@Test
@@ -36,9 +36,10 @@ public class CarteCivilisationManagerTest {
 		CarteCivilisationManager ccm = new CarteCivilisationManager(zcc);
 		
 		ccm.initDeck();
+		int taille = ccm.getDeck().size();
 		ArrayList<CarteCivilisation> cloneDeck = new ArrayList<CarteCivilisation>(ccm.getDeck());
 		
-		for(int i = 0; i<20; i++) {
+		for(int i = 0; i<taille; i++) {
 			CarteCivilisation cv = ccm.getRandomCivilisationCard();
 			assertEquals(false, ccm.getDeck().contains(cv));
 			assertEquals(true, cloneDeck.contains(cv));
