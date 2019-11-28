@@ -6,7 +6,6 @@ import java.util.stream.IntStream;
 import game.Ressource;
 import game.Settings;
 import game.building.*;
-import game.zone.Zone;
 import game.zone.*;
 import inventory.InventoryIA;
 import player.PlayerIA;
@@ -35,12 +34,14 @@ public class NoobIA extends IA
     private int currentZone;
 
     /**
-     * chooseZone retourne l'indice de la zone choisie par l'IA (ici au hasard). 
-     * @param zoneAvailableSpace le tableau avec l'espace disponible de chaque zone. 
-     * @param zoneName le tableau des noms des zones.
-     * @return l'indice de la zone
-     */
-    public int chooseZone (int[] zoneAvailableSpace, String[] zoneName, Zone[] zonesCpy) 
+	 * chooseZone retourne l'indice de la zone choisie par l'IA . 
+	 * @param zoneAvailableSpace le tableau avec l'espace disponible de chaque zone. 
+	 * @param zoneName le tableau des noms des zones.
+	 * @param buildings la copie des zones batiment
+	 * @param cV la copie des zones carte civilisation
+	 * @return l'indice de la zone
+	 */
+    public int chooseZone (int[] zoneAvailableSpace, String[] zoneName, ZoneBuilding[] buildings, ZoneCarteCivilisation[] cV)
     {
     	// RESET
     	this.currentZone = -1;
@@ -58,12 +59,12 @@ public class NoobIA extends IA
         		// SINON ON CHECK TOUTES LES CARTES CIVILISATION
         		else
         		{
-        			for (int i = 8; i < 11; i++)
+        			for (int i = 0; i < cV.length; i++)
         			{
         				// SI ELLE OFFRE 1 MARQUEUR NOURRITURE
-        				if (((ZoneCarteCivilisation) zonesCpy[i]).getCard().getRessource() == Ressource.FIELD)
+        				if (cV[i].getCard().getRessource() == Ressource.FIELD)
         				{
-        					this.currentZone = i;
+        					this.currentZone = i+8;
         				}
         			}
         			// SINON ON VA DANS LA CHASSE
@@ -91,19 +92,19 @@ public class NoobIA extends IA
         		else
         		{
         			// CHECK DES CARTES BATIMENT
-        			for (int i = 12; i < 15; i++)
+        			for (int i = 0; i < buildings.length; i++)
         			{
         				// SI Y'A DE LA PLACE
         				if (zoneAvailableSpace[i] == 1)
         				{
-            				Building tmpBuilding = ((ZoneBuilding) zonesCpy[i]).getBuilding();
+            				Building tmpBuilding = buildings[i].getBuilding();
             				// RESSOURCE IMPOSED
             				if (tmpBuilding.getType() == 0)
                 			{
             					// SI C'EST UN BUILDING AVEC RESSOURCE IMPOSEES ET QU'ON A LES RESSOURCES
             					if (((BuildingRessourceImposed) tmpBuilding).checkNeededRessource(this.inventoryIA.getCopyRessources()))
             					{
-            						this.currentZone = i;
+            						this.currentZone = i + 12;
             					}
                 			}
             				else if (tmpBuilding.getType() == 1)
@@ -111,7 +112,7 @@ public class NoobIA extends IA
             					// SI C'EST UN BUILDING AVEC RESSOURCE NON IMPOSEES ET QU'ON A LES RESSOURCES
             					if (((BuildingRessourceNotImposed) tmpBuilding).checkNeededRessource())
             					{
-            						this.currentZone = i;
+            						this.currentZone = i + 12;
             					}
             				}
             				else if (tmpBuilding.getType() == 2)
@@ -119,7 +120,7 @@ public class NoobIA extends IA
             					// SI C'EST UN BUILDING AVEC RESSOURCE A CHOIX ET QU'ON A LES RESSOURCES
             					if (((BuildingRessourceChoosed) tmpBuilding).checkNeededRessource())
             					{
-            						this.currentZone = i;
+            						this.currentZone = i + 12;
             					}
             				}
             				// AUCUN AUTRE BATIMENT POSSIBLE
@@ -130,12 +131,12 @@ public class NoobIA extends IA
         			if (this.currentZone == -1)
         			{
         				// REGARDER SI ON PEUT PRENDRE UNE CARTE CIVILISATION
-        				for (int i = 8; i < 11; i++)
+        				for (int i = 0; i < cV.length; i++)
         				{
         					// SI ON A ASSEZ DE RESSOURCE
-        					if (IntStream.of(this.inventoryIA.getCopyRessources()).sum() >= 12 - i && zoneAvailableSpace[i] == 1)
+        					if (IntStream.of(this.inventoryIA.getCopyRessources()).sum() >= 4 - i && zoneAvailableSpace[i] == 1)
         					{
-        						this.currentZone = i;
+        						this.currentZone = i + 8;
         						break;
         					}
         				}
