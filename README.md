@@ -45,14 +45,15 @@ fin du jeu a la fin du tour, le joueur est gagnant.
 -Nous ajouterons un protytpe de bâtiment et de carte qui seront de nouvelles zones spéciales.  
   
 ## Cinquième itération:  
--Ajouts de toutes les cartes et bâtiments  
--Ajout des regles en fonction du nombre de joueur  
+-Ajouts de (presque) toutes les cartes et bâtiments  
 -Ajout d'une nouvelle IA  
 -Affinement de la boucle de jeu, on assiste à une partie normale avec des conditions de victoires réalistes  
   
 ## Sixième itération:  
+-Ajout des regles en fonction du nombre de joueur  
 -Ajout d'un système de statistique disponible pour l'utilisateur  
 -Ajouts des IA intéressantes à implémenter pour tester une stratégie avancée  
+-Ajout de la carte civilisation manquante  
   
 ## Juste avant rendu:  
 -Affinement du système statistique pour une utilisation plus user-friendy et correction de possibles bugs  
