@@ -1,20 +1,32 @@
 package game;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 
-public class DiceTest {
-
+public class DiceTest 
+{
 	@Test
-	//* Test pour verifier si le lancers de de sont bien entre 1 et 6 dans tout le tableau, et si le tableau est de la bonne longueur.
-	public void testRollDice() {
-		int number=6;
-		int[] tab = Dice.rollDice(number);
-		for (int i=0;i<number;i++) {
-			assertEquals(true, tab[i] <= 6 && tab[i] >=1);
-		}
-		assertEquals(true,tab.length==number);
+	/**
+	 * Test si le retour du de est trop haut
+	 */
+	public void testRollDiceTooHigh () 
+	{
+		Random tooMuch = mock(Random.class);
+		when(tooMuch.nextInt(anyInt())).thenReturn(7);
+		Dice.rollDice(tooMuch, 1);
 	}
-
+	
+	/**
+	 * Test si le retour du de est trop bas
+	 */
+	public void testRollDiceTooLow () 
+	{
+		Random tooLow = mock(Random.class);
+		when(tooLow.nextInt(anyInt())).thenReturn(-1);
+		Dice.rollDice(tooLow, 1);
+	}
 }
