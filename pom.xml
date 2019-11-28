@@ -6,7 +6,7 @@
 
     <groupId>SAH</groupId> <!-- à changer par le nom du groupe -->
     <artifactId>StoneAge</artifactId> <!-- et le nom du projet -->
-    <version>2.0</version>
+    <version>3.0</version>
 
 
     <properties>
