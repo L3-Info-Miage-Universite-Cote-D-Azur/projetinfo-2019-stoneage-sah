@@ -69,7 +69,7 @@ public class Tools extends ToolStruct{
 		boolean[] choose = new boolean[tools.length];
 
 		int sum=0;
-		for(int i=0; i< tools.length; i++){ if(!toolsUsed[i]) sum += tools[i]; }
+		for(int i=0; i< tools.length; i++){ if(i>=3 ||!toolsUsed[i]) sum += tools[i]; }
 		if(sum == 0) return 0;//cas ou l'utilisateur n'a pas d'outil a utiliser.
 
 
@@ -82,7 +82,7 @@ public class Tools extends ToolStruct{
 			if(choose.length == tools.length) 
 			{
 				for(int i = 0; i<tools.length; i++){
-					if(choose[i] && toolsUsed[i]) correctChoose = false;//Probleme dans la reponse de l'IA.
+					if(choose[i] && (i<3 && toolsUsed[i])) correctChoose = false;//Probleme dans la reponse de l'IA.
 				}
 			}
 		}
@@ -95,11 +95,12 @@ public class Tools extends ToolStruct{
 				if(i < 3) {
 					toolsUsed[i] = true; //L'outils est maintenant utilise.
 					Printer.getPrinter().println(useToolsToString(player.getName(),tools[i]));
+					sum += tools[i];//La valeur bonus des outils
 				}else {
 					Printer.getPrinter().println("Le joueur "+player.getName()+" a utiliser un outils unique de niveau "+tools[i]+".");
+					sum += tools[i];//La valeur bonus des outils
 					subUniqueTool(i);
 				}
-				sum += tools[i];//La valeur bonus des outils
 			}
 		}
 
