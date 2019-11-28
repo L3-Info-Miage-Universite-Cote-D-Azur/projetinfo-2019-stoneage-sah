@@ -24,10 +24,18 @@ public class ZoneCarteCivilisation extends ZoneOnePlayer{
 		this.numberRessourceNeed = numberRessourceNeed;
 		this.dice = dice;
 	}
+	
+	public ZoneCarteCivilisation (ZoneCarteCivilisation z)
+	{
+		super(String.valueOf(z.getName()), z.getAvailableSpace());
+		this.numberRessourceNeed = z.getNumberRessourceNeed();
+		this.dice = new Dice(z.getDice());
+	}
 
 	/* GETTERS */
 	public int getNumberRessourceNeed() {return this.numberRessourceNeed;}
 	public CarteCivilisation getCard(){return this.carteCivilisation;}
+	public Dice getDice(){return this.dice;}
 
 	/* SETTERS */
 	public void setCard(CarteCivilisation cv){this.carteCivilisation = cv;}
@@ -38,12 +46,8 @@ public class ZoneCarteCivilisation extends ZoneOnePlayer{
 	 * playerRecoveryFigurine rend les figurines au joueur dans la zone. 
 	 * @param player : le joueur concerne.
 	 * @param inventory : l'inventaire du joueur concerne.
-	 * @return nombre qui represente les action suplementaire a effectuer 
-	 * (pour les carte ou tout les joueur sont affecter ou piocher une carte
-	 *  supplementaire pour la donner au joueur)
-	 * 
 	 */ 
-	public int playerRecoveryFigurine(Player player, Inventory inventory) {
+	public void playerRecoveryFigurine(Player player, Inventory inventory) {
 		//recuperation des figurines
 		int number = super.howManyPlayerFigurine(player);
 
@@ -55,45 +59,30 @@ public class ZoneCarteCivilisation extends ZoneOnePlayer{
 
 			if(!pickCard) {//Le joueur ne prend pas la carte
 				Printer.getPrinter().println("Le joueur "+player.getName()+" ne prend pas la carte de "+this.getName()+".");
-				return 0;
+				return;
 			}
-			
-			//Ajout de la carte a l'inventaire + suppression de la carte de la zone
+
 			inventory.addCardCivilisation(carteCivilisation);
-			CarteCivilisation copieLinkCard = carteCivilisation;
-			carteCivilisation=null; //suppresion de la carte civilisation de la zone.
 			Printer.getPrinter().println("Le joueur "+player.getName()+" obtient la carte civilisation de "+this.getName()+".");
 
-			switch(copieLinkCard.getTypeUpPart()){
+			switch(carteCivilisation.getTypeUpPart()){
 			case 0 : //cas ou c'est un gain de ressource direct
-				int total = ressourceEffect(copieLinkCard);
-				inventory.addRessource(copieLinkCard.getRessource(),total);
+				int total = ressourceEffect(carteCivilisation);
+				inventory.addRessource(carteCivilisation.getRessource(),total);
 				Printer.getPrinter().println("Le joueur "+player.getName()+" obtient "+total
-						+" "+copieLinkCard.getRessource().toString()+ " (carte).");
-				return 0;
+						+" "+carteCivilisation.getRessource().toString()+ " (carte).");
+				break;
 
 			case 1 : //cas ou le joueur gagne des point de victoire
-				player.addScore(copieLinkCard.getNumberEffect());
-				Printer.getPrinter().println("Le joueur "+player.getName()+" obtient "+copieLinkCard.getNumberEffect()+" point de victoire (carte).");
-				return 0;
-				
-			case 2 : //cas ou le joueur pioche une carte civilisation suplementaire
-				//aucun traitement suplementaire necesaire sur le joueur en question les action seront fait par la classe qui traite le retour
-				return 1;
-				
-			case 3 : //cas ou le joueur pioche les carte ou tout le monde dois selectionner son bonnus
-				//aucune action suplementaire necesaire sur le joueur les action seront fait par la classe qui traite le retour
-				return 2;
-				
-			case 4 : //cas ou le joueur peut utiliser la carte au moment voulue
-				return 0;
-				
+				player.addScore(carteCivilisation.getNumberEffect());
+				Printer.getPrinter().println("Le joueur "+player.getName()+" obtient "+carteCivilisation.getNumberEffect()+" point de victoire (carte).");
+				break;
+
 			default :
 				Printer.getPrinter().println("Erreur Carte Civilisation");
 			}
 			carteCivilisation=null; //suppresion de la carte civilisation de la zone.
 		}
-		return 0;
 	}
 
 	/**
@@ -146,7 +135,7 @@ public class ZoneCarteCivilisation extends ZoneOnePlayer{
 			sum=0;
 			verif = true;
 			//On demande a l'IA
-			int[] choix = player.getIA().pickCard(ressourceRequire);//AJOUTER AU FUTUR LA CARTE CONCERNEE
+			int[] choix = player.getIA().pickCard(inventory.getCopyRessources(), ressourceRequire);//AJOUTER AU FUTUR LA CARTE CONCERNEE
 
 			for(int i = 0; i<4 && verif; i++) {
 				if(choix[i] > inventory.getRessource(Ressource.indexToRessource(i)) || choix[i] < 0) 
