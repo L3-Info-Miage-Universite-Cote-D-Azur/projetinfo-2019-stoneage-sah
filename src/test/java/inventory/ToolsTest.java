@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import player.Player;
-import game.Ressource;
 
 
 public class ToolsTest {
@@ -78,7 +77,43 @@ public class ToolsTest {
 	}
 	
 	@Test
-	public void useTools() {
-				
+	public void testUseTools() {
+		Inventory inv = new Inventory();
+    	Playertest = new Player("test", inv.getInventoryIA());
+    	Tools tools = inv.getTools();
+    	
+    	//Cas avec 4 outils
+    	for(int i = 0; i < 4; i++){
+    	     tools.incrementTool();
+        }
+    	
+    	int res = tools.useTools(Playertest, 0, null);
+    	assertEquals(true, res >= 0);
+    	assertEquals(true, res <= 4);
+    	
+    	//Cas avec aucun outils
+    	inv = new Inventory();
+    	tools = inv.getTools();
+    	Playertest = new Player("test", inv.getInventoryIA());
+    	
+    	res = tools.useTools(Playertest, 0, null);
+    	assertEquals(true, res == 0);
+    	for(int i = 0; i<3; i++) {
+    		assertEquals(true, tools.getToolsUsed()[i] == false);  		
+    	}
+    	
+    	//cas avec un outils
+    	inv = new Inventory();
+    	tools = inv.getTools();
+    	Playertest = new Player("test", inv.getInventoryIA());
+    	tools.incrementTool();
+    	
+    	res = tools.useTools(Playertest, 0, null);
+    	assertEquals(true, res>= 0);
+    	assertEquals(true, res <= 1);
+    	assertEquals(true, tools.getToolsUsed()[0] == false || tools.getToolsUsed()[0] == true);
+    	for(int i = 1; i<3; i++) {
+    		assertEquals(true, tools.getToolsUsed()[i] == false);  		
+    	}
 	}
 }
