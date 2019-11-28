@@ -42,13 +42,20 @@ public class Game {
 
 			Printer.getPrinter().println("\n\n--- PHASE DE RECOLTE ---");
 			harvestPhase();
-
+			
+			gameZones.organizeCard();
+			
+			if (gameZones.getCardManager().isEmpty()) {
+				Printer.getPrinter().println("\n--- PARTIE TERMINEE : Il n'y a plus de carte civilisation ---");
+				break;
+			}
+			//on deplace ici l'organisation des cartes pour arreter le jeu s'il n'y a plus de cartes civilisations avant de nourrir, d'apres les regles
 			Printer.getPrinter().println("\n\n--- PHASE DE NOURRISAGE ---");
 			feedPhase();
 
 			gamePlayers.resetTools();
 			//update carte civilisation (si necessaire)
-			gameZones.organizeCard();
+			
 			nbTour+=1;
 		}
 		Printer.getPrinter().println("\n=========================\nLa partie est fini\n=========================");
