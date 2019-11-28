@@ -1,5 +1,6 @@
 package game.zone;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import game.Ressource;
 import game.Settings;
@@ -15,13 +16,20 @@ import printer.Printer;
 /**
  * Cette class defini une zone pour un paquet de Settings.NB_BUILDING_CARD_IN_DECK(7) batiments
  */
-public class ZoneBuilding extends ZoneOnePlayer{
-
+public class ZoneBuilding extends ZoneOnePlayer
+{
 	private ArrayList<Building> buildings;
+	
 	/* CONSTRUCTOR */
 	public ZoneBuilding (String name){
 		super(name,1);
 		this.buildings = Settings.getRandomDeck();
+	}
+	
+	public ZoneBuilding (ZoneBuilding z)
+	{
+		super(String.valueOf(z.getName()), z.getAvailableSpace());
+		Collections.copy(z.getBuildings(), this.buildings);
 	}
 
 	/**
@@ -70,10 +78,8 @@ public class ZoneBuilding extends ZoneOnePlayer{
 	 * Gere le systeme pour retirer la figurine de la zone
 	 * @param player : le joueur concerne.
 	 * @param inventory inventaire du joueur concerner
-	 * @return nombre qui represente les action suplementaire a effectuer,
-	 * n'a pas d'importance pour cette classe
 	 */
-	public int playerRecoveryFigurine(Player player,Inventory inventory){
+	public void playerRecoveryFigurine(Player player,Inventory inventory){
 		int number = super.howManyPlayerFigurine(player);
 
 		if (number > 0){
@@ -116,7 +122,6 @@ public class ZoneBuilding extends ZoneOnePlayer{
 			}
 			super.removeFigurine(player);
 		}
-		return 0;
 
 	}
 
@@ -126,4 +131,16 @@ public class ZoneBuilding extends ZoneOnePlayer{
 	 * @return true s'il est vide, false sinon
 	 */
 	public boolean isDeckEmpty () {return this.buildings.isEmpty();}
+	
+	/**
+	 * Retourne le building en haut de la liste
+	 * @return Building type
+	 */
+	public Building getBuilding () {return this.buildings.get(0);}
+	
+	/**
+	 * Retourne les batiments
+	 * @return ArrayList type
+	 */
+	public ArrayList<Building> getBuildings () {return this.buildings;}
 }
