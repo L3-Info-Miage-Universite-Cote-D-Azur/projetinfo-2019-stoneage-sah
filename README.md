@@ -8,6 +8,8 @@ Nom/prénom des membres du groupe:
 -Theoricien : Jerome Maxime  
 -AnthonyS06 : Santi Anthony  
   
+## Diagramme en cour:
+![](https://github.com/L3-Info-Miage-Universite-Cote-D-Azur/projetinfo-2019-stoneage-sah/blob/master/StoneAgeUML.png)
 ## Première Itération:        
 -1 joueur.      
 -1 figurine.    
