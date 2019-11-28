@@ -126,11 +126,11 @@ public class RandomIA extends IA {
 
 		//cas ou il n'y a pas d'outil a utiliser
 		if (usableTools == 0) {
-			return new boolean[inventoryIA.getTools().getTools().length];
+			return new boolean[toolsToUse.length];
 		}
 
 		int numberTools = Settings.RAND.nextInt(usableTools+1);
-		boolean[] res = new boolean[inventoryIA.getTools().getTools().length];
+		boolean[] res = new boolean[toolsToUse.length];
 
 		for(int i = numberTools; 0 < i; i --){
 			boolean hasChoose = false;
