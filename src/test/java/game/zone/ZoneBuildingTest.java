@@ -1,19 +1,20 @@
 package game.zone;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import client.RandomIA;
-import game.Inventory;
-import game.Player;
 import game.Ressource;
 import game.Settings;
-import game.building.*;
-import game.zone.ZoneBuilding;
+import game.building.Building;
+import game.building.BuildingRessourceChoosed;
+import game.building.BuildingRessourceImposed;
+import game.building.BuildingRessourceNotImposed;
+import inventory.Inventory;
+import player.Player;
 
 public class ZoneBuildingTest
 {
@@ -23,11 +24,11 @@ public class ZoneBuildingTest
 	public void testPlayerRecoveryFigurine ()
 	{
 		reset();
-		Player p = new Player(Settings.getRandomName(), new RandomIA());
 		Inventory inventory = new Inventory();
+		Player p = new Player(Settings.getRandomName(),inventory.getInventoryIA());
 		inventory.addRessource(Ressource.WOOD, 2);
 		inventory.addRessource(Ressource.CLAY, 1);
-		this.zb = new ZoneBuilding();
+		this.zb = new ZoneBuilding("testZone");
 		this.zb.placeFigurine(1, p);
 		
 		// Test d'initialisation

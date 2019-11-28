@@ -4,7 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import game.Player;
+import player.Player;
+import game.Dice;
 import game.Ressource;
 
 public class ZoneTest {
@@ -12,7 +13,7 @@ public class ZoneTest {
 	
 	@Test
 	public void testAbleToChooseZone() {
-		zonetest = new ZoneRessource("test", Ressource.WOOD, 7);
+		zonetest = new ZoneRessource("test", Ressource.WOOD, 7, new Dice());
 		Player playertest = new Player("testplayer",null);
 		
 		//Cas ou le joueur n'as jamais rien placer.

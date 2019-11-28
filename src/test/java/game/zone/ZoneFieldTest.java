@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import game.Inventory;
-import game.Player;
 import game.Ressource;
+import inventory.Inventory;
+import player.Player;
 
 public class ZoneFieldTest {
 	ZoneField zoneField;
@@ -14,7 +14,7 @@ public class ZoneFieldTest {
 	@Test
 	public void playerRecoveryFigurine() {
 		//player 1
-		Player player = new Player(null, null);
+		Player player = new Player(null,null);
 		Inventory inventory = new Inventory();
 		
 		//player 2

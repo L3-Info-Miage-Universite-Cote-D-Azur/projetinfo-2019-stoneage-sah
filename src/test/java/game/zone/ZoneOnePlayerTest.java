@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import game.Player;
+import player.Player;
 
 public class ZoneOnePlayerTest {
 	
@@ -13,8 +13,8 @@ public class ZoneOnePlayerTest {
 	
 	@Test
 	public void howManyPlayerFigurineTest() {
-		Player player1 = new Player(null, null);
-		Player player2 = new Player(null, null);
+		Player player1 = new Player(null,null);
+		Player player2 = new Player(null,null);
 		int numberFigurine = player1.getCurrentFigurine();
 		zoneOnePlayer = new ZoneHut(null);
 		int minimalFigurine=zoneOnePlayer.getMinimalFigurineRequierement();
@@ -36,7 +36,7 @@ public class ZoneOnePlayerTest {
 	public void placeFigurineTest ()
 	{
 
-		Player player = new Player(null, null);
+		Player player = new Player(null,null);
 		int numberFigurine = player.getCurrentFigurine();
 		zoneOnePlayer = new ZoneHut(null);
 		// Test d'initialisation
@@ -53,8 +53,8 @@ public class ZoneOnePlayerTest {
 	
 	@Test
 	public void removeFigurineTest() {
-		Player player1 = new Player(null, null);
-		Player player2 = new Player(null, null);
+		Player player1 = new Player(null,null);
+		Player player2 = new Player(null,null);
 		int numberFigurine = player1.getCurrentFigurine();
 		zoneOnePlayer = new ZoneHut(null);
 		int minimalFigurine=zoneOnePlayer.getMinimalFigurineRequierement();

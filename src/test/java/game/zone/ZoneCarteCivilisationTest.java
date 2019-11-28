@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import game.CarteCivilisation;
-import game.Inventory;
-import game.Player;
+import game.Dice;
 import game.Ressource;
-import game.Settings;
+import inventory.Inventory;
+import player.Player;
 
 
 public class ZoneCarteCivilisationTest {
@@ -21,9 +21,9 @@ public class ZoneCarteCivilisationTest {
 
 	@Test
 	public void testPlayerRecoveryFigurine() {
-		zonetest = new ZoneCarteCivilisation("test", 4);
-		playertest = new Player("test", Settings.getRandomIA());
+		zonetest = new ZoneCarteCivilisation("test", 4, new Dice());
 		Inventorytest = new Inventory();
+		playertest = new Player("test",null);
 
 		//La carte donne des ressources fixe.
 		cartetest = new CarteCivilisation(0,0,0,Ressource.WOOD,4);

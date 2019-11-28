@@ -4,9 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import game.Inventory;
-import game.Player;
+import game.Dice;
 import game.Ressource;
+import inventory.Inventory;
+import player.Player;
 
 public class ZoneRessourceTest {
 	Inventory inventoryTest;
@@ -17,12 +18,12 @@ public class ZoneRessourceTest {
 	
 	@Test
 	public void testPlayerRecoveryFigurine() {
-		zonetest = new ZoneRessource("test", Ressource.WOOD, 7);
+		zonetest = new ZoneRessource("test", Ressource.WOOD, 7, new Dice());
 		inventoryTest = new Inventory();
 		inventoryTest2 = new Inventory();
 		
-		playertest = new Player("test", null);
-		playertest2 = new Player("test2", null);
+		playertest = new Player("test",null);
+		playertest2 = new Player("test2",null);
 		
 		assertEquals(true, inventoryTest.getRessource(Ressource.WOOD) == 0 );
 		

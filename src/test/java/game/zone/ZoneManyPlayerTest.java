@@ -4,7 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import game.Player;
+import player.Player;
+import game.Dice;
 import game.Ressource;
 
 public class ZoneManyPlayerTest {
@@ -14,7 +15,7 @@ public class ZoneManyPlayerTest {
 	
 	@Test
 	public void testPlaceFigurine() {
-		zonetest = new ZoneRessource("test", Ressource.WOOD, 7);
+		zonetest = new ZoneRessource("test", Ressource.WOOD, 7,new Dice());
 		playertest = new Player("testplayer",null);
 		
 		//Cas ou le joueur n'a pas place
@@ -27,7 +28,7 @@ public class ZoneManyPlayerTest {
 		assertEquals(true, zonetest.getAvailableSpace() == 4);
 		
 		//Un autre joueur place.
-		playertest2 = new Player("testplayer2", null);
+		playertest2 = new Player("testplayer2",null);
 		zonetest.placeFigurine(4, playertest2);
 		assertEquals(true, zonetest.howManyPlayerFigurine(playertest) == 3);
 		assertEquals(true, zonetest.howManyPlayerFigurine(playertest2) == 4);
@@ -35,7 +36,7 @@ public class ZoneManyPlayerTest {
 		
 		
 		//Cas ou un joueur peut placer plusieur fois.
-		zonetest = new ZoneHunt("testhunt", Ressource.FOOD, 40);
+		zonetest = new ZoneHunt("testhunt", Ressource.FOOD, 40, new Dice());
 		//Normalement la place correspond a : NBPLAYER * NBMAXFIGURES
 		playertest = new Player("testplayer",null);
 		
@@ -49,7 +50,7 @@ public class ZoneManyPlayerTest {
 	
 	@Test
 	public void testHowManyPlayerFigurine() {
-		zonetest = new ZoneRessource("test", Ressource.WOOD, 7);
+		zonetest = new ZoneRessource("test", Ressource.WOOD, 7, new Dice());
 		playertest = new Player("testplayer",null);
 		
 		//Cas ou le joueur n'a pas place
@@ -60,7 +61,7 @@ public class ZoneManyPlayerTest {
 		assertEquals(true, zonetest.howManyPlayerFigurine(playertest) == 3);
 		
 		//Un autre joueur place.
-		playertest2 = new Player("testplayer2", null);
+		playertest2 = new Player("testplayer2",null);
 		zonetest.placeFigurine(4, playertest2);
 		assertEquals(true, zonetest.howManyPlayerFigurine(playertest) == 3);
 		assertEquals(true, zonetest.howManyPlayerFigurine(playertest2) == 4);
@@ -73,7 +74,7 @@ public class ZoneManyPlayerTest {
 		
 		
 		//Cas ou un joueur peut placer plusieur fois.
-		zonetest = new ZoneHunt("testhunt", Ressource.FOOD, 40);
+		zonetest = new ZoneHunt("testhunt", Ressource.FOOD, 40, new Dice());
 		//Normalement la place correspond a : NBPLAYER * NBMAXFIGURES
 		playertest = new Player("testplayer",null);
 		
@@ -89,7 +90,7 @@ public class ZoneManyPlayerTest {
 	
 	@Test
 	public void testRemoveFigurine() {
-		zonetest = new ZoneRessource("test", Ressource.WOOD, 7);
+		zonetest = new ZoneRessource("test", Ressource.WOOD, 7, new Dice());
 		playertest = new Player("testplayer",null);
 		
 		//Cas ou un joueur place puis retire.
@@ -99,7 +100,7 @@ public class ZoneManyPlayerTest {
 		assertEquals(true, zonetest.getAvailableSpace() == 7);
 		
 		//Cas ou deux joueur place et retire.
-		playertest2 = new Player("testplayer2", null);
+		playertest2 = new Player("testplayer2",null);
 		zonetest.placeFigurine(5, playertest);
 		zonetest.placeFigurine(2, playertest2);
 		

@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import game.Player;
+import player.Player;
 
 public class ZoneHutTest {
 	
@@ -12,7 +12,7 @@ public class ZoneHutTest {
 	
 	@Test
 	public void playerRecoveryFigurineTest() {
-		Player player = new Player(null, null);
+		Player player = new Player(null,null);
 		Player player2 = new Player(null,null);
 		int initFigurine = player.getCurrentFigurine();
 		zoneHut = new ZoneHut(null);
@@ -28,7 +28,7 @@ public class ZoneHutTest {
 		
 		
 		//reinitialisation du joueur pour un test jusqu'au maximum
-		player = new Player(null, null);
+		player = new Player(null,null);
 		for(int i=1;i<9;i++) {
 			zoneHut.placeFigurine(zoneHut.getMinimalFigurineRequierement(), player);
 			zoneHut.playerRecoveryFigurine(player,null);
