@@ -54,7 +54,7 @@ public class NoobIA extends IA
         		// SI LA FERME EST DISPO
         		if (zoneAvailableSpace[5] == 1)
                 {
-                    this.currentZone = 5;
+        			if (this.rand.nextInt(2) == 1) this.currentZone = 5;
                 }
         		// SINON ON CHECK TOUTES LES CARTES CIVILISATION
         		else
@@ -64,103 +64,114 @@ public class NoobIA extends IA
         				// SI ELLE OFFRE 1 MARQUEUR NOURRITURE
         				if (cV[i].getCard().getRessource() == Ressource.FIELD)
         				{
-        					this.currentZone = i+8;
+        					if (this.rand.nextInt(2) == 1) this.currentZone = i+8;
         				}
         			}
         			// SINON ON VA DANS LA CHASSE
         			if (this.currentZone == -1) 
         				this.currentZone = 4;
         		}
-        	}
-        	// SI ON A ASSEZ DE NOURRITURE, ON SE CONCENTRE D'ABORD SUR LE VILLAGE
-        	else 
-        	{
-        		if (zoneAvailableSpace[5] >= 1)
-        		{
-        			this.currentZone = 5;
-        		}
-        		else if (zoneAvailableSpace[6] >= 1)
-        		{
-        			this.currentZone = 6;
-        		}
-        		else if (zoneAvailableSpace[7] >= 1)
-        		{
-        			this.currentZone = 7;
-        		}
-        		
-        		// SI LE VILLAGE EST PLEIN, ON SE CONCENTRE SUR LE GAIN DE POINTS, ET SUR LES RESSOURCES NECESSAIRES
-        		else
-        		{
-        			// CHECK DES CARTES BATIMENT
-        			for (int i = 0; i < buildings.length; i++)
-        			{
-        				// SI Y'A DE LA PLACE
-        				if (zoneAvailableSpace[i] == 1)
-        				{
-            				Building tmpBuilding = buildings[i].getBuilding();
-            				// RESSOURCE IMPOSED
-            				if (tmpBuilding.getType() == 0)
-                			{
-            					// SI C'EST UN BUILDING AVEC RESSOURCE IMPOSEES ET QU'ON A LES RESSOURCES
-            					if (((BuildingRessourceImposed) tmpBuilding).checkNeededRessource(this.inventoryIA.getCopyRessources()))
-            					{
-            						this.currentZone = i + 12;
-            					}
-                			}
-            				else if (tmpBuilding.getType() == 1)
-            				{
-            					// SI C'EST UN BUILDING AVEC RESSOURCE NON IMPOSEES ET QU'ON A LES RESSOURCES
-            					if (((BuildingRessourceNotImposed) tmpBuilding).checkNeededRessource())
-            					{
-            						this.currentZone = i + 12;
-            					}
-            				}
-            				else if (tmpBuilding.getType() == 2)
-            				{
-            					// SI C'EST UN BUILDING AVEC RESSOURCE A CHOIX ET QU'ON A LES RESSOURCES
-            					if (((BuildingRessourceChoosed) tmpBuilding).checkNeededRessource())
-            					{
-            						this.currentZone = i + 12;
-            					}
-            				}
-            				// AUCUN AUTRE BATIMENT POSSIBLE
-            				else {throw new RuntimeException("Building type not expected");}
-        				}
-        			}
-        			
-        			if (this.currentZone == -1)
-        			{
-        				// REGARDER SI ON PEUT PRENDRE UNE CARTE CIVILISATION
-        				for (int i = 0; i < cV.length; i++)
-        				{
-        					// SI ON A ASSEZ DE RESSOURCE
-        					if (IntStream.of(this.inventoryIA.getCopyRessources()).sum() >= 4 - i && zoneAvailableSpace[i] == 1)
-        					{
-        						this.currentZone = i + 8;
-        						break;
-        					}
-        				}
-        			}
-        			
-        			// IL NOUS RESTE LES RESSOURCES
-        			if (this.currentZone == -1)
-        			{
-        				for (int i = 0; i < 3; i++)
-        				{
-        					if (zoneAvailableSpace[i] >= 1)
-        					{
-        						this.currentZone = i;
-        						break;
-        					}
-        				}
-        			}
-        			
-        			// A LA FIN, IL RESTE LA CHASSE
-        			if (this.currentZone == -1)
-        				this.currentZone = 4;
-        		}
+        		// SINON ON VA DANS LA CHASSE
+    			if (this.currentZone == -1) 
+    				this.currentZone = 4;
         	}
         }
+        // SI ON A ASSEZ DE NOURRITURE, ON SE CONCENTRE D'ABORD SUR LE VILLAGE
+        else 
+       	{
+       		if (zoneAvailableSpace[5] >= 1)
+       		{
+       			if (this.rand.nextInt(3) == 1) this.currentZone = 5;
+       		}
+       		else if (zoneAvailableSpace[6] >= 1)
+       		{
+       			if (this.rand.nextInt(3) == 1) this.currentZone = 6;
+       		}
+       		else if (zoneAvailableSpace[7] >= 1)
+       		{
+       			if (this.rand.nextInt(3) == 1) this.currentZone = 7;
+       		}
+       		
+       		// SI LE VILLAGE EST PLEIN, ON SE CONCENTRE SUR LE GAIN DE POINTS, ET SUR LES RESSOURCES NECESSAIRES
+       		else
+       		{
+       			// CHECK DES CARTES BATIMENT
+       			for (int i = 0; i < buildings.length; i++)
+       			{
+       				// SI Y'A DE LA PLACE
+       				if (zoneAvailableSpace[i] == 1)
+       				{
+           				Building tmpBuilding = buildings[i].getBuilding();
+           				// RESSOURCE IMPOSED
+           				if (tmpBuilding.getType() == 0)
+               			{
+           					// SI C'EST UN BUILDING AVEC RESSOURCE IMPOSEES ET QU'ON A LES RESSOURCES
+           					if (((BuildingRessourceImposed) tmpBuilding).checkNeededRessource(this.inventoryIA.getCopyRessources()))
+           					{
+           						if (this.rand.nextInt(2) == 1) this.currentZone = i + 12;
+           					}
+               			}
+           				else if (tmpBuilding.getType() == 1)
+           				{
+           					// SI C'EST UN BUILDING AVEC RESSOURCE NON IMPOSEES ET QU'ON A LES RESSOURCES
+           					if (((BuildingRessourceNotImposed) tmpBuilding).checkNeededRessource())
+           					{
+           						if (this.rand.nextInt(2) == 1) this.currentZone = i + 12;
+           					}
+           				}
+           				else if (tmpBuilding.getType() == 2)
+           				{
+           					// SI C'EST UN BUILDING AVEC RESSOURCE A CHOIX ET QU'ON A LES RESSOURCES
+           					if (((BuildingRessourceChoosed) tmpBuilding).checkNeededRessource())
+           					{
+           						if (this.rand.nextInt(2) == 1) this.currentZone = i + 12;
+           					}
+           				}
+           				// AUCUN AUTRE BATIMENT POSSIBLE
+           				else {throw new RuntimeException("Building type not expected");}
+       				}
+       			}
+       			
+        		if (this.currentZone == -1)
+        		{
+        			// REGARDER SI ON PEUT PRENDRE UNE CARTE CIVILISATION
+        			for (int i = 0; i < cV.length; i++)
+        			{
+        				// SI ON A ASSEZ DE RESSOURCE
+        				if (IntStream.of(this.inventoryIA.getCopyRessources()).sum() >= 4 - i && zoneAvailableSpace[i] == 1)
+        				{
+        					if (this.rand.nextInt(2) == 1) this.currentZone = i + 8;
+        					break;
+        				}
+        			}
+        		}
+        			
+        		// IL NOUS RESTE LES RESSOURCES
+        		if (this.currentZone == -1)
+        		{
+        			for (int i = 0; i < 3; i++)
+        			{
+        				if (zoneAvailableSpace[i] >= 1)
+        				{
+        					if (this.rand.nextInt(2) == 1) this.currentZone = i;
+        					break;
+        				}
+        			}
+        		}
+        		
+        		// A LA FIN, IL RESTE LA CHASSE
+        		if (this.currentZone == -1)
+        			this.currentZone = 4;
+        	}
+       		// SINON ON VA DANS LA CHASSE
+			if (this.currentZone == -1) 
+				this.currentZone = 4;
+        }
+        // SINON ON VA DANS LA CHASSE
+     	if (this.currentZone == -1) 
+     		this.currentZone = 4;
+     	
+     	System.out.println(this.currentZone);
         return this.currentZone;
     }
 
@@ -175,6 +186,8 @@ public class NoobIA extends IA
         if (this.currentZone == 4)
         {
         	int nbFoodRequired = ((this.inventoryIA.getRessource(Ressource.FIELD) + this.inventoryIA.getRessource(Ressource.FOOD)) - this.playerIA.getMaxFigurine());
+        	if (((2 * nbFoodRequired) / 3) % max < min)
+        		return min;
         	return ((2 * nbFoodRequired) / 3) % max;
         }
         // SINON IL RENVOIE UN NOMBRE ALEATOIRE
