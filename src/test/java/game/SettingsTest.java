@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
+import game.building.*;
 
 public class SettingsTest {
 	@Test
@@ -21,15 +22,6 @@ public class SettingsTest {
 			assertEquals(true,liste.contains(nom));
 		}
 		assertEquals(0,Settings.PLAYER_NAME.size());
-	}
-	@Test
-	// Test si l'IA retournee fait bien partie de la liste aleatoire, que la liste fait bien un de taille et ne renvoie pas rien.
-	public void testGetRandomIA(){	
-
-		assertEquals(true,Settings.IA_list[0] == Settings.getRandomIA());
-		assertEquals(true,Settings.IA_list.length == 1);
-		assertEquals(false,null == Settings.getRandomIA());
-			
 	}
 	
 	@Test
