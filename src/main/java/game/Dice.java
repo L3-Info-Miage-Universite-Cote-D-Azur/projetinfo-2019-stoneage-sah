@@ -15,7 +15,7 @@ public class Dice
      * @param number: le nombre de fois qu'il faut lancer le de. 
      * @return le tableau d'entier contenant les resultats du lancer de de number fois. 
      */ 
-    public static int[] rollDice(Random r, int number)
+    public int[] rollDice(Random r, int number)
     {
         int[] tab = new int[number];
 
