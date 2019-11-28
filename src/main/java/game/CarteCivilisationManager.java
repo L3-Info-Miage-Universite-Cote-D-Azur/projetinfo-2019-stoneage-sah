@@ -2,16 +2,19 @@ package game;
 
 import java.util.ArrayList;
 
+import game.zone.ZoneCarteCivilisation;
+
 /**
  * CarteCivilisationManager s'occupe de tout ce qui concerne les cartes civilisation sur le plateau de jeu. 
  * @author Mentra20
  *
  */
 public class CarteCivilisationManager {
-	
+
+	/* FIELDS */
 	private ZoneCarteCivilisation[] cardZone;
 	private ArrayList<CarteCivilisation> deck;
-	
+
 	/* CONSTRUCTOR */
 	public CarteCivilisationManager(ZoneCarteCivilisation[] cardZone) {
 		this.cardZone = cardZone;
@@ -19,19 +22,20 @@ public class CarteCivilisationManager {
 		initCardInZone();
 	}
 	
+	/* GETTERS */
 	public ArrayList<CarteCivilisation> getDeck() {
 		return deck;
 	}
-	
+
 	/**
 	 * initCardInZone initialise les cartes dans les ZoneCarteCivilisation.
 	 */
 	private void initCardInZone(){
-        for(int i=0; i < cardZone.length;i++){ 
-        	cardZone[i].setCard(getRandomCivilisationCard()); 
-        }
-    }
-	
+		for(int i=0; i < cardZone.length;i++){ 
+			cardZone[i].setCard(getRandomCivilisationCard()); 
+		}
+	}
+
 	/**
 	 * InitDeck initialise le deck de cartes civilisations.
 	 */
@@ -48,7 +52,7 @@ public class CarteCivilisationManager {
 		deck.add(new CarteCivilisation(0, 7, 0, Ressource.FOOD, 1));
 		deck.add(new CarteCivilisation(0, 1, 0, Ressource.GOLD, 0));
 		//deck.add(new CarteCivilisation(0, 1, 0, Ressource.TOOL, 1)); POUR PLUS TARD. 
-		
+
 		//Cartes jaunes : 
 		deck.add(new CarteCivilisation(0, 10, 1, Ressource.FOOD, 4));
 		deck.add(new CarteCivilisation(0, 10, 2, Ressource.FOOD, 2));
@@ -62,20 +66,20 @@ public class CarteCivilisationManager {
 		deck.add(new CarteCivilisation(0, 11, 1, Ressource.STONE, 1));
 		deck.add(new CarteCivilisation(0, 11, 1, Ressource.GOLD, 1));
 	}
-	
+
 	/**
 	 * getRandomCivilisationCard renvoie une carte civilisation au hasard du deck, et la retire du deck. 
 	 * @return CarteCivilisation : la carte tiree au hasard. 
 	 */
 	public CarteCivilisation getRandomCivilisationCard() {
-		if(deck.size()==0) return null;
+		if(deck.size() == 0) return null;
 		int index = Settings.RAND.nextInt(deck.size());
 		CarteCivilisation card = deck.get(index);
-		
+
 		deck.remove(index);
 		return card; 
 	}
-	
+
 	/**
 	 * organizeCard replace les cartes comme il faut a la fin du tour.
 	 */
@@ -84,11 +88,11 @@ public class CarteCivilisationManager {
 		while(n >= 0) {
 			if(null == cardZone[n].getCard()) {
 				int m = n;
-				
+
 				while(m >= 0) {
 					if(cardZone[m].getCard() != null) {
 						cardZone[n].setCard(cardZone[m].getCard());
-						
+
 						cardZone[m].setCard(null);
 						break;
 					}
@@ -100,9 +104,9 @@ public class CarteCivilisationManager {
 			}
 			n--;
 		}
-		
+
 	}
-	
+
 	/**
 	 * regarde si il reste des carte en jeu
 	 * @return true -> plus de carte (fin de parti); false -> il reste des carte
