@@ -30,12 +30,12 @@ public class CarteCivilisation{
     1: point de victoire
     2: pioche une carte civilisation supplementaire
     3: tout les joueur selectionne un objet parmi la liste
-    4: carte a action non immediate
+    4: carte outils temporaire.
     Ajout des autres cartes plus tard. 
 	 */
 
 	private final Ressource ressource; //La ressrouce concernee par la carte. 
-	private final int numberEffect; //Le nombre de l'eefet de la carte.
+	private final int numberEffect; //Le nombre de l'effet de la carte.
 
 	/* CONSTRUCTOR */
 	public CarteCivilisation(int typeUp, int typeDown,int numberDownPart, Ressource ressource, int numberEffect){
@@ -108,6 +108,15 @@ public class CarteCivilisation{
 			break;
 		case 1:
 			string += " "+numberEffect+" points de victoire;";
+			break;
+		case 2:
+			string += " pioche de carte civilisation;";
+			break;
+		case 3 :
+			string += " tirage au sort;";
+			break;
+		case 4 : 
+			string += " outils unique de valeur "+numberEffect+";";
 			break;
 		default:
 			break;
