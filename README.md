@@ -48,6 +48,7 @@ fin du jeu a la fin du tour, le joueur est gagnant.
 -Ajouts de (presque) toutes les cartes et bâtiments  
 -Ajout d'une nouvelle IA  
 -Affinement de la boucle de jeu, on assiste à une partie normale avec des conditions de victoires réalistes  
+-Améliorer la maintenabilité du code  
   
 ## Sixième itération:  
 -Ajout des regles en fonction du nombre de joueur  
