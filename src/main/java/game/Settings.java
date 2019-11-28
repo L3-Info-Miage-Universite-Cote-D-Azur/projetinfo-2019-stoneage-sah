@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-import client.IA;
-import client.RandomIA;
-import game.building.*;
+import game.building.Building;
+import game.building.BuildingRessourceChoosed;
+import game.building.BuildingRessourceImposed;
+import game.building.BuildingRessourceNotImposed;
 
 /**
  * La classe represente les parametres immutables du jeu.  
@@ -36,7 +37,7 @@ public class Settings
 	// Nombre d'espace au fabricant d'outils:
 	public static final int MAX_ZONETOOL_SPACE = 1;
 
-	
+
 	// Toutes les cartes tuiles batiment du jeu
 	public static ArrayList<Building> BUILDINGS = new ArrayList<Building>(Arrays.asList(
 			new BuildingRessourceImposed(10, Ressource.WOOD, Ressource.WOOD, Ressource.CLAY),
@@ -68,19 +69,18 @@ public class Settings
 			new BuildingRessourceNotImposed(4, 5),
 			new BuildingRessourceNotImposed(3, 5)
 			));
-	
+
 	// Nombre de pile de cartes tuiles batiments
 	public static final int NB_BUILDING_DECK = 4;
 	// Nombre de cartes dans un deck
 	public static final int NB_BUILDING_CARD_IN_DECK = (int)(Settings.BUILDINGS.size() / Settings.NB_BUILDING_DECK);
-		
+
 	// Liste des noms de joueurs. 
 	public static ArrayList<String> PLAYER_NAME = new ArrayList<String>(Arrays.asList("Robert","Sardoche","Doritos","JeanCharles","Mclito&Carfly","Helico42"));
-    
-	public static IA[] IA_list = new IA[]{new RandomIA()};
-    
+
+
 	/* STATIC METHODS */
-	
+
 	/**
 	 * Renvoie un nom au hasard parmis une liste de nom.
 	 * @return String ret, le nom de la personnage pris au hasard. 
@@ -88,22 +88,14 @@ public class Settings
 	public static String getRandomName ()
 	{
 		int index = Settings.RAND.nextInt(Settings.PLAYER_NAME.size());
-		
+
 		String ret = Settings.PLAYER_NAME.get(index);
 		Settings.PLAYER_NAME.remove(index);
-		
+
 		return ret;
 	}
-	
-	/**
-	 * Renvoie une IA parmi celles presentes alÃƒÂ©atoirement
-	 * @return Renvoie une instance implementant l'interface IA
-	 */
-	public static IA getRandomIA () 
-	{
-		return IA_list[Settings.RAND.nextInt(IA_list.length)];
-	}
-	
+
+
 	/**
 	 * Renvoie un deck de cartes de tuiles batiments
 	 * @return un deck de cartes de tuiles batiments
@@ -120,5 +112,5 @@ public class Settings
 		}
 		return buildings;
 	}
-    
+
 }
