@@ -222,7 +222,7 @@ public class NoobIA extends IA
      * @param ressourceNumber Le tableau du nombre de ressource possedee par le joueur. 
      * @return Booleen : true si le joueur veut utiliser ses ressources pour nourrir, false sinon.
      */
-    public boolean useRessourceToFeed(int[] ressourceNumber)
+    public boolean useRessourceToFeed()
     {
     	// LE JOUEUR PRIVILEGIE LE SCORE
         return true;
@@ -235,10 +235,13 @@ public class NoobIA extends IA
      * @param numberRessourceRequire : le nombre de ressource pour l'achat de la carte. 
      * @return res : tableau des ressources donnes pour la carte. 
      */
-    public int[] pickCard(int[] ressourceNumber,int numberRessourceRequire) 
+    public int[] pickCard(int numberRessourceRequire) 
     {    
         int[] res = new int[] {0,0,0,0};
-        
+        int[] ressourceNumber = new int[4];
+        for(int i = 0; i<4; i++) {
+			ressourceNumber[i] = inventoryIA.getRessource(Ressource.indexToRessource(i));
+		}
         if(this.rand.nextInt(2) == 1) {
             while(numberRessourceRequire > 0) {
                 int index = 0;
@@ -272,8 +275,10 @@ public class NoobIA extends IA
 	 * @param useTools : le tableau des outils deja utilises et non disponible.
 	 * @return
 	 */
-    public boolean[] pickTools(int[] toolsToUse , boolean[] useTools)
+    public boolean[] pickTools()
     {
+    	int[] toolsToUse = inventoryIA.getTools().getTools();
+    	boolean[] useTools = inventoryIA.getTools().getToolsUsed();
         int usableTools=0;
         for(int i=0;i<toolsToUse.length;i++){
             if(useTools[i] && toolsToUse[i]>0) usableTools+=1;
@@ -299,7 +304,7 @@ public class NoobIA extends IA
     
     /**
 	 * Phase de tirage
-	 * @param listeTirage des dée tirée
+	 * @param listeTirage des dÃ©e tirÃ©e
 	 * @param alreadyChoose si un autre joueur l'a deja choisi ou non
 	 * @return l'index de ce que veut le joueur dans le tirage
 	 */
@@ -314,4 +319,5 @@ public class NoobIA extends IA
 	}
     
     public String toString () {return "Brainlet";}
+
 }
