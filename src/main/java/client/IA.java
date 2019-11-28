@@ -25,7 +25,7 @@ public abstract class IA{
 	 * @param zoneName le tableau des noms des zones.
 	 * @return l'indice de la zone
 	 */
-	public abstract int chooseZone(int[] zoneAvailableSpace,String[] zoneName);
+	public abstract int chooseZone(int[] zoneAvailableSpace,String[] zoneName, Zone[] z);
 
 	/**
 	 * chooseNumber retourne le nombre de figurines choisie par l'IA. 
