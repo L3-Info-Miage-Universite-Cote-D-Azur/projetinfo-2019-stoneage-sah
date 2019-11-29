@@ -7,7 +7,11 @@ public class Program {
 	 */
 
 	public static void main(String[] args) {
-		//System.setProperty( "file.encoding", "UTF-8" );
+		try {
+    			System.setOut(new PrintStream(System.out, true, "UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+    			e.printStackTrace();
+		} 
 		
 		//si on veut que l'affichage soit active ou non
 		//true : affichage / false : pas d'affichage
