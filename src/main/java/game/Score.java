@@ -77,17 +77,21 @@ public class Score {
 	 */
 	public void classement(Player[] players) {
 		int[] score = new int[players.length];
+		boolean[] notprint = new boolean[players.length];
+		
 		for(int i = 0; i < players.length; i++) {
 			score[i]=players[i].getScore();
+			notprint[i] = true;
 		}
 		Arrays.sort(score);
 		Printer.getPrinter().println("\nVoici le classement:");
-		int position =1;
+		int position = 1;
 		for(int i = players.length-1; i >= 0; i--) {
-			for(Player player: players) {
-				if(player.getScore() == score[i]) { 
-					Printer.getPrinter().println("Posistion "+position+" : "+player.getName()+" avec un score de : "+player.getScore()); 
-					break; //gerer les egalit� plus tard (le premier dans la liste est prioriter en cas d'egalit�)
+			for(int j = 0; j < players.length; j++) {
+				if(players[j].getScore() == score[i] && notprint[j]) { 
+					notprint[j] = false;
+					Printer.getPrinter().println("Posistion "+position+" : "+players[j].getName()+" avec un score de : "+players[j].getScore()); 
+					break; //gerer les egalite plus tard (le premier dans la liste est prioriter en cas d'egalite)
 				}
 			}
 			position++;
