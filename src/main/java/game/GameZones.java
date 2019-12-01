@@ -26,6 +26,7 @@ public class GameZones {
 	private Zone[] zones;//Tableau des zones.
 	private CarteCivilisationManager cardManager; //gestion carte civilisation
 	int numberPlayer;
+	int numberSpecialZoneOccuped; //utile pour les regle a 2 ou 3 joueur
 	private final Dice dice;
 
 	/* CONSTRUCTOR */
@@ -33,13 +34,17 @@ public class GameZones {
 		this.numberPlayer=numberPlayer;
 		this.dice = dice;
 		initZone();
+		numberSpecialZoneOccuped = 0;
 	}
 
 	/* GETTERS */
 	public CarteCivilisationManager getCardManager() { return cardManager; }
 	public Zone[] getZones() {return zones;}
 
-
+	/**
+	 * remet la valeur numberSpecialZoneOccuped a 0.
+	 */
+	public void resetNumberSpecialZoneOccuped() { numberSpecialZoneOccuped = 0; }
 	/**
 	 * gestion du placement du joueur dans une zone (selection du joueur + placement)
 	 * @param player le joueur qui doit placer les figurine
@@ -51,7 +56,7 @@ public class GameZones {
 		int zoneIndex = zoneChoose(player);//On recupere l'indice de la zone
 		int number = numberChoose(player,zones[zoneIndex]);//On recupere le nombre de figurines
 		zones[zoneIndex].placeFigurine(number,player);//On place les figurines dans la zone. 
-
+		if(zoneIndex>=5 && zoneIndex<=7) numberSpecialZoneOccuped+=1; //si c'est une zone speciale
 		if(player.getCurrentFigurine() == 0) {//Si le joueur n'a plus de figurine
 			return true;
 		}
@@ -95,16 +100,17 @@ public class GameZones {
 	 * Initie le tableau zones. 
 	 */
 	public void initZone(){
-		zones = new Zone[Settings.NB_ZONES];
+		zones = new Zone[Settings.NB_ZONES-(4-numberPlayer)];
 		ZoneCarteCivilisation[] zoneCarteCivilisation = new ZoneCarteCivilisation[4];
 
 		//Les zones du jeu. 
-		zones[0] = new ZoneRessource("Foret",Ressource.WOOD,Settings.MAX_ZONERESSOURCE_SPACE, dice);
-		zones[1] = new ZoneRessource("Glaisiere",Ressource.CLAY,Settings.MAX_ZONERESSOURCE_SPACE, dice);
-		zones[2] = new ZoneRessource("Carriere",Ressource.STONE,Settings.MAX_ZONERESSOURCE_SPACE, dice);
-		zones[3] = new ZoneRessource("Riviere",Ressource.GOLD,Settings.MAX_ZONERESSOURCE_SPACE, dice);
+		zones[0] = new ZoneRessource("Foret",Ressource.WOOD,Settings.MAX_ZONERESSOURCE_SPACE, dice, numberPlayer);
+		zones[1] = new ZoneRessource("Glaisiere",Ressource.CLAY,Settings.MAX_ZONERESSOURCE_SPACE, dice, numberPlayer);
+		zones[2] = new ZoneRessource("Carriere",Ressource.STONE,Settings.MAX_ZONERESSOURCE_SPACE, dice, numberPlayer);
+		zones[3] = new ZoneRessource("Riviere",Ressource.GOLD,Settings.MAX_ZONERESSOURCE_SPACE, dice, numberPlayer);
 		//La zone de chasse a : nombre de joueur x le nombre de figurines maximum d'espace. 
 		zones[4] = new ZoneHunt("Chasse", Ressource.FOOD,numberPlayer * Settings.MAX_FIGURINE, dice);
+		//zone speciale
 		zones[5] = new ZoneField("Champs", Ressource.FIELD);
 		zones[6] = new ZoneHut("Cabane de reproduction");
 		zones[7] = new ZoneTool("Le Fabricant D'outils");
@@ -117,12 +123,9 @@ public class GameZones {
 			zones[8+i]=zcc;
 		}
 		cardManager = new CarteCivilisationManager(zoneCarteCivilisation);
-
-		zones[12] = new ZoneBuilding("Tuile Batiment 1");
-		zones[13] = new ZoneBuilding("Tuile Batiment 2");
-		zones[14] = new ZoneBuilding("Tuile Batiment 3");
-		zones[15] = new ZoneBuilding("Tuile Batiment 4");
-
+		for(int i=0;i<numberPlayer;i++) {
+			zones[i+12] = new ZoneBuilding("Tuile Batiment "+ (i + 1));
+		}
 	}
 
 
@@ -184,16 +187,21 @@ public class GameZones {
 		}
 
 		while(!ok){
-			ZoneBuilding[] buildingsCpy = new ZoneBuilding[4];
+			//copy
+			ZoneBuilding[] buildingsCpy = new ZoneBuilding[numberPlayer];
+			for (int i = 0; i < buildingsCpy.length; i++)
+			{
+				buildingsCpy[i] = new ZoneBuilding((ZoneBuilding)zones[i + 12]);
+			}
 			ZoneCarteCivilisation[] cVCpy = new ZoneCarteCivilisation[4];
 			for (int i = 0; i < 4; i++)
 			{
-				buildingsCpy[i] = new ZoneBuilding((ZoneBuilding)zones[i + 12]);
 				cVCpy[i] = new ZoneCarteCivilisation((ZoneCarteCivilisation)zones[i + 8]);
 			}
+			
 			choose = player.getIA().chooseZone(zoneAvailableSpace,zoneName, buildingsCpy, cVCpy);
 
-			if((choose >= 0) && (choose<zones.length) && ableToChooseZone(zones[choose], player)) ok=true;
+			if((choose >= 0) && (choose<zones.length) && ableToChooseZone(choose, player)) ok=true;
 			else Printer.getPrinter().println("/!\\ Zone "+zones[choose].getName()+" : Choix incorrecte ou zone pleine, veuillez reessayer./!\\");
 		}
 		return choose;
@@ -231,10 +239,12 @@ public class GameZones {
 	 * ableToPlaceFigurine() utilise les ableToPlaceFigurine() de zone et de player pour savoir si cela est possible. 
 	 * @param zone : la zone concernee.
 	 * @param player : le joueur concerne. 
+	 * @param indexZone : index de la zone concernee
 	 * @return true si possible de placer, false sinon.
 	 */ 
-	private boolean ableToChooseZone(Zone zone,Player player){
-		return zone.ableToChooseZone(player) && zone.getMinimalFigurineRequierement()<=player.getCurrentFigurine();
+	private boolean ableToChooseZone(int indexZone,Player player){
+		if( numberPlayer < 4 && (indexZone>=5 && indexZone<=7) && numberSpecialZoneOccuped>=2) return false; //regle a 2 ou 3 joueur 2 zone speciale utiliser par tour
+		return zones[indexZone].ableToChooseZone(player) && zones[indexZone].getMinimalFigurineRequierement()<=player.getCurrentFigurine();
 	}
 
 	/**
