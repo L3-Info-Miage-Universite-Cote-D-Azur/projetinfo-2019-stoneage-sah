@@ -315,6 +315,23 @@ public class NoobIA extends IA
 
 		return choose;
 	}
+	
+	/**
+	 * useRessourceCard demande a l'ia si elle veut utiliser ses ressources au choix. 
+	 * Si oui, elle demande lesquelles.
+	 * @return
+	 */
+	// A CHANGER MAXIME.
+	public int useRessourceCard() {
+		int res = -1;
+		int choose;
+		choose = this.rand.nextInt(2);
+		
+		if(choose == 0) {
+			res = this.rand.nextInt(4);
+		}
+		return res;
+	}
 
 	public String toString () {return "Brainlet";}
 

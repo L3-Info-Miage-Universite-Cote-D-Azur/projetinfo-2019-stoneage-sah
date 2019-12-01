@@ -83,6 +83,13 @@ public abstract class IA{
 	 * @return l'index de ce que veut le joueur dans le tirage
 	 */
 	public abstract int chooseTirage(int[] listeTirage, boolean[] alreadyChoose);
+	
+	/**
+	 * useRessourceCard demande a l'ia si elle veut utiliser ses ressources au choix. 
+	 * Si oui, elle demande lesquelles.
+	 * @return
+	 */
+	public abstract int useRessourceCard();
 
 
 	@Override
