@@ -31,7 +31,7 @@ public class CarteCivilisation{
     2: pioche une carte civilisation supplementaire
     3: tout les joueur selectionne un objet parmi la liste
     4: carte outils temporaire.
-    Ajout des autres cartes plus tard. 
+    5 : carte ressources a utiliser quand on veut.
 	 */
 
 	private final Ressource ressource; //La ressrouce concernee par la carte. 
@@ -117,6 +117,9 @@ public class CarteCivilisation{
 			break;
 		case 4 : 
 			string += " outils unique de valeur "+numberEffect+";";
+			break;
+		case 5 : 
+			string += " ressources au choix;";
 			break;
 		default:
 			break;
