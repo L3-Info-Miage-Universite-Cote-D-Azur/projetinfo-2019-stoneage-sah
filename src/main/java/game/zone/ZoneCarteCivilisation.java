@@ -97,7 +97,10 @@ public class ZoneCarteCivilisation extends ZoneOnePlayer{
 				inventory.getTools().addUniqueTool(copieLinkCard.getNumberEffect());
 				Printer.getPrinter().println("Le joueur "+player.getName()+" obtient un outils temporaire de valeur : "+copieLinkCard.getNumberEffect());
 				return 0;
-				
+			case 5:
+				inventory.incrementCardRessource();
+				Printer.getPrinter().println("Le joueur "+player.getName()+" obtient "+copieLinkCard.getNumberEffect()+" ressources au choix.");
+				return 0;
 			default :
 				Printer.getPrinter().println("Erreur Carte Civilisation");
 			}
