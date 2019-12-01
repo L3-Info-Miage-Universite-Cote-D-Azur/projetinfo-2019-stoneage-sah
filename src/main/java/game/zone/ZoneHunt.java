@@ -7,7 +7,7 @@ import player.Player;
 public class ZoneHunt extends ZoneRessource {
 
 	public ZoneHunt(String name, Ressource ressource, int availableSpace, Dice dice) {
-		super(name, ressource, availableSpace, dice);
+		super(name, ressource, availableSpace, dice,0);
 	}
 
 	@Override

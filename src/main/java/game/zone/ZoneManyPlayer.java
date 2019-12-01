@@ -16,11 +16,14 @@ public abstract class  ZoneManyPlayer extends Zone{
 
 	//Le dictionnaire qui memorise pour un joueur, le nombre de figurines placees dans la zone. 
 	private Hashtable<Player,Integer> figurineInZone;
+	private final int numberPlayer;
+	private int differentPlayerInZone;
 
 	/* CONSTRUCTOR */
-	protected ZoneManyPlayer(String name, int availableSpace){
+	protected ZoneManyPlayer(String name, int availableSpace,int numberPlayer){
 		super(name, availableSpace, 1);
 		figurineInZone = new Hashtable<Player,Integer>();
+		this.numberPlayer = numberPlayer;
 	}
 
 	/**
@@ -29,6 +32,7 @@ public abstract class  ZoneManyPlayer extends Zone{
 	 * @param player : le joueur qui les mets. 
 	 */
 	public void placeFigurine(int number,Player player){
+		differentPlayerInZone += 1;
 		Printer.getPrinter().println(super.stringPlaceFigurine(number,player));
 		super.availableSpace -= number;
 		player.placeFigurine(number);
@@ -57,10 +61,20 @@ public abstract class  ZoneManyPlayer extends Zone{
 		int number = howManyPlayerFigurine(player);
 		if(number > 0)
 		{
+			differentPlayerInZone -= 1;
 			figurineInZone.remove(player);
 			super.availableSpace += number;
 			player.recoveryFigurine(number);
 		}
+	}
+	
+	@Override
+	public boolean ableToChooseZone(Player player) {
+		boolean numberPlayerRule = true;
+		if(numberPlayer == 3 && differentPlayerInZone == 2) numberPlayerRule=false;
+		if(numberPlayer == 2 && differentPlayerInZone == 1) numberPlayerRule=false;
+		return numberPlayerRule && super.ableToChooseZone(player);
+		
 	}
 	/* ABSTRACT METHOD */
 	public abstract int playerRecoveryFigurine(Player player, Inventory inventory);

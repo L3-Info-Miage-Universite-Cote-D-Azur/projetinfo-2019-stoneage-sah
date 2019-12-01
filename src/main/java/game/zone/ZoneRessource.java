@@ -21,8 +21,8 @@ public class ZoneRessource extends ZoneManyPlayer{
 	private final Dice dice; 
 
 	/* CONSTRUCTOR */
-	public ZoneRessource(String name, Ressource ressource, int availableSpace, Dice dice){
-		super(name,availableSpace);
+	public ZoneRessource(String name, Ressource ressource, int availableSpace, Dice dice,int numberPlayer){
+		super(name,availableSpace,numberPlayer);
 		this.ressource = ressource;
 		this.divisor= ressource.getDivisor();
 		this.dice = dice;
@@ -55,4 +55,5 @@ public class ZoneRessource extends ZoneManyPlayer{
 		}
 		return 0;
 	}
+	
 }
