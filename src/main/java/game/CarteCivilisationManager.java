@@ -56,6 +56,7 @@ public class CarteCivilisationManager {
 		deck.add(new CarteCivilisation(3, 2, 0, null, 0));
 		deck.add(new CarteCivilisation(3, 5, 0, null, 0));
 		deck.add(new CarteCivilisation(3, 3, 0, null, 0));
+		deck.add(new CarteCivilisation(5, 0, 0, null, 2));
 
 		//Cartes jaunes : 
 		deck.add(new CarteCivilisation(0, 10, 1, Ressource.FOOD, 4));
