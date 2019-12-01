@@ -1,3 +1,6 @@
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+
 import game.Game;
 import printer.Printer;
 
