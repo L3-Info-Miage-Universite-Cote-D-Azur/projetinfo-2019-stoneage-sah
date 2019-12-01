@@ -54,5 +54,17 @@ public class Inventory extends InventoryStruct {
 		super.incrementBuilding();
 		inventoryIA.incrementBuilding();
 	}
+	
+	@Override
+	public void incrementCardRessource(){
+		super.incrementCardRessource();
+		inventoryIA.incrementCardRessource();
+	}
+	
+	@Override
+	public void decrementCardRessource(){
+		super.decrementCardRessource();
+		inventoryIA.decrementCardRessource();
+	}
 }
 

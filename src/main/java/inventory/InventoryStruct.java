@@ -55,7 +55,8 @@ public abstract class InventoryStruct {
 	}
 
 	protected void incrementBuilding() {this.buildings += 1;}
-
+	protected void incrementCardRessource() {this.cardRessource +=1;}
+	protected void decrementCardRessource() {this.cardRessource -=1;}
 
 	//SUBSTRACTORS
 	/**
