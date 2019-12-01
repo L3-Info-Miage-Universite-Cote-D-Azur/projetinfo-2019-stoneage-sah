@@ -169,7 +169,6 @@ public class NoobIA extends IA
 		if (this.currentZone == -1) 
 			this.currentZone = 4;
 
-		System.out.println(this.currentZone);
 		return this.currentZone;
 	}
 
@@ -302,7 +301,7 @@ public class NoobIA extends IA
 
 	/**
 	 * Phase de tirage
-	 * @param listeTirage des des tires
+	 * @param listeTirage des dÃ©e tirÃ©e
 	 * @param alreadyChoose si un autre joueur l'a deja choisi ou non
 	 * @return l'index de ce que veut le joueur dans le tirage
 	 */
@@ -314,23 +313,6 @@ public class NoobIA extends IA
 		}while(alreadyChoose[choose]);
 
 		return choose;
-	}
-	
-	/**
-	 * useRessourceCard demande a l'ia si elle veut utiliser ses ressources au choix. 
-	 * Si oui, elle demande lesquelles.
-	 * @return
-	 */
-	// A CHANGER MAXIME.
-	public int useRessourceCard() {
-		int res = -1;
-		int choose;
-		choose = this.rand.nextInt(2);
-		
-		if(choose == 0) {
-			res = this.rand.nextInt(4);
-		}
-		return res;
 	}
 
 	public String toString () {return "Brainlet";}
