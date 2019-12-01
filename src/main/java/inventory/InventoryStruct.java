@@ -16,6 +16,7 @@ public abstract class InventoryStruct {
 	/* FIELDS */
 	// Les ressources que peut avoir le joueur. 
 	private int[] ressources;
+	private int cardRessource;
 	private int buildings;
 	private ArrayList<CarteCivilisation> carteCivilisation;
 
@@ -24,6 +25,7 @@ public abstract class InventoryStruct {
 		ressources = new int[Settings.NB_RESSOURCES];
 		ressources[Ressource.FOOD.getIndex()]=15;
 		buildings = 0;
+		cardRessource = 0;
 		carteCivilisation = new ArrayList<CarteCivilisation>();
 	}
 
@@ -36,6 +38,7 @@ public abstract class InventoryStruct {
 		return cardCivi;
 	}
 	public int getBuildings() { return buildings; }
+	public int getCardRessource() {return cardRessource;}
 
 
 	//ADDERS
