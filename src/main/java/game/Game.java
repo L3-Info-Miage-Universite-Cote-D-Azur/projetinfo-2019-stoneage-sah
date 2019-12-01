@@ -1,6 +1,8 @@
 package game;
 
 import game.zone.ZoneCarteCivilisation;
+import inventory.Inventory;
+import player.Player;
 import printer.Printer;
 
 /**
@@ -36,12 +38,15 @@ public class Game {
 			Printer.getPrinter().println("\n\n####### TOUR : "+nbTour+" #######");
 
 			afficheInfo();
-
+			
 			Printer.getPrinter().println("\n\n--- PHASE DE PLACEMENT ---");
 			placePhase();
-
+			gameZones.resetNumberSpecialZoneOccuped();
+			
 			Printer.getPrinter().println("\n\n--- PHASE DE RECOLTE ---");
 			harvestPhase();
+			
+			useCardRessource();//Demande si le joueur veut utiliser ses cartes ressources au choix.
 			
 			gameZones.organizeCard();
 			
@@ -143,6 +148,34 @@ public class Game {
 			ZoneCarteCivilisation zoneciv = (ZoneCarteCivilisation) gameZones.getZones()[8+i];
 			CarteCivilisation cc = zoneciv.getCard();
 			Printer.getPrinter().println(zoneciv.getName()+ ": "+cc.toString()+" cout: "+zoneciv.getNumberRessourceNeed()+".");
+		}
+	}
+	
+	
+	public void useCardRessource() {
+		for(int i = 0; i < numberPlayer; i++) {
+			int  selectedPlayer = (i + nbTour) % numberPlayer;//L'indice du joueur selectionne en fonction du tour. 
+			Inventory inv = gamePlayers.getInventory(selectedPlayer);
+			Player player = gamePlayers.getPlayer(selectedPlayer);
+			
+			if(inv.getCardRessource() > 0) {
+				Printer.getPrinter().println("\n---- PHASE RESSOURCE AU CHOIX ----");
+				for(int j = 0; j < inv.getCardRessource(); j++) {
+					
+					int res = player.getIA().useRessourceCard();
+					
+					if(res != -1) {//Si l'IA utilise
+						Printer.getPrinter().println("Le joueur "+player.getName()+
+								" utilise sa carte ressource au choix pour obtenir 2 "+Ressource.indexToRessource(res).toString()+".");
+						inv.addRessource(Ressource.indexToRessource(res), 2);//On ajoute toujours 2 de la ressource choisie.
+						inv.decrementCardRessource();
+					}
+					else {
+						Printer.getPrinter().println("Le joueur "+gamePlayers.getPlayer(selectedPlayer).getName()+
+								" garde sa carte ressource au choix.");
+					}
+				}
+			}
 		}
 	}
 
