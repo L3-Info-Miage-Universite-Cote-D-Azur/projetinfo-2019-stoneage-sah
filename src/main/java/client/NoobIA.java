@@ -302,7 +302,7 @@ public class NoobIA extends IA
 
 	/**
 	 * Phase de tirage
-	 * @param listeTirage des dÃ©e tirÃ©e
+	 * @param listeTirage des des tires
 	 * @param alreadyChoose si un autre joueur l'a deja choisi ou non
 	 * @return l'index de ce que veut le joueur dans le tirage
 	 */
