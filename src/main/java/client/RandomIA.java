@@ -126,7 +126,7 @@ public class RandomIA extends IA {
 		int usableTools = 0;
 		
 		for(int i = 0;i < toolsToUse.length;i++){
-			if((i>=3) || !useTools[i] && toolsToUse[i] > 0) usableTools+=1;
+			if(((i>=3) || !useTools[i]) && toolsToUse[i] > 0) usableTools+=1;
 		}
 
 		//cas ou il n'y a pas d'outil a utiliser
