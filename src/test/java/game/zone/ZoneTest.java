@@ -13,7 +13,7 @@ public class ZoneTest {
 	
 	@Test
 	public void testAbleToChooseZone() {
-		zonetest = new ZoneRessource("test", Ressource.WOOD, 7, new Dice());
+		zonetest = new ZoneRessource("test", Ressource.WOOD, 7, new Dice(),4);
 		Player playertest = new Player("testplayer",null);
 		
 		//Cas ou le joueur n'as jamais rien placer.

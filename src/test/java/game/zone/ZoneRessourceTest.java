@@ -18,7 +18,7 @@ public class ZoneRessourceTest {
 	
 	@Test
 	public void testPlayerRecoveryFigurine() {
-		zonetest = new ZoneRessource("test", Ressource.WOOD, 7, new Dice());
+		zonetest = new ZoneRessource("test", Ressource.WOOD, 7, new Dice(),2);
 		inventoryTest = new Inventory();
 		inventoryTest2 = new Inventory();
 		

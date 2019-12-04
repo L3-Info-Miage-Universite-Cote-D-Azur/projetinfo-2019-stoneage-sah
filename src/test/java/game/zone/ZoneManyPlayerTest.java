@@ -15,7 +15,7 @@ public class ZoneManyPlayerTest {
 	
 	@Test
 	public void testPlaceFigurine() {
-		zonetest = new ZoneRessource("test", Ressource.WOOD, 7,new Dice());
+		zonetest = new ZoneRessource("test", Ressource.WOOD, 7,new Dice(),2);
 		playertest = new Player("testplayer",null);
 		
 		//Cas ou le joueur n'a pas place
@@ -50,7 +50,7 @@ public class ZoneManyPlayerTest {
 	
 	@Test
 	public void testHowManyPlayerFigurine() {
-		zonetest = new ZoneRessource("test", Ressource.WOOD, 7, new Dice());
+		zonetest = new ZoneRessource("test", Ressource.WOOD, 7, new Dice(),2);
 		playertest = new Player("testplayer",null);
 		
 		//Cas ou le joueur n'a pas place
@@ -90,7 +90,7 @@ public class ZoneManyPlayerTest {
 	
 	@Test
 	public void testRemoveFigurine() {
-		zonetest = new ZoneRessource("test", Ressource.WOOD, 7, new Dice());
+		zonetest = new ZoneRessource("test", Ressource.WOOD, 7, new Dice(),2);
 		playertest = new Player("testplayer",null);
 		
 		//Cas ou un joueur place puis retire.
