@@ -52,7 +52,7 @@ public class Tools extends ToolStruct{
 	
 	/**
 	 * subUniqueTool supprime l'outils unique de valeur val;
-	 * @param val : la valeur de l'outils unique.
+	 * @param indexToErase : index de l'outil a supprimer
 	 */
 	public void subUniqueTool(int indexToErase) {
 		super.subUniqueTool(indexToErase);
@@ -60,9 +60,11 @@ public class Tools extends ToolStruct{
 	}
 	
 	/**
-	 * useTools renvoie le tableau correspondant aux outils utilise et choisis par l'IA
+	 * 	 * useTools renvoie le tableau correspondant aux outils utilise et choisis par l'IA
 	 * @param player : le joueur concerne. 
-	 * @return sum : la somme des valeurs des outils utilises.
+	 * @param sumDice : la somme des valeurs des outils utilises.
+	 * @param ressource : ressource pour la quel vas etre utiliser l'outil.
+	 * @return valeur des outils utiliser.
 	 */
 	public int	useTools(Player player,int sumDice, Ressource ressource){
 		boolean correctChoose = false;

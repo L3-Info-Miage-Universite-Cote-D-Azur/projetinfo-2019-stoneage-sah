@@ -86,7 +86,7 @@ public abstract class ToolStruct {
 
 	/**
 	 * subUniqueTool supprime l'outils unique de valeur val;
-	 * @param val : la valeur de l'outils unique.
+	 * @param indexToErase : index de l'outil a supprimer
 	 */
 	public void subUniqueTool(int indexToErase) {
 		if(tools.length > 3 ) {
