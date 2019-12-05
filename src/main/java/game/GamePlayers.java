@@ -1,5 +1,6 @@
 package game;
 
+import client.IA;
 import inventory.Inventory;
 import player.Player;
 import printer.Printer;
@@ -20,6 +21,12 @@ public class GamePlayers {
 		initInventories(numberPlayer); 
 		initPlayer(numberPlayer);
 	}
+	
+	/* CONSTRUCTOR FOR STATS */
+    public GamePlayers(int numberPlayer,int[] iaPlayers) {
+        initInventories(numberPlayer); 
+        initPlayerWithIA(numberPlayer,iaPlayers);
+    }
 
 	/* GETTERS */
 	public int getNumberPlayers() { return players.length; }
@@ -33,6 +40,8 @@ public class GamePlayers {
 	}
 	public Inventory[] getInventories () {return this.inventories;}
 	public Player[] getPlayers () {return this.players;}
+	public void setPlayers (Player[] p) {this.players = p;}
+	public void setPlayerIA (int index, IA ia) {this.players[index].setIA(ia);}
 
 
 	/* INIT */
@@ -48,6 +57,16 @@ public class GamePlayers {
 			players[i] = new Player(Settings.getRandomName(),inventories[i].getInventoryIA());
 		}
 	}
+	
+	/* INIT FOR STATS */
+    public void initPlayerWithIA(int numberPlayer, int[] iaPlayers) {
+        players = new Player[numberPlayer];
+
+        for(int i = 0; i < numberPlayer; i++){
+            //On attribut un nom et une IA au hasard. 
+            players[i] = new Player(Settings.getRandomName(),inventories[i].getInventoryIA(),iaPlayers[i]);
+        }
+    }
 
 	/**
 	 * Initie le tableau inventories 
@@ -153,13 +172,13 @@ public class GamePlayers {
 
 		int[] IAChoose;
 		int[] copieInventory=inventory.getCopyRessources();
-
+		// IAChoose[0] = Ressource.index(0)
+		// IAChoose[1] = nb de IAChoose[0]
 		do {
 			IAChoose = player.getIA().chooseRessource(ressourceToFood);
 		}while(IAChoose[0] < 0 || IAChoose[0] > 3 || IAChoose[1] <= 0 || IAChoose[1] > Math.min(ressourceToFood, copieInventory[IAChoose[0]]));
 
 		Printer.getPrinter().println("Le joueur "+player.getName()+ " nourris ses figurines avec "+ IAChoose[1]+" "+Ressource.indexToRessource(IAChoose[0])+".");
-		inventory.ableToSubRessource(Ressource.indexToRessource(IAChoose[0]), IAChoose[1]);
 		inventory.subRessource(Ressource.indexToRessource(IAChoose[0]), IAChoose[1]);
 
 		return IAChoose[1];
