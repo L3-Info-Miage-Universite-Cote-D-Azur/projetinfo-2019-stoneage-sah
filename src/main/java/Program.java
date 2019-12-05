@@ -8,12 +8,15 @@ import statistics.Statistics;
 public class Program {
     /**
      * Cette classe contient le main et lance la partie
-     * @throws IOException 
      */
 
+	/**
+	 * classe main
+	 * @param args 0 : nombre de joueur entre 2 et 4, 1: Statistique permet de lancer n fois la parti pour faire des statistique.
+	 */
     public static void main(String[] args) throws IOException {
         
-        //si on veut que l'affichage soit active ou non
+    	//si on veut que l'affichage soit active ou non
         //true : affichage / false : pas d'affichage
         Printer.Instance(true);
         
@@ -31,33 +34,50 @@ public class Program {
                 numberPlayer = defaultNumber;
             }
         }
+        //plusieur parti avec creation de fichier de statistique
+        if(args.length==2 && args[1]=="Statistique") {
+        	Printer.getPrinter().println("Statistique en cours");
+        	Printer.getPrinter().setPrinterCanWrite(false);//pas besoins d'affichage pour faire n partie
+        	Statistics stats = new Statistics(numberPlayer);
         
-        Statistics stats = new Statistics(numberPlayer);
-        
-        //a changer en fonction du nombre de joueur et faire de maniere random
-        int[] iaPlayers = new int[]{0,0,0,0};
-        String[] ias = new String[iaPlayers.length];
-        for(int i = 0; i < iaPlayers.length; i++)
-        {
-        	 switch(iaPlayers[i]) {
-	             case 0: 
-	            	 ias[i] = "Random";
-	                 break;
-	             case 1:
-	            	 ias[i] = "Debutant";
-	                 break;
-	             default:
-	            	 ias[i] = null;
-        	 }
+        	//a changer en fonction du nombre de joueur et faire de maniere random
+        	int[] iaPlayers = new int[numberPlayer];
+        	String[] ias = new String[numberPlayer];
+        	for(int i = 0; i < numberPlayer; i++)
+        	{
+        		switch(iaPlayers[i]) {
+	            	case 0: 
+	            		ias[i] = "Random";
+	            		break;
+	            	case 1:
+	            		ias[i] = "Debutant";
+	            		break;
+	            	default:
+	            		ias[i] = null;
+        		}
+        	}
+        	
+        	Printer.getPrinter().setPrinterCanWrite(true);
+        	Printer.getPrinter().println("Partie en cours de simulation");
+        	Printer.getPrinter().setPrinterCanWrite(false);
+        	for (int i = 0; i < Settings.NB_GAMES; i++)
+        	{
+        		Game game = new Game(iaPlayers,stats);
+        		game.gameLoop();//Lancement du jeu.
+        		Settings.resetArrays();
+        	}
+        	Printer.getPrinter().setPrinterCanWrite(true);
+        	Printer.getPrinter().println("Creation des fichier de statistique");
+        	Printer.getPrinter().setPrinterCanWrite(false);
+        	stats.createJITCurves(ias);
+        	stats.createAverages(ias);
+        	Printer.getPrinter().setPrinterCanWrite(true);
+        	Printer.getPrinter().println("Fin du programme");
         }
-        
-        for (int i = 0; i < Settings.NB_GAMES; i++)
-        {
-            Game game = new Game(iaPlayers,stats);
-            game.gameLoop();//Lancement du jeu.
-            Settings.resetArrays();
+        //parti normale
+        else {
+        	Game game = new Game(numberPlayer);
+    		game.gameLoop();//Lancement du jeu.
         }
-        stats.createJITCurves(ias);
-        stats.createAverages(ias);
     }
 }
