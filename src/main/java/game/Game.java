@@ -165,6 +165,12 @@ public class Game {
 			CarteCivilisation cc = zoneciv.getCard();
 			Printer.getPrinter().println(zoneciv.getName()+ ": "+cc.toString()+" cout: "+zoneciv.getNumberRessourceNeed()+".");
 		}
+		Printer.getPrinter().println();
+		for(int i=0; i<numberPlayer; i++) {
+			ZoneBuilding zonebuild = (ZoneBuilding) gameZones.getZones()[12+i];
+          	Building build = zonebuild.getBuilding();
+          	Printer.getPrinter().println("Dans la zone "+zonebuild.getName()+": "+build.getName()+".");
+		}
 	}
 	
 	
