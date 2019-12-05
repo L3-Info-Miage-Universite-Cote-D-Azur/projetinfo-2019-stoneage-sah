@@ -73,7 +73,6 @@ public class Statistics
 	// etc
 	public void createJITCurves (Player[] players) throws IOException
 	{
-		Printer.getPrinter().println("COUCOU");
 		// DONNER LES NOMS DE DEPART
 		this.csv.addElementToRow(this.JITCurves[0], "Tours");
 		this.csv.addElementToRow(this.JITCurves[0], "Score");
@@ -84,9 +83,9 @@ public class Statistics
 		for (int i = 1; i < this.JITCurves.length; i++)
 		{
 			this.csv.addElementToRow(this.JITCurves[i], "Tours");
-			this.csv.addElementToRow(this.JITCurves[i], Ressource.indexToRessource(i-1).toString());
 			for (int k = 0; k < players.length; k++)
 				this.csv.addElementToRow(this.JITCurves[i], players[k].getIA().toString());
+			this.csv.addElementToRow(this.JITCurves[i], Ressource.indexToRessource(i-1).toString()+"Moyen");
 			this.csv.endRow(this.JITCurves[i]);
 		}
 
@@ -103,23 +102,33 @@ public class Statistics
 			// POUR CHAQUE DATA
 			for (int statDataIndex = 0; statDataIndex < this.playersArrays.get(0).length; statDataIndex++)
 			{
+				File tmpFile = this.JITCurves[statDataIndex];
+				int averageStatData = 0;
+				int occ = 0;
+				// AJOUT DU TOUR A CHAQUE DEBUT DE LIGNE
+				this.csv.addSomething(tmpFile, Integer.toString(nbRounds));
 				// POUR CHAQUE JOUEUR
 				for (int currPlayer = 0; currPlayer < this.playersArrays.size(); currPlayer++)
 				{
-					File tmpFile = this.JITCurves[statDataIndex];
+
 					// SI LE JOUEUR POSSEDE LA RESSOURCE A CE TOUR T
 					if (this.playersArrays.get(currPlayer)[statDataIndex].size() > nbRounds)
 					{
 						// SI OUI, AJOUTER LA RESSOURCE
 						this.csv.addElementToRow(tmpFile, this.playersArrays.get(currPlayer)[statDataIndex].get(nbRounds).toString());
+						averageStatData += this.playersArrays.get(currPlayer)[statDataIndex].get(nbRounds);
+						occ++;
 					}
 					else
 					{
 						// SI NON, NE RIEN AJOUTER
 						this.csv.addNothing(tmpFile);
 					}
-					this.csv.endRow(tmpFile);
+
 				}
+				// AJOUT DU TOTAL SUR LES JOUEURS
+				this.csv.addElementToRow(tmpFile, Double.toString((double)averageStatData/occ));
+				this.csv.endRow(tmpFile);
 			}
 		}
 	}
