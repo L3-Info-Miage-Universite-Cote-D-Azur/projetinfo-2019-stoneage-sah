@@ -6,20 +6,24 @@ package game;
  *
  */
 public enum Ressource {
-    WOOD(0),CLAY(1),STONE(2),GOLD(3),FOOD(4),FIELD(5);
+  	//ressource est definit par 3 champ : (son id, son nom, son diviseur)
+    WOOD(0,"bois",3),CLAY(1,"argile",4),STONE(2,"pierre",5),GOLD(3,"or",6),FOOD(4,"nourriture",2),FIELD(5,"marqueur nourriture",1);
 
     private final int id;
+	private final String name;
+    private final int divisor;
     
-    Ressource(int id){
+    Ressource(int id,String name, int divisor){
         this.id = id;
+      	this.name = name;
+    	this.divisor = divisor;
     }
     /**
      * Representation textuel de la ressource.
      * @return le nom de la ressource.
      */
     public String toString(){
-        String[] name = new String[] {"bois","argile","pierre","or","nourriture","marqueur nourriture"};
-        return name[id];
+        return name;
     }
 
     /**
@@ -46,7 +50,6 @@ public enum Ressource {
      * @return int diviseur, le diviseur de la ressource. 
      */
     public int getDivisor(){
-        int[] divisor = new int[] {3,4,5,6,2,1};
-        return divisor[id];
+        return divisor;
     }
 } 
