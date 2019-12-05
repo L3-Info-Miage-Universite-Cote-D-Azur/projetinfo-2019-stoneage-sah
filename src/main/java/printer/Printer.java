@@ -1,4 +1,8 @@
 package printer;
+
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+
 /**
  * Singleton qui permet d'afficher ou non les information de jeu
  * @author Yohann
@@ -10,6 +14,11 @@ public class Printer {
 	
 	private Printer(boolean canWrite) {
 		this.write = canWrite;
+		try {
+			System.setOut(new PrintStream(System.out, true, "UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} 
 	}
 	
 	/**
