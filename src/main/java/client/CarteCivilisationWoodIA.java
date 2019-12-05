@@ -197,7 +197,7 @@ public class CarteCivilisationWoodIA extends IA {
 	 */
 	@Override
 	public int[] chooseRessource(int figurinesToFeed) {
-		for(int i = 3; i > 0; i--) {//On essaye de nourrir les figurines avec les ressources les plus couteuse. 
+		for(int i = 3; i >= 0; i--) {//On essaye de nourrir les figurines avec les ressources les plus couteuse. 
 			int nbRessource = inventoryIA.getRessource(Ressource.indexToRessource(i));
 			if(nbRessource != 0) {
 				return new int[] {i,Math.min(nbRessource, figurinesToFeed)};
