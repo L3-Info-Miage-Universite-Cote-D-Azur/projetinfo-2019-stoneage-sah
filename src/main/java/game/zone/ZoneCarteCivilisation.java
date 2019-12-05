@@ -30,6 +30,7 @@ public class ZoneCarteCivilisation extends ZoneOnePlayer{
 		super(String.valueOf(z.getName()), z.getAvailableSpace());
 		this.numberRessourceNeed = z.getNumberRessourceNeed();
 		this.dice = new Dice(z.getDice());
+		this.carteCivilisation = z.getCard();
 	}
 
 	/* GETTERS */
