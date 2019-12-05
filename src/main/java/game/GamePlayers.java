@@ -31,6 +31,8 @@ public class GamePlayers {
 		if(index >= 0 && index < inventories.length) { return inventories[index]; }
 		return null;
 	}
+	public Inventory[] getInventories () {return this.inventories;}
+	public Player[] getPlayers () {return this.players;}
 
 
 	/* INIT */
