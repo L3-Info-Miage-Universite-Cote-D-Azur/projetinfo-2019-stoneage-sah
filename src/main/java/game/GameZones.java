@@ -210,7 +210,8 @@ public class GameZones {
 			choose = player.getIA().chooseZone(zoneAvailableSpace,zoneName, buildingsCpy, cVCpy);
 
 			if((choose >= 0) && (choose<zones.length) && ableToChooseZone(choose, player)) ok=true;
-			else Printer.getPrinter().println("/!\\ Zone "+zones[choose].getName()+" : Choix incorrecte ou zone pleine, veuillez reessayer./!\\");
+			else if((choose >= 0) && (choose<zones.length)) Printer.getPrinter().println("/!\\ Zone "+zones[choose].getName()+" : Choix incorrecte ou zone pleine, veuillez reessayer./!\\");
+			else Printer.getPrinter().println("/!\\ L'index "+choose+" est incorrecte, veuillez reessayer./!\\");
 		}
 		return choose;
 	}
