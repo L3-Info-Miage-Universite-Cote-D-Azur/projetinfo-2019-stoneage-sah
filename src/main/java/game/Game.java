@@ -17,18 +17,18 @@ public class Game {
 	private int nbTour;//Compteur du nombre de tours. 
 	public final int numberPlayer;
 	public final Dice dice;
-	private Statistics statistics;
+	//private Statistics statistics;
 
 	/**
 	 * Le constructeur de Game qui initialise players et zones.
 	 */
-	public Game(int numberPlayer, Statistics stats){
+	public Game(int numberPlayer){
 		this.numberPlayer=numberPlayer;
 		this.dice = new Dice();
 		gameZones = new GameZones(numberPlayer,dice);
 		gamePlayers = new GamePlayers(numberPlayer);
 		nbTour=1;
-		this.statistics = stats;
+		//this.statistics = stats;
 	}
 
 
@@ -38,7 +38,7 @@ public class Game {
 	public void gameLoop() {
 		while(!this.isEnd()){
 			Printer.getPrinter().println("\n\n####### TOUR : "+nbTour+" #######");
-			this.statistics.updateStats(this.gamePlayers.getInventories(), this.gamePlayers.getPlayers());
+			//this.statistics.updateStats(this.gamePlayers.getInventories(), this.gamePlayers.getPlayers());
 
 			afficheInfo();
 			
@@ -67,8 +67,8 @@ public class Game {
 			nbTour+=1;
 		}
 		Printer.getPrinter().println("\n=========================\nLa partie est fini\n=========================");
-		this.statistics.createJITCurves(this.gamePlayers.getPlayers());
-		this.statistics.createAverages(this.gamePlayers.getPlayers());
+		//this.statistics.createJITCurves(this.gamePlayers.getPlayers());
+		//this.statistics.createAverages(this.gamePlayers.getPlayers());
 		gamePlayers.endGame();
 	}
 
