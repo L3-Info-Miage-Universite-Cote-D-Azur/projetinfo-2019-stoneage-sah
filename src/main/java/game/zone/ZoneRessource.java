@@ -42,6 +42,7 @@ public class ZoneRessource extends ZoneManyPlayer{
 		if (number > 0)
 		{
 			int[] diceValue = dice.rollDice(Settings.RAND, number);
+			Printer.getPrinter().println("Le joueur "+player.getName()+" a eu comme lancer de de: "+Arrays.toString(diceValue));
 			int sum=0;
 
 			for (int value : diceValue) { sum += value; }
@@ -50,7 +51,6 @@ public class ZoneRessource extends ZoneManyPlayer{
 
 			super.removeFigurine(player);
 			inventory.addRessource(ressource, total);//On ajoute la ressource au joueur.
-			Printer.getPrinter().println("Le joueur "+player.getName()+" a eu comme lancer de de: "+Arrays.toString(diceValue));
 			Printer.getPrinter().println("Il recolte donc: "+total+" "+ressource);
 		}
 		return 0;
