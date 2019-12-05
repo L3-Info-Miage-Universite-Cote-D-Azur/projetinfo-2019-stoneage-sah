@@ -197,7 +197,7 @@ public class NoobIA extends IA
 	}
 
 	/**
-	 * chooseNumber retourne le nombre de res choisie par l'IA. 
+	 * chooseRessource retourne le nombre de res choisie par l'IA. 
 	 * @param Le nombre de figurines a nourrir
 	 * @return le tableau des ressources sacrifiee.
 	 */
