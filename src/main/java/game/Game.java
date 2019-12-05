@@ -68,6 +68,7 @@ public class Game {
 		}
 		Printer.getPrinter().println("\n=========================\nLa partie est fini\n=========================");
 		this.statistics.createJITCurves(this.gamePlayers.getPlayers());
+		this.statistics.createAverages(this.gamePlayers.getPlayers());
 		gamePlayers.endGame();
 	}
 
