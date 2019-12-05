@@ -38,20 +38,20 @@ public class RandomIA extends IA {
 		return rand.nextInt(zoneAvailableSpace.length);
 	}
 
-	/**
+    /**
 	 * chooseNumber retourne le nombre de figurines choisie par l'IA. 
 	 * @param min : le nombre de figurines minimum.
 	 * @param max : le nombre de figurines maximum. 
-	 * @return l'indice de la zone
+	 * @return le nombre de figurines que l'IA place.
 	 */
 	public int chooseNumber (int min,int max) {
 		return rand.nextInt(max-min+1)+min;
 	}
 
 	/**
-	 * chooseNumber retourne le nombre de ressource choisie par l'IA au hasard. 
+	 * chooseNumber retourne le nombre de res choisie par l'IA. 
 	 * @param Le nombre de figurines a nourrir
-	 * @return l'indice de la zone
+	 * @return le tableau des ressources sacrifiee.
 	 */
 	public int[] chooseRessource(int figurinesToFeed) {
 		int ressource;

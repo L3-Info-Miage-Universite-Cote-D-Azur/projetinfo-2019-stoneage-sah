@@ -35,14 +35,14 @@ public abstract class IA{
 	 * chooseNumber retourne le nombre de figurines choisie par l'IA. 
 	 * @param min : le nombre de figurines minimum.
 	 * @param max : le nombre de figurines maximum. 
-	 * @return l'indice de la zone
+	 * @return le nombre de figurines que l'IA place.
 	 */
 	public abstract int chooseNumber(int min,int max);
 
 	/**
 	 * chooseNumber retourne le nombre de res choisie par l'IA. 
 	 * @param Le nombre de figurines a nourrir
-	 * @return l'indice de la zone
+	 * @return le tableau des ressources sacrifiee.
 	 */
 	public abstract int[] chooseRessource(int figurinesToFeed);
 

@@ -177,9 +177,10 @@ public class NoobIA extends IA
 	}
 
 	/**
-	 * chooseNumber retourne le nombre de figurines choisie par l'IA (ici au hasard). 
-	 * @param min et max, le nombre minimum et maximum entre lesquels l'IA doit choisir. 
-	 * @return l'indice de la zone
+	 * chooseNumber retourne le nombre de figurines choisie par l'IA. 
+	 * @param min : le nombre de figurines minimum.
+	 * @param max : le nombre de figurines maximum. 
+	 * @return le nombre de figurines que l'IA place.
 	 */
 	public int chooseNumber (int min, int max) 
 	{
@@ -196,11 +197,9 @@ public class NoobIA extends IA
 	}
 
 	/**
-	 * chooseRessource retourne le nombre de ressource choisie par l'IA au hasard. 
+	 * chooseNumber retourne le nombre de res choisie par l'IA. 
 	 * @param Le nombre de figurines a nourrir
-	 * @param Un tableau contenant le nombre de ressource que l'IA possede par index.
-	 * @param Un tableau contenant le nom des ressources que l'IA possede par index.
-	 * @return l'indice de la zone
+	 * @return le tableau des ressources sacrifiee.
 	 */
 	public int[] chooseRessource(int figurinesToFeed) {
 		int ressource;
@@ -220,7 +219,6 @@ public class NoobIA extends IA
 	/**
 	 * useRessourceToFeed renvoie true ou false selon le choix de l'IA pour nourrir 
 	 * ses figurines avec des ressources. Le choix se fait au hasard.  
-	 * @param ressourceNumber Le tableau du nombre de ressource possedee par le joueur. 
 	 * @return Booleen : true si le joueur veut utiliser ses ressources pour nourrir, false sinon.
 	 */
 	public boolean useRessourceToFeed()
@@ -232,7 +230,6 @@ public class NoobIA extends IA
 	/**
 	 * pickCard renvoie les ressources donnee pour l'achat de la carte civilisation. 
 	 * Si l'IA renvoie un tableau vide, elle refuse l'achat de la carte. 
-	 * @param ressourceNumber : les ressources premieres du joueur
 	 * @param numberRessourceRequire : le nombre de ressource pour l'achat de la carte. 
 	 * @return res : tableau des ressources donnes pour la carte. 
 	 */
