@@ -41,7 +41,7 @@ public abstract class IA{
 
 	/**
 	 * chooseRessouce retourne le nombre de ressources choisie par l'IA. 
-	 * @param Le nombre de figurines a nourrir
+	 * @param figurinesToFeed Le nombre de figurines a nourrir
 	 * @return le tableau des ressources sacrifiee.
 	 */
 	public abstract int[] chooseRessource(int figurinesToFeed);
@@ -56,7 +56,6 @@ public abstract class IA{
 	/**
 	 * pickCard renvoie les ressources donnee pour l'achat de la carte civilisation. 
 	 * Si l'IA renvoie un tableau vide, elle refuse l'achat de la carte. 
-	 * @param ressourceNumber : les ressources premieres du joueur
 	 * @param numberRessourceRequire : le nombre de ressource pour l'achat de la carte. 
 	 * @return res : tableau des ressources donnes pour la carte. 
 	 */
@@ -70,9 +69,7 @@ public abstract class IA{
 
 	/**
 	 * pickTools renvoie un tableau de boolean pour dire quel outils l'IA utilise.
-	 * @param toolsToUse : le tableau des outils avec leurs niveau.
-	 * @param useTools : le tableau des outils deja utilises et non disponible.
-	 * @return
+	 * @return tableau des outils que le joueur veux utiliser
 	 */
 	public abstract boolean[] pickTools();
 
@@ -86,8 +83,8 @@ public abstract class IA{
 	
 	/**
 	 * useRessourceCard demande a l'ia si elle veut utiliser ses ressources au choix. 
-	 * Si oui, elle demande lesquelles.
-	 * @return
+	 * Si oui, elle demande lesquelles (id de la ressource).
+	 * @return ressource que le joueur veux -1 pour ne pas l'utiliser
 	 */
 	public abstract int useRessourceCard();
 

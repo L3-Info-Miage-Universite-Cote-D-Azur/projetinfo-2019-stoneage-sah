@@ -192,7 +192,7 @@ public class CarteCivilisationWoodIA extends IA {
 
 	/**
 	 * chooseNumber retourne le nombre de res choisie par l'IA. 
-	 * @param Le nombre de figurines a nourrir
+	 * @param figurinesToFeed Le nombre de figurines a nourrir
 	 * @return le tableau des ressources sacrifiee.
 	 */
 	@Override
@@ -210,7 +210,6 @@ public class CarteCivilisationWoodIA extends IA {
 	/**
 	 * useRessourceToFeed renvoie true ou false selon le choix de l'IA pour nourrir 
 	 * ses figurines avec des ressources. Le choix se fait au hasard.  
-	 * @param ressourceNumber Le tableau du nombre de ressource possedee par le joueur. 
 	 * @return Booleen : true si le joueur veut utiliser ses ressources pour nourrir, false sinon.
 	 */
 	@Override
@@ -252,7 +251,7 @@ public class CarteCivilisationWoodIA extends IA {
 
 	/**
 	 * pickTools renvoie un tableau de boolean pour dire quel outils l'IA utilise.
-	 * @return
+	 * @return tableau des outils que le joueur veux utiliser
 	 */
 	@Override
 	public boolean[] pickTools() {
@@ -294,8 +293,8 @@ public class CarteCivilisationWoodIA extends IA {
 	
 	/**
 	 * useRessourceCard demande a l'ia si elle veut utiliser ses ressources au choix. 
-	 * Si oui, elle demande lesquelles.
-	 * @return
+	 * Si oui, elle demande lesquelles (id de la ressource).
+	 * @return ressource que le joueur veux -1 pour ne pas l'utiliser
 	 */
 	@Override
 	public int useRessourceCard() {

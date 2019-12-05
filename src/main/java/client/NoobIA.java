@@ -198,7 +198,7 @@ public class NoobIA extends IA
 
 	/**
 	 * chooseRessource retourne le nombre de ressources choisie par l'IA. 
-	 * @param Le nombre de figurines a nourrir
+	 * @param figurinesToFeed Le nombre de figurines a nourrir
 	 * @return le tableau des ressources sacrifiee.
 	 */
 	public int[] chooseRessource(int figurinesToFeed) {
@@ -269,7 +269,7 @@ public class NoobIA extends IA
 
 	/**
 	 * pickTools renvoie un tableau de boolean pour dire quel outils l'IA utilise.
-	 * @return
+	 * @return tableau des outils que le joueur veux utiliser
 	 */
 	public boolean[] pickTools() {
 		int[] toolsToUse = inventoryIA.getTools().getTools();
@@ -308,8 +308,8 @@ public class NoobIA extends IA
 	
 	/**
 	 * useRessourceCard demande a l'ia si elle veut utiliser ses ressources au choix. 
-	 * Si oui, elle demande lesquelles.
-	 * @return
+	 * Si oui, elle demande lesquelles (id de la ressource).
+	 * @return ressource que le joueur veux -1 pour ne pas l'utiliser
 	 */
 	// WOOD - CLAY - STONE - GOLD
 	public int useRessourceCard() {
