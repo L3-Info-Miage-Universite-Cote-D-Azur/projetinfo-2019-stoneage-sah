@@ -279,9 +279,9 @@ public class NoobIA extends IA
 		boolean[] useTools = inventoryIA.getTools().getToolsUsed();
 		boolean[] res = new boolean[toolsToUse.length];
 		
-		for (int i = 0; i < toolsToUse.length; i++)
+		for (int i = 0; i < useTools.length; i++)
 		{
-			if (i>=3 || useTools[i] == false)
+			if (useTools[i] == false)
 			{
 				res[i] = true;
 			}
