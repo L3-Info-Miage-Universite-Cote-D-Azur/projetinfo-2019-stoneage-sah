@@ -123,7 +123,7 @@ public class CarteCivilisationManager {
 
 	/**
 	 * regarde si il reste des carte en jeu
-	 * @return true -> plus de carte (fin de parti); false -> il reste des carte
+	 * @return true : plus de carte (fin de parti); false : il reste des carte
 	 */
 	public boolean isEmpty() {
 		for(int i = 0; i<cardZone.length; i++) {
