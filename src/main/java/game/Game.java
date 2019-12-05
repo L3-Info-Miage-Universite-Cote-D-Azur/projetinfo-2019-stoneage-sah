@@ -22,18 +22,19 @@ public class Game {
 	private int nbTour;//Compteur du nombre de tours. 
 	public final int numberPlayer;
 	public final Dice dice;
+	private boolean useStats;
 	private Statistics statistics;
 
 	/**
 	 * Le constructeur de Game qui initialise players et zones.
 	 */
-	public Game(int numberPlayer, Statistics stats){
+	public Game(int numberPlayer){
 		this.numberPlayer=numberPlayer;
 		this.dice = new Dice();
 		gameZones = new GameZones(numberPlayer,dice);
 		gamePlayers = new GamePlayers(numberPlayer);
 		nbTour=1;
-		this.statistics = stats;
+		useStats = false;
 	}
 	
 	/* CONSTRUCTOR FOR STATS */
@@ -44,6 +45,7 @@ public class Game {
         	gamePlayers = new GamePlayers(numberPlayer,iaPlayers);
         	nbTour=1;
         	this.statistics = stats;
+        	useStats=true;
     	}
 
 
@@ -54,7 +56,7 @@ public class Game {
 	public void gameLoop() throws IOException {
 		while(!this.isEnd()){
 			Printer.getPrinter().println("\n\n####### TOUR : "+nbTour+" #######");
-			this.statistics.updateStats(this.gamePlayers.getInventories(), this.gamePlayers.getPlayers(), this.nbTour);
+			if(useStats) this.statistics.updateStats(this.gamePlayers.getInventories(), this.gamePlayers.getPlayers(), this.nbTour);
 			afficheInfo();
 			
 			Printer.getPrinter().println("\n\n--- PHASE DE PLACEMENT ---");
@@ -162,17 +164,6 @@ public class Game {
 			Printer.getPrinter().println(string);
 		}
 		Printer.getPrinter().println();
-		for (int i = 0; i < numberPlayer;i++) {
-			int nbBat = gamePlayers.getInventory(i).getBuildings();
-			String str = "Le joueur "+gamePlayers.getPlayer(i).getName()+" a: "+nbBat+" Batiments; Carte civillisations: [";
-			for(CarteCivilisation cv : gamePlayers.getInventory(i).getCardCivilisation()) {
-				str +=  cv.getName()+",";
-			}
-			str += "].";
-			Printer.getPrinter().println(str);
-		}
-		Printer.getPrinter().println();
-		Printer.getPrinter().println("--- Info Zone ---");
 		for(int i = 0; i < 4; i++) {
 			ZoneCarteCivilisation zoneciv = (ZoneCarteCivilisation) gameZones.getZones()[8+i];
 			CarteCivilisation cc = zoneciv.getCard();
