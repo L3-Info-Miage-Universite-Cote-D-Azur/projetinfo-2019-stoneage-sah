@@ -40,7 +40,7 @@ public abstract class IA{
 	public abstract int chooseNumber(int min,int max);
 
 	/**
-	 * chooseNumber retourne le nombre de res choisie par l'IA. 
+	 * chooseRessouce retourne le nombre de ressources choisie par l'IA. 
 	 * @param Le nombre de figurines a nourrir
 	 * @return le tableau des ressources sacrifiee.
 	 */
