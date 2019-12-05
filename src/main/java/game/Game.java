@@ -2,6 +2,8 @@ package game;
 
 import java.io.IOException;
 
+import game.building.Building;
+import game.zone.ZoneBuilding;
 import game.zone.ZoneCarteCivilisation;
 import inventory.Inventory;
 import player.Player;
@@ -160,6 +162,17 @@ public class Game {
 			Printer.getPrinter().println(string);
 		}
 		Printer.getPrinter().println();
+		for (int i = 0; i < numberPlayer;i++) {
+			int nbBat = gamePlayers.getInventory(i).getBuildings();
+			String str = "Le joueur "+gamePlayers.getPlayer(i).getName()+" a: "+nbBat+" Batiments; Carte civillisations: [";
+			for(CarteCivilisation cv : gamePlayers.getInventory(i).getCardCivilisation()) {
+				str +=  cv.getName()+",";
+			}
+			str += "].";
+			Printer.getPrinter().println(str);
+		}
+		Printer.getPrinter().println();
+		Printer.getPrinter().println("--- Info Zone ---");
 		for(int i = 0; i < 4; i++) {
 			ZoneCarteCivilisation zoneciv = (ZoneCarteCivilisation) gameZones.getZones()[8+i];
 			CarteCivilisation cc = zoneciv.getCard();
