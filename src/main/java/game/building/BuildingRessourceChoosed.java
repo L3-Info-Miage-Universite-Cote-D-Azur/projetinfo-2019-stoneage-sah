@@ -31,4 +31,6 @@ public class BuildingRessourceChoosed extends BuildingSpecial
 	{
 		return super.neededRessource[0] != null;
 	}
+	
+	public String getName() {return "'Batiment ressources au choix'";}
 }
