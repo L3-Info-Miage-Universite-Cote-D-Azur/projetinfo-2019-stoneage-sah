@@ -77,8 +77,9 @@ public class Score {
 	/**
 	 * Affichage du classement
 	 * @param players liste de tout les joueur.
+	 * @return l'indice du joueur gagnant
 	 */
-	public void classement(Player[] players) {
+	public int classement(Player[] players) {
 		int[] score = new int[players.length];
 		boolean[] notprint = new boolean[players.length];
 		
@@ -99,5 +100,12 @@ public class Score {
 			}
 			position++;
 		}
+		
+		// RETOURNER L'INDICE DU MEILLEUR JOUEUR
+		int max = 0;
+		for (int i = 0; i < players.length; i++)
+			if (players[i].getScore() > players[max].getScore())
+				max = i;
+		return max;
 	}
 }
