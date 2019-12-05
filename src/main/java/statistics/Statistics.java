@@ -2,7 +2,6 @@ package statistics;
 
 import java.io.*; 
 import java.util.*; 
-import com.opencsv.CSVWriter;
 
 import game.Settings;
 import game.Ressource;
@@ -109,7 +108,6 @@ public class Statistics
 			{
 				File tmpFile = this.JITCurves[statDataIndex];
 				int averageStatData = 0;
-				int occ = 0;
 				// AJOUT DU TOUR A CHAQUE DEBUT DE LIGNE
 				this.csv.addSomething(tmpFile, Integer.toString(nbRounds));
 				// POUR CHAQUE JOUEUR
@@ -122,7 +120,6 @@ public class Statistics
 						// SI OUI, AJOUTER LA RESSOURCE
 						this.csv.addElementToRow(tmpFile, Double.toString((double)this.playersArrays.get(currPlayer)[statDataIndex].get(nbRounds)/Settings.NB_GAMES));
 						averageStatData += this.playersArrays.get(currPlayer)[statDataIndex].get(nbRounds);
-						occ++;
 					}
 					else
 					{
