@@ -13,8 +13,9 @@ public class Program {
 	/**
 	 * classe main
 	 * @param args 0 : nombre de joueur entre 2 et 4, 1: Statistique permet de lancer n fois la parti pour faire des statistique.
+	 * @throws IOException IO exception
 	 */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException{
         
     	//si on veut que l'affichage soit active ou non
         //true : affichage / false : pas d'affichage
