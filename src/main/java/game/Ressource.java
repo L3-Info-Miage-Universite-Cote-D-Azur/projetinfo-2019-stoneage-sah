@@ -36,7 +36,7 @@ public enum Ressource {
 
     /**
      * Renvoie la ressource correspondant a l'index de l'inventaire
-     * @param index de l'inventaire que l'on veux savoir la ressource
+     * @param id index de l'inventaire que l'on veux savoir la ressource
      * @return ressource selectionner par l'index
      */
     public static Ressource indexToRessource(int id) {

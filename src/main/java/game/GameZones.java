@@ -66,8 +66,9 @@ public class GameZones {
 
 	/**
 	 * Phase de recolte, le joueur selectionner recupere toutes ces figurine et recois les effet de la zone en question
-	 * @param player le joueur qui recupere
-	 * @param inventory l'inventaire du joueur en question
+	 * @param player le joueur qui recupere.
+	 * @param inventory l'inventaire du joueur en question.
+	 * @param gamePlayers Tout les joueur et leurs inventaire (utile pour le tirage).
 	 */
 	public void playerHarvest(Player player, Inventory inventory,GamePlayers gamePlayers){
 		Printer.getPrinter().println("\n##### C'est au tour de "+player.getName()+" : #####");

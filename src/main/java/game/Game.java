@@ -27,6 +27,7 @@ public class Game {
 
 	/**
 	 * Le constructeur de Game qui initialise players et zones.
+	 * @param numberPlayer Nombre de joueur dans la parti;
 	 */
 	public Game(int numberPlayer){
 		this.numberPlayer=numberPlayer;
@@ -36,22 +37,27 @@ public class Game {
 		nbTour=1;
 		useStats = false;
 	}
-	
+
 	/* CONSTRUCTOR FOR STATS */
-        public Game(int[] iaPlayers, Statistics stats){
-             	this.numberPlayer=iaPlayers.length;
-             	this.dice = new Dice();
-        	gameZones = new GameZones(numberPlayer,dice);
-        	gamePlayers = new GamePlayers(numberPlayer,iaPlayers);
-        	nbTour=1;
-        	this.statistics = stats;
-        	useStats=true;
-    	}
+	/**
+	 * Le constructeur de Game qui initialise players et zones pour les statistique avec une ia pres selectionner.
+	 * @param iaPlayers le numero de l'ia.
+	 * @param stats l'objet qui stock les statistique.
+	 */
+	public Game(int[] iaPlayers, Statistics stats){
+		this.numberPlayer=iaPlayers.length;
+		this.dice = new Dice();
+		gameZones = new GameZones(numberPlayer,dice);
+		gamePlayers = new GamePlayers(numberPlayer,iaPlayers);
+		nbTour=1;
+		this.statistics = stats;
+		useStats=true;
+	}
 
 
 	/**
 	 * gameLoop constitue la boucle du jeu. 
-	 * @throws IOException 
+	 * @throws IOException IO exception
 	 */
 	public void gameLoop() throws IOException {
 		while(!this.isEnd()){

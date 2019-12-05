@@ -8,7 +8,9 @@ import printer.Printer;
 
 public class Score {
 	/**
-	 * Calcule le score de chaque joueur (ne dois etre appeler que 1 fois et a la fin de la partie)
+	 * Calcule le score de chaque joueur (ne dois etre appeler que 1 fois et a la fin de la partie).
+	 * @param player Le joueur que l'on calcule le score.
+	 * @param inventory l'inventaire du joueur.
 	 */
 	public void calculScore(Player player,Inventory inventory) {
 
@@ -74,6 +76,7 @@ public class Score {
 
 	/**
 	 * Affichage du classement
+	 * @param players liste de tout les joueur.
 	 */
 	public void classement(Player[] players) {
 		int[] score = new int[players.length];

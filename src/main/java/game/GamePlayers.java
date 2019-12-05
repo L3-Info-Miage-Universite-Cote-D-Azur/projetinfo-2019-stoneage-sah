@@ -46,7 +46,8 @@ public class GamePlayers {
 
 	/* INIT */
 	/**
-	 * Initie le tableau players de la classe game avec joueurs. 
+	 * * Initie le tableau players de la classe game avec joueurs. 
+	 * @param numberPlayer Nombre de joueur.
 	 */
 	public void initPlayer(int numberPlayer){
 
@@ -69,7 +70,8 @@ public class GamePlayers {
     }
 
 	/**
-	 * Initie le tableau inventories 
+	 * * Initie le tableau inventories 
+	 * @param numberPlayer Nombre de joueur.
 	 */
 	public void initInventories(int numberPlayer){
 		this.inventories = new Inventory[numberPlayer];
@@ -82,6 +84,7 @@ public class GamePlayers {
 
 	/**
 	 * feedPhase correspond a la phase de nourrisage cote joueur. 
+	 * @param selectedPlayer Le joueur qui recolte.
 	 */
 	public void playerFeedPhase(int selectedPlayer) {
 		Player player = players[selectedPlayer];
