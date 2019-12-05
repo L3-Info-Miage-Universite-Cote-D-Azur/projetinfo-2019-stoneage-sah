@@ -27,6 +27,7 @@ public abstract class Building
 	public int getVP () {return this.victoryPoints;}
 	public Ressource[] getNeededRessource() {return this.neededRessource;}
 	public int getType() {return this.type;}
+	public abstract String getName();
 
 	/* SETTERS */
 	protected void setVP (int VP) {this.victoryPoints = VP;}
