@@ -147,7 +147,7 @@ public class Game {
 		for(int i = 0; i < 4; i++) {
 			ZoneCarteCivilisation zoneciv = (ZoneCarteCivilisation) gameZones.getZones()[8+i];
 			CarteCivilisation cc = zoneciv.getCard();
-			Printer.getPrinter().println(zoneciv.getName()+ ": "+cc.toString()+" cout: "+zoneciv.getNumberRessourceNeed()+".");
+			Printer.getPrinter().println("Dans la zone "+zoneciv.getName()+ ": "+cc.toString()+" COUT: "+zoneciv.getNumberRessourceNeed()+".");
 		}
 	}
 	

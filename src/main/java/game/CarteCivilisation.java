@@ -59,13 +59,13 @@ public class CarteCivilisation{
 				"Poterie;","Cadran solaire;","Transport;","Musique;","Tissage;",
 				numberDownPart+" Paysan;",numberDownPart+" Fabricant d'outil;",numberDownPart+" Constructeur;",numberDownPart+" Chamane;"};
 		
-		String[] typeUpPartTab = new String[] {"error"," "+numberEffect+" points de victoire;"," pioche de carte civilisation;",
+		String[] typeUpPartTab = new String[] {"ERROR"," "+numberEffect+" points de victoire;"," pioche de carte civilisation;",
 				" tirage au sort;"," outils unique de valeur "+numberEffect+";"," ressources au choix;"};
  		
-		String string = "Carte ";
+		String string = "CARTE : ";
 		string += typeDownPartTab[this.typeDownPart];
 		
-		string += " gain:";
+		string += " GAIN:";
 		
 		if(this.typeUpPart == 0) {
 			if(numberEffect == 0) {
