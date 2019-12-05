@@ -42,6 +42,14 @@ public class Printer {
 		return Instance(false);
 	}
 	
+	/**
+	 * Permet de changer l'activation ou non de l'affichage
+	 * @param write true : affiche / false : n'affiche pas;
+	 */
+	public void setPrinterCanWrite(boolean write) {
+		this.write = write;
+	}
+	
 	/* PRINTER */
 	/**
 	 * print une chaine de caractere avec retour a la ligne a la fin
