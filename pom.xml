@@ -6,7 +6,7 @@
 
     <groupId>SAH</groupId> <!-- à changer par le nom du groupe -->
     <artifactId>StoneAge</artifactId> <!-- et le nom du projet -->
-    <version>3.0</version>
+    <version>4.0</version>
 
 
     <properties>
@@ -111,6 +111,7 @@
                     <!-- arguments récupérés dans le main -->
                     <arguments>
                             <argument>4</argument> <!-- Nombre de joueur -->
+                            <!--<argument>Statistique</argument>--> <!-- generation des fichier de statistique -->
                     </arguments>
 
                     <!-- arguments de configuration système -->
