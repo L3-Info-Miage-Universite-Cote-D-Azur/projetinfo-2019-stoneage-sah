@@ -134,6 +134,10 @@ public class Game {
 		}
 		Printer.getPrinter().println();
 		for (int i = 0; i < numberPlayer;i++) {
+			Printer.getPrinter().println("Le joueur "+ gamePlayers.getPlayer(i).getName()+" a " + gamePlayers.getPlayer(i).getMaxFigurine()+" ouvriers");
+		}
+		Printer.getPrinter().println();
+		for (int i = 0; i < numberPlayer;i++) {
 			String string = "Le joueur "+gamePlayers.getPlayer(i).getName()+" a :";
 			string += " "+gamePlayers.getInventory(i).getRessource(Ressource.WOOD)+" bois,";
 			string += " "+gamePlayers.getInventory(i).getRessource(Ressource.CLAY)+" argiles,";
