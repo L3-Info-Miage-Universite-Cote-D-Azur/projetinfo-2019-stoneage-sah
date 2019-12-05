@@ -78,10 +78,10 @@ public class ZoneBuilding extends ZoneOnePlayer
 	}
 
 	/**
-	 * Gere le systeme pour retirer la figurine de la zone
+	 * Gere le systeme pour retirer la figurine de la zone.
 	 * @param player : le joueur concerne.
-	 * @param inventory inventaire du joueur concerner
-	 * @return 
+	 * @param inventory inventaire du joueur concerner.
+	 * @return Renvoie l'id de l'action suplementaire (si necesaire sinon 0).
 	 */
 	public int playerRecoveryFigurine(Player player,Inventory inventory){
 		int number = super.howManyPlayerFigurine(player);

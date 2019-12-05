@@ -29,7 +29,7 @@ public abstract class Zone {
 	/* METHOD */
 	/**
 	 * ableToChooseZone renvoie true ou false si le joueur peut placer ses figurines ou non sur la zone. 
-	 * @param Player player : le joueur concerne.
+	 * @param player : le joueur concerne.
 	 * @return Boolean : true si il peut choisir, false sinon.
 	 */ 
 	public boolean ableToChooseZone(Player player){
@@ -39,7 +39,6 @@ public abstract class Zone {
 	/* STRING */
 	/**
 	 * Affichage textuel du joueur qui place dans la zone un nombre de figurine
-	 * @param zone : zone a afficher
 	 * @param player : player a afficher
 	 * @param number : nombre a qui a etait placer
 	 * @return phrase qui resume l'action
