@@ -53,6 +53,12 @@ public class CarteCivilisation{
 	public Ressource getRessource() { return ressource; }
 	public int getNumberEffect() { return numberEffect; }
 	
+	public String getName() {
+		String[] typeDownPartTab = new String[] {"Medecine","Art","Ecriture",
+				"Poterie","Cadran solaire","Transport;","Musique","Tissage",
+				numberDownPart+" Paysan",numberDownPart+" Fabricant d'outil",numberDownPart+" Constructeur",numberDownPart+" Chamane"};
+		return "'Carte "+typeDownPartTab[this.typeDownPart]+"'";
+	}
 	
 	public String toString() {
 		String[] typeDownPartTab = new String[] {"Medecine;","Art;","Ecriture;",
@@ -62,7 +68,7 @@ public class CarteCivilisation{
 		String[] typeUpPartTab = new String[] {"ERROR"," "+numberEffect+" points de victoire;"," pioche de carte civilisation;",
 				" tirage au sort;"," outils unique de valeur "+numberEffect+";"," ressources au choix;"};
  		
-		String string = "CARTE : ";
+		String string = "CARTE: ";
 		string += typeDownPartTab[this.typeDownPart];
 		
 		string += " GAIN:";

@@ -80,6 +80,7 @@ public class GameZones {
 				if (action>0 && zones[i] instanceof ZoneCarteCivilisation) {
 					if (action==1) {
 						CarteCivilisation cc = cardManager.getRandomCivilisationCard();
+						Printer.getPrinter().println("Le joueur "+player.getName()+" obtient "+cc.getName()+" grace a la carte civilisation.");
 						if (cc != null) inventory.addCardCivilisation(cc); //plus de carte dans le jeu
 					}
 					//tirage pour chaque joueur
