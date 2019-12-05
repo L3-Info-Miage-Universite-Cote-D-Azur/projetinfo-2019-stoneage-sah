@@ -184,7 +184,7 @@ public class GameZones {
 		//Initialisation des variables pour l'IA
 		for(int i = 0; i < zones.length; i++){
 			
-			if(zones[i].ableToChooseZone(player)) zoneAvailableSpace[i] = zones[i].getAvailableSpace(); 
+			if(ableToChooseZone(i,player)) zoneAvailableSpace[i] = zones[i].getAvailableSpace(); 
 			else zoneAvailableSpace[i] = 0; //si le joueur ne peut pas placer dans la zone pour quelconc resaions
 			zoneName[i] = zones[i].getName();
 		}
