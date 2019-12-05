@@ -113,8 +113,8 @@ public class Player extends PlayerStruct {
 	}
 	
 	/**
-	 * Renvoie une IA parmi celles presentes alÃƒÂ©atoirement
-	 * @return Renvoie une instance implementant l'interface IA
+	 * Renvoie une IA parmi celles presentes aleatoirement
+	 * @param inventoryIA l'inventaire de l'ia.
 	 */
 	public void initIA(InventoryIA inventoryIA) 
 	{
