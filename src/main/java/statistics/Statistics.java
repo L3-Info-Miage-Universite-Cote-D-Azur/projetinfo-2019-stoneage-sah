@@ -2,8 +2,6 @@ package statistics;
 
 import java.io.*; 
 import java.util.*; 
-import com.opencsv.CSVWriter;
-
 import game.Settings;
 import game.Ressource;
 import inventory.InventoryStruct;
@@ -71,20 +69,20 @@ public class Statistics
 	// 0, 10, 5, 15 \n
 	// 1, 20, 10, 30 \n
 	// etc
-	public void createJITCurves (Player[] players) throws IOException
+	public void createJITCurves (String[] players) throws IOException
 	{
 		// DONNER LES NOMS DE DEPART
 		this.csv.addElementToRow(this.JITCurves[0], "Tours");
 		this.csv.addElementToRow(this.JITCurves[0], "Score");
 		for (int i = 0; i < players.length; i++)
-			this.csv.addElementToRow(this.JITCurves[0], players[i].getIA().toString());
+			this.csv.addElementToRow(this.JITCurves[0], players[i]);
 		this.csv.endRow(this.JITCurves[0]);
 
 		for (int i = 1; i < this.JITCurves.length; i++)
 		{
 			this.csv.addElementToRow(this.JITCurves[i], "Tours");
 			for (int k = 0; k < players.length; k++)
-				this.csv.addElementToRow(this.JITCurves[i], players[k].getIA().toString());
+				this.csv.addElementToRow(this.JITCurves[i], players[k]);
 			this.csv.addElementToRow(this.JITCurves[i], Ressource.indexToRessource(i-1).toString()+"Moyen");
 			this.csv.endRow(this.JITCurves[i]);
 		}
@@ -115,7 +113,7 @@ public class Statistics
 					if (this.playersArrays.get(currPlayer)[statDataIndex].size() > nbRounds)
 					{
 						// SI OUI, AJOUTER LA RESSOURCE
-						this.csv.addElementToRow(tmpFile, this.playersArrays.get(currPlayer)[statDataIndex].get(nbRounds).toString());
+						this.csv.addElementToRow(tmpFile, Double.toString((double)this.playersArrays.get(currPlayer)[statDataIndex].get(nbRounds)/Settings.NB_GAMES));
 						averageStatData += this.playersArrays.get(currPlayer)[statDataIndex].get(nbRounds);
 						occ++;
 					}
@@ -127,24 +125,24 @@ public class Statistics
 
 				}
 				// AJOUT DU TOTAL SUR LES JOUEURS
-				this.csv.addElementToRow(tmpFile, Double.toString((double)averageStatData/occ));
+				this.csv.addElementToRow(tmpFile, Double.toString((double)averageStatData/(Settings.NB_GAMES * players.length)));
 				this.csv.endRow(tmpFile);
 			}
 		}
 	}
 	
-	public void createAverages (Player[] players) throws IOException
+	public void createAverages (String[] players) throws IOException
 	{
 		// DONNER LES NOMS DE DEPART
 		this.csv.addElementToRow(this.average[0], "Score");
 		for (int i = 0; i < players.length; i++)
-			this.csv.addElementToRow(this.average[0], players[i].getIA().toString());
+			this.csv.addElementToRow(this.average[0], players[i]);
 		this.csv.endRow(this.average[0]);
 
 		for (int i = 1; i < this.average.length; i++)
 		{
 			for (int k = 0; k < players.length; k++)
-				this.csv.addElementToRow(this.average[i], players[k].getIA().toString());
+				this.csv.addElementToRow(this.average[i], players[k]);
 			this.csv.addElementToRow(this.average[i], Ressource.indexToRessource(i-1).toString()+"Moyen");
 			this.csv.endRow(this.average[i]);
 		}
@@ -182,7 +180,7 @@ public class Statistics
 				if (this.playersArrays.get(currPlayer)[statDataIndex].size() > max - 1)
 				{
 					// SI OUI, AJOUTER LA RESSOURCE
-					this.csv.addElementToRow(tmpFile, this.playersArrays.get(currPlayer)[statDataIndex].get(max - 1).toString());
+					this.csv.addElementToRow(tmpFile, Double.toString((double)this.playersArrays.get(currPlayer)[statDataIndex].get(max - 1)/Settings.NB_GAMES));
 					averageStatData += this.playersArrays.get(currPlayer)[statDataIndex].get(max - 1);
 					occ++;
 				}
@@ -193,17 +191,17 @@ public class Statistics
 				}
 			}
 			// AJOUT DU TOTAL SUR LES JOUEURS
-			this.csv.addElementToRow(tmpFile, Double.toString((double)averageStatData/occ));
+			this.csv.addElementToRow(tmpFile, Double.toString((double)averageStatData/(Settings.NB_GAMES * players.length)));
 			this.csv.endRow(tmpFile);
 		}
 	}
 
-	public void updateStats (InventoryStruct[] invs, PlayerStruct[] players)
+	public void updateStats (InventoryStruct[] invs, PlayerStruct[] players, int nbRounds)
 	{
 		// SCORE FIRST
 		for (int i = 0; i < players.length; i++)
 		{
-			this.playersArrays.get(i)[0].add(players[i].getScore());
+			this.updateTheStat(i, 0, players[i].getScore(), nbRounds);
 		}
 
 		// RESSOURCES
@@ -215,8 +213,23 @@ public class Statistics
 			for (int k = 1; k < ressrc.length + 1; k++)
 			{
 				// AJOUTER LA RESSOURCE EN FIN D'ARRAYLIST
-				this.playersArrays.get(i)[k].add(ressrc[k-1]);
+				this.updateTheStat(i, k, ressrc[k-1], nbRounds);
 			}
+		}
+	}
+
+	public void updateTheStat (int currPlayer, int currData, int value, int rounds)
+	{
+		//System.out.println(this.playersArrays.get(currPlayer)[currData].toArray().length + " " + Integer.toString(rounds));
+		if (this.playersArrays.get(currPlayer)[currData].size() > rounds - 1 /*rounds commence a 1*/)
+		{
+			int res = this.playersArrays.get(currPlayer)[currData].get(rounds - 1) + value;
+			this.playersArrays.get(currPlayer)[currData].set(rounds - 1, res);
+			//System.out.println(this.playersArrays.get(currPlayer)[currData].get(rounds - 1).toString() + " " + Integer.toString(value));
+		}
+		else
+		{
+			this.playersArrays.get(currPlayer)[currData].add(value);
 		}
 	}
 
