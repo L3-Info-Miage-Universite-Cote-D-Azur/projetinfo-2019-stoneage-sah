@@ -45,12 +45,19 @@ public class Program {
         	String[] ias = new String[numberPlayer];
         	for(int i = 0; i < numberPlayer; i++)
         	{
+        		iaPlayers[i]=i; //on a 4 ia pour le moment il dest donc interesant de fixé les IA 
         		switch(iaPlayers[i]) {
 	            	case 0: 
 	            		ias[i] = "Random";
 	            		break;
 	            	case 1:
 	            		ias[i] = "Debutant";
+	            		break;
+	            	case 2:
+	            		ias[i] = "CarteCivilisation version Bois";
+	            		break;
+	            	case 3:
+	            		ias[i] = "Civilisation";
 	            		break;
 	            	default:
 	            		ias[i] = null;
