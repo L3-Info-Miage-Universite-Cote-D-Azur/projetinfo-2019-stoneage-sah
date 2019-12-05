@@ -90,7 +90,7 @@ public class Game {
 			nbTour+=1;
 		}
 		Printer.getPrinter().println("\n=========================\nLa partie est fini\n=========================");
-		gamePlayers.endGame();
+		gamePlayers.endGame(this.statistics);
 	}
 
 	/**
