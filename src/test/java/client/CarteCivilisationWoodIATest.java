@@ -8,22 +8,20 @@ import game.Ressource;
 import inventory.Inventory;
 import player.Player;
 
-
-public class RandomIATest {
-	
+public class CarteCivilisationWoodIATest {
 	public Inventory inv = new Inventory();
-	public IA testIa = new RandomIA(null,inv.getInventoryIA());
+	public Player play = new Player("Test", inv.getInventoryIA());
+	public IA testIa = new CarteCivilisationWoodIA(play.getPlayerIA(),inv.getInventoryIA());
 
 	@Test
 	void testChooseZone() {
-		for(int i = 1; i <= 10; i++) {
+		for(int i = 1; i <100; i++) {
 			//On incremente la taille du tableau a chaque iteration. 
-			int[] tab1 = new int[i];
-			String[] tab2 = new String[i];
+			int[] tab1 = new int[] {7,7,7,7,5000,0,0,0,0,0,0,0,0,0,0};
 
 			for(int j =0; j < 100; j++) {
 				//On test 100 fois que l'indice renvoye est bien compris entre 0 et tab1.length
-				int test = testIa.chooseZone(tab1, tab2,null , null);
+				int test = testIa.chooseZone(tab1, null ,null , null);
 				assertEquals(true,test < tab1.length);
 				assertEquals(true,test >= 0);
 			}
@@ -54,9 +52,9 @@ public class RandomIATest {
 		inv.addRessource(Ressource.WOOD, 1);
 		inv.addRessource(Ressource.CLAY, 2);
 		inv.addRessource(Ressource.STONE, 3);
-		
+
 		int i1 = 3;
-		
+
 		for(int j =0; j < 50; j++) {
 			int[] test = testIa.chooseRessource(i1);
 			assertEquals(true,test[0] < 3);
@@ -69,12 +67,12 @@ public class RandomIATest {
 			assertEquals(false,test[1] < 0);
 			assertEquals(false,test[1] > 3);
 		}
-		
-		
+
+
 		//CAS 2
 		inv = new Inventory();
 		testIa = new RandomIA(null,inv.getInventoryIA());
-		
+
 		inv.addRessource(Ressource.WOOD, 1);
 		inv.addRessource(Ressource.CLAY, 1);
 		int i2 = 2;
@@ -94,7 +92,7 @@ public class RandomIATest {
 		//CAS 3
 		inv = new Inventory();
 		testIa = new RandomIA(null,inv.getInventoryIA());
-		
+
 		inv.addRessource(Ressource.WOOD, 3);
 		int i3 = 3;
 
@@ -116,9 +114,9 @@ public class RandomIATest {
 		//Test dans un cas ou il dois depenser toutes ses ressources. 
 		inv = new Inventory();
 		testIa = new RandomIA(null,inv.getInventoryIA());
-		
+
 		inv.addRessource(Ressource.GOLD, 4);
-		
+
 		int number = 4;
 		int[] res;
 
@@ -134,7 +132,7 @@ public class RandomIATest {
 		//Test dans un cas general
 		inv = new Inventory();
 		testIa = new RandomIA(null,inv.getInventoryIA());
-		
+
 		inv.addRessource(Ressource.WOOD, 1);
 		inv.addRessource(Ressource.CLAY, 2);
 		inv.addRessource(Ressource.STONE, 3);
@@ -172,12 +170,12 @@ public class RandomIATest {
 			assertEquals(true, res[1] == false);
 			assertEquals(true, res[2] == false);
 		}
-		
+
 		//Cas general 
 		inv = new Inventory();
 		testIa = new RandomIA(null,inv.getInventoryIA());
 		Player testPlayer = new Player("test",inv.getInventoryIA());
-		
+
 		for(int i =0; i<5;i++) {
 			inv.getTools().incrementTool();
 		}
@@ -186,7 +184,7 @@ public class RandomIATest {
 
 		for(int j =0; j < 50; j++) {
 			res = testIa.pickTools();
-			
+
 			if(testBooleans[0]) {
 				assertEquals(true, res[0] == false);
 			}else {
@@ -197,7 +195,7 @@ public class RandomIATest {
 			}else {
 				assertEquals(true, res[1] == false || res[1] == true);
 			}
-			
+
 			if(testBooleans[2]) {
 				assertEquals(true, res[2] == false);
 			}else {
@@ -205,7 +203,7 @@ public class RandomIATest {
 			}
 		}
 	}
-	
+
 	@Test
 	void testChooseTirage() {
 		//TEST SUR LA VALEUR DU TIRAGE CHOISI.
@@ -254,7 +252,7 @@ public class RandomIATest {
 		int res;
 		for(int i = 0; i <100; i++) {
 			res = testIa.useRessourceCard();
-			assertEquals(true, (res >=0 && res < 4) || (res == -1));
+			assertEquals(true, res == 0);
 		}
 	}
 }
