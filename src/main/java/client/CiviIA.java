@@ -44,7 +44,7 @@ public class CiviIA extends IA {
 		this.currentZone = -1;
 
 		// ELLE PREND EN PRIORITE LA CABANE TANT QU'ELLE N'A PAS LE MAX DE FIGURINES
-		if (zoneAvailableSpace[6] >= 2 || this.playerIA.getMaxFigurine() < 10) {
+		if (zoneAvailableSpace[6] >= 2 && this.playerIA.getMaxFigurine() < 10) {
 			this.currentZone = 6;
 		}
 		
@@ -52,7 +52,7 @@ public class CiviIA extends IA {
 		else if (zoneAvailableSpace[9] >= 1) this.currentZone = 9;
 		
 		// ELLE VA A LA CHASSE
-		else if (zoneAvailableSpace[4] >= 1)
+		else if (zoneAvailableSpace[4] >= 1 && inventoryIA.getRessource(Ressource.FOOD)<10)
 		{
 			if (this.rand.nextInt(2) == 1) this.currentZone = 4;
 		}
