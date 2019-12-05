@@ -156,7 +156,7 @@ public class GamePlayers {
 
 		do {
 			IAChoose = player.getIA().chooseRessource(ressourceToFood);
-		}while(IAChoose[0] < 0 && IAChoose[0] > 3 && IAChoose[1] > 0 && IAChoose[1] <= Math.min(ressourceToFood, copieInventory[IAChoose[0]]));
+		}while(IAChoose[0] < 0 || IAChoose[0] > 3 || IAChoose[1] <= 0 || IAChoose[1] > Math.min(ressourceToFood, copieInventory[IAChoose[0]]));
 
 		Printer.getPrinter().println("Le joueur "+player.getName()+ " nourris ses figurines avec "+ IAChoose[1]+" "+Ressource.indexToRessource(IAChoose[0])+".");
 		inventory.ableToSubRessource(Ressource.indexToRessource(IAChoose[0]), IAChoose[1]);
