@@ -92,7 +92,7 @@ public class GamePlayers {
 		int figurinesToFeed = player.getMaxFigurine();
 		figurinesToFeed -= inventory.getRessource(Ressource.FIELD);
 
-		Printer.getPrinter().println("\nC'est au tour de "+player.getName()+" :");
+		Printer.getPrinter().println("\n##### C'est au tour de "+player.getName()+" : #####");
 
 		if(figurinesToFeed <= 0) {
 			Printer.getPrinter().println("Le joueur "+player.getName()+" a nourris ses figurines.");

@@ -52,7 +52,7 @@ public class GameZones {
 	 * false : a encore des figurine a placer
 	 */
 	public boolean playerPlaceFigurine(Player player) {
-		Printer.getPrinter().println("\nC'est le tour de " + player.getName() + ".");
+		Printer.getPrinter().println("\n##### C'est au tour de "+player.getName()+" : #####");
 		int zoneIndex = zoneChoose(player);//On recupere l'indice de la zone
 		int number = numberChoose(player,zones[zoneIndex]);//On recupere le nombre de figurines
 		zones[zoneIndex].placeFigurine(number,player);//On place les figurines dans la zone. 
@@ -70,7 +70,7 @@ public class GameZones {
 	 * @param inventory l'inventaire du joueur en question
 	 */
 	public void playerHarvest(Player player, Inventory inventory,GamePlayers gamePlayers){
-		Printer.getPrinter().println("\nC'est au tour de "+player.getName()+" :");
+		Printer.getPrinter().println("\n##### C'est au tour de "+player.getName()+" : #####");
 		int action;
 		for(int i = 0; i < zones.length; i++) 
 		{
