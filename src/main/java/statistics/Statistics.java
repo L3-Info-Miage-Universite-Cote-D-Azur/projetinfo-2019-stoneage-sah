@@ -2,13 +2,10 @@ package statistics;
 
 import java.io.*; 
 import java.util.*; 
-
 import game.Settings;
 import game.Ressource;
 import inventory.InventoryStruct;
-import player.Player;
 import player.PlayerStruct;
-import printer.Printer;
 
 public class Statistics
 {
@@ -19,6 +16,7 @@ public class Statistics
 	 */
 	private File[] average;
 	private File[] JITCurves;
+	private File victoryRate;
 	private CSVUtility csv;
 
 	/*
@@ -29,14 +27,16 @@ public class Statistics
 	 */
 	private ArrayList<ArrayList<Integer>[]> playersArrays;
 	private ArrayList<Integer>[] arrays;
+	private int[] victoryRateArray;
 
 	/* CONSTRUCTOR */
 	@SuppressWarnings("unchecked")
 	public Statistics (int nbPlayers)
 	{
 		// CREATING THE DIRECTORIES
-		new File("./averages").mkdir();
-		new File("./just-in-time-curves").mkdir();
+		new File("./stats").mkdir();
+		new File("./stats/averages").mkdir();
+		new File("./stats/just-in-time-curves").mkdir();
 
 		// INSTANCIATE THE FIELDS
 		this.average = new File[Settings.FILE_NAMES.length];
@@ -45,8 +45,8 @@ public class Statistics
 
 		for (int i = 0; i < Settings.FILE_NAMES.length; i++)
 		{
-			this.average[i] = new File("averages/" + Settings.FILE_NAMES[i]);
-			this.JITCurves[i] = new File("just-in-time-curves/" + Settings.FILE_NAMES[i]);
+			this.average[i] = new File("./stats/averages/" + Settings.FILE_NAMES[i]);
+			this.JITCurves[i] = new File("./stats/just-in-time-curves/" + Settings.FILE_NAMES[i]);
 		}
 
 		this.playersArrays = new ArrayList<ArrayList<Integer>[]>();
@@ -61,6 +61,9 @@ public class Statistics
 			}
 			this.playersArrays.add(this.arrays);
 		}
+		
+		this.victoryRate = new File("./stats/victoryRate.csv");
+		this.victoryRateArray = new int[nbPlayers];
 	}
 
 	/* METHODS */
@@ -74,12 +77,12 @@ public class Statistics
 	/**
 	 * Creer tous les fichiers dans ./just-in-time-curves/ qui representent la moyenne des ressources au cours des tours sur Settings.NB_GAMES 
 	 * @param players le nom des IA de chaque joueur
-	 * @throws IOException IO exception
+	 * @throws IOException IO Exception
 	 */
 	public void createJITCurves (String[] players) throws IOException
 	{
 		// DONNER LES NOMS DE DEPART
-		this.csv.addElementToRow(this.JITCurves[0], "Tours");
+		this.csv.addSomething(this.JITCurves[0], "Tours");
 		this.csv.addElementToRow(this.JITCurves[0], "Score");
 		for (int i = 0; i < players.length; i++)
 			this.csv.addElementToRow(this.JITCurves[0], players[i]);
@@ -109,7 +112,6 @@ public class Statistics
 			{
 				File tmpFile = this.JITCurves[statDataIndex];
 				int averageStatData = 0;
-				int occ = 0;
 				// AJOUT DU TOUR A CHAQUE DEBUT DE LIGNE
 				this.csv.addSomething(tmpFile, Integer.toString(nbRounds));
 				// POUR CHAQUE JOUEUR
@@ -122,7 +124,6 @@ public class Statistics
 						// SI OUI, AJOUTER LA RESSOURCE
 						this.csv.addElementToRow(tmpFile, Double.toString((double)this.playersArrays.get(currPlayer)[statDataIndex].get(nbRounds)/Settings.NB_GAMES));
 						averageStatData += this.playersArrays.get(currPlayer)[statDataIndex].get(nbRounds);
-						occ++;
 					}
 					else
 					{
@@ -141,21 +142,29 @@ public class Statistics
 	/**
 	 * Creer tous les fichiers dans ./just-in-time-curves/ qui representent la moyenne des ressources a la fin de la partie
 	 * @param players le nom des IA de chaque joueur
-	 * @throws IOException IO exception
+	 * @throws IOException IO Exception
 	 */
 	public void createAverages (String[] players) throws IOException
 	{
 		// DONNER LES NOMS DE DEPART
-		this.csv.addElementToRow(this.average[0], "Score");
+		this.csv.addSomething(this.average[0], "Score");
+		this.csv.addNothing(this.average[0]);
 		for (int i = 0; i < players.length; i++)
-			this.csv.addElementToRow(this.average[0], players[i]);
+		{
+			this.csv.addSomething(this.average[0], players[i]);
+			this.csv.addNothing(this.average[0]);
+		}
 		this.csv.endRow(this.average[0]);
 
 		for (int i = 1; i < this.average.length; i++)
 		{
 			for (int k = 0; k < players.length; k++)
-				this.csv.addElementToRow(this.average[i], players[k]);
-			this.csv.addElementToRow(this.average[i], Ressource.indexToRessource(i-1).toString()+"Moyen");
+			{
+				this.csv.addSomething(this.average[i], players[k]);
+				this.csv.addNothing(this.average[i]);
+			}
+			this.csv.addSomething(this.average[i], Ressource.indexToRessource(i-1).toString()+"Moyen");
+			this.csv.addNothing(this.average[i]);
 			this.csv.endRow(this.average[i]);
 		}
 	
@@ -203,6 +212,41 @@ public class Statistics
 			this.csv.addElementToRow(tmpFile, Double.toString((double)averageStatData/(Settings.NB_GAMES * players.length)));
 			this.csv.endRow(tmpFile);
 		}
+	}
+	
+	/**
+	 * Creer un fichier victoryRate.csv qui montre le taux de victoire par IA
+	 * @param players le nom des IA de chaque joueur
+	 * @throws IOException IO Exception
+	 */
+	public void createVictoryRate (String[] players) throws IOException
+	{
+		this.csv.addSomething(this.victoryRate, players[0]);
+		this.csv.addNothing(this.victoryRate);
+		for (int i = 1; i < players.length; i++)
+		{
+			this.csv.addSomething(this.victoryRate, players[i]);
+			this.csv.addNothing(this.victoryRate);
+		}
+		this.csv.endRow(this.victoryRate);
+		
+		this.csv.addSomething(this.victoryRate, Double.toString((double)((this.victoryRateArray[0] * 100)/Settings.NB_GAMES)) + "%");
+		this.csv.addNothing(this.victoryRate);
+		for (int i = 1; i < this.victoryRateArray.length; i++)
+		{
+			this.csv.addElementToRow(this.victoryRate, Double.toString((double)((this.victoryRateArray[i] * 100)/Settings.NB_GAMES)) + "%");
+			this.csv.addNothing(this.victoryRate);
+		}
+		this.csv.endRow(this.victoryRate);
+	}
+	
+	/**
+	 * Ajoute une victoire au joueur dans le systeme de statistique
+	 * @param index l'indice du joueur gagnant
+	 */
+	public void updateVictoryRate (int index)
+	{
+		this.victoryRateArray[index]++;
 	}
 	
 	/**
