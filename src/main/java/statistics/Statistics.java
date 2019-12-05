@@ -45,7 +45,7 @@ public class Statistics
 
 		for (int i = 0; i < Settings.FILE_NAMES.length; i++)
 		{
-			this.average[i] = new File(Settings.FILE_NAMES[i]);
+			this.average[i] = new File("averages/" + Settings.FILE_NAMES[i]);
 			this.JITCurves[i] = new File("just-in-time-curves/" + Settings.FILE_NAMES[i]);
 		}
 
@@ -130,6 +130,71 @@ public class Statistics
 				this.csv.addElementToRow(tmpFile, Double.toString((double)averageStatData/occ));
 				this.csv.endRow(tmpFile);
 			}
+		}
+	}
+	
+	public void createAverages (Player[] players) throws IOException
+	{
+		// DONNER LES NOMS DE DEPART
+		this.csv.addElementToRow(this.average[0], "Score");
+		for (int i = 0; i < players.length; i++)
+			this.csv.addElementToRow(this.average[0], players[i].getIA().toString());
+		this.csv.endRow(this.average[0]);
+
+		for (int i = 1; i < this.average.length; i++)
+		{
+			for (int k = 0; k < players.length; k++)
+				this.csv.addElementToRow(this.average[i], players[k].getIA().toString());
+			this.csv.addElementToRow(this.average[i], Ressource.indexToRessource(i-1).toString()+"Moyen");
+			this.csv.endRow(this.average[i]);
+		}
+	
+		// FIND THE MAX ROUNDS
+		int max = 0;
+		for (int i = 0; i < this.playersArrays.size(); i++)
+			for (int k = 0; k < this.playersArrays.get(i).length; k++)
+				if (max < this.playersArrays.get(i)[k].size())
+					max = this.playersArrays.get(i)[k].size();
+
+		// POUR CHAQUE DATA
+		for (int statDataIndex = 0; statDataIndex < this.playersArrays.get(0).length; statDataIndex++)
+		{
+			File tmpFile = this.average[statDataIndex];
+			int averageStatData = 0;
+			int occ = 0;
+			// SI LE JOUEUR POSSEDE LA RESSOURCE A CE TOUR T
+			if (this.playersArrays.get(0)[statDataIndex].size() > max - 1)
+			{
+				// SI OUI, AJOUTER LA RESSOURCE
+				this.csv.addSomething(tmpFile, this.playersArrays.get(0)[statDataIndex].get(max - 1).toString());
+				averageStatData += this.playersArrays.get(0)[statDataIndex].get(max - 1);
+				occ++;
+			}
+			else
+			{
+				// SI NON, NE RIEN AJOUTER
+				this.csv.addNothing(tmpFile);
+			}
+			// POUR CHAQUE JOUEUR
+			for (int currPlayer = 1; currPlayer < this.playersArrays.size(); currPlayer++)
+			{
+				// SI LE JOUEUR POSSEDE LA RESSOURCE A CE TOUR T
+				if (this.playersArrays.get(currPlayer)[statDataIndex].size() > max - 1)
+				{
+					// SI OUI, AJOUTER LA RESSOURCE
+					this.csv.addElementToRow(tmpFile, this.playersArrays.get(currPlayer)[statDataIndex].get(max - 1).toString());
+					averageStatData += this.playersArrays.get(currPlayer)[statDataIndex].get(max - 1);
+					occ++;
+				}
+				else
+				{
+					// SI NON, NE RIEN AJOUTER
+					this.csv.addNothing(tmpFile);
+				}
+			}
+			// AJOUT DU TOTAL SUR LES JOUEURS
+			this.csv.addElementToRow(tmpFile, Double.toString((double)averageStatData/occ));
+			this.csv.endRow(tmpFile);
 		}
 	}
 
