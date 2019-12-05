@@ -38,6 +38,9 @@ public class Settings
 	public static final int MAX_ZONETOOL_SPACE = 1;
 	// Noms des fichiers de statistiques
 	public static final String[] FILE_NAMES = new String[] {"score.csv", "bois.csv", "argile.csv", "pierre.csv", "or.csv", "nourriture.csv", "marqueur_nourriture.csv"};
+	// Nombre de parties
+	public static final int NB_GAMES = 500;
+
 
 	// Toutes les cartes tuiles batiment du jeu
 	public static ArrayList<Building> BUILDINGS = new ArrayList<Building>(Arrays.asList(
@@ -113,5 +116,39 @@ public class Settings
 		}
 		return buildings;
 	}
-
+	
+	public static void resetArrays ()
+	{
+		Settings.BUILDINGS = new ArrayList<Building>(Arrays.asList(
+				new BuildingRessourceImposed(10, Ressource.WOOD, Ressource.WOOD, Ressource.CLAY),
+				new BuildingRessourceImposed(11, Ressource.WOOD, Ressource.WOOD, Ressource.STONE),
+				new BuildingRessourceImposed(12, Ressource.WOOD, Ressource.WOOD, Ressource.GOLD),
+				new BuildingRessourceImposed(11, Ressource.WOOD, Ressource.CLAY, Ressource.CLAY),
+				new BuildingRessourceImposed(12, Ressource.WOOD, Ressource.CLAY, Ressource.STONE),
+				new BuildingRessourceImposed(12, Ressource.WOOD, Ressource.CLAY, Ressource.STONE),
+				new BuildingRessourceImposed(13, Ressource.CLAY, Ressource.CLAY, Ressource.STONE),
+				new BuildingRessourceImposed(14, Ressource.WOOD, Ressource.STONE, Ressource.GOLD),
+				new BuildingRessourceImposed(14, Ressource.WOOD, Ressource.STONE, Ressource.GOLD),
+				new BuildingRessourceImposed(13, Ressource.WOOD, Ressource.STONE, Ressource.STONE),
+				new BuildingRessourceImposed(13, Ressource.WOOD, Ressource.CLAY, Ressource.GOLD),
+				new BuildingRessourceImposed(13, Ressource.WOOD, Ressource.CLAY, Ressource.GOLD),
+				new BuildingRessourceImposed(16, Ressource.STONE, Ressource.STONE, Ressource.GOLD),
+				new BuildingRessourceImposed(15, Ressource.CLAY, Ressource.STONE, Ressource.GOLD),
+				new BuildingRessourceImposed(15, Ressource.CLAY, Ressource.STONE, Ressource.GOLD),
+				new BuildingRessourceImposed(14, Ressource.CLAY, Ressource.STONE, Ressource.STONE),
+				new BuildingRessourceImposed(14, Ressource.CLAY, Ressource.CLAY, Ressource.GOLD),
+				new BuildingRessourceChoosed(),
+				new BuildingRessourceChoosed(),
+				new BuildingRessourceChoosed(),
+				new BuildingRessourceNotImposed(2, 5),
+				new BuildingRessourceNotImposed(1, 5),
+				new BuildingRessourceNotImposed(4, 4),
+				new BuildingRessourceNotImposed(3, 4),
+				new BuildingRessourceNotImposed(2, 4),
+				new BuildingRessourceNotImposed(1, 4),
+				new BuildingRessourceNotImposed(4, 5),
+				new BuildingRessourceNotImposed(3, 5)
+				));
+		Settings.PLAYER_NAME = new ArrayList<String>(Arrays.asList("Robert","Sardoche","Doritos","JeanCharles","Mclito&Carfly","Helico42"));
+	}
 }
