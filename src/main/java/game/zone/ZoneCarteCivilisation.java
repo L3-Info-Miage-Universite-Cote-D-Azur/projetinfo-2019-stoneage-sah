@@ -70,7 +70,9 @@ public class ZoneCarteCivilisation extends ZoneOnePlayer{
 			inventory.addCardCivilisation(carteCivilisation);
 			CarteCivilisation copieLinkCard = carteCivilisation;
 			carteCivilisation=null; //suppresion de la carte civilisation de la zone.
-			Printer.getPrinter().println("Le joueur "+player.getName()+" obtient la carte civilisation de "+this.getName()+".");
+			
+			Printer.getPrinter().println("Le joueur "+player.getName()+
+					" obtient "+copieLinkCard.getName()+" dans la zone "+this.getName()+".");
 
 			switch(copieLinkCard.getTypeUpPart()){
 			case 0 : //cas ou c'est un gain de ressource direct
@@ -178,7 +180,7 @@ public class ZoneCarteCivilisation extends ZoneOnePlayer{
 
 					if(choix[i] != 0) {//On affiche.
 						Printer.getPrinter().println("Le joueur "+player.getName()+" depense "+ choix[i]
-								+" "+ Ressource.indexToRessource(i)+ " pour la carte civilisation de "+this.getName()+".");
+								+" "+ Ressource.indexToRessource(i)+ " pour la carte de "+this.getName()+".");
 					}
 				}
 				return true;
