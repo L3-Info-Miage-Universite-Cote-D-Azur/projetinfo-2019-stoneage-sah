@@ -92,7 +92,7 @@ public class GamePlayers {
 		int figurinesToFeed = player.getMaxFigurine();
 		figurinesToFeed -= inventory.getRessource(Ressource.FIELD);
 
-		Printer.getPrinter().println("\n##### C'est au tour de "+player.getName()+" : #####");
+		Printer.getPrinter().println("\nC'est au tour de "+player.getName()+" :");
 
 		if(figurinesToFeed <= 0) {
 			Printer.getPrinter().println("Le joueur "+player.getName()+" a nourris ses figurines.");
@@ -176,7 +176,7 @@ public class GamePlayers {
 		// IAChoose[1] = nb de IAChoose[0]
 		do {
 			IAChoose = player.getIA().chooseRessource(ressourceToFood);
-		}while(IAChoose[0] < 0 || IAChoose[0] > 3 || IAChoose[1] <= 0 || IAChoose[1] > Math.min(ressourceToFood, copieInventory[IAChoose[0]]));
+		}while(IAChoose == null || IAChoose.length!=2 || IAChoose[0] < 0 || IAChoose[0] > 3 || IAChoose[1] <= 0 || IAChoose[1] > Math.min(ressourceToFood, copieInventory[IAChoose[0]]));
 
 		Printer.getPrinter().println("Le joueur "+player.getName()+ " nourris ses figurines avec "+ IAChoose[1]+" "+Ressource.indexToRessource(IAChoose[0])+".");
 		inventory.subRessource(Ressource.indexToRessource(IAChoose[0]), IAChoose[1]);
