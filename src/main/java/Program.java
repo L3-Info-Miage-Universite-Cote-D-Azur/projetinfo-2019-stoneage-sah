@@ -1,10 +1,7 @@
 import java.io.IOException;
 
-import client.NoobIA;
-import client.RandomIA;
 import game.Game;
 import game.Settings;
-import player.Player;
 import printer.Printer;
 import statistics.Statistics;
 
