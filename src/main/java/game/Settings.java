@@ -36,7 +36,8 @@ public class Settings
 	public static final int NB_MAX_RESSOURCE_BUILDING = 7;
 	// Nombre d'espace au fabricant d'outils:
 	public static final int MAX_ZONETOOL_SPACE = 1;
-
+	// Noms des fichiers de statistiques
+	public static final String[] FILE_NAMES = new String[] {"score.csv", "bois.csv", "argile.csv", "pierre.csv", "or.csv", "nourriture.csv", "marqueur_nourriture.csv"};
 
 	// Toutes les cartes tuiles batiment du jeu
 	public static ArrayList<Building> BUILDINGS = new ArrayList<Building>(Arrays.asList(
