@@ -25,6 +25,23 @@ public class Player extends PlayerStruct {
 		playerIA = new PlayerIA(name);
 		this.initIA(inventoryIA);
 	}
+	
+	/* CONSTRUCTOR FOR STATS*/
+    public Player(String name,InventoryIA inventoryIA,int iaPlayer)
+    {
+        super(name);
+        playerIA = new PlayerIA(name);
+        switch(iaPlayer) {
+        case 0: 
+            this.ia = new RandomIA(this.getPlayerIA(),inventoryIA);
+            break;
+        case 1:
+            this.ia = new NoobIA(this.getPlayerIA(),inventoryIA);
+            break;
+        default:
+            this.ia = null;
+        }
+    }
 
 	/* METHODS */
 	/**
