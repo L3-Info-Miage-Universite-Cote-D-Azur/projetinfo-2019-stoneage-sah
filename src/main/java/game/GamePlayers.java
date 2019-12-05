@@ -145,13 +145,13 @@ public class GamePlayers {
 	}
 
 	/* Score */
-	public void endGame() {
+	public void endGame(Statistics stats) {
 		Score score = new Score();
 		for(int i = 0; i < players.length; i++) {
 			Printer.getPrinter().println();
 			score.calculScore(players[i],inventories[i]);
 		}
-		score.classement(players);
+		stats.updateVictoryRate(score.classement(players));
 	}
 
 
