@@ -4,6 +4,7 @@ import client.IA;
 import inventory.Inventory;
 import player.Player;
 import printer.Printer;
+import statistics.Statistics;
 
 /**
  * La classe GamePlayers gere ce qui se passe sur le plateau cote joueur.
