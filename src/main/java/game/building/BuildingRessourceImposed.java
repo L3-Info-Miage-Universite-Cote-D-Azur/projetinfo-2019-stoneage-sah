@@ -34,4 +34,14 @@ public class BuildingRessourceImposed extends Building
 		}
 		return true;
 	}
+	
+	public String getName() {
+		  String str = "'Batiment ressources imposee: ";
+		  for (int i = 0; i < neededRessource.length; i++)
+		  	{
+		    	str += neededRessource[i]+" ";
+		  	}
+		  str += "; Points: "+this.victoryPoints+"'";
+		  return str;
+		}
 }
