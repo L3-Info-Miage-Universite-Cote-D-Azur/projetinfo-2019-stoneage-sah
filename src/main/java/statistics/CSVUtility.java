@@ -10,7 +10,7 @@ public class CSVUtility
 	 * Permet d'ajouter un element a la ligne
 	 * @param f le fichier
 	 * @param strings la valeur
-	 * @throws IOException
+	 * @throws IOException IO exception
 	 */
 	public void addToRow (File f, String strings) throws IOException
 	{
@@ -37,7 +37,7 @@ public class CSVUtility
 	 * Permet d'ajouter un element
 	 * @param f le fichier
 	 * @param s la valeur
-	 * @throws IOException
+	 * @throws IOException IO exception
 	 */
 	public void addSomething (File f, String s) throws IOException
 	{
@@ -54,7 +54,7 @@ public class CSVUtility
 	 * Permet d'ajouter un element a la ligne avec une virgule au debut
 	 * @param f le fichier
 	 * @param elt la valeur
-	 * @throws IOException
+	 * @throws IOException IO exception
 	 */
 	public void addElementToRow (File f, String elt) throws IOException
 	{
@@ -83,7 +83,7 @@ public class CSVUtility
 	/**
 	 * Ajoute une virgule
 	 * @param f le fichier
-	 * @throws IOException
+	 * @throws IOException IO exception
 	 */
 	public void addNothing (File f) throws IOException
 	{
@@ -93,7 +93,7 @@ public class CSVUtility
 	/**
 	 * Ajoute un retour a la ligne
 	 * @param f le fichier
-	 * @throws IOException
+	 * @throws IOException IO exception
 	 */
 	public void endRow (File f) throws IOException
 	{

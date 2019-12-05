@@ -2,7 +2,6 @@ package statistics;
 
 import java.io.*; 
 import java.util.*; 
-import com.opencsv.CSVWriter;
 
 import game.Settings;
 import game.Ressource;
@@ -75,7 +74,7 @@ public class Statistics
 	/**
 	 * Creer tous les fichiers dans ./just-in-time-curves/ qui representent la moyenne des ressources au cours des tours sur Settings.NB_GAMES 
 	 * @param players le nom des IA de chaque joueur
-	 * @throws IOException
+	 * @throws IOException IO exception
 	 */
 	public void createJITCurves (String[] players) throws IOException
 	{
@@ -142,7 +141,7 @@ public class Statistics
 	/**
 	 * Creer tous les fichiers dans ./just-in-time-curves/ qui representent la moyenne des ressources a la fin de la partie
 	 * @param players le nom des IA de chaque joueur
-	 * @throws IOException
+	 * @throws IOException IO exception
 	 */
 	public void createAverages (String[] players) throws IOException
 	{
