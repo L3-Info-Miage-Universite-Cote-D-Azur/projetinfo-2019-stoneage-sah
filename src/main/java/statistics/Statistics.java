@@ -2,6 +2,8 @@ package statistics;
 
 import java.io.*; 
 import java.util.*; 
+import com.opencsv.CSVWriter;
+
 import game.Settings;
 import game.Ressource;
 import inventory.InventoryStruct;
@@ -69,6 +71,11 @@ public class Statistics
 	// 0, 10, 5, 15 \n
 	// 1, 20, 10, 30 \n
 	// etc
+	/**
+	 * Creer tous les fichiers dans ./just-in-time-curves/ qui representent la moyenne des ressources au cours des tours sur Settings.NB_GAMES 
+	 * @param players le nom des IA de chaque joueur
+	 * @throws IOException
+	 */
 	public void createJITCurves (String[] players) throws IOException
 	{
 		// DONNER LES NOMS DE DEPART
@@ -131,6 +138,11 @@ public class Statistics
 		}
 	}
 	
+	/**
+	 * Creer tous les fichiers dans ./just-in-time-curves/ qui representent la moyenne des ressources a la fin de la partie
+	 * @param players le nom des IA de chaque joueur
+	 * @throws IOException
+	 */
 	public void createAverages (String[] players) throws IOException
 	{
 		// DONNER LES NOMS DE DEPART
@@ -195,7 +207,13 @@ public class Statistics
 			this.csv.endRow(tmpFile);
 		}
 	}
-
+	
+	/**
+	 * Permet de mettre a jour les statistiques en fonction du tour
+	 * @param invs l'inventaire des joueurs
+	 * @param players les joueurs
+	 * @param nbRounds le nombre de tours
+	 */
 	public void updateStats (InventoryStruct[] invs, PlayerStruct[] players, int nbRounds)
 	{
 		// SCORE FIRST
@@ -218,6 +236,13 @@ public class Statistics
 		}
 	}
 
+	/**
+	 * Permet soit d'ajouter la valeur si le tour n'existe pas, soit accumule les donnees
+	 * @param currPlayer l'indice du joueur
+	 * @param currData l'indice de la donnee
+	 * @param value la valeur
+	 * @param rounds le tour courant
+	 */
 	public void updateTheStat (int currPlayer, int currData, int value, int rounds)
 	{
 		//System.out.println(this.playersArrays.get(currPlayer)[currData].toArray().length + " " + Integer.toString(rounds));
