@@ -22,7 +22,7 @@ public class BuildingRessourceNotImposed extends BuildingSpecial
 
 	/**
 	 * Permet de verifier si le joueur a bien mis le nombre de ressources differentes, et assez
-	 * @return
+	 * @return regarde si le joueur peut recupere la carte
 	 */
 	public boolean checkNeededRessource ()
 	{

@@ -35,7 +35,7 @@ public abstract class BuildingSpecial extends Building
 
 	/**
 	 * Retourne le nombre de points de victoire en fonction de ce qu'il y a dans neededRessource
-	 * @return
+	 * @return renvoie le nombre de point de victoire.
 	 */
 	public int computeVP ()
 	{

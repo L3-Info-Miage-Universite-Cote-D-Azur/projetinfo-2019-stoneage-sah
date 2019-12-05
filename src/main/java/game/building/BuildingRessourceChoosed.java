@@ -25,7 +25,7 @@ public class BuildingRessourceChoosed extends BuildingSpecial
 	/* METHODS */
 	/**
 	 * Permet de verifier si le joueur a bien mis au moins 1 ressource
-	 * @return
+	 * @return regarde si le joueur peut recupere la carte
 	 */
 	public boolean checkNeededRessource () 
 	{
