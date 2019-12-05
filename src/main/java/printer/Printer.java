@@ -53,6 +53,7 @@ public class Printer {
 	/* PRINTER */
 	/**
 	 * print une chaine de caractere avec retour a la ligne a la fin
+	 * @param str : La chaine de caractere a afficher.
 	 */
 	public void println(String str) {
 		if (write) {
@@ -69,7 +70,8 @@ public class Printer {
 	}
 	
 	/**
-	 * print une chaine de caractere
+	 * print une chaine de caractere.
+	 * @param str : La chaine de caractere a afficher.
 	 */
 	public void print(String str) {
 		if (uniqueInstance != null && write) {
