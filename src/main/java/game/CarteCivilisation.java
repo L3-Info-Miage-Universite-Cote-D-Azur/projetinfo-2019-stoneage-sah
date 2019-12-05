@@ -53,76 +53,30 @@ public class CarteCivilisation{
 	public Ressource getRessource() { return ressource; }
 	public int getNumberEffect() { return numberEffect; }
 	
+	
 	public String toString() {
+		String[] typeDownPartTab = new String[] {"Medecine;","Art;","Ecriture;",
+				"Poterie;","Cadran solaire;","Transport;","Musique;","Tissage;",
+				numberDownPart+" Paysan;",numberDownPart+" Fabricant d'outil;",numberDownPart+" Constructeur;",numberDownPart+" Chamane;"};
+		
+		String[] typeUpPartTab = new String[] {"error"," "+numberEffect+" points de victoire;"," pioche de carte civilisation;",
+				" tirage au sort;"," outils unique de valeur "+numberEffect+";"," ressources au choix;"};
+ 		
 		String string = "Carte ";
-		switch (this.typeDownPart) {
-		case 0:
-			string +="Medecine;";
-			break;
-		case 1:
-			string +="Art;";
-			break;
-		case 2:
-			string +="Ecriture;";
-			break;
-		case 3:
-			string +="Poterie;";
-			break;
-		case 4:
-			string +="Cadran solaire;";
-			break;
-		case 5:
-			string +="Transport;";
-			break;
-		case 6:
-			string +="Musique;";
-			break;
-		case 7:
-			string +="Tissage;";
-			break;
-		case 8:
-			string +="Paysan;";
-			break;
-		case 9:
-			string +="Fabricant d'outil;";
-			break;
-		case 10:
-			string +="Constructeur;";
-			break;
-		case 11:
-			string +="Chamane;";
-			break;
-		default:
-			break;
-		}
+		string += typeDownPartTab[this.typeDownPart];
 		
 		string += " gain:";
-		switch (this.typeUpPart) {
-		case 0:
+		
+		if(this.typeUpPart == 0) {
 			if(numberEffect == 0) {
 				string += " (chiffre du de divise par "+ressource.getDivisor()+")";
 			}else {
 				string += " "+numberEffect;
 			}
 			string += " "+ressource.toString()+";";
-			break;
-		case 1:
-			string += " "+numberEffect+" points de victoire;";
-			break;
-		case 2:
-			string += " pioche de carte civilisation;";
-			break;
-		case 3 :
-			string += " tirage au sort;";
-			break;
-		case 4 : 
-			string += " outils unique de valeur "+numberEffect+";";
-			break;
-		case 5 : 
-			string += " ressources au choix;";
-			break;
-		default:
-			break;
+		}
+		else {
+			string += typeUpPartTab[this.typeUpPart];
 		}
 		return string;
 	}
