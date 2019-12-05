@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import game.Ressource;
 
 /**
- * Batiment qui contient directement un nombre de ressources imposees et un nombre de point de victoire connu
+ * Batiment qui contient directement un nombre de ressources non imposees et un nombre de point de victoire connu
  */
 public class BuildingRessourceNotImposed extends BuildingSpecial
 {
