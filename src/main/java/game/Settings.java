@@ -111,8 +111,9 @@ public class Settings
 		{
 			if (Settings.BUILDINGS.isEmpty())
 				break;
-			buildings.add(Settings.BUILDINGS.get(0));
-			Settings.BUILDINGS.remove(0);
+			int nb = Settings.RAND.nextInt(Settings.BUILDINGS.size());
+			buildings.add(Settings.BUILDINGS.get(nb));
+			Settings.BUILDINGS.remove(nb);
 		}
 		return buildings;
 	}
