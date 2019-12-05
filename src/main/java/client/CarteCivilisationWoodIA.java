@@ -179,7 +179,7 @@ public class CarteCivilisationWoodIA extends IA {
 			return max;
 		}
 		if(currentZone < 4) {//Si la zone est une zone de ressource premiere.
-			return (playerIA.getCurrentFigurine() - FigurineForFeed);
+			return Math.min((playerIA.getCurrentFigurine() - FigurineForFeed),max);
 		}
 		if(currentZone == 4) {//Si la zone est la chasse.
 			return FigurineForFeed;
@@ -230,7 +230,7 @@ public class CarteCivilisationWoodIA extends IA {
 		int[] copyRessource = inventoryIA.getCopyRessources();
 
 
-		for(int i = 3; i > 0; i--) {
+		for(int i = 3; i >= 0; i--) {
 			if(numberRessourceRequire == 0) break;
 			int nb = Math.min(copyRessource[i], numberRessourceRequire);
 
