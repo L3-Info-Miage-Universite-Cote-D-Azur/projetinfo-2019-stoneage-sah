@@ -6,6 +6,12 @@ import printer.Printer;
 public class CSVUtility
 {
 	/* METHODS */
+	/**
+	 * Permet d'ajouter un element a la ligne
+	 * @param f le fichier
+	 * @param strings la valeur
+	 * @throws IOException
+	 */
 	public void addToRow (File f, String strings) throws IOException
 	{
 		System.out.println(String.join("", strings));
@@ -27,7 +33,12 @@ public class CSVUtility
 		}
 	}
 	
-	// s contient \n
+	/**
+	 * Permet d'ajouter un element
+	 * @param f le fichier
+	 * @param s la valeur
+	 * @throws IOException
+	 */
 	public void addSomething (File f, String s) throws IOException
 	{
 		try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f, true), "UTF-8")))
@@ -39,13 +50,14 @@ public class CSVUtility
 		}
 	}
 	
+	/**
+	 * Permet d'ajouter un element a la ligne avec une virgule au debut
+	 * @param f le fichier
+	 * @param elt la valeur
+	 * @throws IOException
+	 */
 	public void addElementToRow (File f, String elt) throws IOException
 	{
-		for (int i = 0; i < elt.length(); i++)
-		{
-			System.out.printf("%x ", (int)elt.charAt(i));
-		}
-		
 		String line = null;
 		char last = ',';
 		BufferedReader reader = null;
@@ -68,11 +80,21 @@ public class CSVUtility
 		this.addSomething(f, elt);
 	}
 
+	/**
+	 * Ajoute une virgule
+	 * @param f le fichier
+	 * @throws IOException
+	 */
 	public void addNothing (File f) throws IOException
 	{
 		this.addSomething(f, ",");
 	}
 
+	/**
+	 * Ajoute un retour a la ligne
+	 * @param f le fichier
+	 * @throws IOException
+	 */
 	public void endRow (File f) throws IOException
 	{
 		this.addSomething(f, "\n");
