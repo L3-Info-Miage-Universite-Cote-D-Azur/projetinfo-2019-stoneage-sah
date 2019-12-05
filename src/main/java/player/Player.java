@@ -1,8 +1,11 @@
 package player;
 
+import client.CarteCivilisationWoodIA;
+import client.CiviIA;
 import client.IA;
 import client.NoobIA;
 import client.RandomIA;
+import client.RessourceIA;
 import game.Settings;
 import inventory.InventoryIA;
 import printer.Printer;
@@ -31,16 +34,25 @@ public class Player extends PlayerStruct {
     {
         super(name);
         playerIA = new PlayerIA(name);
-        switch(iaPlayer) {
-        case 0: 
-            this.ia = new RandomIA(this.getPlayerIA(),inventoryIA);
-            break;
-        case 1:
-            this.ia = new NoobIA(this.getPlayerIA(),inventoryIA);
-            break;
-        default:
-            this.ia = null;
-        }
+		switch(iaPlayer) {
+		case 0: 
+			this.ia = new RandomIA(this.getPlayerIA(),inventoryIA);
+			break;
+		case 1:
+			this.ia = new NoobIA(this.getPlayerIA(),inventoryIA);
+			break;
+		case 2:
+			this.ia = new CarteCivilisationWoodIA(this.getPlayerIA(),inventoryIA);
+			break;
+		case 3:
+			this.ia = new CiviIA(this.getPlayerIA(),inventoryIA);
+			break;
+		case 4: //IA qui ne finit pas la parti seul donc non utiliser pour cette iteration
+			this.ia = new RessourceIA(this.getPlayerIA(),inventoryIA);
+			break;
+		default:
+			this.ia = null;
+		}
     }
 
 	/* METHODS */
@@ -106,7 +118,7 @@ public class Player extends PlayerStruct {
 	 */
 	public void initIA(InventoryIA inventoryIA) 
 	{
-		int numberIA = 2; //nombre d'ia possible
+		int numberIA = 4; //nombre d'ia possible
 		
 		int choose = Settings.RAND.nextInt(numberIA);
 		switch(choose) {
@@ -115,6 +127,15 @@ public class Player extends PlayerStruct {
 			break;
 		case 1:
 			this.ia = new NoobIA(this.getPlayerIA(),inventoryIA);
+			break;
+		case 2:
+			this.ia = new CarteCivilisationWoodIA(this.getPlayerIA(),inventoryIA);
+			break;
+		case 3:
+			this.ia = new CiviIA(this.getPlayerIA(),inventoryIA);
+			break;
+		case 4: //IA qui ne finit pas la parti seul donc non utiliser pour cette iteration
+			this.ia = new RessourceIA(this.getPlayerIA(),inventoryIA);
 			break;
 		default:
 			this.ia = null;
