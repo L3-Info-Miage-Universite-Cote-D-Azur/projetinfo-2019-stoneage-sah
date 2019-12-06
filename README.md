@@ -60,7 +60,7 @@ fin du jeu a la fin du tour, le joueur est gagnant.
 -Ajout de la carte civilisation manquante  
   
 ## Juste avant rendu:  
--Affinement du système statistique pour une utilisation plus user-friendy et correction de possibles bugs  
--Affinement ou ajout d'IA, on propose à l'utilisateur un système avancé et propre.
--Améliorer la maintenabilité du code.
--Finalisation des test unitaire. 
+-Affinement du système statistique pour une utilisation plus user-friendy et correction de possibles bugs.  
+-Affinement ou ajout d'IA, on propose à l'utilisateur un système avancé et propre.  
+-Améliorer la maintenabilité du code.  
+-Finalisation des test unitaire.  
