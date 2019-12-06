@@ -16,17 +16,20 @@ public class GamePlayers {
 	/* FIELDS */
 	private Player[] players;//Tableau des joueurs.
 	private Inventory[] inventories;//Tableau d'inventaire des joueurs.
+	private boolean useStats;
 	
 	/* CONSTRUCTOR */
 	public GamePlayers(int numberPlayer) {
 		initInventories(numberPlayer); 
 		initPlayer(numberPlayer);
+		useStats=false;
 	}
 	
 	/* CONSTRUCTOR FOR STATS */
     public GamePlayers(int numberPlayer,int[] iaPlayers) {
         initInventories(numberPlayer); 
         initPlayerWithIA(numberPlayer,iaPlayers);
+        useStats=true;
     }
 
 	/* GETTERS */
@@ -152,7 +155,8 @@ public class GamePlayers {
 			Printer.getPrinter().println();
 			score.calculScore(players[i],inventories[i]);
 		}
-		stats.updateVictoryRate(score.classement(players));
+		if(useStats) stats.updateVictoryRate(score.classement(players));
+		else score.classement(players);
 	}
 
 
