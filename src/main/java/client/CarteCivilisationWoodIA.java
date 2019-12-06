@@ -182,7 +182,8 @@ public class CarteCivilisationWoodIA extends IA {
 			return Math.min((playerIA.getCurrentFigurine() - FigurineForFeed),max);
 		}
 		if(currentZone == 4) {//Si la zone est la chasse.
-			return FigurineForFeed;
+			if(FigurineForFeed==0) return 1;
+			return Math.min(FigurineForFeed,max);
 		}
 		else {
 			Printer.getPrinter().println("ERREUR");
