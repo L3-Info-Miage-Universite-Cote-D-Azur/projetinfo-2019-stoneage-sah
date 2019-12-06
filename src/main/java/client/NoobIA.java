@@ -47,6 +47,19 @@ public class NoobIA extends IA
 	 */
 	public int chooseZone (int[] zoneAvailableSpace, String[] zoneName, ZoneBuilding[] buildings, ZoneCarteCivilisation[] cV)
 	{
+		//pour eviter les parti infini
+		if(inventoryIA.availableResourceToFeed()>100) {
+			// CHECK DES CARTES Civilisation
+			for (int i = 0; i < cV.length; i++)
+			{
+				// SI Y'A DE LA PLACE
+				if (zoneAvailableSpace[i+8] >= 1)
+				{
+					this.currentZone = i + 8;
+					return currentZone;
+				}
+			}
+		}
 		// RESET
 		this.currentZone = -1;
 		// SI ON A PAS ASSEZ POUR NOURRIR TLM A LA FIN DU TOUR
