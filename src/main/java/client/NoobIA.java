@@ -291,7 +291,7 @@ public class NoobIA extends IA
 		
 		for (int i = 0; i < useTools.length; i++)
 		{
-			if (useTools[i] == false)
+			if (useTools[i] == false && toolsToUse[i]>0)
 			{
 				res[i] = true;
 			}
