@@ -46,7 +46,8 @@ public class Program {
         	String[] ias = new String[numberPlayer];
         	for(int i = 0; i < numberPlayer; i++)
         	{
-        		iaPlayers[i]=i; //on a 4 ia pour le moment il dest donc interesant de fixé les IA 
+        		if(numberPlayer==4) iaPlayers[i]=i;//on a 4 ia pour le moment il dest donc interesant de fixé les IA 
+        		else if(numberPlayer<4) iaPlayers[i]=Settings.RAND.nextInt(4);
         		switch(iaPlayers[i]) {
 	            	case 0: 
 	            		ias[i] = "Random";
