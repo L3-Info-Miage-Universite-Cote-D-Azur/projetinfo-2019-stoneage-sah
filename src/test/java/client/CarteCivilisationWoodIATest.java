@@ -71,7 +71,7 @@ public class CarteCivilisationWoodIATest {
 
 		//CAS 2
 		inv = new Inventory();
-		testIa = new RandomIA(null,inv.getInventoryIA());
+		testIa = new CarteCivilisationWoodIA(play.getPlayerIA(),inv.getInventoryIA());
 
 		inv.addRessource(Ressource.WOOD, 1);
 		inv.addRessource(Ressource.CLAY, 1);
@@ -81,7 +81,22 @@ public class CarteCivilisationWoodIATest {
 			int[] test = testIa.chooseRessource(i2);
 			assertEquals(true,test[0] < 2);
 			assertEquals(true,test[0] >= 0);
+			assertEquals(true, test[0] == 1);
 			assertEquals(true,test[1] == 1);
+
+			assertEquals(false,test[0] >= 2);
+			assertEquals(false,test[0] < 0);
+			assertEquals(false,test[1] < 0);
+			assertEquals(false,test[1] >= 2);
+		}
+		//On redemande une deuxieme fois a l'IA de nourrir ses figurines.
+		inv.subRessource(Ressource.CLAY, 1);
+		i2 = 1;
+		
+		for(int j =0; j < 50; j++) {
+			int[] test = testIa.chooseRessource(i2);
+			assertEquals(true,test[1] == 1);
+			assertEquals(true,test[0] == 0);
 
 			assertEquals(false,test[0] >= 2);
 			assertEquals(false,test[0] < 0);
@@ -91,7 +106,7 @@ public class CarteCivilisationWoodIATest {
 
 		//CAS 3
 		inv = new Inventory();
-		testIa = new RandomIA(null,inv.getInventoryIA());
+		testIa = new CarteCivilisationWoodIA(play.getPlayerIA(),inv.getInventoryIA());
 
 		inv.addRessource(Ressource.WOOD, 3);
 		int i3 = 3;
@@ -100,7 +115,7 @@ public class CarteCivilisationWoodIATest {
 			int[] test = testIa.chooseRessource(i3);
 			assertEquals(true,test[0] == 0);
 			assertEquals(true,test[1] > 0);
-			assertEquals(true,test[1] <= i3);
+			assertEquals(true,test[1] == i3);
 
 			assertEquals(false,test[0] != 0);
 			assertEquals(false,test[1] < 0);
@@ -113,7 +128,7 @@ public class CarteCivilisationWoodIATest {
 
 		//Test dans un cas ou il dois depenser toutes ses ressources. 
 		inv = new Inventory();
-		testIa = new RandomIA(null,inv.getInventoryIA());
+		testIa = new CarteCivilisationWoodIA(play.getPlayerIA(),inv.getInventoryIA());
 
 		inv.addRessource(Ressource.GOLD, 4);
 
@@ -126,12 +141,12 @@ public class CarteCivilisationWoodIATest {
 			assertEquals(true,res[0] == 0);
 			assertEquals(true,res[1] == 0);
 			assertEquals(true,res[2] == 0);
-			assertEquals(true,res[3] == 4 || res[3] == 0);
+			assertEquals(true,res[3] == 4);
 		}
 
 		//Test dans un cas general
 		inv = new Inventory();
-		testIa = new RandomIA(null,inv.getInventoryIA());
+		testIa = new CarteCivilisationWoodIA(play.getPlayerIA(),inv.getInventoryIA());
 
 		inv.addRessource(Ressource.WOOD, 1);
 		inv.addRessource(Ressource.CLAY, 2);
@@ -142,16 +157,16 @@ public class CarteCivilisationWoodIATest {
 		for(int j =0; j < 50; j++) {
 			res = testIa.pickCard(number);
 
-			assertEquals(true,res[0] >= 0 && res[0] <= 1);
-			assertEquals(true,res[1] >= 0 && res[1] <= 2);
-			assertEquals(true,res[2] >= 0 && res[2] <= 3);
-			assertEquals(true,res[3] >= 0 && res[3] <= 4);
+			assertEquals(true,res[0] == 0);
+			assertEquals(true,res[1] == 0);
+			assertEquals(true,res[2] == 1);
+			assertEquals(true,res[3] == 4);
 
 			int sum = 0;
 			for(int el : res) {
 				sum += el;
 			}
-			assertEquals(true, sum == number || sum == 0);
+			assertEquals(true, sum == number);
 		}
 
 		//Le cas ou l'ia n'a pas assez de ressource est tester en amont et donnerais une boucle infinie ici. 
@@ -173,7 +188,7 @@ public class CarteCivilisationWoodIATest {
 
 		//Cas general 
 		inv = new Inventory();
-		testIa = new RandomIA(null,inv.getInventoryIA());
+		testIa = new CarteCivilisationWoodIA(play.getPlayerIA(),inv.getInventoryIA());
 		Player testPlayer = new Player("test",inv.getInventoryIA());
 
 		for(int i =0; i<5;i++) {
@@ -188,18 +203,18 @@ public class CarteCivilisationWoodIATest {
 			if(testBooleans[0]) {
 				assertEquals(true, res[0] == false);
 			}else {
-				assertEquals(true, res[0] == false || res[0] == true);
+				assertEquals(true, res[0] == true);
 			}
 			if(testBooleans[1]) {
 				assertEquals(true, res[1] == false);
 			}else {
-				assertEquals(true, res[1] == false || res[1] == true);
+				assertEquals(true, res[1] == true);
 			}
 
 			if(testBooleans[2]) {
 				assertEquals(true, res[2] == false);
 			}else {
-				assertEquals(true, res[2] == false || res[2] == true);
+				assertEquals(true, res[2] == true);
 			}
 		}
 	}
@@ -215,30 +230,30 @@ public class CarteCivilisationWoodIATest {
 			assertEquals(true, tirage[res] == 5);
 			assertEquals(true, res >=0 && res < tirage.length);
 		}
-		
+
 		tirage = new int[] {1,2,3,4};//TEST POUR CHAQUE TIRAGE.
-		
+
 		alreadyChoose = new boolean[] {false,true,true,true};
 		res = testIa.chooseTirage(tirage, alreadyChoose);
 		for(int i=0; i <100; i++) {
 			assertEquals(true, tirage[res] == 1);
 			assertEquals(true, res == 0);
 		}
-		
+
 		alreadyChoose = new boolean[] {true,false,true,true};
 		res = testIa.chooseTirage(tirage, alreadyChoose);
 		for(int i=0; i <100; i++) {
 			assertEquals(true, tirage[res] == 2);
 			assertEquals(true, res == 1);
 		}
-		
+
 		alreadyChoose = new boolean[] {true,true,false,true};
 		res = testIa.chooseTirage(tirage, alreadyChoose);
 		for(int i=0; i <100; i++) {
 			assertEquals(true, tirage[res] == 3);
 			assertEquals(true, res == 2);
 		}
-		
+
 		alreadyChoose = new boolean[] {true,true,true,false};
 		res = testIa.chooseTirage(tirage, alreadyChoose);
 		for(int i=0; i <100; i++) {
@@ -246,7 +261,7 @@ public class CarteCivilisationWoodIATest {
 			assertEquals(true, res == 3);
 		}
 	}
-	
+
 	@Test
 	void testUseRessourceCard() {
 		int res;
