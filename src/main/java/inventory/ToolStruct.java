@@ -74,6 +74,7 @@ public abstract class ToolStruct {
 	 * @param val : la valeur de l'outils unique.
 	 */
 	public void addUniqueTool(int val) {
+		if(val<=0) return;
 		int[] res = new int[tools.length + 1];
 		int i = 0;
 		while(i < tools.length) {
