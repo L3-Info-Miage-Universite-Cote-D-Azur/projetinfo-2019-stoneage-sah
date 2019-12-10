@@ -72,7 +72,7 @@ public class Tools extends ToolStruct{
 	 */
 	public int setSelectToolsToUsed(boolean[] choose,String player) {
 		int sum = 0;
-		for(int i = 0; i<tools.length; i++)
+		for(int i = tools.length-1; i>=0; i--)
 		{
 			if(choose[i]==true)
 			{
