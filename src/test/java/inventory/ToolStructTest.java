@@ -10,7 +10,7 @@ public class ToolStructTest {
 
 	@Test
 	public void resetToolsUsedTest() {
-		this.toolStructTest = new ToolStruct();
+		this.toolStructTest = new Tools();
 		
 		//on test l'instanciation
 		assertEquals(this.toolStructTest.getTool(),0);
@@ -30,7 +30,7 @@ public class ToolStructTest {
 	
 	@Test
 	public void incrementToolTest() {
-		this.toolStructTest = new ToolStruct();
+		this.toolStructTest = new Tools();
 		//on test l'instanciation
 		assertEquals(this.toolStructTest.getTool(),0);
 		assertEquals(this.toolStructTest.getTools()[0], 0);
@@ -55,7 +55,7 @@ public class ToolStructTest {
 	
 	@Test
 	public void addUniqueToolTest() {
-		toolStructTest = new ToolStruct();
+		toolStructTest = new Tools();
 		//cas de base que les outils usable a chaque tour soit 3
 		assertEquals(toolStructTest.tools.length,3);
 		//on ajoute un outil a usage uniquede valeur 5
@@ -71,7 +71,7 @@ public class ToolStructTest {
 	
 	@Test
 	public void subUniqueToolTest() {
-		toolStructTest = new ToolStruct();
+		toolStructTest = new Tools();
 		//supression index non valide
 		toolStructTest.subUniqueTool(1);
 		assertEquals(toolStructTest.tools.length,3); //rien ne change
@@ -97,7 +97,7 @@ public class ToolStructTest {
 	
 	@Test
 	public void setToolsToUsedTest() {
-		toolStructTest = new ToolStruct();
+		toolStructTest = new Tools();
 		for(int i=0;i<5;i++) this.toolStructTest.incrementTool();// on met 5 niveau dans les outil (soit 2,2,1)
 		assertEquals(this.toolStructTest.getTools()[0], 2);
 		assertEquals(this.toolStructTest.getTools()[1], 2);
