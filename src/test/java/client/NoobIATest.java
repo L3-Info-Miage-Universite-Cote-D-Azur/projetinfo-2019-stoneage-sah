@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import game.Ressource;
+import game.zone.ZoneBuilding;
+import game.zone.ZoneCarteCivilisation;
 import inventory.Inventory;
 import player.Player;
 
@@ -12,21 +14,21 @@ import player.Player;
 public class NoobIATest 
 {
 	public Inventory inv = new Inventory();
-	public IA testIa = new RandomIA(null,inv.getInventoryIA());
+	public Player player = new Player("Test", inv.getInventoryIA());
+	public IA testIa = new NoobIA(player.getPlayerIA(), inv.getInventoryIA());
 
 	@Test
 	void testChooseZone() {
-		for(int i = 1; i <= 10; i++) {
-			//On incremente la taille du tableau a chaque iteration. 
-			int[] tab1 = new int[i];
-			String[] tab2 = new String[i];
+		int[] tab1 = new int[] {7,7,7,7,5000,0,0,0,0,0,0,0,0,0,0};
 
-			for(int j =0; j < 100; j++) {
-				//On test 100 fois que l'indice renvoye est bien compris entre 0 et tab1.length
-				int test = testIa.chooseZone(tab1, tab2,null , null);
-				assertEquals(true,test < tab1.length);
-				assertEquals(true,test >= 0);
-			}
+		for(int j =0; j < 100; j++) {
+			ZoneBuilding[] zb = new ZoneBuilding[] {new ZoneBuilding("test"), new ZoneBuilding("test1")};
+			ZoneCarteCivilisation[] zcv = new ZoneCarteCivilisation[] {new ZoneCarteCivilisation("test", 1, null), new ZoneCarteCivilisation("test", 1, null)};
+			
+			//On test 100 fois que l'indice renvoye est bien compris entre 0 et tab1.length
+			int test = testIa.chooseZone(tab1,null, zb , zcv);
+			assertEquals(true,test < tab1.length);
+			assertEquals(true,test >= 0);
 		}
 	}
 
@@ -54,9 +56,9 @@ public class NoobIATest
 		inv.addRessource(Ressource.WOOD, 1);
 		inv.addRessource(Ressource.CLAY, 2);
 		inv.addRessource(Ressource.STONE, 3);
-		
+
 		int i1 = 3;
-		
+
 		for(int j =0; j < 50; j++) {
 			int[] test = testIa.chooseRessource(i1);
 			assertEquals(true,test[0] < 3);
@@ -69,12 +71,12 @@ public class NoobIATest
 			assertEquals(false,test[1] < 0);
 			assertEquals(false,test[1] > 3);
 		}
-		
-		
+
+
 		//CAS 2
 		inv = new Inventory();
-		testIa = new RandomIA(null,inv.getInventoryIA());
-		
+		testIa = new NoobIA(player.getPlayerIA(), inv.getInventoryIA());
+
 		inv.addRessource(Ressource.WOOD, 1);
 		inv.addRessource(Ressource.CLAY, 1);
 		int i2 = 2;
@@ -93,8 +95,8 @@ public class NoobIATest
 
 		//CAS 3
 		inv = new Inventory();
-		testIa = new RandomIA(null,inv.getInventoryIA());
-		
+		testIa = new NoobIA(player.getPlayerIA(), inv.getInventoryIA());
+
 		inv.addRessource(Ressource.WOOD, 3);
 		int i3 = 3;
 
@@ -115,10 +117,10 @@ public class NoobIATest
 
 		//Test dans un cas ou il dois depenser toutes ses ressources. 
 		inv = new Inventory();
-		testIa = new RandomIA(null,inv.getInventoryIA());
-		
+		testIa = new NoobIA(player.getPlayerIA(), inv.getInventoryIA());
+
 		inv.addRessource(Ressource.GOLD, 4);
-		
+
 		int number = 4;
 		int[] res;
 
@@ -133,8 +135,8 @@ public class NoobIATest
 
 		//Test dans un cas general
 		inv = new Inventory();
-		testIa = new RandomIA(null,inv.getInventoryIA());
-		
+		testIa = new NoobIA(player.getPlayerIA(), inv.getInventoryIA());
+
 		inv.addRessource(Ressource.WOOD, 1);
 		inv.addRessource(Ressource.CLAY, 2);
 		inv.addRessource(Ressource.STONE, 3);
@@ -172,12 +174,12 @@ public class NoobIATest
 			assertEquals(true, res[1] == false);
 			assertEquals(true, res[2] == false);
 		}
-		
+
 		//Cas general 
 		inv = new Inventory();
-		testIa = new RandomIA(null,inv.getInventoryIA());
+		testIa = new NoobIA(player.getPlayerIA(), inv.getInventoryIA());
 		Player testPlayer = new Player("test",inv.getInventoryIA());
-		
+
 		for(int i =0; i<5;i++) {
 			inv.getTools().incrementTool();
 		}
@@ -186,7 +188,7 @@ public class NoobIATest
 
 		for(int j =0; j < 50; j++) {
 			res = testIa.pickTools();
-			
+
 			if(testBooleans[0]) {
 				assertEquals(true, res[0] == false);
 			}else {
@@ -197,7 +199,7 @@ public class NoobIATest
 			}else {
 				assertEquals(true, res[1] == false || res[1] == true);
 			}
-			
+
 			if(testBooleans[2]) {
 				assertEquals(true, res[2] == false);
 			}else {
@@ -205,7 +207,7 @@ public class NoobIATest
 			}
 		}
 	}
-	
+
 	@Test
 	void testChooseTirage ()
 	{
