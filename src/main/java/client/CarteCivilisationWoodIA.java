@@ -12,7 +12,8 @@ public class CarteCivilisationWoodIA extends IA {
 
 	private int FigurineForFeed; //le nombre de figurine minimale que le joueur dois mettre sur la chasse
 	private int nbPeasantToHave = 3;//Le nombre de paysans a avoir pour continuer a obtenir des marqueurs nourritures.
-	private int currentZone;
+	private int currentZone;//La zone choisie precedemment.
+	private int nbTurnWithoutCC = 0;//Le nombre de tour sans avoir pris de carte civilisation.
 
 	public CarteCivilisationWoodIA(PlayerIA playerIA, InventoryIA inventoryIA) {
 		super(playerIA, inventoryIA);
@@ -39,7 +40,13 @@ public class CarteCivilisationWoodIA extends IA {
 	private boolean wantToPickCard(CarteCivilisation cc){
 		//L'IA n'aura jamais d'outils ni de batiments.
 		//Si la carte n'est pas 'constructeur de batiment' ou 'fabricant d'outils'.
-		if(cc.getTypeDownPart() != 10 || cc.getTypeDownPart() != 9) {
+		if(cc.getTypeDownPart() != 10 && cc.getTypeDownPart() != 9) {
+			return true;
+		}
+		
+		//Si cela fait 4 tour que l'IA n'a pas pris de carte civilisation, qu'importe son genre on la veut.
+		if(nbTurnWithoutCC >= 4) {
+			nbTurnWithoutCC = 0; //On le reinitialise.
 			return true;
 		}
 		return false;
@@ -107,23 +114,30 @@ public class CarteCivilisationWoodIA extends IA {
 				//carteCivilisation cout 1
 				if(inventoryIA.getRessource(Ressource.WOOD) >= 1 && zoneAvailableSpace[8] > 0 && wantToPickCard(cV[0].getCard())) {
 					currentZone = 8;
+					nbTurnWithoutCC = 0;//On reinitialise.
 					return 8;
 				}
 				//carteCivilisation cout 2
 				if(inventoryIA.getRessource(Ressource.WOOD) >= 2 && zoneAvailableSpace[9] > 0 && wantToPickCard(cV[1].getCard())) {
 					currentZone = 9;
+					nbTurnWithoutCC = 0;//On reinitialise.
 					return 9;
 				}
 				//carteCivilisation cout 3
 				if(inventoryIA.getRessource(Ressource.WOOD) >= 3 && zoneAvailableSpace[10] > 0 && wantToPickCard(cV[2].getCard())) {
 					currentZone = 10;
+					nbTurnWithoutCC = 0;//On reinitialise.
 					return 10;
 				}
 				//carteCivilisation cout 4
 				if(inventoryIA.getRessource(Ressource.WOOD) >= 4 && zoneAvailableSpace[11] > 0 && wantToPickCard(cV[3].getCard())) {
 					currentZone = 11;
+					nbTurnWithoutCC = 0;//On reinitialise.
 					return 11;
 				}
+				
+				//On ne regarde pas pour le debut de partie.
+				nbTurnWithoutCC++; //On a selectionner aucune carte civilisation.
 
 				//Champ si bcp de carteCivilisation paysans.
 				if(hasManyPeasant() && zoneAvailableSpace[5] > 0) {
@@ -261,6 +275,9 @@ public class CarteCivilisationWoodIA extends IA {
 
 		boolean[] res = new boolean[toolsToUse.length];
 
+		/* Il faut savoir que cette IA n'est pas cense avoir d'outils donc qu'importe sur quoi elle les utilisent. 
+		 * Il y a beaucoup de chance que cela soit du bois si jamais cela arrive.
+		 */
 		for(int i = 0; i < toolsToUse.length; i++) {
 			if((i>=3 || !useTools[i]) && toolsToUse[i] > 0 && res[i] == false){
 				//L'IA utilise tout ses outils immediatement (elle ne les utilisent que sur la zone de ressource premiere).
@@ -304,7 +321,7 @@ public class CarteCivilisationWoodIA extends IA {
 
 	@Override
 	public String toString() {
-		return "CarteCivilisation version Bois.";
+		return "CarteCivilisation version Bois";
 	}
 
 }
