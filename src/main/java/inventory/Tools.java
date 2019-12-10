@@ -1,5 +1,5 @@
 package inventory;
-
+import client.IA;
 import game.Ressource;
 import player.Player;
 import printer.Printer;
@@ -48,16 +48,74 @@ public class Tools extends ToolStruct{
 	public void addUniqueTool(int val) {
 		super.addUniqueTool(val);
 		toolsIA.addUniqueTool(val);
+		
+	}
+	
+	
+	/**
+	 * Met a jour les outils utiliser du joueur et aussi pour son ia
+	 * @param index l'index de l'outils selectionner par l'ia.
+	 * @return renvoie la valeur de l'outils utiliser.
+	 */
+	@Override
+	public int setToolsToUsed(int index) {
+		toolsIA.setToolsToUsed(index);
+		return super.setToolsToUsed(index);
+	}
+	
+	
+	/**
+	 * Change tout les outils selectionner par le joueur a usé et renvoie la sum de ces outils.
+	 * @param choose la liste des choix du joueur (une liste valide).
+	 * @param player le nom du joueur que a utiliser les outils.
+	 * @return la somme des outils utiliser.
+	 */
+	public int setSelectToolsToUsed(boolean[] choose,String player) {
+		int sum = 0;
+		for(int i = 0; i<tools.length; i++)
+		{
+			if(choose[i]==true)
+			{
+				if(i < 3) {
+					Printer.getPrinter().println(useToolsToString(player,tools[i]));
+				}else {
+					Printer.getPrinter().println("Le joueur "+player+" a utiliser un outils unique de niveau "+tools[i]+".");
+				}
+				sum += setToolsToUsed(i);
+			}
+		}
+		
+		return sum;
+	}
+	
+	
+	/**
+	 * Verifie si le choix la liste des choix est correcte
+	 * @param choose liste des choix a verifier
+	 * @return true : Le choix est correct; False le choix est incorrect
+	 */
+	public boolean playerChooseToolsVerif(boolean[] choose) {
+		if(choose.length != tools.length) return false;
+		//on verifie si tout les choix son valide
+		for(int i = 0; i<tools.length; i++){
+			if(choose[i] && (i<3 && toolsUsed[i])) return false;//Probleme dans la reponse de l'IA.
+		}
+		return true;
 	}
 	
 	/**
-	 * subUniqueTool supprime l'outils unique de valeur val;
-	 * @param indexToErase : index de l'outil a supprimer
+	 * Demande au joueur les outils qu'il veux choisir
+	 * @param ia IA qui dois faire le choix
+	 * @return liste des choix (valide)
 	 */
-	public void subUniqueTool(int indexToErase) {
-		super.subUniqueTool(indexToErase);
-		toolsIA.subUniqueTool(indexToErase);
+	public boolean[] playerChooseTools(IA ia) {
+		boolean[] choose;
+		do {
+			choose = ia.pickTools();
+		}while(!playerChooseToolsVerif(choose));
+		return choose;
 	}
+	
 	
 	/**
 	 * 	 * useTools renvoie le tableau correspondant aux outils utilise et choisis par l'IA
@@ -67,49 +125,9 @@ public class Tools extends ToolStruct{
 	 * @return valeur des outils utiliser.
 	 */
 	public int	useTools(Player player,int sumDice, Ressource ressource){
-		boolean correctChoose = false;
-		boolean[] choose = new boolean[tools.length];
-
-		int sum=0;
-		for(int i=0; i< tools.length; i++){ if(i>=3 ||!toolsUsed[i]) sum += tools[i]; }
-		if(sum == 0) return 0;//cas ou l'utilisateur n'a pas d'outil a utiliser.
-
-
-		while(!correctChoose){//Tant qu'il y a un probleme
-
-			correctChoose = true;
-			//On demande a l'IA les outils qu'elle veut utiliser.
-			choose = player.getIA().pickTools();
-
-			if(choose.length == tools.length) 
-			{
-				for(int i = 0; i<tools.length; i++){
-					if(choose[i] && (i<3 && toolsUsed[i])) correctChoose = false;//Probleme dans la reponse de l'IA.
-				}
-			}
-		}
-		//La reponse de l'IA est correcte.
-		sum = 0;
-		for(int i = 0; i<tools.length; i++)
-		{
-			if(choose[i]==true)
-			{
-				if(i < 3) {
-					toolsUsed[i] = true; //L'outils est maintenant utilise.
-					Printer.getPrinter().println(useToolsToString(player.getName(),tools[i]));
-					sum += tools[i];//La valeur bonus des outils
-				}else {
-					Printer.getPrinter().println("Le joueur "+player.getName()+" a utiliser un outils unique de niveau "+tools[i]+".");
-					sum += tools[i];//La valeur bonus des outils
-					subUniqueTool(i);
-				}
-			}
-		}
-
-		if(sum > 0){
-			toolsIA.useTools(choose);
-		}
-		return sum;
+		if(!emptyToolsToUse()) return 0;
+		boolean[] choose = playerChooseTools(player.getIA());
+		return setSelectToolsToUsed(choose,player.getName());
 	}
 
 }

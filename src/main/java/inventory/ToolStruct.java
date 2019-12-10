@@ -108,4 +108,34 @@ public abstract class ToolStruct {
 			this.tools = res;
 		}
 	}
+	
+	/**
+	 * Met a true les outils utilises.
+	 * @param index l'index de l'outils selectionner par l'ia.
+	 * @return renvoie la valeur de l'outils utiliser.
+	 */
+	protected int setToolsToUsed(int index) {
+		int value = 0;
+		if(index<3 && !toolsUsed[index])
+		{
+			toolsUsed[index] = true; //L'outils est maintenant utilise.
+			value = tools[index];
+		}
+		else if (tools.length>index){
+			value =tools[index];
+			subUniqueTool(index);
+		}
+		return value;
+	}
+	
+	/**
+	 * Verification si le joueur a des outils a utiliser
+	 * @return true il en a; false il en a pas.
+	 */
+	public boolean emptyToolsToUse() {
+		for(int i=0; i< tools.length; i++){ 
+			if((i>=3 ||!toolsUsed[i]) && tools[i]>0) return true; 
+		}
+		return false;
+	}
 }
