@@ -89,7 +89,7 @@ public abstract class ToolStruct {
 	 * @param indexToErase : index de l'outil a supprimer
 	 */
 	public void subUniqueTool(int indexToErase) {
-		if(tools.length > 3 ) {
+		if(tools.length > 3 && indexToErase>=3 && indexToErase<tools.length) {
 			int[] res = new int[tools.length - 1];
 
 			for(int j =0; j<3; j++) {// On copie les outils ordinaires.
@@ -99,7 +99,7 @@ public abstract class ToolStruct {
 			int i = 3;
 			int k = 3;
 			while(k < tools.length) {
-				if(i != indexToErase) {
+				if(k != indexToErase) {
 					res[i] = tools[k];
 					i++;
 				}
