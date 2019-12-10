@@ -116,7 +116,7 @@ public class NoobIA extends IA
 				for (int i = 0; i < buildings.length; i++)
 				{
 					// SI Y'A DE LA PLACE
-					if (zoneAvailableSpace[i] >= 1)
+					if (zoneAvailableSpace[i+12] >= 1)
 					{
 						Building tmpBuilding = buildings[i].getBuilding();
 						// RESSOURCE IMPOSED
@@ -155,7 +155,7 @@ public class NoobIA extends IA
 					for (int i = 0; i < cV.length; i++)
 					{
 						// SI ON A ASSEZ DE RESSOURCE
-						if (IntStream.of(this.inventoryIA.getCopyRessources()).sum() >= 4 - i && zoneAvailableSpace[i] == 1)
+						if (IntStream.of(this.inventoryIA.getCopyRessources()).sum() >= 4 - i && zoneAvailableSpace[i+8] == 1)
 						{
 							if (this.rand.nextInt(2) == 1) this.currentZone = i + 8;
 							break;
