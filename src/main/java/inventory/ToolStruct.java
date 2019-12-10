@@ -1,11 +1,11 @@
 package inventory;
 
 /**
- * ToolStruct est une classe qui represente les outils dans le jeu.
+ * ToolStruct est une classe abstract qui represente les outils dans le jeu.
  * @author Mentra20
  *
  */
-public class ToolStruct {
+public abstract class ToolStruct {
 	/* FIELDS */
 	protected int[] tools;
 	protected int tool;
