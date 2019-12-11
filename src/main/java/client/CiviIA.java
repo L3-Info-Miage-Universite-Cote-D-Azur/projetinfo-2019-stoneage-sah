@@ -88,7 +88,7 @@ public class CiviIA extends IA {
 		}
 		
 		// SINON ELLE VA A LA CHASSE
-		else if (this.currentZone == -1) this.currentZone = 4;
+		if (this.currentZone == -1) this.currentZone = 4;
 
 		return this.currentZone;
 
