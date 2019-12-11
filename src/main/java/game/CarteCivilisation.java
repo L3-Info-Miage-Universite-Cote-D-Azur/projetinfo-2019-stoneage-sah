@@ -67,7 +67,7 @@ public class CarteCivilisation{
 				numberDownPart+" Paysan;",numberDownPart+" Fabricant d'outil;",numberDownPart+" Constructeur;",numberDownPart+" Chamane;"};
 		
 		String[] typeUpPartTab = new String[] {"ERROR"," "+numberEffect+" points de victoire;"," pioche de carte civilisation;",
-				" tirage au sort;"," outils unique de valeur "+numberEffect+";"," ressources au choix;"};
+				" tirage au sort;"," outils unique de valeur "+numberEffect+";"," ressources au choix;"," un outil permanent;"};
  		
 		String string = "CARTE: ";
 		string += typeDownPartTab[this.typeDownPart];
