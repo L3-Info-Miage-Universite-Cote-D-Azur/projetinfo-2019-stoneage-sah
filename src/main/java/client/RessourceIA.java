@@ -59,19 +59,19 @@ public class RessourceIA extends IA
 		this.currentZone = -1;
 
 		//ELLE PRENDS EN PRIORITE LES ZONES DE RESSOURCES
-		if (zoneAvailableSpace[0] >= 1)
+		if (zoneAvailableSpace[0] >= 1 && this.inventoryIA.getRessource(Ressource.WOOD)<20 )
 		{
 			if (this.rand.nextInt(2) == 1) this.currentZone = 0;
 		}
-		else if (zoneAvailableSpace[2] >= 1)
+		else if (zoneAvailableSpace[2] >= 1 && this.inventoryIA.getRessource(Ressource.STONE)<12 )
 		{
 			if (this.rand.nextInt(2) == 1) this.currentZone = 2;
 		}
-		else if (zoneAvailableSpace[3] >= 1)
+		else if (zoneAvailableSpace[3] >= 1 && this.inventoryIA.getRessource(Ressource.GOLD)<8 )
 		{
 			if (this.rand.nextInt(2) == 1) this.currentZone = 3;
 		}
-		else if (zoneAvailableSpace[1] >= 1)
+		else if (zoneAvailableSpace[1] >= 1 && this.inventoryIA.getRessource(Ressource.CLAY) <16 )
 		{
 			if (this.rand.nextInt(2) == 1) this.currentZone = 1;
 		}
@@ -138,7 +138,7 @@ public class RessourceIA extends IA
 	public boolean useRessourceToFeed()
 	{
 		// LE JOUEUR NOURRI LES FIGURINES UNE FOIS SUR DEUX
-		if (this.rand.nextInt(3) == 1) {
+		if (this.rand.nextInt(2) == 1) {
 			return true;
 		}
 		return false;
@@ -180,7 +180,7 @@ public class RessourceIA extends IA
 	 */
 	public boolean pickBuilding ()
 	{
-		// ELLE PRENDS TOUJOURS LES BUILDING SI ELLE EST SUR LA CASE
+		// IL NE PASSE JAMAIS SUR LES BATIMENTS
 		return true;
 	}
 
