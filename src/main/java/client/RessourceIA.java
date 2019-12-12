@@ -23,12 +23,10 @@ public class RessourceIA extends IA
 	//Random de l'IA (elle ne peux pas acceder a Settings).
 	private Random rand = new Random();
 	private int currentZone;
-	private int choosedRessource;
 
 	public RessourceIA (PlayerIA playerIA, InventoryIA inventoryIA) 
 	{
 		super(playerIA, inventoryIA);
-		this.choosedRessource = 4;
 	}
 
 
@@ -231,8 +229,14 @@ public class RessourceIA extends IA
 	 */
 	// GOLD - STONE - CLAY - WOOD
 	public int useRessourceCard() {
-		this.choosedRessource--;
-		return this.choosedRessource;
+		int res = -1;
+		int choose;
+		choose = this.rand.nextInt(2);
+
+		if(choose == 0) {
+			res = this.rand.nextInt(4);
+		}
+		return res;
 	}
 
 	public String toString () {return "Ressource";}
