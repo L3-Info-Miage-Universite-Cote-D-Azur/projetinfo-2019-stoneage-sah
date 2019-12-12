@@ -25,11 +25,32 @@ public class BuildingRessourceChoosed extends BuildingSpecial
 	/* METHODS */
 	/**
 	 * Permet de verifier si le joueur a bien mis au moins 1 ressource
+	 * @param inv la copie de l'inventaire du joueur
 	 * @return regarde si le joueur peut recupere la carte
 	 */
-	public boolean checkNeededRessource () 
+	public boolean checkNeededRessource (int[] inv) 
 	{
-		return super.neededRessource[0] != null;
+		for (int i = 0; i < inv.length; i++)
+		{
+			if (inv[i] > 0)
+				return true;
+		}
+		return false;
+	}
+	
+	public boolean checkRessourceChoosed (Ressource[] ressources, int[] inv)
+	{
+		// Check de la longueur
+		if (ressources.length == 0 || ressources.length > this.neededRessource.length)
+			return false;
+		// Check si le joueur possede ces ressources
+		for (int i = 0; i < ressources.length; i++)
+		{
+			inv[ressources[i].getIndex()] -= 1;
+			if (inv[ressources[i].getIndex()] < 0)
+				return false;
+		}
+		return true;
 	}
 	
 	public String getName() {return "'Batiment ressources au choix'";}
