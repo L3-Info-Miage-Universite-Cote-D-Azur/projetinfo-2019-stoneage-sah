@@ -241,7 +241,9 @@ public class Game {
 		}
 	}
 	
-	
+	/**
+	 * useCardRessource demande si le joueur veut utiliser une carte de ressource instantane, et si oui, en quelle ressource il veut convertir 
+	 */
 	public void useCardRessource() {
 		for(int i = 0; i < numberPlayer; i++) {
 			int  selectedPlayer = (i + nbTour) % numberPlayer;//L'indice du joueur selectionne en fonction du tour. 
@@ -254,6 +256,10 @@ public class Game {
 					
 					int res = player.getIA().useRessourceCard();
 					
+					while (res < -1 || res > 3 ) {
+						res = player.getIA().useRessourceCard();
+					}
+						
 					if(res != -1) {//Si l'IA utilise
 						Printer.getPrinter().println("Le joueur "+player.getName()+
 								" utilise sa carte ressource au choix pour obtenir 2 "+Ressource.indexToRessource(res).toString()+".");
