@@ -327,6 +327,7 @@ public class NoobIA extends IA
 	// WOOD - CLAY - STONE - GOLD
 	public int useRessourceCard() {
 		this.choosedRessource++;
+		this.choosedRessource %= 4;
 		return this.choosedRessource;
 	}
 
