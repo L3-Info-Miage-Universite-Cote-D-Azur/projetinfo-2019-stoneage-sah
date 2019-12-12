@@ -14,7 +14,7 @@ public class CSVUtility
 	 */
 	public void addToRow (File f, String strings) throws IOException
 	{
-		System.out.println(String.join("", strings));
+		//System.out.println(String.join("", strings));
 		try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f, true), "UTF-8")))
 		{
 			StringBuilder sb = new StringBuilder();
@@ -25,7 +25,7 @@ public class CSVUtility
 			sb.append(strings);
 
 			sb.append(System.getProperty("line.separator"));
-			System.out.println(sb.toString());
+			//System.out.println(sb.toString());
 			writer.write(sb.toString());
 			writer.close();
 		} catch (FileNotFoundException e) {
@@ -98,5 +98,16 @@ public class CSVUtility
 	public void endRow (File f) throws IOException
 	{
 		this.addSomething(f, "\n");
+	}
+	
+	/**
+	 * Permet de vider un fichier
+	 * @param file le fichier
+	 * @throws FileNotFoundException exception levee
+	 */
+	public void clearFile (File file) throws FileNotFoundException
+	{
+		PrintWriter writer = new PrintWriter(file);
+		writer.close();
 	}
 }
