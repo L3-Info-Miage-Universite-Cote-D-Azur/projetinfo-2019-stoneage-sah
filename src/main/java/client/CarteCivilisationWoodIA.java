@@ -289,7 +289,7 @@ public class CarteCivilisationWoodIA extends IA {
 
 	/**
 	 * Phase de tirage
-	 * @param listeTirage des dée tirée
+	 * @param listeTirage des des tires
 	 * @param alreadyChoose si un autre joueur l'a deja choisi ou non
 	 * @return l'index de ce que veut le joueur dans le tirage
 	 */
