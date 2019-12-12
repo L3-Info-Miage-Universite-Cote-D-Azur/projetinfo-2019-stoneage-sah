@@ -180,8 +180,8 @@ public class RessourceIA extends IA
 	 */
 	public boolean pickBuilding ()
 	{
-		// IL NE PASSE JAMAIS SUR LES BATIMENTS
-		return false;
+		// ELLE PRENDS TOUJOURS LES BUILDING SI ELLE EST SUR LA CASE
+		return true;
 	}
 
 	/**
