@@ -12,7 +12,7 @@ import player.Player;
 public class RessourceIATest 
 {
 	public Inventory inv = new Inventory();
-	public IA testIa = new RandomIA(null,inv.getInventoryIA());
+	public IA testIa = new RessourceIA(null,inv.getInventoryIA());
 
 	@Test
 	void testChooseZone() {
@@ -24,7 +24,7 @@ public class RessourceIATest
 			for(int j =0; j < 100; j++) {
 				//On test 100 fois que l'indice renvoye est bien compris entre 0 et tab1.length
 				int test = testIa.chooseZone(tab1, tab2,null , null);
-				assertEquals(true,test < tab1.length);
+				assertEquals(true,test <= tab1.length);
 				assertEquals(true,test >= 0);
 			}
 		}
@@ -73,7 +73,7 @@ public class RessourceIATest
 		
 		//CAS 2
 		inv = new Inventory();
-		testIa = new RandomIA(null,inv.getInventoryIA());
+		testIa = new RessourceIA(null,inv.getInventoryIA());
 		
 		inv.addRessource(Ressource.WOOD, 1);
 		inv.addRessource(Ressource.CLAY, 1);
@@ -93,7 +93,7 @@ public class RessourceIATest
 
 		//CAS 3
 		inv = new Inventory();
-		testIa = new RandomIA(null,inv.getInventoryIA());
+		testIa = new RessourceIA(null,inv.getInventoryIA());
 		
 		inv.addRessource(Ressource.WOOD, 3);
 		int i3 = 3;
@@ -115,7 +115,7 @@ public class RessourceIATest
 
 		//Test dans un cas ou il dois depenser toutes ses ressources. 
 		inv = new Inventory();
-		testIa = new RandomIA(null,inv.getInventoryIA());
+		testIa = new RessourceIA(null,inv.getInventoryIA());
 		
 		inv.addRessource(Ressource.GOLD, 4);
 		
@@ -133,7 +133,7 @@ public class RessourceIATest
 
 		//Test dans un cas general
 		inv = new Inventory();
-		testIa = new RandomIA(null,inv.getInventoryIA());
+		testIa = new RessourceIA(null,inv.getInventoryIA());
 		
 		inv.addRessource(Ressource.WOOD, 1);
 		inv.addRessource(Ressource.CLAY, 2);
@@ -175,7 +175,7 @@ public class RessourceIATest
 		
 		//Cas general 
 		inv = new Inventory();
-		testIa = new RandomIA(null,inv.getInventoryIA());
+		testIa = new RessourceIA(null,inv.getInventoryIA());
 		Player testPlayer = new Player("test",inv.getInventoryIA());
 		
 		for(int i =0; i<5;i++) {
