@@ -40,9 +40,15 @@ public class BuildingRessourceNotImposed extends BuildingSpecial
 		ArrayList<int[]> comb = MathPlus.combinaisons(inv, this.howManyDifferentRessource);
 		for (int[] arr : comb)
 		{
+			boolean isContinue = false;
 			for (int i = 0; i < arr.length; i++)
 				if (arr[i] == 0)
+				{
+					isContinue = true;
 					break;
+				}
+			if (isContinue == true)
+				continue;
 			if (IntStream.of(arr).sum() >= this.neededRessource.length)
 			{
 				return true;
