@@ -1,5 +1,6 @@
 package client;
 
+import game.Ressource;
 import game.zone.ZoneBuilding;
 import game.zone.ZoneCarteCivilisation;
 import inventory.InventoryIA;
@@ -75,7 +76,7 @@ public abstract class IA{
 
 	/**
 	 * Phase de tirage
-	 * @param listeTirage des des tires
+	 * @param listeTirage des dée tirée
 	 * @param alreadyChoose si un autre joueur l'a deja choisi ou non
 	 * @return l'index de ce que veut le joueur dans le tirage
 	 */
@@ -87,6 +88,20 @@ public abstract class IA{
 	 * @return ressource que le joueur veux -1 pour ne pas l'utiliser
 	 */
 	public abstract int useRessourceCard();
+	
+	/**
+	 * Renvoie le tableau des ressources utilisees pour les buildingsNotImposed
+	 * @param nombreRessource le nombre de ressources
+	 * @param combienDeRessourcesDifferentes le nombre de ressources differentes
+	 * @return un tableau des ressources
+	 */
+	public abstract Ressource[] chooseRessourceBuildingNotImposed (int nombreRessource, int combienDeRessourcesDifferentes);
+	
+	/**
+	 * Renvoie le tableau des ressources utilisees pour les buildingsChoosed
+	 * @return un tableau des ressources
+	 */
+	public abstract Ressource[] chooseRessourceBuildingChoosed ();
 
 
 	@Override
