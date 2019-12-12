@@ -150,6 +150,7 @@ public class GamePlayers {
 
 	/* Score */
 	public void endGame(Statistics stats) {
+		Printer.getPrinter().println("\n---- SCORE DE FIN DE PARTIE ----");
 		Score score = new Score();
 		for(int i = 0; i < players.length; i++) {
 			Printer.getPrinter().println();

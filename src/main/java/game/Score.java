@@ -69,6 +69,7 @@ public class Score {
 				}
 			}
 		}
+		Printer.getPrinter().println("Le joueur "+player.getName()+" obtient "+inventory.availableResourceToFeed()+" grace au ressources premieres.");
 		scoreAdd += inventory.availableResourceToFeed();
 		player.addScore(scoreAdd);
 	}
@@ -88,7 +89,7 @@ public class Score {
 			notprint[i] = true;
 		}
 		Arrays.sort(score);
-		Printer.getPrinter().println("\nVoici le classement:");
+		Printer.getPrinter().println("\n---- Voici le classement:-----");
 		int position = 1;
 		for(int i = players.length-1; i >= 0; i--) {
 			for(int j = 0; j < players.length; j++) {

@@ -89,8 +89,39 @@ public class Game {
 			
 			nbTour+=1;
 		}
-		Printer.getPrinter().println("\n=========================\nLa partie est fini\n=========================");
-		if(useStats) this.statistics.endGame(this.gamePlayers.getInventories(), this.gamePlayers.getPlayers(), this.nbTour - 1);
+		Printer.getPrinter().println("\n=========================\nLa partie est fini\n=========================\n");
+		//AFFICHAGE
+		Printer.getPrinter().println("---- Voici les inventaires finaux des joueurs: ----\n");
+		for (int i = 0; i < numberPlayer;i++) {
+			Printer.getPrinter().println("Le joueur "+ gamePlayers.getPlayer(i).getName()+" a " + gamePlayers.getPlayer(i).getScore()+" points de victoire");
+		}
+		Printer.getPrinter().println();
+		for(int i = 0; i < numberPlayer; i++) {
+			Printer.getPrinter().println("Le joueur "+ gamePlayers.getPlayer(i).getName()+" a " + gamePlayers.getPlayer(i).getMaxFigurine()+" ouvriers.");
+		}
+		Printer.getPrinter().println();
+		for (int i = 0; i < numberPlayer;i++) {
+			String string = "Le joueur "+gamePlayers.getPlayer(i).getName()+" a :";
+			string += " "+gamePlayers.getInventory(i).getRessource(Ressource.WOOD)+" bois,";
+			string += " "+gamePlayers.getInventory(i).getRessource(Ressource.CLAY)+" argiles,";
+			string += " "+gamePlayers.getInventory(i).getRessource(Ressource.STONE)+" pierres,";
+			string += " "+gamePlayers.getInventory(i).getRessource(Ressource.GOLD)+" or,";
+			string += " "+gamePlayers.getInventory(i).getRessource(Ressource.FOOD)+" nourritures,";
+			string += " et "+gamePlayers.getInventory(i).getRessource(Ressource.FIELD)+" marqueurs nourritures.";
+			Printer.getPrinter().println(string);
+		}
+		Printer.getPrinter().println();
+		for (int i = 0; i < numberPlayer;i++) {
+			int nbBat = gamePlayers.getInventory(i).getBuildings();
+			String str = "Le joueur "+gamePlayers.getPlayer(i).getName()+" a: "+nbBat+" Batiments; Carte civillisations: [";
+			for(CarteCivilisation cv : gamePlayers.getInventory(i).getCardCivilisation()) {
+				str +=  cv.getName()+",";
+			}
+			str += "].";
+			Printer.getPrinter().println(str);
+		}
+		//TRAITEMENT
+		if (useStats) this.statistics.endGame(this.gamePlayers.getInventories(), this.gamePlayers.getPlayers(), this.nbTour - 1);
 		gamePlayers.endGame(this.statistics);
 	}
 
@@ -136,6 +167,16 @@ public class Game {
 	 * feedPhase correspond a la phase de nourrisage. 
 	 */
 	public void feedPhase() {
+		//AFFICHAGE
+		Printer.getPrinter().println("\n--- Info Joueur ---");
+		for(int i = 0; i < numberPlayer; i++) {
+			Printer.getPrinter().println("Le joueur "+ gamePlayers.getPlayer(i).getName()+" a " + gamePlayers.getPlayer(i).getMaxFigurine()+" ouvriers.");
+			Printer.getPrinter().println(""+gamePlayers.getInventory(i).getRessource(Ressource.FOOD)+" nourritures.");
+			Printer.getPrinter().println(""+gamePlayers.getInventory(i).getRessource(Ressource.FIELD)+" marqueurs nourritures.");
+			Printer.getPrinter().println(gamePlayers.getInventory(i).availableResourceToFeed()+" ressources premieres.");
+			Printer.getPrinter().println();
+		}
+		//TRAITEMENT
 		for(int i = 0; i < numberPlayer; i++) {
 			int  selectedPlayer = (i + nbTour) % numberPlayer;//L'indice du joueur selectionne en fonction du tour. 
 			gamePlayers.playerFeedPhase(selectedPlayer);
@@ -155,9 +196,14 @@ public class Game {
 	 * afficheInfo affiche des informations de la partie en debut de tour.
 	 */
 	public void afficheInfo() {
-		Printer.getPrinter().println("\n--- INFORMATIONS ---");
+		Printer.getPrinter().println("\n----- INFORMATIONS -----\n");
+		Printer.getPrinter().println("--- Info Joueur ---");
 		for (int i = 0; i < numberPlayer;i++) {
 			Printer.getPrinter().println("Le joueur "+ gamePlayers.getPlayer(i).getName()+" a " + gamePlayers.getPlayer(i).getScore()+" points de victoire");
+		}
+		Printer.getPrinter().println();
+		for(int i = 0; i < numberPlayer; i++) {
+			Printer.getPrinter().println("Le joueur "+ gamePlayers.getPlayer(i).getName()+" a " + gamePlayers.getPlayer(i).getMaxFigurine()+" ouvriers.");
 		}
 		Printer.getPrinter().println();
 		for (int i = 0; i < numberPlayer;i++) {
