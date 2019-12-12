@@ -24,7 +24,7 @@ public class CarteCivilisationManagerTest {
 		
 		ccm.initDeck();
 		//Test de la longueur
-		assertEquals(true,ccm.getDeck().size() == 35);
+		assertEquals(true,ccm.getDeck().size() == 36);
 	}
 	
 	@Test
