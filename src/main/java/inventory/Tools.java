@@ -65,7 +65,7 @@ public class Tools extends ToolStruct{
 	
 	
 	/**
-	 * Change tout les outils selectionner par le joueur a usé et renvoie la sum de ces outils.
+	 * Change tous les outils selectionner par le joueur en uses et renvoie la somme de ces outils.
 	 * @param choose la liste des choix du joueur (une liste valide).
 	 * @param player le nom du joueur que a utiliser les outils.
 	 * @return la somme des outils utiliser.
@@ -90,7 +90,7 @@ public class Tools extends ToolStruct{
 	
 	
 	/**
-	 * Verifie si le choix la liste des choix est correcte
+	 * Verifie si le choix de la liste des choix est correcte
 	 * @param choose liste des choix a verifier
 	 * @return true : Le choix est correct; False le choix est incorrect
 	 */
