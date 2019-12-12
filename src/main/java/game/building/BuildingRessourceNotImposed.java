@@ -1,6 +1,7 @@
 package game.building;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 import game.Ressource;
 
@@ -24,43 +25,62 @@ public class BuildingRessourceNotImposed extends BuildingSpecial
 	 * Permet de verifier si le joueur a bien mis le nombre de ressources differentes, et assez
 	 * @return regarde si le joueur peut recupere la carte
 	 */
-	public boolean checkNeededRessource ()
+	public boolean checkNeededRessource (int[] inv)
 	{
 		/* INITIALISATION */
+		
 		// LISTE QUI VA CONTENIR UNIQUEMENT howManyDifferentRessource RESSOURCE, ON CHECK AVEC .contains()
 		ArrayList<Ressource> r = new ArrayList<Ressource>();
 		for (int i = 0; i < this.howManyDifferentRessource; i++)
 		{
 			r.add(null);
 		}
-
+		
 		/* TREATMENT */
-		for (int i = 0, r_index = 0; i < super.neededRessource.length; i++)
+		ArrayList<int[]> comb = MathPlus.combinaisons(inv, this.howManyDifferentRessource);
+		for (int[] arr : comb)
 		{
-			// SI LA RESSOURCE N'EST PAS DANS NOTRE LISTE
-			if (super.neededRessource[i] != null  &&
-					r.contains(super.neededRessource[i]) == false)
-			{			
-				// SI ON A UNE RESSOURCE DIFFERENTE DE TROP
-				if (r_index == this.howManyDifferentRessource)
-				{
-					// IL Y A ERREUR
-					return false;
-				}
-
-				// ON L'AJOUTE
-				r.set(r_index, super.neededRessource[i]);
-				r_index++;
+			for (int i = 0; i < arr.length; i++)
+				if (arr[i] == 0)
+					break;
+			if (IntStream.of(arr).sum() >= this.neededRessource.length)
+			{
+				return true;
 			}
 		}
-
-		// SI ON A UN EMPLACEMENT VIDE
-		if (r.get(this.howManyDifferentRessource - 1) == null)
+		return false;
+	}
+	
+	/**
+	 * Permet de verifier les ressources que le joueur veut miser
+	 * @param ressources les ressources misees
+	 * @param inv une copie de l'inventaire du joueur
+	 * @return true s'il peut miser, false sinon
+	 */
+	public boolean checkRessourceNotImposed (Ressource[] ressources, int[] inv)
+	{
+		// Check si on a assez de ressources differentes
+		ArrayList<Ressource> howManyRessources = new ArrayList<Ressource>();
+		for (Ressource r : ressources)
 		{
-			// ON A PAS ASSEZ DE RESSOURCE DIFFERENTES
-			return false;
+			if (howManyRessources.contains(r) == false)
+			{
+				howManyRessources.add(r);
+			}
 		}
-
+		if (howManyRessources.size() != this.howManyDifferentRessource)
+			return false;
+		// Check de la longueur
+		if (ressources.length != super.neededRessource.length)
+			return false;
+		
+		// Check si le joueur possede ces ressources
+		for (int i = 0; i < ressources.length; i++)
+		{
+			inv[ressources[i].getIndex()] -= 1;
+			if (inv[ressources[i].getIndex()] < 0)
+				return false;
+		}
 		return true;
 	}
 
