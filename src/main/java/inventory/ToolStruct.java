@@ -60,7 +60,7 @@ public abstract class ToolStruct {
 	}
 
 	/**
-	 * useToolsToString creer une chaine de caratere correspondnat a l'utilisation des outils.
+	 * useToolsToString creer une chaine de caratere correspondant a l'utilisation des outils.
 	 * @param name le nom du joueur.
 	 * @param tools le niveau de l'outils
 	 * @return la chaine de caracteres pour l'utilisation des outils.
@@ -70,8 +70,8 @@ public abstract class ToolStruct {
 	}
 
 	/**
-	 * addUniqueTool ajoute l'outils unique de valeur val a Tools.
-	 * @param val : la valeur de l'outils unique.
+	 * addUniqueTool ajoute l'outil unique de valeur val a Tools.
+	 * @param val : la valeur de l'outil unique.
 	 */
 	public void addUniqueTool(int val) {
 		if(val<=0) return;
@@ -86,7 +86,7 @@ public abstract class ToolStruct {
 	}
 
 	/**
-	 * subUniqueTool supprime l'outils unique de valeur val;
+	 * subUniqueTool supprime l'outil unique de valeur val;
 	 * @param indexToErase : index de l'outil a supprimer
 	 */
 	public void subUniqueTool(int indexToErase) {
@@ -112,8 +112,8 @@ public abstract class ToolStruct {
 	
 	/**
 	 * Met a true les outils utilises.
-	 * @param index l'index de l'outils selectionner par l'ia.
-	 * @return renvoie la valeur de l'outils utiliser.
+	 * @param index l'index de l'outil selectionner par l'ia.
+	 * @return renvoie la valeur de l'outil utiliser.
 	 */
 	protected int setToolsToUsed(int index) {
 		int value = 0;
