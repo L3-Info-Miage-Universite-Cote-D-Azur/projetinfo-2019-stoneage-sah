@@ -11,18 +11,18 @@ import player.Player;
 
 public class CiviIATest {
 	public Inventory inv = new Inventory();
-	public IA testIa = new RandomIA(null,inv.getInventoryIA());
+	public IA testIa = new CiviIA(null,inv.getInventoryIA());
 
 	@Test
 	void testChooseZone() {
 		int[] tab1 = new int[] {7,7,7,7,5000,1,1,1,0,0,0,0,0,0,0};
 
-        for(int j =0; j < 100; j++) {
-            //On test 100 fois que l'indice renvoye est bien compris entre 0 et tab1.length
-            int test = testIa.chooseZone(tab1, null ,null , null);
-            assertEquals(true,test < tab1.length);
-            assertEquals(true,test >= 0);
-        }
+		for(int j =0; j < 100; j++) {
+			//On test 100 fois que l'indice renvoye est bien compris entre 0 et tab1.length
+			int test = testIa.chooseZone(tab1, null ,null , null);
+			assertEquals(true,test < tab1.length);
+			assertEquals(true, test >= 0);
+		}
 	}
 
 	@Test
@@ -49,9 +49,9 @@ public class CiviIATest {
 		inv.addRessource(Ressource.WOOD, 1);
 		inv.addRessource(Ressource.CLAY, 2);
 		inv.addRessource(Ressource.STONE, 3);
-		
+
 		int i1 = 3;
-		
+
 		for(int j =0; j < 50; j++) {
 			int[] test = testIa.chooseRessource(i1);
 			assertEquals(true,test[0] < 3);
@@ -64,12 +64,12 @@ public class CiviIATest {
 			assertEquals(false,test[1] < 0);
 			assertEquals(false,test[1] > 3);
 		}
-		
-		
+
+
 		//CAS 2
 		inv = new Inventory();
-		testIa = new RandomIA(null,inv.getInventoryIA());
-		
+		testIa = new CiviIA(null,inv.getInventoryIA());
+
 		inv.addRessource(Ressource.WOOD, 1);
 		inv.addRessource(Ressource.CLAY, 1);
 		int i2 = 2;
@@ -89,7 +89,7 @@ public class CiviIATest {
 		//CAS 3
 		inv = new Inventory();
 		testIa = new RandomIA(null,inv.getInventoryIA());
-		
+
 		inv.addRessource(Ressource.WOOD, 3);
 		int i3 = 3;
 
@@ -110,10 +110,10 @@ public class CiviIATest {
 
 		//Test dans un cas ou il dois depenser toutes ses ressources. 
 		inv = new Inventory();
-		testIa = new RandomIA(null,inv.getInventoryIA());
-		
+		testIa = new CiviIA(null,inv.getInventoryIA());
+
 		inv.addRessource(Ressource.GOLD, 4);
-		
+
 		int number = 4;
 		int[] res;
 
@@ -128,8 +128,8 @@ public class CiviIATest {
 
 		//Test dans un cas general
 		inv = new Inventory();
-		testIa = new RandomIA(null,inv.getInventoryIA());
-		
+		testIa = new CiviIA(null,inv.getInventoryIA());
+
 		inv.addRessource(Ressource.WOOD, 1);
 		inv.addRessource(Ressource.CLAY, 2);
 		inv.addRessource(Ressource.STONE, 3);
@@ -167,12 +167,11 @@ public class CiviIATest {
 			assertEquals(true, res[1] == false);
 			assertEquals(true, res[2] == false);
 		}
-		
 		//Cas general 
 		inv = new Inventory();
-		testIa = new RandomIA(null,inv.getInventoryIA());
+		testIa = new CiviIA(null,inv.getInventoryIA());
 		Player testPlayer = new Player("test",inv.getInventoryIA());
-		
+
 		for(int i =0; i<5;i++) {
 			inv.getTools().incrementTool();
 		}
@@ -181,7 +180,7 @@ public class CiviIATest {
 
 		for(int j =0; j < 50; j++) {
 			res = testIa.pickTools();
-			
+
 			if(testBooleans[0]) {
 				assertEquals(true, res[0] == false);
 			}else {
@@ -192,7 +191,7 @@ public class CiviIATest {
 			}else {
 				assertEquals(true, res[1] == false || res[1] == true);
 			}
-			
+
 			if(testBooleans[2]) {
 				assertEquals(true, res[2] == false);
 			}else {
@@ -201,3 +200,4 @@ public class CiviIATest {
 		}
 	}
 }
+
