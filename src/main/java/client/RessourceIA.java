@@ -42,9 +42,22 @@ public class RessourceIA extends IA
 	 */
 	public int chooseZone (int[] zoneAvailableSpace, String[] zoneName, ZoneBuilding[] buildings, ZoneCarteCivilisation[] cV)
 	{
+		//pour eviter les parti infinies
+		if(inventoryIA.availableResourceToFeed()>150) {
+			// CHECK DES BUILDINGS
+			for (int i = 0; i < buildings.length; i++)
+			{
+				// SI Y'A DE LA PLACE
+				if (zoneAvailableSpace[i+12] >= 1)
+				{
+					this.currentZone = i + 12;
+					return currentZone;
+				}
+			}
+		}
 		// RESET
 		this.currentZone = -1;
-		
+
 		//ELLE PRENDS EN PRIORITE LES ZONES DE RESSOURCES
 		if (zoneAvailableSpace[0] >= 1)
 		{
@@ -182,7 +195,7 @@ public class RessourceIA extends IA
 		int[] toolsToUse = inventoryIA.getTools().getTools();
 		boolean[] useTools = inventoryIA.getTools().getToolsUsed();
 		boolean[] res = new boolean[toolsToUse.length];
-		
+
 		//ON UTILISE JAMAIS LES OUTILS
 		for (int i = 0; i < toolsToUse.length; i++)
 		{
@@ -214,7 +227,7 @@ public class RessourceIA extends IA
 		return choose;
 	}
 
-	
+
 	/**
 	 * useRessourceCard demande a l'ia si elle veut utiliser ses ressources au choix. 
 	 * Si oui, elle demande lesquelles (id de la ressource).
