@@ -56,7 +56,7 @@ public class ZoneBuilding extends ZoneOnePlayer
 		else if (type == 1)
 		{
 			// CHECKER SI LE JOUEUR PEUT CHOISIR
-			if (((BuildingRessourceNotImposed)this.buildings.get(0)).checkNeededRessource() == true)
+			if (((BuildingRessourceNotImposed)this.buildings.get(0)).checkNeededRessource(inventory.getCopyRessources()) == true)
 			{
 				// SI IL VEUT RETIRER SES POINTS DE VICTOIRE
 				return this.occupated.getIA().pickBuilding();
@@ -65,7 +65,7 @@ public class ZoneBuilding extends ZoneOnePlayer
 		else if (type == 2)
 		{
 			// CHECKER SI LE JOUEUR PEUT CHOISIR
-			if (((BuildingRessourceChoosed)this.buildings.get(0)).checkNeededRessource() == true)
+			if (((BuildingRessourceChoosed)this.buildings.get(0)).checkNeededRessource(inventory.getCopyRessources()) == true)
 			{
 				// SI IL VEUT RETIRER SES POINTS DE VICTOIRE
 				return this.occupated.getIA().pickBuilding();
@@ -92,6 +92,24 @@ public class ZoneBuilding extends ZoneOnePlayer
 			// SI LE JOUEUR VEUT LA TUILE BATIMENT
 			if (wantToPickBuilding == true)
 			{
+				// SI C'EST UN BATIMENT SPECIAL
+				if (this.buildings.get(0).getType() > 0)
+				{
+					// BUIDLING NOT IMPOSED
+					if (this.buildings.get(0).getType() == 1)
+					{
+						BuildingRessourceNotImposed b = (BuildingRessourceNotImposed) this.buildings.get(0);
+						// public Ressource[] chooseRessourceBuildingNotImposed (int nombreRessource, int combienDeRessourcesDifferentes)
+						while (b.checkRessourceNotImposed(player.getIA().chooseRessourceBuildingNotImposed(b.getNeededRessource().length, b.getHowManyDifferentRessource()), inventory.getCopyRessources()) == false);
+					}
+					else
+					{
+						BuildingRessourceChoosed b = (BuildingRessourceChoosed) this.buildings.get(0);
+						// public Ressource[] chooseRessourceBuildingChoosed ()
+						while (b.checkRessourceChoosed(player.getIA().chooseRessourceBuildingChoosed(), inventory.getCopyRessources()) == false);
+					}
+				}
+				
 				// ON SUPPRIME LES RESSOURCES DU JOUEUR UNE PAR UNE
 				for (int i = 0; i < this.buildings.get(0).getNeededRessource().length; i++)
 				{
