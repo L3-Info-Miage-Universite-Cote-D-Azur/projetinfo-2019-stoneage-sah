@@ -90,6 +90,7 @@ public class Game {
 			nbTour+=1;
 		}
 		Printer.getPrinter().println("\n=========================\nLa partie est fini\n=========================");
+		this.statistics.endGame(this.gamePlayers.getInventories(), this.gamePlayers.getPlayers(), this.nbTour - 1);
 		gamePlayers.endGame(this.statistics);
 	}
 
