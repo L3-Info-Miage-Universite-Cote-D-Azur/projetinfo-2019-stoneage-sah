@@ -78,9 +78,7 @@ public class Program {
         	Printer.getPrinter().setPrinterCanWrite(true);
         	Printer.getPrinter().println("Creation des fichier de statistique");
         	Printer.getPrinter().setPrinterCanWrite(false);
-        	stats.createJITCurves(ias);
-        	stats.createAverages(ias);
-		stats.createVictoryRate(ias);
+        	stats.createAll(ias);
         	Printer.getPrinter().setPrinterCanWrite(true);
         	Printer.getPrinter().println("Fin du programme");
         }
