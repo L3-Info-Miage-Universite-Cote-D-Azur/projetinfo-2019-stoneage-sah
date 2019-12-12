@@ -1,5 +1,6 @@
 package client;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -131,7 +132,7 @@ public class NoobIA extends IA
 						else if (tmpBuilding.getType() == 1)
 						{
 							// SI C'EST UN BUILDING AVEC RESSOURCE NON IMPOSEES ET QU'ON A LES RESSOURCES
-							if (((BuildingRessourceNotImposed) tmpBuilding).checkNeededRessource())
+							if (((BuildingRessourceNotImposed) tmpBuilding).checkNeededRessource(this.inventoryIA.getCopyRessources()))
 							{
 								if (this.rand.nextInt(2) == 1) this.currentZone = i + 12;
 							}
@@ -139,7 +140,7 @@ public class NoobIA extends IA
 						else if (tmpBuilding.getType() == 2)
 						{
 							// SI C'EST UN BUILDING AVEC RESSOURCE A CHOIX ET QU'ON A LES RESSOURCES
-							if (((BuildingRessourceChoosed) tmpBuilding).checkNeededRessource())
+							if (((BuildingRessourceChoosed) tmpBuilding).checkNeededRessource(this.inventoryIA.getCopyRessources()))
 							{
 								if (this.rand.nextInt(2) == 1) this.currentZone = i + 12;
 							}
@@ -327,8 +328,102 @@ public class NoobIA extends IA
 	// WOOD - CLAY - STONE - GOLD
 	public int useRessourceCard() {
 		this.choosedRessource++;
-		this.choosedRessource %= 4;
 		return this.choosedRessource;
+	}
+	
+	/**
+	 * Renvoie le tableau des ressources utilisees pour les buildingsNotImposed
+	 * @param nombreRessource le nombre de ressources
+	 * @param combienDeRessourcesDifferentes le nombre de ressources differentes
+	 * @return un tableau des ressources
+	 */
+	public Ressource[] chooseRessourceBuildingNotImposed (int nombreRessource, int combienDeRessourcesDifferentes)
+	{
+		/*
+		 * EXPLICATION DE L'ALGORITHME:
+		 * On fait la liste des combinaisons possibles de taille combienDeRessourcesDifferentes
+		 * Si il y a un 0 dans la combinaison, donc que le joueur ne possede pas la ressource, on vire la combinaison
+		 * Si la somme est inferieur a nombreRessource, on vire la combinaison
+		 * Des qu'on a trouve 1 bonne combinaison, on la garde
+		 * Avec la bonne combinaison, on met au moins 1 ressource de chaque dans la reponse
+		 * Ensuite, on enleve les ressources une par une dans l'ordre de la combinaison
+		 */
+		
+		// COMBINAISONS
+		ArrayList<int[]> comb = MathPlus.combinaisons(this.inventoryIA.getCopyRessources(), combienDeRessourcesDifferentes);
+		Ressource[] res = new Ressource[nombreRessource];
+		int i = 0;
+		// ON CHERCHE 1 COMBINAISON BONNE
+		for (; i < comb.size(); i++)
+		{
+			int retToStart = 0;
+			for (int k = 0; k < comb.get(i).length; k++)
+			{
+				if (comb.get(i)[k] == 0)
+					retToStart = 1;
+			}
+			if (retToStart == 0)
+				break;
+		}
+		int[] tabAns = comb.get(i);
+		int[] cpy = this.inventoryIA.getCopyRessources();
+		Ressource[] correspondances = new Ressource[combienDeRessourcesDifferentes];
+		
+		// ON MET 1 RESSOURCE DE CHAQUE
+		for (int k = 0, r = 0 ; i < tabAns.length; i++)
+		{
+			int g = 0;
+			for (; g < cpy.length; g++)
+				if (tabAns[k] == cpy[g])
+				{
+					cpy[g]--;
+					break;
+				}
+			correspondances[r] = Ressource.indexToRessource(g);
+		}
+		
+		// ON FINIT
+		for (int k = 0; k < combienDeRessourcesDifferentes; k++)
+		{
+			res[k] = correspondances[k];
+		}
+		
+		for (int k = correspondances.length, g = 0; k < nombreRessource; k++)
+		{
+			if (cpy[g] == 0)
+			{
+				g++;
+				k--;
+			}
+			else
+			{
+				res[k] = correspondances[g];
+				cpy[g]--;
+			}
+		}
+		return res;
+	}
+	
+	/**
+	 * Renvoie le tableau des ressources utilisees pour les buildingsChoosed
+	 * @return un tableau des ressources
+	 */
+	public Ressource[] chooseRessourceBuildingChoosed ()
+	{
+		Ressource[] res = new Ressource[this.rand.nextInt(7)+1 /* [1, 7] */];
+		for (int i = 0, invIndex = 0; i < res.length; i++)
+		{
+			if (this.inventoryIA.getRessource(Ressource.indexToRessource(invIndex)) == 0)
+			{
+				i--;
+				invIndex++;
+			}
+			else
+			{
+				res[i] = Ressource.indexToRessource(invIndex);
+			}
+		}
+		return res;
 	}
 
 	public String toString () {return "Debutant";}
