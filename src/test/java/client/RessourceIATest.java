@@ -24,8 +24,7 @@ public class RessourceIATest
 				assertEquals(true,test <= tab1.length);
 				assertEquals(true,test >= 0);
 			}
-		
-	}
+		}
 
 	@Test
 	void testChooseNumber() {
