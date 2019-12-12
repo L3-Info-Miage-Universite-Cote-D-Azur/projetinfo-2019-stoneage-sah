@@ -212,7 +212,7 @@ public class GameZones {
 
 			if((choose >= 0) && (choose<zones.length) && ableToChooseZone(choose, player)) ok=true;
 			else if((choose >= 0) && (choose<zones.length)) Printer.getPrinter().println("/!\\ Zone "+zones[choose].getName()+" : Choix incorrecte ou zone pleine, veuillez reessayer./!\\");
-			else Printer.getPrinter().println("/!\\ L'index "+choose+" est incorrecte, veuillez reessayer./!\\");
+			else Printer.getPrinter().println("/!\\ L'index "+choose+" est hors limite de Zones[], veuillez reessayer./!\\");
 		}
 		return choose;
 	}
@@ -283,40 +283,14 @@ public class GameZones {
 				}
 			}
 			String str = "Le joueur "+gamePlayers.getPlayer(indexPlayerChoose).getName()+" a choisi : ";
-			switch(diceRes[choose]) {
-				case 1:
-					gamePlayers.getInventory(indexPlayerChoose).addRessource(Ressource.WOOD, 1);
-					Printer.getPrinter().println(str+Ressource.WOOD);
-					break;
-					
-				case 2:
-					gamePlayers.getInventory(indexPlayerChoose).addRessource(Ressource.CLAY, 1);
-					Printer.getPrinter().println(str+Ressource.CLAY);
-					break;
-					
-				case 3:
-					gamePlayers.getInventory(indexPlayerChoose).addRessource(Ressource.STONE, 1);
-					Printer.getPrinter().println(str+Ressource.STONE);
-					break;
-					
-				case 4:
-					gamePlayers.getInventory(indexPlayerChoose).addRessource(Ressource.GOLD, 1);
-					Printer.getPrinter().println(str+Ressource.GOLD);
-					break;
-					
-				case 5:
-					gamePlayers.getInventory(indexPlayerChoose).getTools().incrementTool();
-					Printer.getPrinter().println(str+"une augmentation d'outils");
-					break;
-					
-				case 6:
-					gamePlayers.getInventory(indexPlayerChoose).addRessource(Ressource.FIELD, 1);
-					Printer.getPrinter().println(str+Ressource.FIELD);
-					break;
-				default:
-					Printer.getPrinter().println("erreur");
+			if(diceRes[choose]==5) {
+				gamePlayers.getInventory(indexPlayerChoose).getTools().incrementTool();
+				Printer.getPrinter().println(str+"une augmentation d'outils");
 			}
-			
+			else {
+				gamePlayers.getInventory(indexPlayerChoose).addRessource(Ressource.indexToRessource(diceRes[choose]-1), 1);
+				Printer.getPrinter().println(str+Ressource.indexToRessource(diceRes[choose]-1));
+			}	
 		}
 	}
 }
