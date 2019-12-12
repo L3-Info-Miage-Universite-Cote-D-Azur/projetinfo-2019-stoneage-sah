@@ -186,4 +186,44 @@ public class RandomIA extends IA {
 		return "Random";
 	}
 
+	/**
+	 * Renvoie le tableau des ressources utilisees pour les buildingsNotImposed
+	 * @param nombreRessource le nombre de ressources
+	 * @param combienDeRessourcesDifferentes le nombre de ressources differentes
+	 * @return un tableau des ressources
+	 */
+	public Ressource[] chooseRessourceBuildingNotImposed(int nombreRessource, int combienDeRessourcesDifferentes) 
+	{
+		Ressource[] res = new Ressource[nombreRessource];
+		for (int i = 0; i < nombreRessource; i++)
+		{
+			int x = this.rand.nextInt(this.inventoryIA.getCopyRessources().length);
+			while (this.inventoryIA.getRessource(Ressource.indexToRessource(x)) == 0);
+			{
+				x = this.rand.nextInt(this.inventoryIA.getCopyRessources().length);
+			}
+			res[i] = Ressource.indexToRessource(x);
+		}
+		return res;
+	}
+
+	/**
+	 * Renvoie le tableau des ressources utilisees pour les buildingsChoosed
+	 * @return un tableau des ressources
+	 */
+	public Ressource[] chooseRessourceBuildingChoosed()
+	{
+		Ressource[] res = new Ressource[this.rand.nextInt(7) + 1];
+		for (int i = 0; i < res.length; i++)
+		{
+			int x = this.rand.nextInt(this.inventoryIA.getCopyRessources().length);
+			while (this.inventoryIA.getRessource(Ressource.indexToRessource(x)) == 0);
+			{
+				x = this.rand.nextInt(this.inventoryIA.getCopyRessources().length);
+			}
+			res[i] = Ressource.indexToRessource(x);
+		}
+		return res;
+	}
+
 }
