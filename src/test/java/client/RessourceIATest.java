@@ -16,18 +16,15 @@ public class RessourceIATest
 
 	@Test
 	void testChooseZone() {
-		for(int i = 1; i <= 10; i++) {
-			//On incremente la taille du tableau a chaque iteration. 
-			int[] tab1 = new int[i];
-			String[] tab2 = new String[i];
+			int[] tab1 = new int[] {7,7,7,7,5000,1,1,1,0,0,0,0,0,0,0};
 
 			for(int j =0; j < 100; j++) {
 				//On test 100 fois que l'indice renvoye est bien compris entre 0 et tab1.length
-				int test = testIa.chooseZone(tab1, tab2,null , null);
+				int test = testIa.chooseZone(tab1, null,null , null);
 				assertEquals(true,test <= tab1.length);
 				assertEquals(true,test >= 0);
 			}
-		}
+		
 	}
 
 	@Test
