@@ -64,6 +64,11 @@ public class GamePlayers {
 	}
 	
 	/* INIT FOR STATS */
+	/**
+	 * 
+	 * @param numberPlayer Nombre de joueur
+	 * @param iaPlayers le numero de l'ia
+	 */
     public void initPlayerWithIA(int numberPlayer, int[] iaPlayers) {
         players = new Player[numberPlayer];
 
@@ -149,6 +154,10 @@ public class GamePlayers {
 	}
 
 	/* Score */
+	/**
+	 * 
+	 * @param stats l'objet qui stock les statistiques
+	 */
 	public void endGame(Statistics stats) {
 		Printer.getPrinter().println("\n---- SCORE DE FIN DE PARTIE ----");
 		Score score = new Score();
