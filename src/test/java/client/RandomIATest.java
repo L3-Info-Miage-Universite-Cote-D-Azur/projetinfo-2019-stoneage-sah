@@ -1,13 +1,17 @@
 package client;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import client.IA;
+import client.RandomIA;
 import game.Ressource;
 import inventory.Inventory;
 import player.Player;
-
 
 public class RandomIATest {
 	
@@ -255,6 +259,64 @@ public class RandomIATest {
 		for(int i = 0; i <100; i++) {
 			res = testIa.useRessourceCard();
 			assertEquals(true, (res >=0 && res < 4) || (res == -1));
+		}
+	}
+	
+	
+	@Test
+	public void testChooseRessourceBuildingNotImposed ()
+	{
+		this.inv = new Inventory();
+		this.inv.addRessource(Ressource.WOOD, 1);
+		this.inv.addRessource(Ressource.CLAY, 3);
+		this.inv.addRessource(Ressource.STONE, 2);
+		testIa = new RandomIA(null,inv.getInventoryIA());
+		
+		Ressource[] res = this.testIa.chooseRessourceBuildingNotImposed(4, 3);
+		// TEST TAILLE
+		assertEquals(res.length, 4);
+		
+		// TEST VALEUR ATTENDUES
+		Ressource[] nbOcc = new Ressource[3];
+		for (int r = 0, idx = 0; r < res.length; r++)
+		{
+			assertEquals(nbOcc.length != idx, true);
+			boolean toContinue = false;
+			for (int i = 0; i < nbOcc.length; i++)
+			{
+				if (nbOcc[i] == res[r])
+				{
+					toContinue = true;
+					break;
+				}
+			}
+			if (toContinue == true)
+				continue;
+			nbOcc[idx] = res[r];
+			idx++;
+		}
+		assertNotNull(nbOcc[nbOcc.length - 1]);
+	}
+	
+	@Test
+	public void testChooseRessourceBuildingChoosed ()
+	{
+		this.inv = new Inventory();
+		this.inv.addRessource(Ressource.WOOD, 0);
+		this.inv.addRessource(Ressource.CLAY, 0);
+		this.inv.addRessource(Ressource.STONE, 0);
+		this.inv.addRessource(Ressource.GOLD, 4);
+		testIa = new RandomIA(null,inv.getInventoryIA());
+
+		Ressource[] res = this.testIa.chooseRessourceBuildingChoosed();
+		System.out.println(Arrays.toString(res));
+		// TEST TAILLE
+		assertEquals(res.length > 0 && res.length < 8, true);
+		
+		// TEST VALEUR ATTENDUES
+		for (int i = 0; i < res.length; i++)
+		{
+			assertEquals(Ressource.GOLD, res[i]);
 		}
 	}
 }
