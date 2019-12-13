@@ -399,4 +399,6 @@ public class Statistics
 
 	/* GETTERS */
 	public CSVUtility getCSV () {return this.csv;}
+	public ArrayList<ArrayList<Integer>[]>[] getDatas () {return this.playersArrays;}
+	public double[] getVictoryRate() {return this.victoryRateArray;}
 }
