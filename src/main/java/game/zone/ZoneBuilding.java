@@ -1,5 +1,6 @@
 package game.zone;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import game.Ressource;
 import game.Settings;
@@ -92,30 +93,54 @@ public class ZoneBuilding extends ZoneOnePlayer
 			// SI LE JOUEUR VEUT LA TUILE BATIMENT
 			if (wantToPickBuilding == true)
 			{
+				Ressource[] choosed = buildings.get(0).getNeededRessource();
 				// SI C'EST UN BATIMENT SPECIAL
 				if (this.buildings.get(0).getType() > 0)
 				{
+					//System.out.println("in " + player.getName() + player.getIA().toString() +  " " + this.buildings.get(0).getName());
 					// BUIDLING NOT IMPOSED
 					if (this.buildings.get(0).getType() == 1)
 					{
 						BuildingRessourceNotImposed b = (BuildingRessourceNotImposed) this.buildings.get(0);
-						// public Ressource[] chooseRessourceBuildingNotImposed (int nombreRessource, int combienDeRessourcesDifferentes)
-						while (b.checkRessourceNotImposed(player.getIA().chooseRessourceBuildingNotImposed(b.getNeededRessource().length, b.getHowManyDifferentRessource()), inventory.getCopyRessources()) == false);
+						int[] inv = inventory.getCopyRessources();
+						choosed = player.getIA().chooseRessourceBuildingNotImposed(b.getNeededRessource().length, b.getHowManyDifferentRessource());
+						//System.out.println("Choosed: " + Arrays.toString(choosed));
+						boolean cond = b.checkRessourceNotImposed(choosed, inv);
+						//System.out.println(cond);
+						
+						while (cond == false)
+						{
+							choosed = player.getIA().chooseRessourceBuildingNotImposed(b.getNeededRessource().length, b.getHowManyDifferentRessource());
+							//System.out.println("Choosed: " + Arrays.toString(choosed));
+							cond = b.checkRessourceNotImposed(choosed, inv);
+							//System.out.println(cond);
+						}
 					}
-					else
+					else if (this.buildings.get(0).getType() == 2)
 					{
 						BuildingRessourceChoosed b = (BuildingRessourceChoosed) this.buildings.get(0);
-						// public Ressource[] chooseRessourceBuildingChoosed ()
-						while (b.checkRessourceChoosed(player.getIA().chooseRessourceBuildingChoosed(), inventory.getCopyRessources()) == false);
+						int[] inv = inventory.getCopyRessources();
+						choosed = player.getIA().chooseRessourceBuildingChoosed();
+						//System.out.println("Choosed: " + Arrays.toString(choosed));
+						boolean cond = b.checkRessourceChoosed(choosed, inv);
+						//System.out.println(cond);
+						while (cond == false)
+						{
+							choosed = player.getIA().chooseRessourceBuildingChoosed();
+							//System.out.println("Choosed: " + Arrays.toString(choosed));
+							cond = b.checkRessourceChoosed(choosed, inv);
+							//System.out.println(cond);
+						}
 					}
 				}
+				//System.out.println("out");
 				
 				// ON SUPPRIME LES RESSOURCES DU JOUEUR UNE PAR UNE
-				for (int i = 0; i < this.buildings.get(0).getNeededRessource().length; i++)
+				for (int i = 0; i < choosed.length; i++)
 				{
 					Printer.getPrinter().println("Le joueur "+occupated.getName()+" depense 1 "
-							+this.buildings.get(0).getNeededRessource()[i]+" pour la "+ this.getName()+".");
-					inventory.subRessource(this.buildings.get(0).getNeededRessource()[i], 1);
+							+choosed[i]+" pour la "+ this.getName()+".");
+					inventory.subRessource(choosed[i], 1);
 				}
 				
 				// LE JOUEUR OBTIENT UNE CARTE BATIMENT EN PLUS
