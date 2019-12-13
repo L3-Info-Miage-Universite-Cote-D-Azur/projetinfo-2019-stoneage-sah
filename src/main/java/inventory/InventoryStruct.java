@@ -32,6 +32,15 @@ public abstract class InventoryStruct {
 	//GETTERS
 	public int getRessource(Ressource ressource){ return ressources[ressource.getIndex()] ;}
 	public int[] getCopyRessources() {return ressources.clone();}
+	public int[] getCopyRessourcesLootable() 
+	{
+		int[] res = new int[4];
+		res[0] = this.getRessource(Ressource.WOOD);
+		res[1] = this.getRessource(Ressource.CLAY);
+		res[2] = this.getRessource(Ressource.STONE);
+		res[3] = this.getRessource(Ressource.GOLD);
+		return res;
+	}
 	public CarteCivilisation[] getCardCivilisation() {
 		CarteCivilisation[] cardCivi = new CarteCivilisation[carteCivilisation.size()];
 		for(int i=0; i<cardCivi.length; i++) { cardCivi[i]=carteCivilisation.get(i); }
