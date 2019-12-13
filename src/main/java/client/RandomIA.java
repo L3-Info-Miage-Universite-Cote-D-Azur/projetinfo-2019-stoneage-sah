@@ -151,7 +151,7 @@ public class RandomIA extends IA {
 	
 	/**
 	 * Phase de tirage
-	 * @param listeTirage des des tires
+	 * @param listeTirage des dée tirée
 	 * @param alreadyChoose si un autre joueur l'a deja choisi ou non
 	 * @return l'index de ce que veut le joueur dans le tirage
 	 */
@@ -213,14 +213,16 @@ public class RandomIA extends IA {
 	 */
 	public Ressource[] chooseRessourceBuildingChoosed()
 	{
+		int[] inv = this.inventoryIA.getCopyRessourcesLootable();
 		Ressource[] res = new Ressource[this.rand.nextInt(7) + 1];
 		for (int i = 0; i < res.length; i++)
 		{
-			int x = this.rand.nextInt(this.inventoryIA.getCopyRessources().length);
-			while (this.inventoryIA.getRessource(Ressource.indexToRessource(x)) == 0);
+			int x = this.rand.nextInt(inv.length);
+			while (inv[x] == 0);
 			{
-				x = this.rand.nextInt(this.inventoryIA.getCopyRessources().length);
+				x = this.rand.nextInt(inv.length);
 			}
+			inv[x]--;
 			res[i] = Ressource.indexToRessource(x);
 		}
 		return res;
