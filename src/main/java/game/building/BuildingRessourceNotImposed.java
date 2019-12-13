@@ -65,6 +65,15 @@ public class BuildingRessourceNotImposed extends BuildingSpecial
 	 */
 	public boolean checkRessourceNotImposed (Ressource[] ressources, int[] inv)
 	{
+		// Check des bonnes ressources
+		for (Ressource r : ressources)
+		{
+			if (r != Ressource.WOOD &&
+					r != Ressource.CLAY &&
+					r != Ressource.STONE &&
+					r != Ressource.GOLD)
+				return false;
+		}
 		// Check si on a assez de ressources differentes
 		ArrayList<Ressource> howManyRessources = new ArrayList<Ressource>();
 		for (Ressource r : ressources)
