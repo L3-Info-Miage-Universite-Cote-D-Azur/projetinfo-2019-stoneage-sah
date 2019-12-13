@@ -1,6 +1,7 @@
 package client;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -288,11 +289,14 @@ public class NoobIA extends IA
 	public boolean[] pickTools() {
 		int[] toolsToUse = inventoryIA.getTools().getTools();
 		boolean[] useTools = inventoryIA.getTools().getToolsUsed();
+		
+		System.out.println("[IA-toolsToUse + useTools]" + Arrays.toString(toolsToUse) + Arrays.toString(useTools));
+		
 		boolean[] res = new boolean[toolsToUse.length];
 		
 		for (int i = 0; i < useTools.length; i++)
 		{
-			if (useTools[i] == false && toolsToUse[i]>0)
+			if (useTools[i] == false && toolsToUse[i] > 0)
 			{
 				res[i] = true;
 			}
@@ -301,6 +305,7 @@ public class NoobIA extends IA
 				res[i] = false;
 			}
 		}
+		System.out.println("[RET-pickTools]" + Arrays.toString(res));
 		return res;
 	}
 
@@ -328,7 +333,6 @@ public class NoobIA extends IA
 	// WOOD - CLAY - STONE - GOLD
 	public int useRessourceCard() {
 		this.choosedRessource++;
-		this.choosedRessource %= 4;
 		return this.choosedRessource;
 	}
 	
@@ -351,7 +355,8 @@ public class NoobIA extends IA
 		 */
 		
 		// COMBINAISONS
-		ArrayList<int[]> comb = MathPlus.combinaisons(this.inventoryIA.getCopyRessources(), combienDeRessourcesDifferentes);
+		int[] cpy = this.inventoryIA.getCopyRessourcesLootable();
+		ArrayList<int[]> comb = MathPlus.combinaisons(this.inventoryIA.getCopyRessourcesLootable(), combienDeRessourcesDifferentes);
 		Ressource[] res = new Ressource[nombreRessource];
 		int i = 0;
 		// ON CHERCHE 1 COMBINAISON BONNE
@@ -363,35 +368,57 @@ public class NoobIA extends IA
 				if (comb.get(i)[k] == 0)
 					retToStart = 1;
 			}
-			if (retToStart == 0)
-				break;
+			if (retToStart == 1)
+				continue;
+			break;
 		}
 		int[] tabAns = comb.get(i);
-		int[] cpy = this.inventoryIA.getCopyRessources();
 		Ressource[] correspondances = new Ressource[combienDeRessourcesDifferentes];
 		
-		// ON MET 1 RESSOURCE DE CHAQUE
-		for (int k = 0, r = 0 ; i < tabAns.length; i++)
+		// ON INITIALISE correspondances
+		int eIndex = 0;
+		int[] exceptionIndex = new int[combienDeRessourcesDifferentes];
+		for (int k = 0; k < exceptionIndex.length; k++)
 		{
-			int g = 0;
-			for (; g < cpy.length; g++)
+			exceptionIndex[k] = -1;
+		}
+
+		for (int k = 0, r = 0 ; k < tabAns.length; k++)
+		{
+			for (int g = 0; g < cpy.length; g++)
+			{
 				if (tabAns[k] == cpy[g])
 				{
+					boolean breakNow = false;
+					for (int n = 0; n < exceptionIndex.length; n++)
+					{
+						if (exceptionIndex[n] == g)
+						{
+							breakNow = true;
+							break;
+						}
+					}
+					if (breakNow == true)
+						continue;
+					exceptionIndex[eIndex] = g;
+					eIndex++;
 					cpy[g]--;
+					correspondances[r] = Ressource.indexToRessource(g);
+					r++;
 					break;
 				}
-			correspondances[r] = Ressource.indexToRessource(g);
+			}
 		}
 		
-		// ON FINIT
+		// ON MET 1 RESSOURCE DE CHAQUE
 		for (int k = 0; k < combienDeRessourcesDifferentes; k++)
 		{
 			res[k] = correspondances[k];
 		}
-		
+		// ON FINIT
 		for (int k = correspondances.length, g = 0; k < nombreRessource; k++)
 		{
-			if (cpy[g] == 0)
+			if (cpy[g] <= 0)
 			{
 				g++;
 				k--;
@@ -411,17 +438,19 @@ public class NoobIA extends IA
 	 */
 	public Ressource[] chooseRessourceBuildingChoosed ()
 	{
+		int[] inv = this.inventoryIA.getCopyRessourcesLootable();
 		Ressource[] res = new Ressource[this.rand.nextInt(7)+1 /* [1, 7] */];
-		for (int i = 0, invIndex = 0; i < res.length; i++)
+		for (int i = 0, invIndex = 0; i < res.length;)
 		{
-			if (this.inventoryIA.getRessource(Ressource.indexToRessource(invIndex)) == 0)
+			if (inv[invIndex] == 0)
 			{
-				i--;
 				invIndex++;
 			}
 			else
 			{
 				res[i] = Ressource.indexToRessource(invIndex);
+				inv[invIndex]--;
+				i++;
 			}
 		}
 		return res;
