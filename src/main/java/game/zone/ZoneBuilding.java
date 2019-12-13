@@ -47,7 +47,7 @@ public class ZoneBuilding extends ZoneOnePlayer
 		if (type == 0)
 		{
 			// CHECKER SI LE JOUEUR PEUT CHOISIR
-			if (((BuildingRessourceImposed)this.buildings.get(0)).checkNeededRessource(inventory.getCopyRessources()) == true)
+			if (((BuildingRessourceImposed)this.buildings.get(0)).checkNeededRessource(inventory.getCopyRessourcesLootable()) == true)
 			{
 				// SI IL VEUT RETIRER SES POINTS DE VICTOIRE
 				return this.occupated.getIA().pickBuilding();
@@ -56,7 +56,7 @@ public class ZoneBuilding extends ZoneOnePlayer
 		else if (type == 1)
 		{
 			// CHECKER SI LE JOUEUR PEUT CHOISIR
-			if (((BuildingRessourceNotImposed)this.buildings.get(0)).checkNeededRessource(inventory.getCopyRessources()) == true)
+			if (((BuildingRessourceNotImposed)this.buildings.get(0)).checkNeededRessource(inventory.getCopyRessourcesLootable()) == true)
 			{
 				// SI IL VEUT RETIRER SES POINTS DE VICTOIRE
 				return this.occupated.getIA().pickBuilding();
@@ -65,7 +65,7 @@ public class ZoneBuilding extends ZoneOnePlayer
 		else if (type == 2)
 		{
 			// CHECKER SI LE JOUEUR PEUT CHOISIR
-			if (((BuildingRessourceChoosed)this.buildings.get(0)).checkNeededRessource(inventory.getCopyRessources()) == true)
+			if (((BuildingRessourceChoosed)this.buildings.get(0)).checkNeededRessource(inventory.getCopyRessourcesLootable()) == true)
 			{
 				// SI IL VEUT RETIRER SES POINTS DE VICTOIRE
 				return this.occupated.getIA().pickBuilding();
