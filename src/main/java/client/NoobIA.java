@@ -150,7 +150,8 @@ public class NoobIA extends IA
 						else {throw new RuntimeException("Building type not expected");}
 					}
 				}
-
+				
+				/**
 				if (this.currentZone == -1)
 				{
 					// REGARDER SI ON PEUT PRENDRE UNE CARTE CIVILISATION
@@ -164,6 +165,7 @@ public class NoobIA extends IA
 						}
 					}
 				}
+				*/
 
 				// IL NOUS RESTE LES RESSOURCES
 				if (this.currentZone == -1)
@@ -356,8 +358,10 @@ public class NoobIA extends IA
 		
 		// COMBINAISONS
 		int[] cpy = this.inventoryIA.getCopyRessourcesLootable();
+		//System.out.println(Arrays.toString(cpy));
 		ArrayList<int[]> comb = MathPlus.combinaisons(this.inventoryIA.getCopyRessourcesLootable(), combienDeRessourcesDifferentes);
 		Ressource[] res = new Ressource[nombreRessource];
+		//System.out.println("[res] " + Arrays.toString(res));
 		int i = 0;
 		// ON CHERCHE 1 COMBINAISON BONNE
 		for (; i < comb.size(); i++)
@@ -370,6 +374,8 @@ public class NoobIA extends IA
 			}
 			if (retToStart == 1)
 				continue;
+			if (IntStream.of(comb.get(i)).sum() < nombreRessource)
+				continue;
 			break;
 		}
 		int[] tabAns = comb.get(i);
@@ -377,7 +383,7 @@ public class NoobIA extends IA
 		
 		// ON INITIALISE correspondances
 		int eIndex = 0;
-		int[] exceptionIndex = new int[combienDeRessourcesDifferentes];
+		int[] exceptionIndex = new int[combienDeRessourcesDifferentes]; // Contient les indices des correspondances dans cpy
 		for (int k = 0; k < exceptionIndex.length; k++)
 		{
 			exceptionIndex[k] = -1;
@@ -418,17 +424,27 @@ public class NoobIA extends IA
 		// ON FINIT
 		for (int k = correspondances.length, g = 0; k < nombreRessource; k++)
 		{
-			if (cpy[g] <= 0)
+			//System.out.println("\t[cpy1] " + Arrays.toString(cpy) + " [idx] " + Arrays.toString(exceptionIndex) + "  [l,h] " + nombreRessource + " " + combienDeRessourcesDifferentes);
+			//System.out.println("\t[!!!] " + Arrays.toString(tabAns));
+			// On check pour chaque ressource si elle est dispo
+			for (int idx : exceptionIndex)
 			{
-				g++;
-				k--;
+				// Si il nous reste une ressource
+				if (cpy[idx] > 0)
+				{
+					// on assigne l'indice
+					g = idx;
+					// on retire la ressource de la copie
+					cpy[g]--;
+					//System.out.println("\t\t[cpy2] " + Arrays.toString(cpy));
+					break;
+				}
 			}
-			else
-			{
-				res[k] = correspondances[g];
-				cpy[g]--;
-			}
+			// on ajoute la ressource a notre reponse
+			res[k] = Ressource.indexToRessource(g);
+			
 		}
+		//System.out.println("[res] " + Arrays.toString(res));
 		return res;
 	}
 	
@@ -438,13 +454,25 @@ public class NoobIA extends IA
 	 */
 	public Ressource[] chooseRessourceBuildingChoosed ()
 	{
+		/**
+		 * Ressources choisies dans l'ordre: GOLD - STONE - CLAY - WOOD
+		 */
 		int[] inv = this.inventoryIA.getCopyRessourcesLootable();
-		Ressource[] res = new Ressource[this.rand.nextInt(7)+1 /* [1, 7] */];
-		for (int i = 0, invIndex = 0; i < res.length;)
+		// res.length = [1; max <= 7]
+		int sum = IntStream.of(inv).sum();
+		int range = 0;
+		if (sum > 7)
+			range = 7;
+		else
+			range = sum;
+		Ressource[] res = new Ressource[this.rand.nextInt(range + 1)];
+		for (int i = 0, invIndex = 3; i < res.length;)
 		{
 			if (inv[invIndex] == 0)
 			{
-				invIndex++;
+				invIndex--;
+				if (invIndex == -1)
+					throw new Error("Impossible de miser");
 			}
 			else
 			{
