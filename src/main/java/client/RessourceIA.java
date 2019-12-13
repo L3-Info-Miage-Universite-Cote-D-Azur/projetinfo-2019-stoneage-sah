@@ -80,10 +80,10 @@ public class RessourceIA extends IA
 			// ON REGARDE LES CARTES CIVILISATION
 			for (int i = 0; i < cV.length; i++)
 			{
-				// SI ON A ASSEZ DE RESSOURCE, UNE CHANCE SUR 4 DE PRENDRE LA CARTE
+				// SI ON A ASSEZ DE RESSOURCE, ON PRENDS LA CARTE
 				if (IntStream.of(this.inventoryIA.getCopyRessources()).sum() >= 4 - i && zoneAvailableSpace[i] == 1)
 				{
-					if (this.rand.nextInt(5) == 1) this.currentZone = i + 8;
+					if (this.rand.nextInt(2) == 1) this.currentZone = i + 8;
 					break;
 				}
 			}
@@ -235,6 +235,54 @@ public class RessourceIA extends IA
 
 		if(choose == 0) {
 			res = this.rand.nextInt(4);
+		}
+		return res;
+	}
+	
+	/**
+	 * Renvoie le tableau des ressources utilisees pour les buildingsNotImposed
+	 * @param nombreRessource le nombre de ressources
+	 * @param combienDeRessourcesDifferentes le nombre de ressources differentes
+	 * @return un tableau des ressources
+	 */
+	public Ressource[] chooseRessourceBuildingNotImposed(int nombreRessource, int combienDeRessourcesDifferentes) 
+	{
+		Ressource[] res = new Ressource[nombreRessource];
+		for (int i = 0; i < res.length; i++)
+		{
+			if (i<combienDeRessourcesDifferentes) {
+				res[i] = Ressource.indexToRessource(i);
+			}
+			else {
+				int x = this.rand.nextInt(this.inventoryIA.getCopyRessources().length);
+				while (this.inventoryIA.getRessource(Ressource.indexToRessource(x)) == 0);
+				{
+					x = this.rand.nextInt(this.inventoryIA.getCopyRessources().length);
+				}
+				res[i] = Ressource.indexToRessource(x);
+			}
+			
+		}
+		return res;
+	}
+	
+	/**
+	 * Renvoie le tableau des ressources utilisees pour les buildingsChoosed
+	 * @return un tableau des ressources
+	 */
+	public Ressource[] chooseRessourceBuildingChoosed()
+	{
+		int[] inv = this.inventoryIA.getCopyRessourcesLootable();
+		Ressource[] res = new Ressource[this.rand.nextInt(7) + 1];
+		for (int i = 0; i < res.length; i++)
+		{
+			int x = this.rand.nextInt(inv.length);
+			while (inv[x] == 0);
+			{
+				x = this.rand.nextInt(inv.length);
+			}
+			inv[x]--;
+			res[i] = Ressource.indexToRessource(x);
 		}
 		return res;
 	}
