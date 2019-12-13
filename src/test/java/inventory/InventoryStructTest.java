@@ -88,4 +88,25 @@ public class InventoryStructTest {
 		assertEquals(this.InventoryStructTest.availableResourceToFeed(), 7 + 4);
 	}
 
+	@Test
+	public void testGetCopyRessourcesLootable ()
+	{
+		this.InventoryStructTest = new Inventory();
+		this.InventoryStructTest.addRessource(Ressource.FOOD, 0);
+		this.InventoryStructTest.addRessource(Ressource.WOOD, 1);
+		this.InventoryStructTest.addRessource(Ressource.CLAY, 2);
+		this.InventoryStructTest.addRessource(Ressource.STONE, 3);
+		this.InventoryStructTest.addRessource(Ressource.GOLD, 4);
+		this.InventoryStructTest.addRessource(Ressource.FIELD, 5);
+		int[] res = this.InventoryStructTest.getCopyRessourcesLootable();
+
+		// TEST SUR CHAQUE RESSOURCE DE LA FONCTION
+		assertEquals(this.InventoryStructTest.getRessource(Ressource.WOOD), res[0]);
+		assertEquals(this.InventoryStructTest.getRessource(Ressource.CLAY), res[1]);
+		assertEquals(this.InventoryStructTest.getRessource(Ressource.STONE), res[2]);
+		assertEquals(this.InventoryStructTest.getRessource(Ressource.GOLD), res[3]);
+		
+		// TEST LONGUEUR
+		assertEquals(res.length, 4);
+	}
 }
