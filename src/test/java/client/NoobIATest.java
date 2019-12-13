@@ -1,9 +1,12 @@
-package client;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
 
+import client.IA;
+import client.NoobIA;
 import game.Ressource;
 import game.zone.ZoneBuilding;
 import game.zone.ZoneCarteCivilisation;
@@ -166,51 +169,92 @@ public class NoobIATest
 
 		//Cas ou il n'as pas d'outils
 		boolean[] res;
+		this.inv = new Inventory();
+		this.player = new Player("Test", inv.getInventoryIA());
+		testIa = new NoobIA(player.getPlayerIA(), inv.getInventoryIA());
 
-		for(int j =0; j < 50; j++) {
-			res = testIa.pickTools();
-
-			assertEquals(true, res[0] == false);
-			assertEquals(true, res[1] == false);
-			assertEquals(true, res[2] == false);
-		}
+		res = testIa.pickTools();
+		assertEquals(res[0], false);
+		assertEquals(res[1], false);
+		assertEquals(res[2], false);
 
 		//Cas general 
 		inv = new Inventory();
 		testIa = new NoobIA(player.getPlayerIA(), inv.getInventoryIA());
 		Player testPlayer = new Player("test",inv.getInventoryIA());
 
-		for(int i =0; i<5;i++) {
+		for(int i =0; i<3;i++) {
 			inv.getTools().incrementTool();
 		}
 		inv.getTools().useTools(testPlayer, 0, null);
 		boolean[] testBooleans = inv.getTools().getToolsUsed();
 
-		for(int j =0; j < 50; j++) {
-			res = testIa.pickTools();
+		res = testIa.pickTools();
 
-			if(testBooleans[0]) {
-				assertEquals(true, res[0] == false);
-			}else {
-				assertEquals(true, res[0] == false || res[0] == true);
-			}
-			if(testBooleans[1]) {
-				assertEquals(true, res[1] == false);
-			}else {
-				assertEquals(true, res[1] == false || res[1] == true);
-			}
-
-			if(testBooleans[2]) {
-				assertEquals(true, res[2] == false);
-			}else {
-				assertEquals(true, res[2] == false || res[2] == true);
-			}
-		}
+		if(testBooleans[0] == true)
+			assertEquals(res[0], false);
+		else
+			assertEquals(res[0], true);
+		
+		if(testBooleans[1])
+			assertEquals(res[1], false);
+		else
+			assertEquals(res[1], true);
+		
+		if(testBooleans[2])
+			assertEquals(res[2], false);
+		else
+			assertEquals(res[2], true);
 	}
 
 	@Test
 	void testChooseTirage ()
 	{
 		assertEquals(testIa.chooseTirage(new int[] {1,2,3}, new boolean[] {true, true, false}), 2);
+	}
+	
+	@Test
+	public void testChooseRessourceBuildingNotImposed ()
+	{
+		this.inv = new Inventory();
+		this.inv.addRessource(Ressource.WOOD, 1);
+		this.inv.addRessource(Ressource.CLAY, 3);
+		this.inv.addRessource(Ressource.STONE, 2);
+		player = new Player("Test", inv.getInventoryIA());
+		testIa = new NoobIA(player.getPlayerIA(), inv.getInventoryIA());
+		
+		Ressource[] res = this.testIa.chooseRessourceBuildingNotImposed(4, 3);
+		// TEST TAILLE
+		assertEquals(res.length, 4);
+		
+		// TEST VALEUR ATTENDUES
+		assertEquals(res[0], Ressource.WOOD);
+		assertEquals(res[1], Ressource.CLAY);
+		assertEquals(res[2], Ressource.STONE);
+		assertEquals(res[3], Ressource.CLAY);
+	}
+	
+	@Test
+	public void testChooseRessourceBuildingChoosed ()
+	{
+		this.inv = new Inventory();
+		this.inv.addRessource(Ressource.WOOD, 1);
+		this.inv.addRessource(Ressource.CLAY, 1);
+		this.inv.addRessource(Ressource.STONE, 1);
+		this.inv.addRessource(Ressource.GOLD, 4);
+		player = new Player("Test", inv.getInventoryIA());
+		testIa = new NoobIA(player.getPlayerIA(), inv.getInventoryIA());
+
+		Ressource[] res = this.testIa.chooseRessourceBuildingChoosed();
+		System.out.println(Arrays.toString(res));
+		// TEST TAILLE
+		assertEquals(res.length > 0 && res.length < 8, true);
+		
+		Ressource[] expected = new Ressource[] {Ressource.WOOD, Ressource.CLAY, Ressource.STONE, Ressource.GOLD, Ressource.GOLD, Ressource.GOLD, Ressource.GOLD};
+		// TEST VALEUR ATTENDUES
+		for (int i = 0; i < res.length; i++)
+		{
+			assertEquals(expected[i], res[i]);
+		}
 	}
 }
