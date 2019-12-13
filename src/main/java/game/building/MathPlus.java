@@ -46,7 +46,7 @@ public class MathPlus
 	 */
 	public static int[] slice (int[] tab, int n)
 	{
-		if (n - tab.length >= 0)
+		if (tab.length - n < 0 || n < 0)
 			return new int[0];
 		int[] res = new int[tab.length - n];
 		for (int i = n; i < tab.length; i++)
