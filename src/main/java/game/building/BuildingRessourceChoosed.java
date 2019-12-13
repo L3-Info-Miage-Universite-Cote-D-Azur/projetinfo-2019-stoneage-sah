@@ -40,6 +40,16 @@ public class BuildingRessourceChoosed extends BuildingSpecial
 	
 	public boolean checkRessourceChoosed (Ressource[] ressources, int[] inv)
 	{
+		// Check des bonnes ressources
+		for (Ressource r : ressources)
+		{
+			if (r != Ressource.WOOD &&
+					r != Ressource.CLAY &&
+					r != Ressource.STONE &&
+					r != Ressource.GOLD)
+				return false;
+		}
+		
 		// Check de la longueur
 		if (ressources.length == 0 || ressources.length > this.neededRessource.length)
 			return false;
