@@ -5,11 +5,10 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import client.IA;
-import client.NoobIA;
+import game.CarteCivilisation;
 import game.Ressource;
-import game.zone.ZoneBuilding;
-import game.zone.ZoneCarteCivilisation;
+import game.building.Building;
+import game.building.BuildingRessourceImposed;
 import inventory.Inventory;
 import player.Player;
 
@@ -25,11 +24,11 @@ public class NoobIATest
 		int[] tab1 = new int[] {7,7,7,7,5000,0,0,0,0,0,0,0,0,0,0};
 
 		for(int j =0; j < 100; j++) {
-			ZoneBuilding[] zb = new ZoneBuilding[] {new ZoneBuilding("test"), new ZoneBuilding("test1")};
-			ZoneCarteCivilisation[] zcv = new ZoneCarteCivilisation[] {new ZoneCarteCivilisation("test", 1, null), new ZoneCarteCivilisation("test", 1, null)};
+			Building[] zb = new Building[] {new BuildingRessourceImposed(2,Ressource.WOOD), new BuildingRessourceImposed(2,Ressource.WOOD)};
+			CarteCivilisation[] zcv = new CarteCivilisation[] {new CarteCivilisation(0, 0,0, null,0), new CarteCivilisation(0, 0,0, null,0)};
 			
 			//On test 100 fois que l'indice renvoye est bien compris entre 0 et tab1.length
-			int test = testIa.chooseZone(tab1,null, zb , zcv);
+			int test = testIa.chooseZone(tab1, zb , zcv);
 			assertEquals(true,test < tab1.length);
 			assertEquals(true,test >= 0);
 		}
