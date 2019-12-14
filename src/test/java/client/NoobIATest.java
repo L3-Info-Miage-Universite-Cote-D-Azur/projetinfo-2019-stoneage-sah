@@ -249,7 +249,7 @@ public class NoobIATest
 		// TEST TAILLE
 		assertEquals(res.length > 0 && res.length < 8, true);
 		
-		Ressource[] expected = new Ressource[] {Ressource.WOOD, Ressource.CLAY, Ressource.STONE, Ressource.GOLD, Ressource.GOLD, Ressource.GOLD, Ressource.GOLD};
+		Ressource[] expected = new Ressource[] {Ressource.GOLD, Ressource.GOLD, Ressource.GOLD, Ressource.GOLD, Ressource.STONE, Ressource.CLAY, Ressource.WOOD};
 		// TEST VALEUR ATTENDUES
 		for (int i = 0; i < res.length; i++)
 		{
