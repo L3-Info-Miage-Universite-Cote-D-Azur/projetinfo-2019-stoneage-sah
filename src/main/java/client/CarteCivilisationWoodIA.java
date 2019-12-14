@@ -2,8 +2,7 @@ package client;
 
 import game.CarteCivilisation;
 import game.Ressource;
-import game.zone.ZoneBuilding;
-import game.zone.ZoneCarteCivilisation;
+import game.building.Building;
 import inventory.InventoryIA;
 import player.PlayerIA;
 import printer.Printer;
@@ -78,7 +77,7 @@ public class CarteCivilisationWoodIA extends IA {
 	 * @param cV la copie des zones carte civilisation
 	 * @return l'indice de la zone
 	 */
-	public int chooseZone(int[] zoneAvailableSpace, String[] zoneName, ZoneBuilding[] buildings, ZoneCarteCivilisation[] cV) {
+	public int chooseZone(int[] zoneAvailableSpace, Building[] buildings, CarteCivilisation[] cV) {
 		//calcule du nombre de figurine a garder pour la nouriture
 		int foodNeedToFeed = playerIA.getMaxFigurine() - inventoryIA.getRessource(Ressource.FIELD) - inventoryIA.getRessource(Ressource.FOOD);
 		nbFiguresForFeed(foodNeedToFeed);
@@ -99,12 +98,12 @@ public class CarteCivilisationWoodIA extends IA {
 			//DEBUT DE PARTIE.
 			if(playerIA.getMaxFigurine() < 8){
 				//carteCivilisation cout 1
-				if(inventoryIA.getRessource(Ressource.WOOD) >= 1 && zoneAvailableSpace[8] > 0 && wantToPickCard(cV[0].getCard())) {
+				if(inventoryIA.getRessource(Ressource.WOOD) >= 1 && zoneAvailableSpace[8] > 0 && wantToPickCard(cV[0])) {
 					currentZone = 8;
 					return 8;
 				}
 				//carteCivilisation cout 2
-				if(inventoryIA.getRessource(Ressource.WOOD) >= 2 && zoneAvailableSpace[9] > 0 && wantToPickCard(cV[1].getCard())) {
+				if(inventoryIA.getRessource(Ressource.WOOD) >= 2 && zoneAvailableSpace[9] > 0 && wantToPickCard(cV[1])) {
 					currentZone = 9;
 					return 9;
 				}
@@ -112,25 +111,25 @@ public class CarteCivilisationWoodIA extends IA {
 			//PARTIE AVANCEE.
 			if(playerIA.getMaxFigurine() >= 8) {
 				//carteCivilisation cout 1
-				if(inventoryIA.getRessource(Ressource.WOOD) >= 1 && zoneAvailableSpace[8] > 0 && wantToPickCard(cV[0].getCard())) {
+				if(inventoryIA.getRessource(Ressource.WOOD) >= 1 && zoneAvailableSpace[8] > 0 && wantToPickCard(cV[0])) {
 					currentZone = 8;
 					nbTurnWithoutCC = 0;//On reinitialise.
 					return 8;
 				}
 				//carteCivilisation cout 2
-				if(inventoryIA.getRessource(Ressource.WOOD) >= 2 && zoneAvailableSpace[9] > 0 && wantToPickCard(cV[1].getCard())) {
+				if(inventoryIA.getRessource(Ressource.WOOD) >= 2 && zoneAvailableSpace[9] > 0 && wantToPickCard(cV[1])) {
 					currentZone = 9;
 					nbTurnWithoutCC = 0;//On reinitialise.
 					return 9;
 				}
 				//carteCivilisation cout 3
-				if(inventoryIA.getRessource(Ressource.WOOD) >= 3 && zoneAvailableSpace[10] > 0 && wantToPickCard(cV[2].getCard())) {
+				if(inventoryIA.getRessource(Ressource.WOOD) >= 3 && zoneAvailableSpace[10] > 0 && wantToPickCard(cV[2])) {
 					currentZone = 10;
 					nbTurnWithoutCC = 0;//On reinitialise.
 					return 10;
 				}
 				//carteCivilisation cout 4
-				if(inventoryIA.getRessource(Ressource.WOOD) >= 4 && zoneAvailableSpace[11] > 0 && wantToPickCard(cV[3].getCard())) {
+				if(inventoryIA.getRessource(Ressource.WOOD) >= 4 && zoneAvailableSpace[11] > 0 && wantToPickCard(cV[3])) {
 					currentZone = 11;
 					nbTurnWithoutCC = 0;//On reinitialise.
 					return 11;
