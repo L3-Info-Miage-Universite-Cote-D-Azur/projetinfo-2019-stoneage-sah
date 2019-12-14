@@ -236,21 +236,27 @@ public class CiviIA extends IA {
 		}
 		return res;
 	}
+	
+	/**
+	 * Renvoie le tableau des ressources utilisees pour les buildingsNotImposed
+	 * @param nombreRessource 
+	 * @param combienDeRessourcesDifferentes
+	 * @return un tableau vide car il ne prend jamais de cartes batiment
+	 */
+	public Ressource[] chooseRessourceBuildingNotImposed(int nombreRessource, int combienDeRessourcesDifferentes) {
+		return new Ressource[0];
+	}
 
-
+	/**
+	 * Renvoie le tableau des ressources utilisees pour les buildingsChoosed
+	 * @return un tableau vide car il ne prend jamais de cartes batiment
+	 */
+	public Ressource[] chooseRessourceBuildingChoosed() {
+		return new Ressource[0];
+	}
+	
+	@Override
 	public String toString(){
 		return "Civilisation";
-	}
-
-	@Override
-	public Ressource[] chooseRessourceBuildingNotImposed(int nombreRessource, int combienDeRessourcesDifferentes) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Ressource[] chooseRessourceBuildingChoosed() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
