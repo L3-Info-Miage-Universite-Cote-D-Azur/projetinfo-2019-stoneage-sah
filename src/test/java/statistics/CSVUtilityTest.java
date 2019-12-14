@@ -1,13 +1,11 @@
 package statistics;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -107,7 +105,6 @@ public class CSVUtilityTest
 	public void testEndRow () throws IOException
 	{
 		File f = new File("file.test5");
-		String s = "TEST";
 		this.csv = new CSVUtility();
 		this.csv.clearFile(f);
 		
