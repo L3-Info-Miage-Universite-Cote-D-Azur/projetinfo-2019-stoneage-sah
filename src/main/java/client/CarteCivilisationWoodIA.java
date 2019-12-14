@@ -318,6 +318,26 @@ public class CarteCivilisationWoodIA extends IA {
 	public int useRessourceCard() {
 		return 0;//L'IA utilise directement en demandant du bois.
 	}
+	
+	/**
+	 * Renvoie le tableau des ressources utilisees pour les buildingsNotImposed
+	 * @param nombreRessource le nombre de ressources
+	 * @param combienDeRessourcesDifferentes le nombre de ressources differentes
+	 * @return un tableau des ressources
+	 */
+	public  Ressource[] chooseRessourceBuildingNotImposed (int nombreRessource, int combienDeRessourcesDifferentes) {
+		return new Ressource[] {};
+		// L'ia ne prend jamais de batiments.
+	}
+	
+	/**
+	 * Renvoie le tableau des ressources utilisees pour les buildingsChoosed
+	 * @return un tableau des ressources
+	 */
+	public  Ressource[] chooseRessourceBuildingChoosed () {
+		return new Ressource[] {};
+		// L'ia ne prend jamais de batiments.
+	}
 
 	@Override
 	public String toString() {
