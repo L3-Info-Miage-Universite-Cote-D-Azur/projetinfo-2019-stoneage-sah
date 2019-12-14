@@ -3,6 +3,7 @@ package game;
 
 import java.util.Arrays;
 
+import game.building.Building;
 import game.zone.Zone;
 import game.zone.ZoneBuilding;
 import game.zone.ZoneCarteCivilisation;
@@ -180,42 +181,74 @@ public class GameZones {
 	 * @return l'indice de la zone choisie dans le tableau zones de Game.
 	 */
 	public int zoneChoose(Player player) {
-
-		int choose = -1;
-		boolean ok = false;
 		//Variables utiles pour les fonctions de l'IA. 
+		int[] zoneAvailableSpace = zoneAvailableSpaceForPlayer(player);
+		//copy
+		Building[] buildingsCpy = buildingCopy();
+		CarteCivilisation[] cVCpy = carteCivilisationCopy();
+		int choose;
+		do{
+			choose = player.getIA().chooseZone(zoneAvailableSpace, buildingsCpy, cVCpy);
+		}while(zoneChooseVerif(player,choose));
+		return choose;
+	}
+	
+	
+	/**
+	 * Crée un tableau du nombre de figurine que le joueur peut posser dans chaque zone
+	 * @param player le joueur concernée
+	 * @return le tableau qui affiche le nombre de figurine que le joueur selectionner peut posser
+	 */
+	public int[] zoneAvailableSpaceForPlayer(Player player) {
 		int[] zoneAvailableSpace = new int[zones.length];
-		String[] zoneName = new String[zones.length];
-
-		//Initialisation des variables pour l'IA
 		for(int i = 0; i < zones.length; i++){
 			
 			if(ableToChooseZone(i,player)) zoneAvailableSpace[i] = zones[i].getAvailableSpace(); 
 			else zoneAvailableSpace[i] = 0; //si le joueur ne peut pas placer dans la zone pour quelconc resaions
-			zoneName[i] = zones[i].getName();
 		}
-
-		while(!ok){
-			//copy
-			ZoneBuilding[] buildingsCpy = new ZoneBuilding[numberPlayer];
-			for (int i = 0; i < buildingsCpy.length; i++)
-			{
-				buildingsCpy[i] = new ZoneBuilding((ZoneBuilding)zones[i + 12]);
-			}
-			ZoneCarteCivilisation[] cVCpy = new ZoneCarteCivilisation[4];
-			for (int i = 0; i < 4; i++)
-			{
-				cVCpy[i] = new ZoneCarteCivilisation((ZoneCarteCivilisation)zones[i + 8]);
-			}
-			
-			choose = player.getIA().chooseZone(zoneAvailableSpace,zoneName, buildingsCpy, cVCpy);
-
-			if((choose >= 0) && (choose<zones.length) && ableToChooseZone(choose, player)) ok=true;
-			else if((choose >= 0) && (choose<zones.length)) Printer.getPrinter().println("/!\\ Zone "+zones[choose].getName()+" : Choix incorrecte ou zone pleine, veuillez reessayer./!\\");
-			else Printer.getPrinter().println("/!\\ L'index "+choose+" est hors limite de Zones[], veuillez reessayer./!\\");
-		}
-		return choose;
+		return zoneAvailableSpace;
 	}
+	
+	
+	/**
+	 * copy les building present sur le plateau pour l'envoyer au joueur
+	 * @return revoie la liste des copie
+	 */
+	public Building[] buildingCopy() {
+		Building[] buildingsCpy = new Building[numberPlayer];
+		for (int i = 0; i < buildingsCpy.length; i++)
+		{
+			buildingsCpy[i] = ((ZoneBuilding)zones[i + 12]).getBuilding();
+		}
+		return buildingsCpy;
+	}
+	
+	/**
+	 * Copie la liste des carte civilisation presetn sur le plateau pour l'envoyer au joueur
+	 * @return
+	 */
+	public CarteCivilisation[] carteCivilisationCopy() {
+		CarteCivilisation[] cVCpy = new CarteCivilisation[4];
+		for (int i = 0; i < 4; i++)
+		{
+			cVCpy[i] = ((ZoneCarteCivilisation)zones[i + 8]).getCard();
+		}
+		return cVCpy;
+	}
+	
+	/**
+	 * Verifie si le choix du joueur est correct
+	 * @param player le joueur qui a fait le choix
+	 * @param choose le choix du joueur
+	 * @return boolean true : le choix est correct / false le choix est incorrect
+	 */
+	public boolean zoneChooseVerif(Player player,int choose) {
+		if((choose >= 0) && (choose<zones.length) && ableToChooseZone(choose, player)) return true;
+		else if((choose >= 0) && (choose<zones.length)) Printer.getPrinter().println("/!\\ Zone "+zones[choose].getName()+" : Choix incorrecte ou zone pleine, veuillez reessayer./!\\");
+		else Printer.getPrinter().println("/!\\ L'index "+choose+" est hors limite de Zones[], veuillez reessayer./!\\");
+		return false;
+	}
+	
 
 	/**
 	 * numberChoose retourne le nombre de figurines a posee choisie par l'IA.
