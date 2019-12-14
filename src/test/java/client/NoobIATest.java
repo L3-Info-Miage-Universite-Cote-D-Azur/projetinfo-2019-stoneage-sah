@@ -245,7 +245,6 @@ public class NoobIATest
 		testIa = new NoobIA(player.getPlayerIA(), inv.getInventoryIA());
 
 		Ressource[] res = this.testIa.chooseRessourceBuildingChoosed();
-		System.out.println(Arrays.toString(res));
 		// TEST TAILLE
 		assertEquals(res.length > 0 && res.length < 8, true);
 		
