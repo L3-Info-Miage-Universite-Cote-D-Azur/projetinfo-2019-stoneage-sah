@@ -21,7 +21,7 @@ public class CarteCivilisationWoodIATest {
 
 			for(int j =0; j < 100; j++) {
 				//On test 100 fois que l'indice renvoye est bien compris entre 0 et tab1.length
-				int test = testIa.chooseZone(tab1, null ,null , null);
+				int test = testIa.chooseZone(tab1 ,null , null);
 				assertEquals(true,test < tab1.length);
 				assertEquals(true,test >= 0);
 			}
