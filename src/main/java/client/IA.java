@@ -1,8 +1,8 @@
 package client;
 
+import game.CarteCivilisation;
 import game.Ressource;
-import game.zone.ZoneBuilding;
-import game.zone.ZoneCarteCivilisation;
+import game.building.Building;
 import inventory.InventoryIA;
 import player.PlayerIA;
 
@@ -30,7 +30,7 @@ public abstract class IA{
 	 * @param cV la copie des zones carte civilisation
 	 * @return l'indice de la zone
 	 */
-    public abstract int chooseZone (int[] zoneAvailableSpace, String[] zoneName, ZoneBuilding[] buildings, ZoneCarteCivilisation[] cV);
+    public abstract int chooseZone (int[] zoneAvailableSpace, Building[] buildings, CarteCivilisation[] cV);
 
 	/**
 	 * chooseNumber retourne le nombre de figurines choisie par l'IA. 

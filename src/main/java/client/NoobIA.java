@@ -5,10 +5,14 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;
 
+import game.CarteCivilisation;
 import game.Ressource;
 import game.Settings;
-import game.building.*;
-import game.zone.*;
+import game.building.Building;
+import game.building.BuildingRessourceChoosed;
+import game.building.BuildingRessourceImposed;
+import game.building.BuildingRessourceNotImposed;
+import game.building.MathPlus;
 import inventory.InventoryIA;
 import player.PlayerIA;
 
@@ -47,7 +51,7 @@ public class NoobIA extends IA
 	 * @param cV la copie des zones carte civilisation
 	 * @return l'indice de la zone
 	 */
-	public int chooseZone (int[] zoneAvailableSpace, String[] zoneName, ZoneBuilding[] buildings, ZoneCarteCivilisation[] cV)
+	public int chooseZone (int[] zoneAvailableSpace, Building[] buildings, CarteCivilisation[] cV)
 	{
 		//pour eviter les parti infini
 		if(inventoryIA.availableResourceToFeed()>100) {
@@ -81,7 +85,7 @@ public class NoobIA extends IA
 					for (int i = 0; i < cV.length; i++)
 					{
 						// SI ELLE OFFRE 1 MARQUEUR NOURRITURE
-						if (cV[i].getCard().getRessource() == Ressource.FIELD)
+						if (cV[i].getRessource() == Ressource.FIELD)
 						{
 							if (this.rand.nextInt(2) == 1) this.currentZone = i+8;
 						}
@@ -120,7 +124,7 @@ public class NoobIA extends IA
 					// SI Y'A DE LA PLACE
 					if (zoneAvailableSpace[i+12] >= 1)
 					{
-						Building tmpBuilding = buildings[i].getBuilding();
+						Building tmpBuilding = buildings[i];
 						// RESSOURCE IMPOSED
 						if (tmpBuilding.getType() == 0)
 						{

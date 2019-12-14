@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.stream.IntStream;
 
+import game.CarteCivilisation;
 import game.Ressource;
 import game.Settings;
+import game.building.Building;
 import game.building.MathPlus;
-import game.zone.*;
 import inventory.InventoryIA;
 import player.PlayerIA;
 
@@ -40,7 +41,7 @@ public class RessourceIA extends IA
 	 * @param cV la copie des zones carte civilisation
 	 * @return l'indice de la zone
 	 */
-	public int chooseZone (int[] zoneAvailableSpace, String[] zoneName, ZoneBuilding[] buildings, ZoneCarteCivilisation[] cV)
+	public int chooseZone (int[] zoneAvailableSpace, Building[] buildings, CarteCivilisation[] cV)
 	{
 		//pour eviter les parti infinies
 		if(inventoryIA.availableResourceToFeed()>150) {

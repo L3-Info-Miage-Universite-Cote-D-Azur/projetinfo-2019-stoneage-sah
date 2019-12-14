@@ -2,6 +2,8 @@ package client;
 
 import java.util.Random;
 
+import game.CarteCivilisation;
+
 /**
  * Priorite decroissante:
 
@@ -15,8 +17,7 @@ import java.util.Random;
 
 import game.Ressource;
 import game.Settings;
-import game.zone.ZoneBuilding;
-import game.zone.ZoneCarteCivilisation;
+import game.building.Building;
 import inventory.InventoryIA;
 import player.PlayerIA;
 
@@ -38,7 +39,7 @@ public class CiviIA extends IA {
 	 * @param cV la copie des zones carte civilisation
 	 * @return l'indice de la zone
 	 */
-	public int chooseZone (int[] zoneAvailableSpace, String[] zoneName, ZoneBuilding[] buildings, ZoneCarteCivilisation[] cV)
+	public int chooseZone (int[] zoneAvailableSpace, Building[] buildings, CarteCivilisation[] cV)
 	{
 		// RESET
 		this.currentZone = -1;
@@ -239,5 +240,17 @@ public class CiviIA extends IA {
 
 	public String toString(){
 		return "Civilisation";
+	}
+
+	@Override
+	public Ressource[] chooseRessourceBuildingNotImposed(int nombreRessource, int combienDeRessourcesDifferentes) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Ressource[] chooseRessourceBuildingChoosed() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
