@@ -60,6 +60,8 @@ public class BuildingRessourceChoosed extends BuildingSpecial
 			if (inv[ressources[i].getIndex()] < 0)
 				return false;
 		}
+
+		super.neededRessource = ressources.clone();
 		return true;
 	}
 	
