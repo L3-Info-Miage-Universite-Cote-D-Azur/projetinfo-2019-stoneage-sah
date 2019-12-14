@@ -189,7 +189,7 @@ public class GameZones {
 		int choose;
 		do{
 			choose = player.getIA().chooseZone(zoneAvailableSpace, buildingsCpy, cVCpy);
-		}while(zoneChooseVerif(player,choose));
+		}while(!zoneChooseVerif(player,choose));
 		return choose;
 	}
 	
