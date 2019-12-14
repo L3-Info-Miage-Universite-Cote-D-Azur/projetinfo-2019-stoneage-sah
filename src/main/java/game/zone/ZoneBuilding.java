@@ -1,6 +1,5 @@
 package game.zone;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import game.Ressource;
 import game.Settings;
