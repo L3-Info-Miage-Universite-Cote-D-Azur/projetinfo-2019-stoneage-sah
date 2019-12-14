@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import game.Ressource;
+import game.Settings;
 import inventory.Inventory;
 import player.Player;
 
@@ -21,7 +22,7 @@ public class CarteCivilisationWoodIATest {
 
 			for(int j =0; j < 100; j++) {
 				//On test 100 fois que l'indice renvoye est bien compris entre 0 et tab1.length
-				int test = testIa.chooseZone(tab1 ,null , null);
+				int test = testIa.chooseZone(tab1, null ,null , null);
 				assertEquals(true,test < tab1.length);
 				assertEquals(true,test >= 0);
 			}
@@ -268,6 +269,26 @@ public class CarteCivilisationWoodIATest {
 		for(int i = 0; i <100; i++) {
 			res = testIa.useRessourceCard();
 			assertEquals(true, res == 0);
+		}
+	}
+	
+	@Test
+	void testChooseRessourceBuildingNotImposed(){
+		Ressource[] ressources;
+		for(int i = 0; i < 100; i++) {
+			int y = Settings.RAND.nextInt(10)+1;
+			int z = Settings.RAND.nextInt(10)+1;
+			ressources = testIa.chooseRessourceBuildingNotImposed(y, z);
+			assertEquals(true, ressources.length == 0);
+		}
+	}
+	
+	@Test
+	void testChooseRessourceBuildingChoosed(){
+		Ressource[] ressources;
+		for(int i = 0; i < 100; i++) {
+			ressources = testIa.chooseRessourceBuildingChoosed();
+			assertEquals(true, ressources.length == 0);
 		}
 	}
 }
