@@ -101,7 +101,7 @@ public class BuildingRessourceNotImposed extends BuildingSpecial
 
 	/* GETTERS */
 	public int getHowManyDifferentRessource () {return this.howManyDifferentRessource;}
-	public String getName() {return "'Bâtiment ressources non imposees: " + this.neededRessource.length + " Ressources; " + this.howManyDifferentRessource +" Ressources differentes'";}	
+	public String getName() {return "'Batiment ressources non imposees: " + this.neededRessource.length + " Ressources; " + this.howManyDifferentRessource +" Ressources differentes'";}	
 
 	/* SETTERS */
 	public void setHowManyDifferentRessource (int hmdr) {this.howManyDifferentRessource = hmdr;}
