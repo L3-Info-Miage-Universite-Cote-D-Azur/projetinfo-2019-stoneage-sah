@@ -1,10 +1,12 @@
 package client;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.stream.IntStream;
 
 import game.Ressource;
 import game.Settings;
+import game.building.MathPlus;
 import game.zone.*;
 import inventory.InventoryIA;
 import player.PlayerIA;
@@ -245,24 +247,113 @@ public class RessourceIA extends IA
 	 * @param combienDeRessourcesDifferentes le nombre de ressources differentes
 	 * @return un tableau des ressources
 	 */
-	public Ressource[] chooseRessourceBuildingNotImposed(int nombreRessource, int combienDeRessourcesDifferentes) 
+	/**
+	 * Renvoie le tableau des ressources utilisees pour les buildingsNotImposed
+	 * @param nombreRessource le nombre de ressources
+	 * @param combienDeRessourcesDifferentes le nombre de ressources differentes
+	 * @return un tableau des ressources
+	 */
+	public Ressource[] chooseRessourceBuildingNotImposed (int nombreRessource, int combienDeRessourcesDifferentes)
 	{
+		/*
+		 * EXPLICATION DE L'ALGORITHME:
+		 * On fait la liste des combinaisons possibles de taille combienDeRessourcesDifferentes
+		 * Si il y a un 0 dans la combinaison, donc que le joueur ne possede pas la ressource, on vire la combinaison
+		 * Si la somme est inferieur a nombreRessource, on vire la combinaison
+		 * Des qu'on a trouve 1 bonne combinaison, on la garde
+		 * Avec la bonne combinaison, on met au moins 1 ressource de chaque dans la reponse
+		 * Ensuite, on enleve les ressources une par une dans l'ordre de la combinaison
+		 */
+		
+		// COMBINAISONS
+		int[] cpy = this.inventoryIA.getCopyRessourcesLootable();
+		//System.out.println(Arrays.toString(cpy));
+		ArrayList<int[]> comb = MathPlus.combinaisons(this.inventoryIA.getCopyRessourcesLootable(), combienDeRessourcesDifferentes);
 		Ressource[] res = new Ressource[nombreRessource];
-		for (int i = 0; i < res.length; i++)
+		//System.out.println("[res] " + Arrays.toString(res));
+		int i = 0;
+		// ON CHERCHE 1 COMBINAISON BONNE
+		for (; i < comb.size(); i++)
 		{
-			if (i<combienDeRessourcesDifferentes) {
-				res[i] = Ressource.indexToRessource(i);
+			int retToStart = 0;
+			for (int k = 0; k < comb.get(i).length; k++)
+			{
+				if (comb.get(i)[k] == 0)
+					retToStart = 1;
 			}
-			else {
-				int x = this.rand.nextInt(this.inventoryIA.getCopyRessources().length);
-				while (this.inventoryIA.getRessource(Ressource.indexToRessource(x)) == 0);
+			if (retToStart == 1)
+				continue;
+			if (IntStream.of(comb.get(i)).sum() < nombreRessource)
+				continue;
+			break;
+		}
+		int[] tabAns = comb.get(i);
+		Ressource[] correspondances = new Ressource[combienDeRessourcesDifferentes];
+		
+		// ON INITIALISE correspondances
+		int eIndex = 0;
+		int[] exceptionIndex = new int[combienDeRessourcesDifferentes]; // Contient les indices des correspondances dans cpy
+		for (int k = 0; k < exceptionIndex.length; k++)
+		{
+			exceptionIndex[k] = -1;
+		}
+
+		for (int k = 0, r = 0 ; k < tabAns.length; k++)
+		{
+			for (int g = 0; g < cpy.length; g++)
+			{
+				if (tabAns[k] == cpy[g])
 				{
-					x = this.rand.nextInt(this.inventoryIA.getCopyRessources().length);
+					boolean breakNow = false;
+					for (int n = 0; n < exceptionIndex.length; n++)
+					{
+						if (exceptionIndex[n] == g)
+						{
+							breakNow = true;
+							break;
+						}
+					}
+					if (breakNow == true)
+						continue;
+					exceptionIndex[eIndex] = g;
+					eIndex++;
+					cpy[g]--;
+					correspondances[r] = Ressource.indexToRessource(g);
+					r++;
+					break;
 				}
-				res[i] = Ressource.indexToRessource(x);
 			}
+		}
+		
+		// ON MET 1 RESSOURCE DE CHAQUE
+		for (int k = 0; k < combienDeRessourcesDifferentes; k++)
+		{
+			res[k] = correspondances[k];
+		}
+		// ON FINIT
+		for (int k = correspondances.length, g = 0; k < nombreRessource; k++)
+		{
+			//System.out.println("\t[cpy1] " + Arrays.toString(cpy) + " [idx] " + Arrays.toString(exceptionIndex) + "  [l,h] " + nombreRessource + " " + combienDeRessourcesDifferentes);
+			//System.out.println("\t[!!!] " + Arrays.toString(tabAns));
+			// On check pour chaque ressource si elle est dispo
+			for (int idx : exceptionIndex)
+			{
+				// Si il nous reste une ressource
+				if (cpy[idx] > 0)
+				{
+					// on assigne l'indice
+					g = idx;
+					// on retire la ressource de la copie
+					cpy[g]--;
+					//System.out.println("\t\t[cpy2] " + Arrays.toString(cpy));
+					break;
+				}
+			}
+			// on ajoute la ressource a notre reponse
+			res[k] = Ressource.indexToRessource(g);
 			
 		}
+		//System.out.println("[res] " + Arrays.toString(res));
 		return res;
 	}
 	
@@ -270,19 +361,34 @@ public class RessourceIA extends IA
 	 * Renvoie le tableau des ressources utilisees pour les buildingsChoosed
 	 * @return un tableau des ressources
 	 */
-	public Ressource[] chooseRessourceBuildingChoosed()
+	public Ressource[] chooseRessourceBuildingChoosed ()
 	{
+		/**
+		 * Ressources choisies dans l'ordre: GOLD - STONE - CLAY - WOOD
+		 */
 		int[] inv = this.inventoryIA.getCopyRessourcesLootable();
-		Ressource[] res = new Ressource[this.rand.nextInt(7) + 1];
-		for (int i = 0; i < res.length; i++)
+		// res.length = [1; max <= 7]
+		int sum = IntStream.of(inv).sum();
+		int range = 0;
+		if (sum > 7)
+			range = 7;
+		else
+			range = sum;
+		Ressource[] res = new Ressource[this.rand.nextInt(range + 1)];
+		for (int i = 0, invIndex = 3; i < res.length;)
 		{
-			int x = this.rand.nextInt(inv.length);
-			while (inv[x] == 0);
+			if (inv[invIndex] == 0)
 			{
-				x = this.rand.nextInt(inv.length);
+				invIndex--;
+				if (invIndex == -1)
+					throw new Error("Impossible de miser");
 			}
-			inv[x]--;
-			res[i] = Ressource.indexToRessource(x);
+			else
+			{
+				res[i] = Ressource.indexToRessource(invIndex);
+				inv[invIndex]--;
+				i++;
+			}
 		}
 		return res;
 	}
