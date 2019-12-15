@@ -125,7 +125,7 @@ public class ArrayListUtilityTest
 		{
 			assertEquals(arr[i].get(0), 0);
 		}
-		int[] input = new int[] {0,1,2,3,4,5,6,7,8,9};
+		int[] input = new int[] {0,0,0,0,0,0,0,0,0,0};
 		ArrayListUtility.fillArraysUpTo(arr, 1, input);
 		for (int i = 0; i < arr.length; i++)
 		{
