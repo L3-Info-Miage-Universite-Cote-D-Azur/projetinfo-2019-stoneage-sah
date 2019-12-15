@@ -47,7 +47,7 @@ public class Player extends PlayerStruct {
 		case 3:
 			this.ia = new CiviIA(this.getPlayerIA(),inventoryIA);
 			break;
-		case 4: //IA qui ne finit pas la parti seul donc non utiliser pour cette iteration
+		case 4: 
 			this.ia = new RessourceIA(this.getPlayerIA(),inventoryIA);
 			break;
 		default:
@@ -118,7 +118,7 @@ public class Player extends PlayerStruct {
 	 */
 	public void initIA(InventoryIA inventoryIA) 
 	{
-		int numberIA = 4; //nombre d'ia possible
+		int numberIA = 5; //nombre d'ia possible
 		
 		int choose = Settings.RAND.nextInt(numberIA);
 		switch(choose) {
@@ -134,7 +134,7 @@ public class Player extends PlayerStruct {
 		case 3:
 			this.ia = new CiviIA(this.getPlayerIA(),inventoryIA);
 			break;
-		case 4: //IA qui ne finit pas la parti seul donc non utiliser pour cette iteration
+		case 4: 
 			this.ia = new RessourceIA(this.getPlayerIA(),inventoryIA);
 			break;
 		default:
