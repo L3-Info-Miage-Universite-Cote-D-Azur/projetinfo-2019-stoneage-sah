@@ -1,4 +1,4 @@
-package game.civilisation;
+package game;
 
 import java.util.ArrayList;
 
