@@ -296,8 +296,6 @@ public class NoobIA extends IA
 		int[] toolsToUse = inventoryIA.getTools().getTools();
 		boolean[] useTools = inventoryIA.getTools().getToolsUsed();
 		
-		System.out.println("[IA-toolsToUse + useTools]" + Arrays.toString(toolsToUse) + Arrays.toString(useTools));
-		
 		boolean[] res = new boolean[toolsToUse.length];
 		
 		for (int i = 0; i < useTools.length; i++)
@@ -311,7 +309,6 @@ public class NoobIA extends IA
 				res[i] = false;
 			}
 		}
-		System.out.println("[RET-pickTools]" + Arrays.toString(res));
 		return res;
 	}
 
