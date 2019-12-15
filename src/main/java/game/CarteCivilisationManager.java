@@ -1,7 +1,9 @@
-package game;
+package game.civilisation;
 
 import java.util.ArrayList;
 
+import game.Ressource;
+import game.Settings;
 import game.zone.ZoneCarteCivilisation;
 
 /**
@@ -99,27 +101,24 @@ public class CarteCivilisationManager {
 	 * organizeCard replace les cartes comme il faut a la fin du tour.
 	 */
 	public void organizeCard() {
-		int n = cardZone.length-1;
-		while(n >= 0) {
+		int n = 0;
+		while(n<cardZone.length) {
 			if(null == cardZone[n].getCard()) {
 				int m = n;
-
-				while(m >= 0) {
+				while(m < cardZone.length) {
 					if(cardZone[m].getCard() != null) {
 						cardZone[n].setCard(cardZone[m].getCard());
-
 						cardZone[m].setCard(null);
 						break;
 					}
-					m--;
+					m++;
 				}
-				if(m < 0) {
+				if(m == cardZone.length) {
 					cardZone[n].setCard(getRandomCivilisationCard());
 				}
 			}
-			n--;
+			n++;
 		}
-
 	}
 
 	/**
