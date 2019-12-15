@@ -192,8 +192,8 @@ public class GameZones {
 		}while(!zoneChooseVerif(player,choose));
 		return choose;
 	}
-	
-	
+
+
 	/**
 	 * Crée un tableau du nombre de figurine que le joueur peut posser dans chaque zone
 	 * @param player le joueur concernée
@@ -202,14 +202,14 @@ public class GameZones {
 	public int[] zoneAvailableSpaceForPlayer(Player player) {
 		int[] zoneAvailableSpace = new int[zones.length];
 		for(int i = 0; i < zones.length; i++){
-			
+
 			if(ableToChooseZone(i,player)) zoneAvailableSpace[i] = zones[i].getAvailableSpace(); 
 			else zoneAvailableSpace[i] = 0; //si le joueur ne peut pas placer dans la zone pour quelconc resaions
 		}
 		return zoneAvailableSpace;
 	}
-	
-	
+
+
 	/**
 	 * copy les building present sur le plateau pour l'envoyer au joueur
 	 * @return revoie la liste des copie
@@ -222,7 +222,7 @@ public class GameZones {
 		}
 		return buildingsCpy;
 	}
-	
+
 	/**
 	 * Copie la liste des carte civilisation presetn sur le plateau pour l'envoyer au joueur
 	 * @return
@@ -235,7 +235,7 @@ public class GameZones {
 		}
 		return cVCpy;
 	}
-	
+
 	/**
 	 * Verifie si le choix du joueur est correct
 	 * @param player le joueur qui a fait le choix
@@ -248,7 +248,7 @@ public class GameZones {
 		else Printer.getPrinter().println("/!\\ L'index "+choose+" est hors limite de Zones[], veuillez reessayer./!\\");
 		return false;
 	}
-	
+
 
 	/**
 	 * numberChoose retourne le nombre de figurines a posee choisie par l'IA.
@@ -295,36 +295,52 @@ public class GameZones {
 	 * @param gamePlayers la liste de tout les joueur et leurs
 	 * @param player le joueur qui a piocher la carte
 	 */
-	private void tirage(GamePlayers gamePlayers, Player player) {
+	public void tirage(GamePlayers gamePlayers, Player player) {
 		int index=0;
 		for(int j = 0; j < gamePlayers.getNumberPlayers();j++ ) {
 			if(gamePlayers.getPlayer(j)==player) index = j;
 		}
-		
+
 		int[] diceRes = dice.rollDice(Settings.RAND, gamePlayers.getNumberPlayers());
 		Printer.getPrinter().println("le tirage donne : "+Arrays.toString(diceRes));
 		boolean[] alreadyChoose = new boolean[gamePlayers.getNumberPlayers()];
+
 		for(int j = 0; j < gamePlayers.getNumberPlayers();j++ ) {
 			int indexPlayerChoose = (j+index)%gamePlayers.getNumberPlayers();
-			boolean correctChoose = false;
-			int choose=-1;
-			while(!correctChoose) {
-				choose = gamePlayers.getPlayer(indexPlayerChoose).getIA().chooseTirage(diceRes.clone(),alreadyChoose.clone());
-				if(choose>=0 && choose<diceRes.length && !alreadyChoose[choose]) {
-					correctChoose = true;
-					alreadyChoose[choose]=true;
-				}
-			}
-			String str = "Le joueur "+gamePlayers.getPlayer(indexPlayerChoose).getName()+" a choisi : ";
-			if(diceRes[choose]==5) {
-				gamePlayers.getInventory(indexPlayerChoose).getTools().incrementTool();
-				Printer.getPrinter().println(str+"une augmentation d'outils");
-			}
-			else {
-				gamePlayers.getInventory(indexPlayerChoose).addRessource(Ressource.indexToRessource(diceRes[choose]-1), 1);
-				Printer.getPrinter().println(str+Ressource.indexToRessource(diceRes[choose]-1));
-			}	
+			tirageInProgress(gamePlayers.getPlayer(indexPlayerChoose),gamePlayers.getInventory(indexPlayerChoose), diceRes, alreadyChoose);
 		}
 	}
+
+	/**
+	 * Gestion du tirage d'objet pour un joueur.
+	 * @param player le joueur.
+	 * @param inventory son inventaire.
+	 * @param diceRes le resultat du tirage.
+	 * @param alreadyChoose le tableau des recompenses deja prises.
+	 */
+	public void tirageInProgress(Player player,Inventory inventory, int[] diceRes, boolean[] alreadyChoose) {
+
+		boolean correctChoose = false;
+		int choose=-1;
+
+		while(!correctChoose) {
+			choose = player.getIA().chooseTirage(diceRes.clone(),alreadyChoose.clone());
+			if(choose>=0 && choose<diceRes.length && !alreadyChoose[choose]) {
+				correctChoose = true;
+				alreadyChoose[choose]=true;
+			}
+		}
+
+		String str = "Le joueur "+player.getName()+" a choisi : ";
+		if(diceRes[choose]==5) {
+			inventory.getTools().incrementTool();
+			Printer.getPrinter().println(str+"une augmentation d'outils");
+		}
+		else {
+			inventory.addRessource(Ressource.indexToRessource(diceRes[choose]-1), 1);
+			Printer.getPrinter().println(str+Ressource.indexToRessource(diceRes[choose]-1));
+		}	
+	}
 }
+
 
