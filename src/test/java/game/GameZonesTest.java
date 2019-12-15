@@ -12,6 +12,7 @@ import client.RandomIA;
 import game.building.Building;
 import game.zone.Zone;
 import game.zone.ZoneCarteCivilisation;
+import inventory.Inventory;
 import game.zone.ZoneBuilding;
 import player.Player;
 
@@ -307,5 +308,78 @@ public class GameZonesTest{
 
 		}while(!returnValue);
 	}
-
+	
+	@Test
+	public void testTirageInProgress() {
+		gameZones = new GameZones(4,d);
+		Player playerMock = mock(Player.class);
+		IA iaMock = mock(RandomIA.class);
+		//Tirage : bois/outils/or/argile
+		int[] diceRes = new int[]{1,5,4,2};
+		//Tout est dispo
+		boolean[] alreadyChoose = new boolean[]{false,false,false,false};
+		Inventory inventory = new Inventory();
+		
+		when(playerMock.getIA()).thenReturn(iaMock);
+		
+		//On test que le joueur n'a rien.
+		assertEquals(0,inventory.getTools().getTools()[0]);
+		assertEquals(0, inventory.getRessource(Ressource.WOOD));
+		assertEquals(0, inventory.getRessource(Ressource.CLAY));
+		assertEquals(0, inventory.getRessource(Ressource.GOLD));
+		
+		//On force le choix au premier du tirage
+		when(iaMock.chooseTirage(any(int[].class), any(boolean[].class))).thenReturn(0);
+		gameZones.tirageInProgress(playerMock, inventory, diceRes, alreadyChoose);
+		//Tout est dispo sauf le premier
+		assertEquals(alreadyChoose[0], true);
+		assertEquals(alreadyChoose[1], false);
+		assertEquals(alreadyChoose[2], false);
+		assertEquals(alreadyChoose[3], false);
+		//Il a un de bois
+		assertEquals(1, inventory.getRessource(Ressource.WOOD));
+		assertEquals(0,inventory.getTools().getTools()[0]);
+		assertEquals(0, inventory.getRessource(Ressource.CLAY));
+		assertEquals(0, inventory.getRessource(Ressource.GOLD));
+		
+		//On force le choix au deuxieme du tirage
+		when(iaMock.chooseTirage(any(int[].class), any(boolean[].class))).thenReturn(1);
+		gameZones.tirageInProgress(playerMock, inventory, diceRes, alreadyChoose);
+		assertEquals(alreadyChoose[0], true);
+		assertEquals(alreadyChoose[1], true);
+		assertEquals(alreadyChoose[2], false);
+		assertEquals(alreadyChoose[3], false);
+		assertEquals(1, inventory.getRessource(Ressource.WOOD));
+		//Il a un outils en plus
+		assertEquals(1,inventory.getTools().getTools()[0]);
+		assertEquals(0, inventory.getRessource(Ressource.CLAY));
+		assertEquals(0, inventory.getRessource(Ressource.GOLD));
+		
+		//On force le choix au troisieme du tirage
+		when(iaMock.chooseTirage(any(int[].class), any(boolean[].class))).thenReturn(2);
+		gameZones.tirageInProgress(playerMock, inventory, diceRes, alreadyChoose);
+		assertEquals(alreadyChoose[0], true);
+		assertEquals(alreadyChoose[1], true);
+		assertEquals(alreadyChoose[2], true);
+		assertEquals(alreadyChoose[3], false);
+		assertEquals(1, inventory.getRessource(Ressource.WOOD));
+		assertEquals(1,inventory.getTools().getTools()[0]);
+		assertEquals(0, inventory.getRessource(Ressource.CLAY));
+		//Il a de l'or
+		assertEquals(1, inventory.getRessource(Ressource.GOLD));
+		
+		//On force le choix au quatrieme du tirage
+		when(iaMock.chooseTirage(any(int[].class), any(boolean[].class))).thenReturn(3);
+		gameZones.tirageInProgress(playerMock, inventory, diceRes, alreadyChoose);
+		//Plus rien est dispo
+		assertEquals(alreadyChoose[0], true);
+		assertEquals(alreadyChoose[1], true);
+		assertEquals(alreadyChoose[2], true);
+		assertEquals(alreadyChoose[3], true);
+		assertEquals(1, inventory.getRessource(Ressource.WOOD));
+		assertEquals(1,inventory.getTools().getTools()[0]);
+		//Il a de l'argile
+		assertEquals(1, inventory.getRessource(Ressource.CLAY));
+		assertEquals(1, inventory.getRessource(Ressource.GOLD));
+	}
 }
