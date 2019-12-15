@@ -205,11 +205,11 @@ public class Statistics
 			int averageStatData = 0;
 			// SI LE JOUEUR POSSEDE LA RESSOURCE A CE TOUR T
 			if (this.playersArrays[1].get(0)[statDataIndex].size() > max - 1)
-			{
-				// SI OUI, AJOUTER LA RESSOURCE
-				this.csv.addSomething(tmpFile, this.playersArrays[1].get(0)[statDataIndex].get(max - 1).toString());
-				averageStatData += this.playersArrays[1].get(0)[statDataIndex].get(max - 1);
-			}
+            {
+                // SI OUI, AJOUTER LA RESSOURCE
+                this.csv.addSomething(tmpFile, Double.toString((double)(this.playersArrays[1].get(0)[statDataIndex].get(max - 1))/(double)(Settings.NB_GAMES)));
+                averageStatData += this.playersArrays[1].get(0)[statDataIndex].get(max - 1);
+            }
 			else
 			{
 				// SI NON, NE RIEN AJOUTER
