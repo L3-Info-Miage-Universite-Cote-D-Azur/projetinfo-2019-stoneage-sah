@@ -3,7 +3,6 @@ package client;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -277,24 +276,20 @@ public class RandomIATest {
 		
 		// TEST VALEUR ATTENDUES
 		Ressource[] nbOcc = new Ressource[3];
-		for (int r = 0, idx = 0; r < res.length; r++)
-		{
-			assertEquals(nbOcc.length != idx, true);
-			boolean toContinue = false;
-			for (int i = 0; i < nbOcc.length; i++)
-			{
-				if (nbOcc[i] == res[r])
-				{
-					toContinue = true;
-					break;
+		int index = 0;
+		for(int i = 0; i < res.length; i++) {
+			boolean find = false;
+			for(int j = 0; j<nbOcc.length; j++) {
+				if(res[i] == nbOcc[j]) {
+					find = true;
 				}
 			}
-			if (toContinue == true)
-				continue;
-			nbOcc[idx] = res[r];
-			idx++;
+			if(!find) {
+				nbOcc[index] = res[i];
+				index++;
+			}
 		}
-		assertNotNull(nbOcc[nbOcc.length - 1]);
+		assertNotNull(nbOcc);
 	}
 	
 	@Test
@@ -307,15 +302,16 @@ public class RandomIATest {
 		this.inv.addRessource(Ressource.GOLD, 4);
 		testIa = new RandomIA(null,inv.getInventoryIA());
 
-		Ressource[] res = this.testIa.chooseRessourceBuildingChoosed();
-		System.out.println(Arrays.toString(res));
-		// TEST TAILLE
-		assertEquals(res.length > 0 && res.length < 8, true);
-		
-		// TEST VALEUR ATTENDUES
-		for (int i = 0; i < res.length; i++)
-		{
-			assertEquals(Ressource.GOLD, res[i]);
+		for(int i = 0; i<50; i++) {
+			Ressource[] res = this.testIa.chooseRessourceBuildingChoosed();
+			// TEST TAILLE
+			assertEquals(true,res.length >= 0 && res.length < 8);
+			
+			// TEST VALEUR ATTENDUES
+			for (int j = 0; j < res.length; j++)
+			{
+				assertEquals(Ressource.GOLD, res[j]);
+			}
 		}
 	}
 }
