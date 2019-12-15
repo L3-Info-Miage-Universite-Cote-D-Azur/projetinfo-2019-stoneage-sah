@@ -242,7 +242,7 @@ public class RessourceIATest
 
 		Ressource[] res = this.testIa.chooseRessourceBuildingChoosed();
 		// TEST TAILLE
-		assertEquals(res.length > 0 && res.length < 8, true);
+		assertEquals(res.length >= 0 && res.length < 8, true);
 		
 		Ressource[] expected = new Ressource[] {Ressource.GOLD, Ressource.GOLD, Ressource.GOLD, Ressource.GOLD, Ressource.STONE, Ressource.CLAY, Ressource.WOOD};
 		// TEST VALEUR ATTENDUES
