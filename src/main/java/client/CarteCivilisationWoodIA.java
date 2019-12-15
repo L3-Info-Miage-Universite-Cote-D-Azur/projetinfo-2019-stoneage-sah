@@ -340,7 +340,7 @@ public class CarteCivilisationWoodIA extends IA {
 
 	@Override
 	public String toString() {
-		return "CarteCivilisation version Bois";
+		return "CarteCivilisation_Version_Bois";
 	}
 
 }
