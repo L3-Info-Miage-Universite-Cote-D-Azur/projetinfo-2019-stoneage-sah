@@ -78,7 +78,7 @@ public class MathPlus
 	 * @param n l'indice de combinaison
 	 * @param source le tableau source
 	 * @param inProgress le tableau qui contient les elements de la combinaison
-	 * @param ret un ArrayList<int[]> qui contient les differentes combinaison
+	 * @param ret un ArrayList(int[]) qui contient les differentes combinaison
 	 * @param k la longueur de la combinaison generee
 	 */
 	public static void combinaisonPartition (int n, int[] source, int[] inProgress, ArrayList<int[]> ret, int k)
