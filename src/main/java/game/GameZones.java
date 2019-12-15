@@ -80,28 +80,40 @@ public class GameZones {
 			{
 				action = zones[i].playerRecoveryFigurine(player,inventory);//Il recupere ses figurines et les ressources.
 				if (action>0 && zones[i] instanceof ZoneCarteCivilisation) {
-					if (action==1) {
-						CarteCivilisation cc = cardManager.getRandomCivilisationCard();
-						if (cc != null) {
-							Printer.getPrinter().println("Le joueur "+player.getName()+" obtient "+cc.getName()+" grace a la carte civilisation.");
-							inventory.addCardCivilisation(cc); //plus de carte dans le jeu
-						}
-						else {
-							Printer.getPrinter().println("Le joueur "+player.getName()+" n'obtient pas de carte supplementaire car il n'y a plus de carte civilisation");
-						}
-					}
-					//tirage pour chaque joueur
-					else if(action == 2) 
-					{	
-						Printer.getPrinter().println();
-						Printer.getPrinter().println("Phase de Tirage");
-						tirage(gamePlayers,player);
-						Printer.getPrinter().println();
-					}
+					actionRecovery(action, player, inventory, gamePlayers);
 				}
 			}
 		}
 	}
+
+	/**
+	 * actionRecovery effectue la recuperation particuliere en fonction de l'action envoyee.
+	 * @param action : l'action a effectuee.
+	 * @param player : le joueur concerne.
+	 * @param inventory : son inventaire.
+	 * @param gamePlayers : le gestionaire des joueurs.
+	 */
+	public void actionRecovery(int action, Player player,Inventory inventory,GamePlayers gamePlayers) {
+		if (action==1) {//Il obtient une carte civilisation au hasard (grace a une autre carte civilisation)
+			CarteCivilisation cc = cardManager.getRandomCivilisationCard();
+			if (cc != null) {
+				Printer.getPrinter().println("Le joueur "+player.getName()+" obtient "+cc.getName()+" grace a la carte civilisation.");
+				inventory.addCardCivilisation(cc);
+			}
+			else {
+				Printer.getPrinter().println("Le joueur "+player.getName()+" n'obtient pas de carte supplementaire car il n'y a plus de carte civilisation");
+			}
+		}
+		//tirage pour chaque joueur
+		else if(action == 2) 
+		{	
+			Printer.getPrinter().println();
+			Printer.getPrinter().println("Phase de Tirage");
+			tirage(gamePlayers,player);
+			Printer.getPrinter().println();
+		}
+	}
+
 
 
 	/**
