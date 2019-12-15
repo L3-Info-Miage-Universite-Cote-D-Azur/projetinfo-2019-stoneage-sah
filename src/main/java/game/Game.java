@@ -1,6 +1,7 @@
 package game;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import game.building.Building;
 import game.zone.ZoneBuilding;
@@ -213,7 +214,8 @@ public class Game {
 			string += " "+gamePlayers.getInventory(i).getRessource(Ressource.STONE)+" pierres,";
 			string += " "+gamePlayers.getInventory(i).getRessource(Ressource.GOLD)+" or,";
 			string += " "+gamePlayers.getInventory(i).getRessource(Ressource.FOOD)+" nourritures,";
-			string += " et "+gamePlayers.getInventory(i).getRessource(Ressource.FIELD)+" marqueurs nourritures.";
+			string += " "+gamePlayers.getInventory(i).getRessource(Ressource.FIELD)+" marqueurs nourritures.";
+			string += " et outils: "+Arrays.toString(gamePlayers.getInventory(i).getTools().getTools())+".";
 			Printer.getPrinter().println(string);
 		}
 		Printer.getPrinter().println();
