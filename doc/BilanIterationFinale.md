@@ -5,7 +5,7 @@ Nous avons fini les tests unitaires. Suite aux découvertes des fonctionnalité 
 De nombreux bugs et erreurs dans le code ont été corrigés.  
 Certaines améliorations ont été faite sur les IA. RessourceIA peut maintenant finir une partie.  
 Certaines méthodes ont été fractionné afin de faciliter les tests et la maintenabilité du code.  
-Les statistiques ont été améliorées et terminées.  
+Les statistiques ont été améliorées et terminées mais il reste un probleme pour les moyennes des ressources.  
 
 ## Bilan des tests :
 Les tests unitaires sont effectués et fonctionnent pour chacune des classes.
