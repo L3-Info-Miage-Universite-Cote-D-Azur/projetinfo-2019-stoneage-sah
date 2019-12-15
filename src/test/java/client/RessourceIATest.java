@@ -207,4 +207,48 @@ public class RessourceIATest
 	{
 		assertEquals(testIa.chooseTirage(new int[] {1,2,3}, new boolean[] {true, true, false}), 2);
 	}
+	
+	@Test
+	public void testChooseRessourceBuildingNotImposed ()
+	{
+		this.inv = new Inventory();
+		this.inv.addRessource(Ressource.WOOD, 1);
+		this.inv.addRessource(Ressource.CLAY, 3);
+		this.inv.addRessource(Ressource.STONE, 2);
+		Player player = new Player("Test", inv.getInventoryIA());
+		testIa = new RessourceIA(player.getPlayerIA(), inv.getInventoryIA());
+		
+		Ressource[] res = this.testIa.chooseRessourceBuildingNotImposed(4, 3);
+		// TEST TAILLE
+		assertEquals(res.length, 4);
+		
+		// TEST VALEUR ATTENDUES
+		assertEquals(res[0], Ressource.WOOD);
+		assertEquals(res[1], Ressource.CLAY);
+		assertEquals(res[2], Ressource.STONE);
+		assertEquals(res[3], Ressource.CLAY);
+	}
+	
+	@Test
+	public void testChooseRessourceBuildingChoosed ()
+	{
+		this.inv = new Inventory();
+		this.inv.addRessource(Ressource.WOOD, 1);
+		this.inv.addRessource(Ressource.CLAY, 1);
+		this.inv.addRessource(Ressource.STONE, 1);
+		this.inv.addRessource(Ressource.GOLD, 4);
+		Player player = new Player("Test", inv.getInventoryIA());
+		testIa = new RessourceIA(player.getPlayerIA(), inv.getInventoryIA());
+
+		Ressource[] res = this.testIa.chooseRessourceBuildingChoosed();
+		// TEST TAILLE
+		assertEquals(res.length > 0 && res.length < 8, true);
+		
+		Ressource[] expected = new Ressource[] {Ressource.GOLD, Ressource.GOLD, Ressource.GOLD, Ressource.GOLD, Ressource.STONE, Ressource.CLAY, Ressource.WOOD};
+		// TEST VALEUR ATTENDUES
+		for (int i = 0; i < res.length; i++)
+		{
+			assertEquals(expected[i], res[i]);
+		}
+	}
 }
