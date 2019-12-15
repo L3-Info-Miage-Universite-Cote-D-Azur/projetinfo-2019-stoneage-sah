@@ -232,12 +232,6 @@ public class RessourceIA extends IA
 	 * @param combienDeRessourcesDifferentes le nombre de ressources differentes
 	 * @return un tableau des ressources
 	 */
-	/**
-	 * Renvoie le tableau des ressources utilisees pour les buildingsNotImposed
-	 * @param nombreRessource le nombre de ressources
-	 * @param combienDeRessourcesDifferentes le nombre de ressources differentes
-	 * @return un tableau des ressources
-	 */
 	public Ressource[] chooseRessourceBuildingNotImposed (int nombreRessource, int combienDeRessourcesDifferentes)
 	{
 		/*
