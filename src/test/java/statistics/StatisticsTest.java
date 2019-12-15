@@ -35,7 +35,6 @@ public class StatisticsTest
 		// On espere 0: test d'initialisation
 		assertEquals(stats.getDatas()[1].get(0)[1].get(2), 0);
 		stats.endGame(inv, p, nbRounds);
-		System.out.println(Arrays.toString(stats.getDatas()[1].get(0)));
 		// On espere 6: derniere donnee  de l'inventaire
 		assertEquals(stats.getDatas()[1].get(0)[1].get(2), 6);
 	}
