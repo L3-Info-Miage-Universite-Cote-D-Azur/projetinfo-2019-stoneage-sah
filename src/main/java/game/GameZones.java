@@ -236,8 +236,8 @@ public class GameZones {
 	}
 
 	/**
-	 * Copie la liste des carte civilisation presetn sur le plateau pour l'envoyer au joueur
-	 * @return
+	 * Copie la liste des carte civilisation presentes sur le plateau pour l'envoyer au joueur
+	 * @return renvoie la liste des carte civilisation
 	 */
 	public CarteCivilisation[] carteCivilisationCopy() {
 		CarteCivilisation[] cVCpy = new CarteCivilisation[4];
