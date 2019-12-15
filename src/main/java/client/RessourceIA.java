@@ -43,19 +43,6 @@ public class RessourceIA extends IA
 	 */
 	public int chooseZone (int[] zoneAvailableSpace, Building[] buildings, CarteCivilisation[] cV)
 	{
-		//pour eviter les parti infinies
-		if(inventoryIA.availableResourceToFeed()>150) {
-			// CHECK DES BUILDINGS
-			for (int i = 0; i < buildings.length; i++)
-			{
-				// SI Y'A DE LA PLACE
-				if (zoneAvailableSpace[i+12] >= 1)
-				{
-					this.currentZone = i + 12;
-					return currentZone;
-				}
-			}
-		}
 		// RESET
 		this.currentZone = -1;
 
@@ -80,17 +67,18 @@ public class RessourceIA extends IA
 		// SI LES ZONES DE RESSOURCES SONT PLEINES, ON A UNE CHANCE DE PRENDRE UNE CARTE CIVILISATION, SINON ON VA DANS LA ZONE DE CHASSE
 		else
 		{
-			// ON REGARDE LES CARTES CIVILISATION
-			for (int i = 0; i < cV.length; i++)
+			// ON REGARDE LES BUILDING
+			for (int i = 0; i < buildings.length; i++)
 			{
 				// SI ON A ASSEZ DE RESSOURCE, ON PRENDS LA CARTE
-				if (IntStream.of(this.inventoryIA.getCopyRessources()).sum() >= 4 - i && zoneAvailableSpace[i] == 1)
+				if (IntStream.of(this.inventoryIA.getCopyRessources()).sum() >= 4 && zoneAvailableSpace[i+12] == 1)
 				{
-					if (this.rand.nextInt(2) == 1) this.currentZone = i + 8;
+					if (this.rand.nextInt(2) == 1) this.currentZone = i + 12;
 					break;
 				}
 			}
 		}
+		
 
 		// A LA FIN, IL RESTE LA CHASSE
 		if (this.currentZone == -1)
@@ -138,11 +126,7 @@ public class RessourceIA extends IA
 	 */
 	public boolean useRessourceToFeed()
 	{
-		// LE JOUEUR NOURRI LES FIGURINES UNE FOIS SUR DEUX
-		if (this.rand.nextInt(2) == 1) {
-			return true;
-		}
-		return false;
+		return true; // l'ia essaye de ne pas 
 	}
 
 	/**
