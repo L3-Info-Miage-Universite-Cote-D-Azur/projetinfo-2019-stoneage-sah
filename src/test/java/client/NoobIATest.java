@@ -243,7 +243,9 @@ public class NoobIATest
 
 		Ressource[] res = this.testIa.chooseRessourceBuildingChoosed();
 		// TEST TAILLE
-		assertEquals(res.length > 0 && res.length < 8, true);
+		for (int j = 0; j<100; j++) {
+			assertEquals(res.length >= 0 && res.length < 8, true);
+		}
 		
 		Ressource[] expected = new Ressource[] {Ressource.GOLD, Ressource.GOLD, Ressource.GOLD, Ressource.GOLD, Ressource.STONE, Ressource.CLAY, Ressource.WOOD};
 		// TEST VALEUR ATTENDUES
