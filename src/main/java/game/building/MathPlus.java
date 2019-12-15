@@ -107,10 +107,12 @@ public class MathPlus
 	 */
 	public static ArrayList<int[]> combinaisons (int[] inv, int k)
 	{
+		int[] clone = inv.clone();
+		clone = MathPlus.concat(clone, 0);
 		ArrayList<int[]> res = new ArrayList<int[]>();
-		for (int i = 0; i < inv.length; i++)
+		for (int i = 0; i < clone.length; i++)
 		{
-			MathPlus.combinaisonPartition(i, inv, new int[] {}, res, k);
+			MathPlus.combinaisonPartition(i, clone, new int[] {}, res, k);
 		}
 		return res;
 	}
