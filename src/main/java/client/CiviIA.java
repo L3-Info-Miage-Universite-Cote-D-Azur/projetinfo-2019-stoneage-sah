@@ -34,7 +34,6 @@ public class CiviIA extends IA {
 	/**
 	 * chooseZone retourne l'indice de la zone choisie par l'IA . 
 	 * @param zoneAvailableSpace le tableau avec l'espace disponible de chaque zone. 
-	 * @param zoneName le tableau des noms des zones.
 	 * @param buildings la copie des zones batiment
 	 * @param cV la copie des zones carte civilisation
 	 * @return l'indice de la zone
@@ -239,8 +238,8 @@ public class CiviIA extends IA {
 	
 	/**
 	 * Renvoie le tableau des ressources utilisees pour les buildingsNotImposed
-	 * @param nombreRessource 
-	 * @param combienDeRessourcesDifferentes
+	 * @param nombreRessource nombre de ressource necessaire
+	 * @param combienDeRessourcesDifferentes nombre de ressource differente necessaire
 	 * @return un tableau vide car il ne prend jamais de cartes batiment
 	 */
 	public Ressource[] chooseRessourceBuildingNotImposed(int nombreRessource, int combienDeRessourcesDifferentes) {

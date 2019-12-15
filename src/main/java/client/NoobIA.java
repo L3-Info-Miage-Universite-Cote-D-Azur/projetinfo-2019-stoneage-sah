@@ -1,7 +1,6 @@
 package client;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -46,7 +45,6 @@ public class NoobIA extends IA
 	/**
 	 * chooseZone retourne l'indice de la zone choisie par l'IA . 
 	 * @param zoneAvailableSpace le tableau avec l'espace disponible de chaque zone. 
-	 * @param zoneName le tableau des noms des zones.
 	 * @param buildings la copie des zones batiment
 	 * @param cV la copie des zones carte civilisation
 	 * @return l'indice de la zone
