@@ -20,7 +20,7 @@ public class ArrayListUtility
 	
 	/**
 	 * Calcul la derniere valeur d'un ArrayList
-	 * @param arr un ArrayList<Integer>
+	 * @param arr un ArrayList(Integer)
 	 * @return la derniere valeur de l'ArrayList
 	 */
 	public static int getLastValueOf (ArrayList<Integer> arr)

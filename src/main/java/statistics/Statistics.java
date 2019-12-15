@@ -98,6 +98,8 @@ public class Statistics
 	/**
 	 * Creer tous les fichiers dans le dossier de "files" qui representent la moyenne des ressources au cours des tours sur Settings.NB_GAMES 
 	 * @param players le nom des IA de chaque joueur
+	 * @param playersArrays la liste de joueur
+	 * @param files le fichier
 	 * @throws IOException IO Exception
 	 */
 	public void createJITCurves (String[] players, ArrayList<ArrayList<Integer>[]> playersArrays, File[] files) throws IOException
@@ -328,6 +330,7 @@ public class Statistics
 
 	/**
 	 * Permet soit d'ajouter la valeur si le tour n'existe pas, soit accumule les donnees
+	 * @param list une liste d'entier
 	 * @param currPlayer l'indice du joueur
 	 * @param currData l'indice de la donnee
 	 * @param value la valeur
