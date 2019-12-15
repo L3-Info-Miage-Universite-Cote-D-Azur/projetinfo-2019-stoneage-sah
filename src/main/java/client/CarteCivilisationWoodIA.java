@@ -90,7 +90,7 @@ public class CarteCivilisationWoodIA extends IA {
 				return 5;
 			}
 			//reproduction si utile et dispo.
-			if(playerIA.getCurrentFigurine() != 10 && playerIA.getCurrentFigurine()-FigurineForFeed >=2 && zoneAvailableSpace[6] > 0) {
+			if(playerIA.getMaxFigurine() != 10 && playerIA.getCurrentFigurine()-FigurineForFeed >=2 && zoneAvailableSpace[6] > 0) {
 				currentZone = 6;
 				return 6;
 			}
