@@ -46,11 +46,10 @@ public class ProgramStatistique {
 		//a changer en fonction du nombre de joueur et faire de maniere random
 		int[] iaPlayers = new int[numberPlayer];
 		String[] ias = new String[numberPlayer];
-		String nameIa[] = {"Random","Debutant","CarteCivilisation version Bois","Civilisation"};
+		String nameIa[] = {"Random","Debutant","CarteCivilisation version Bois","Civilisation","Ressource"};
 		for(int i = 0; i < numberPlayer; i++)
 		{
-			if(numberPlayer==4) iaPlayers[i]=i;//on a 4 ia pour le moment il est donc interesant de fixe les IA 
-			else if(numberPlayer<4) iaPlayers[i]=Settings.RAND.nextInt(4);
+			iaPlayers[i]=Settings.RAND.nextInt(5);// nous avons 5 ia  different
 			ias[i] = nameIa[iaPlayers[i]];
 		}
 
