@@ -105,6 +105,10 @@
             			</goals>
             			<configuration>
               				<mainClass>main.Progam</mainClass>
+              				<!-- arguments récupérés dans le main -->
+                    		<arguments>
+                            	<argument>4</argument> <!-- Nombre de joueur -->
+                   			</arguments>
             			</configuration>
           			</execution>
           			<execution>
@@ -114,11 +118,19 @@
             			</goals>
             			<configuration>
               				<mainClass>main.ProgamStatistique</mainClass>
+              				<!-- arguments récupérés dans le main -->
+                    		<arguments>
+                            	<argument>4</argument> <!-- Nombre de joueur -->
+                   			</arguments>
             			</configuration>
           			</execution>
     			</executions>
  				<configuration>
             		<mainClass>main.Progam</mainClass>  <!-- exécution par défaut -->
+            		<!-- arguments récupérés dans le main -->
+                	<arguments>
+               			<argument>4</argument> <!-- Nombre de joueur -->
+                	</arguments>
  				</configuration>
     		</plugin>
 
