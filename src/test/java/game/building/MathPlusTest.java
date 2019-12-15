@@ -112,7 +112,7 @@ public class MathPlusTest
 	public void testCombinaisons ()
 	{
 		int k = 3;
-		int[] inv = new int[] {1,3,2,0};
+		int[] inv = new int[] {1,3,2};
 		ArrayList<int[]> ret;
 		ArrayList<int[]> expected = new ArrayList<int[]>();
 		expected.add(new int[] {1, 3, 2});
