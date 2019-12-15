@@ -47,11 +47,6 @@ public class BuildingRessourceChoosedTest
 		inv = new int[] {7, 7, 7, 7};
 		assertEquals(false, this.brc.checkRessourceChoosed(ressources, inv));
 		
-		// TEST CORRECT
-		ressources = new Ressource[] {Ressource.WOOD, Ressource.WOOD, Ressource.GOLD, Ressource.GOLD, Ressource.GOLD, Ressource.GOLD, Ressource.GOLD};
-		inv = new int[] {2, 7, 7, 5};
-		assertEquals(true, this.brc.checkRessourceChoosed(ressources, inv));
-		
 		// TEST AVEC UNE RESSOURCE INTERDITE
 		ressources = new Ressource[] {Ressource.FOOD, Ressource.WOOD, Ressource.GOLD, Ressource.GOLD, Ressource.GOLD, Ressource.GOLD, Ressource.GOLD};
 		inv = new int[] {1, 7, 7, 5};
