@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import client.IA;
 import client.RandomIA;
@@ -386,10 +387,13 @@ public class GameZonesTest{
 	@Test
 	public void testActionRecovery() {
 		gameZones = new GameZones(4,d); 
+		
 		int action;
+		Settings.resetArrays();
 		GamePlayers gamePlayers = new GamePlayers(4);
 		Inventory inventory = new Inventory();
 		Player player = new Player("test", inventory.getInventoryIA());
+		
 		
 		//TEST POUR LE CAS ACTION == 1
 		action = 1;
@@ -409,5 +413,16 @@ public class GameZonesTest{
 		gameZones.actionRecovery(action, player, inventory, gamePlayers);
 		assertEquals(1, inventory.getCardCivilisation().length);
 		assertEquals(31, gameZones.getCardManager().getDeck().size());
+		
+		GameZones gameZonesSpy= Mockito.spy(gameZones);
+		gameZonesSpy.actionRecovery(action, player, inventory, gamePlayers);
+		Mockito.verify(gameZonesSpy).tirage(gamePlayers, player);
+		
+		//avec une action different de 2 tirage ne dois jamais etre appeler
+		action = 1;
+		gameZones = new GameZones(4,d);
+		gameZonesSpy= Mockito.spy(gameZones);
+		gameZonesSpy.actionRecovery(action, player, inventory, gamePlayers);
+		Mockito.verify(gameZonesSpy,never()).tirage(gamePlayers, player);
 	}
 }
