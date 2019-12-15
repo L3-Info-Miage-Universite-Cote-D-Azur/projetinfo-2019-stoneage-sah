@@ -402,5 +402,12 @@ public class GameZonesTest{
 		assertEquals(1, inventory.getCardCivilisation().length);
 		assertEquals(true, inventory.getCardCivilisation()[0] instanceof CarteCivilisation);
 		assertEquals(31, gameZones.getCardManager().getDeck().size());
+		
+		//TEST POUR LE CAS ACTION == 2
+		action = 2;
+		// rien ne dois changer (appel de tirage)
+		gameZones.actionRecovery(action, player, inventory, gamePlayers);
+		assertEquals(1, inventory.getCardCivilisation().length);
+		assertEquals(31, gameZones.getCardManager().getDeck().size());
 	}
 }
